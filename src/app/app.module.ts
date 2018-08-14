@@ -9,6 +9,11 @@ import {MaterialModule} from './material/material.module';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {HelloWorldService} from './hello-world.service';
+import {LoginComponent} from './auth/login/login.component';
+import {RegisterComponent} from './auth/register/register.component';
+import {HomeComponent} from './home/home.component';
+import {ProfileComponent} from './profile/profile.component';
+import { TopMenuComponent } from './top-menu/top-menu.component';
 
 const appRoutes: Routes = [
   {path: 'hello-world', component: HelloWorldComponent}
@@ -16,7 +21,12 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HelloWorldComponent
+    HelloWorldComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    ProfileComponent,
+    TopMenuComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
