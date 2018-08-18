@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HelloWorldMessage, HelloWorldService} from '../hello-world.service';
+import {HelloWorldMessage, HelloWorldService} from '../service/hello-world.service';
 import {MatCheckboxChange} from '@angular/material';
 
 @Component({

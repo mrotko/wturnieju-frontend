@@ -6,37 +6,64 @@ import {HelloWorldComponent} from './hello-world/hello-world.component';
 import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {HelloWorldService} from './hello-world.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HelloWorldService} from './service/hello-world.service';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {HomeComponent} from './home/home.component';
 import {ProfileComponent} from './profile/profile.component';
-import { TopMenuComponent } from './top-menu/top-menu.component';
+import {TopMenuComponent} from './top-menu/top-menu.component';
+import {SharedModule} from './shared/shared.module';
+import {AuthComponent} from './auth/auth.component';
+import {ForgetPasswordComponent} from './auth/forget-password/forget-password.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthGuard} from './guard/auth.guard';
+import {AuthService} from './service/auth.service';
+import {JwtInterceptor} from './helper/jwt.interceptor';
+import {ErrorInterceptor} from './helper/error.interceptor';
+
 
 const appRoutes: Routes = [
-  {path: 'hello-world', component: HelloWorldComponent}
-]
+  {path: 'hello-world', component: HelloWorldComponent},
+  {
+    path: 'auth', component: AuthComponent, canActivate: [AuthGuard], children:
+      [
+        {path: 'login', component: LoginComponent},
+        {path: 'register', component: RegisterComponent},
+        {path: 'forget-password', component: ForgetPasswordComponent}
+      ]
+  }
+];
 @NgModule({
   declarations: [
     AppComponent,
     HelloWorldComponent,
     LoginComponent,
     RegisterComponent,
+    ForgetPasswordComponent,
     HomeComponent,
     ProfileComponent,
-    TopMenuComponent
+    TopMenuComponent,
+    AuthComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
+    SharedModule,
+    HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [HelloWorldService],
+  providers: [
+    HelloWorldService,
+    AuthGuard,
+    AuthService,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

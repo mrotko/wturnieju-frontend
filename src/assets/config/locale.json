@@ -1,0 +1,11 @@
+[
+  {
+    "name": "polish",
+    "code": "pl"
+  },
+  {
+    "name": "english-us",
+    "code": "en-us",
+    "default": true
+  }
+]

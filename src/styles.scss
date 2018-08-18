@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.success-snackbar {
+  background: green;
+}
+
+.error-snackbar {
+  background: red;
+}
+
+.warning-snackbar {
+  background: yellow;
+}
+
+.info-snackbar {
+  background: blue;
+}
