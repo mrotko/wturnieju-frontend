@@ -21,7 +21,11 @@ import {AuthGuard} from './guard/auth.guard';
 import {AuthService} from './service/auth.service';
 import {JwtInterceptor} from './helper/jwt.interceptor';
 import {ErrorInterceptor} from './helper/error.interceptor';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {fas} from '@fortawesome/free-solid-svg-icons';
 
+library.add(fas);
 
 const appRoutes: Routes = [
   {path: 'hello-world', component: HelloWorldComponent},
@@ -55,7 +59,8 @@ const appRoutes: Routes = [
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [
     HelloWorldService,
