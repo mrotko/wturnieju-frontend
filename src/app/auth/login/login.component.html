@@ -1,0 +1,20 @@
+<div class="form-container">
+  <form [formGroup]="loginFormGroup" (submit)="onSubmit()">
+    <mat-form-field>
+      <input matInput type="email" placeholder="{{lm.email | translate}}" formControlName="email"/>
+      <mat-error *ngIf="loginFormGroup.get('email').invalid && loginFormGroup.get('email').touched">
+        <mat-error *ngIf="loginFormGroup.get('email').hasError('required')">{{lm.requiredError | translate}}</mat-error>
+        <mat-error *ngIf="loginFormGroup.get('email').hasError('email')">{{lm.badEmailError | translate}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" placeholder="{{lm.password | translate}}" formControlName="password"/>
+      <mat-error *ngIf="loginFormGroup.get('password').invalid && loginFormGroup.get('password').touched">
+        <mat-error *ngIf="loginFormGroup.get('password').hasError('required')">{{lm.requiredError | translate}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+    <a href="#" style="float: right" routerLink="/auth/forget-password">{{lm.forgetPassword | translate}}</a>
+    <button mat-button routerLink="{{routerUrl.register}}">{{lm.registration | translate}}</button>
+    <button mat-button type="submit">{{lm.makeLogin | translate}}</button>
+  </form>
+</div>
