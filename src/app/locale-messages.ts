@@ -22,5 +22,9 @@ export const LocaleMessages = {
   unknownError: 'unknownError',
   emailExists: 'emailExists',
   loginError: 'loginError',
-  logout: 'logout'
-}
+  logout: 'logout',
+  remindPassword: 'remindPassword',
+  send: 'send',
+  register: 'register',
+  remember: 'remember'
+};

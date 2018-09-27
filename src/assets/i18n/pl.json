@@ -6,7 +6,7 @@
   "email": "Email",
   "password": "Hasło",
   "registration": "Rejestracja",
-  "forgetPassword": "Przypomnij hasło",
+  "forgetPassword": "Zapomniałem hasła",
   "homePage": "Strona główna",
   "remind": "Przypomnij",
   "requiredError": "Uzupełnij wymagane pole",
@@ -22,5 +22,9 @@
   "unknownError": "Nieznany błąd",
   "emailExists": "Taki email już istnieje",
   "loginError": "Podałeś zły email lub hasło",
-  "logout": "Wyloguj"
+  "logout": "Wyloguj",
+  "remindPassword": "Przypomnij hasło",
+  "send": "Wyślij",
+  "register": "Zarejestruj",
+  "remember": "Zapamiętaj"
 }

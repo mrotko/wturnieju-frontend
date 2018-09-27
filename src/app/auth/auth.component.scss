@@ -1,22 +1,30 @@
 .auth-container {
-  width: 100%;
+  margin: 5em auto auto auto;
+  width: 20em;
 }
 
-.form-container {
-  margin-left: 45%;
-  margin-right: auto;
+.form-header {
+  justify-self: center;
+  font-size: 2em;
+  margin-bottom: 1.5em;
 }
 
 form {
-  min-width: 100px;
-  max-width: 150px;
-}
-
-input {
-  width: 100%;
+  display: grid;
+  padding: 2em;
 }
 
 button {
-  float: right;
-  display: inline-block;
+  font-size: 1.2em;
+  height: 2.2em;
+  border-radius: 30px;
+}
+
+button.space-after {
+  margin-bottom: 2em;
+}
+
+button.mat-icon-button {
+  display: grid;
+  transition: background-color 0.2s ease;
 }

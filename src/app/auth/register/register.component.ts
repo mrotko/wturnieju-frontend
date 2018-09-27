@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RegisterForm} from '../../model/register-form';
 import {MatSnackBar} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
+import {RouterUrl} from '../../config/routerUrl';
 
 @Component({
   selector: 'app-register',
@@ -24,6 +25,7 @@ export class RegisterComponent implements OnInit {
   }, this.passwordMatchValidator);
 
   lm = LocaleMessages;
+  routerUrl = RouterUrl;
 
   constructor(
     private authService: AuthService,

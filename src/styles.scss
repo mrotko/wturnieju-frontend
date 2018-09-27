@@ -1,5 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~lato-font/scss/public-api';
+@import '~@angular/material/theming';
+
+$lato-font-path: '~lato-font/fonts';
+
+@include lato-include-font('medium');
+
+$lato-typography: mat-typography-config(
+  $font-family: latoGetFontNameForVariant('medium')
+);
+
+@include angular-material-typography($lato-typography);
 
 .success-snackbar {
   background: green;
@@ -16,3 +28,9 @@
 .info-snackbar {
   background: blue;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+

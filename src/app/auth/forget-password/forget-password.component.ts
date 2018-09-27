@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ForgetPasswordForm} from '../../model/forget-password-form';
 import {FormControl, Validators} from '@angular/forms';
 import {LocaleMessages} from '../../locale-messages';
+import {RouterUrl} from '../../config/routerUrl';
 
 @Component({
   selector: 'app-forget-password',
@@ -12,6 +13,7 @@ export class ForgetPasswordComponent implements OnInit {
   emailFieldControl = new FormControl('', [Validators.email, Validators.required]);
   model: ForgetPasswordForm = {email: ''};
   lm = LocaleMessages;
+  routerUrl = RouterUrl;
 
   constructor() {}
 
