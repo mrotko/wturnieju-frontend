@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ForgetPasswordForm} from '../../model/forget-password-form';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LocaleMessages} from '../../locale-messages';
 import {RouterUrl} from '../../config/routerUrl';
+import {AuthService} from '../../service/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
+import {TranslateService} from '@ngx-translate/core';
+import {ForgetPasswordForm} from '../../model/model';
 
 @Component({
   selector: 'app-forget-password',
@@ -10,27 +14,33 @@ import {RouterUrl} from '../../config/routerUrl';
   styleUrls: ['./forget-password.component.scss', '../auth.component.scss']
 })
 export class ForgetPasswordComponent implements OnInit {
-  emailFieldControl = new FormControl('', [Validators.email, Validators.required]);
-  model: ForgetPasswordForm = {email: ''};
+
+  forgetPasswordFormGroup: FormGroup;
+
   lm = LocaleMessages;
   routerUrl = RouterUrl;
 
-  constructor() {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private translate: TranslateService
+  ) {
+  }
 
   ngOnInit() {
-    console.log(this.model.email);
+    this.forgetPasswordFormGroup = new FormGroup({
+      username: new FormControl('', [Validators.email, Validators.required])
+    });
   }
 
-  validate() {
-    this.emailFieldControl.updateValueAndValidity();
-    console.log(this.model.email);
-  }
-
-  clearError() {
-    const val = this.emailFieldControl.value;
-    this.emailFieldControl.reset();
-    this.emailFieldControl.setValue(val);
-    this.emailFieldControl.setErrors(null);
-    this.emailFieldControl.markAsPristine();
+  onSubmit() {
+    if (this.forgetPasswordFormGroup.valid) {
+      this.authService.forgetPassword(<ForgetPasswordForm>this.forgetPasswordFormGroup.value).subscribe(
+        () => this.snackBar.open(this.translate.instant(this.lm.success), this.translate.instant(this.lm.close)),
+        () => this.snackBar.open(this.translate.instant(this.lm.unknownError), this.translate.instant(this.lm.close))
+      );
+    }
   }
 }

@@ -18,13 +18,9 @@ button {
   font-size: 1.2em;
   height: 2.2em;
   border-radius: 30px;
+  margin: 0.2em;
 }
 
-button.space-after {
-  margin-bottom: 2em;
-}
-
-button.mat-icon-button {
-  display: grid;
-  transition: background-color 0.2s ease;
+mat-form-field:last-of-type {
+  margin-bottom: 1em;
 }

@@ -26,5 +26,6 @@ export const LocaleMessages = {
   remindPassword: 'remindPassword',
   send: 'send',
   register: 'register',
-  remember: 'remember'
+  remember: 'remember',
+  success: 'success'
 };

@@ -1,13 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {LoginForm} from '../model/login-form';
 import {RequestUrl} from '../config/requestUrl';
 import {User} from '../model/user';
-import {RegisterForm} from '../model/register-form';
 import {Observable} from 'rxjs/internal/Observable';
-import {ForgetPasswordForm} from '../model/forget-password-form';
 import {map} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import {ForgetPasswordForm, LoginForm, RegisterForm} from '../model/model';
 
 @Injectable()
 export class AuthService {

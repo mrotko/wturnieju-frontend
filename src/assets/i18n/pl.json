@@ -12,7 +12,7 @@
   "requiredError": "Uzupełnij wymagane pole",
   "badEmailError": "Błędny email",
   "repeatPassword": "Powtórz hasło",
-  "passwordPatternError": "Zły format hasła. Wymagane: duża litera, mała litera, 8 znaków",
+  "passwordPatternError": "Wymagane: duża litera, mała litera, 8 znaków",
   "minLengthError": "Minimum {{v}} znaków",
   "differentPasswordsError": "Hasła są różne",
   "createAccount": "Stwórz konto",
@@ -26,5 +26,6 @@
   "remindPassword": "Przypomnij hasło",
   "send": "Wyślij",
   "register": "Zarejestruj",
-  "remember": "Zapamiętaj"
+  "remember": "Zapamiętaj",
+  "success": "Sukces"
 }
