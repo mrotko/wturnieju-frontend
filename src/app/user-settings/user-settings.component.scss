@@ -1,0 +1,15 @@
+.user-settings-container {
+  display: grid;
+}
+
+mat-accordion {
+  display: grid;
+  max-width: 500px;
+  justify-self: center;
+  padding-top: 100px;
+  width: 100%;
+}
+
+mat-expansion-panel * {
+  flex-basis: 0;
+}

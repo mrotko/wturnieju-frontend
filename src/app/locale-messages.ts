@@ -29,4 +29,5 @@ export const LocaleMessages = {
   remember: 'remember',
   success: 'success',
   account: 'account',
+  personalData: 'personalData'
 };

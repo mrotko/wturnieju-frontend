@@ -3,6 +3,14 @@
     <button mat-button [routerLink]="routerUrl.home">{{lm.homePage | translate}}</button>
   </div>
   <div class="top-menu-center">
+    <form>
+      <mat-form-field style="width: 450px">
+        <input matInput type="text"/>
+        <button matSuffix mat-icon-button>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
   </div>
   <div class="top-menu-right">
     <div>

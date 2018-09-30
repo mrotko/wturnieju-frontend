@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {LocaleMessages} from '../locale-messages';
 
 @Component({
   selector: 'app-user-settings',
@@ -7,7 +8,10 @@ import {Component, OnInit} from '@angular/core';
 })
 export class UserSettingsComponent implements OnInit {
 
-  constructor() { }
+  lm = LocaleMessages;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
