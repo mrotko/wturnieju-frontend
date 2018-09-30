@@ -27,5 +27,6 @@ export const LocaleMessages = {
   send: 'send',
   register: 'register',
   remember: 'remember',
-  success: 'success'
+  success: 'success',
+  account: 'account',
 };

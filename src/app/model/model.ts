@@ -17,3 +17,12 @@ export interface ForgetPasswordForm {
 export class Pattern {
   public static password = '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d].{8,}$';
 }
+
+export interface User {
+  id: string;
+  name?: string;
+  surname?: string;
+  imgPath?: string;
+  username: string;
+  token?: string;
+}

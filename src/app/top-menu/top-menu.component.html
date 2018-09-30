@@ -1,12 +1,26 @@
-<mat-toolbar class="mat-primary">
-  <button mat-button routerLink="/">{{lm.homePage | translate}}</button>
-  <span class="fill-space"></span>
-  <button *ngIf="!currentUser" mat-raised-button class="right-side" routerLink="/auth/login">{{lm.login | translate}}</button>
-  <button *ngIf="currentUser" mat-raised-button class="right-side" (click)="logout()">{{lm.logout | translate}}</button>
-  <div style="width: 150px;">
-    <a class="right-side mat-flat-button" [matMenuTriggerFor]="langMenu">{{currentLocale?.name | translate}}</a>
-    <mat-menu #langMenu>
-      <button mat-menu-item *ngFor="let locale of locales" (click)="changeLocale(locale)">{{locale.name | translate}}</button>
-    </mat-menu>
+<mat-toolbar class="top-menu mat-elevation-z1">
+  <div class="top-menu-left">
+    <button mat-button [routerLink]="routerUrl.home">{{lm.homePage | translate}}</button>
+  </div>
+  <div class="top-menu-center">
+  </div>
+  <div class="top-menu-right">
+    <div>
+      <span class="mat-body"
+            *ngIf="currentUser">{{currentUser.name ? currentUser.name + ' ' + currentUser.surname || ' ' : currentUser.username}}</span>
+      <button mat-icon-button [routerLink]="routerUrl.userSettings" title="{{lm.account | translate}}">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+    <button *ngIf="currentUser" mat-icon-button (click)="logout()" title="{{lm.logout | translate}}">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+    <div>
+      <button mat-flat-button [matMenuTriggerFor]="langMenu">{{currentLocale?.name | translate}}</button>
+      <mat-menu #langMenu>
+        <button mat-menu-item *ngFor="let locale of locales" (click)="changeLocale(locale)">{{locale.name | translate}}
+        </button>
+      </mat-menu>
+    </div>
   </div>
 </mat-toolbar>

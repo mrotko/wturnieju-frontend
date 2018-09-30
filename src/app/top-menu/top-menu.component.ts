@@ -5,7 +5,8 @@ import {Locale} from '../model/locale';
 import {Subscription} from 'rxjs/internal/Subscription';
 import {LocaleMessages} from '../locale-messages';
 import {AuthService} from '../service/auth.service';
-import {User} from '../model/user';
+import {User} from '../model/model';
+import {RouterUrl} from '../config/routerUrl';
 
 @Component({
   selector: 'app-top-menu',
@@ -17,6 +18,8 @@ export class TopMenuComponent implements OnInit, OnDestroy {
   currentLocale: Locale;
   lm = LocaleMessages;
   currentUser: User;
+  routerUrl = RouterUrl;
+
 
 
   currentLocaleSub: Subscription;

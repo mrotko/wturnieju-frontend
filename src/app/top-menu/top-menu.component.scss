@@ -5,3 +5,25 @@
 .right-side {
   float: right;
 }
+
+.top-menu {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
+
+.top-menu-left {
+}
+
+.top-menu-center {
+  justify-self: center;
+}
+
+.top-menu-right {
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 0.5em;
+}
+
+.top-menu-right * {
+  grid-row: 1;
+}

@@ -17,26 +17,29 @@ import {SharedModule} from './shared/shared.module';
 import {AuthComponent} from './auth/auth.component';
 import {ForgetPasswordComponent} from './auth/forget-password/forget-password.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AuthGuard} from './guard/auth.guard';
 import {AuthService} from './service/auth.service';
 import {JwtInterceptor} from './helper/jwt.interceptor';
 import {ErrorInterceptor} from './helper/error.interceptor';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {fas} from '@fortawesome/free-solid-svg-icons';
+import {UserSettingsComponent} from './user-settings/user-settings.component';
+import {AuthRequiredGuard} from './guard/auth-required.guard';
+import {CanActivateAuthComponentGuard} from './guard/can-activate-auth-component.guard';
 
 library.add(fas);
 
 const appRoutes: Routes = [
   {path: 'hello-world', component: HelloWorldComponent},
   {
-    path: 'auth', component: AuthComponent, canActivate: [AuthGuard], children:
+    path: 'auth', component: AuthComponent, canActivate: [CanActivateAuthComponentGuard], children:
       [
         {path: 'login', component: LoginComponent},
         {path: 'register', component: RegisterComponent},
         {path: 'forget-password', component: ForgetPasswordComponent}
       ]
-  }
+  },
+  {path: 'user', component: UserSettingsComponent, canActivate: [AuthRequiredGuard]}
 ];
 @NgModule({
   declarations: [
@@ -49,6 +52,7 @@ const appRoutes: Routes = [
     ProfileComponent,
     TopMenuComponent,
     AuthComponent,
+    UserSettingsComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -64,7 +68,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     HelloWorldService,
-    AuthGuard,
+    AuthRequiredGuard,
+    CanActivateAuthComponentGuard,
     AuthService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
