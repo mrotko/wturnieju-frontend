@@ -26,6 +26,8 @@ import {fas} from '@fortawesome/free-solid-svg-icons';
 import {UserSettingsComponent} from './user-settings/user-settings.component';
 import {AuthRequiredGuard} from './guard/auth-required.guard';
 import {CanActivateAuthComponentGuard} from './guard/can-activate-auth-component.guard';
+import {TournamentCreatorComponent} from './tournament-creator/tournament-creator.component';
+import {TournamentCreatorService} from './service/tournament-creator.service';
 
 library.add(fas);
 
@@ -39,8 +41,10 @@ const appRoutes: Routes = [
         {path: 'forget-password', component: ForgetPasswordComponent}
       ]
   },
-  {path: 'user', component: UserSettingsComponent, canActivate: [AuthRequiredGuard]}
+  {path: 'user', component: UserSettingsComponent, canActivate: [AuthRequiredGuard]},
+  {path: 'create', component: TournamentCreatorComponent, canActivate: [AuthRequiredGuard]}
 ];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +57,7 @@ const appRoutes: Routes = [
     TopMenuComponent,
     AuthComponent,
     UserSettingsComponent,
+    TournamentCreatorComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -71,6 +76,7 @@ const appRoutes: Routes = [
     AuthRequiredGuard,
     CanActivateAuthComponentGuard,
     AuthService,
+    TournamentCreatorService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

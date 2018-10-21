@@ -29,5 +29,21 @@
   "remember": "Zapamiętaj",
   "success": "Sukces",
   "account": "Konto",
-  "personalData": "Dane personalne"
+  "personalData": "Dane personalne",
+  "firstName": "Imię",
+  "secondName": "Nazwisko",
+  "birthDate": "Data urodzenia",
+  "back": "Do tyłu",
+  "forward": "Do przodu",
+  "name": "Nazwa",
+  "availability": "Dostępność",
+  "from": "Od",
+  "to": "Do",
+  "place": "Miejsce",
+  "description": "Opis",
+  "playersFrom": "Minimum uczestników",
+  "playersTo": "Maksimum uczestników",
+  "discipline": "Dyscyplina",
+  "tournamentSystem": "System rozgrywki",
+  "end": "Zakończ"
 }

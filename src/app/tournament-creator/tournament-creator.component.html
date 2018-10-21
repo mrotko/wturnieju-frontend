@@ -1,0 +1,105 @@
+<div class="container">
+  <form>
+    <mat-horizontal-stepper linear>
+      <mat-step>
+        <div class="step-content">
+          <mat-form-field>
+            <mat-label>{{lm.name | translate}}</mat-label>
+            <input matInput type="text">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{lm.availability | translate}}</mat-label>
+            <mat-select>
+              <mat-option>test1</mat-option>
+              <mat-option>test2</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="column-style">
+            <mat-form-field>
+              <mat-label>{{lm.from | translate}}</mat-label>
+              <input matInput [matDatepicker]="tournamentDateFrom">
+              <mat-datepicker-toggle matSuffix [for]="tournamentDateFrom"></mat-datepicker-toggle>
+              <mat-datepicker #tournamentDateFrom></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>{{lm.to | translate}}</mat-label>
+              <input matInput [matDatepicker]="tournamentDateTo">
+              <mat-datepicker-toggle matSuffix [for]="tournamentDateTo"></mat-datepicker-toggle>
+              <mat-datepicker #tournamentDateTo></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <mat-form-field>
+            <mat-label>{{lm.place | translate}}</mat-label>
+            <input matInput type="text"/>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{lm.description | translate }}</mat-label>
+            <input matInput type="text"/>
+          </mat-form-field>
+          <div class="column-style">
+            <mat-form-field>
+              <mat-label>{{lm.playersFrom | translate}}</mat-label>
+              <input matInput type="number"/>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>{{lm.playersTo | translate}}</mat-label>
+              <input matInput type="number"/>
+            </mat-form-field>
+          </div>
+          <mat-form-field>
+            <mat-label>{{lm.discipline | translate}}</mat-label>
+            <mat-select>
+              <mat-option>Szachy</mat-option>
+              <mat-option>itp</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="control-btn">
+            <button mat-icon-button matStepperNext><mat-icon>navigate_next</mat-icon></button>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <div class="step-content">
+          <mat-form-field>
+            <mat-select>
+              <mat-option>Indywidualny</mat-option>
+              <mat-option>Zespołowy</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>{{lm.tournamentSystem | translate}}</mat-label>
+            <mat-select>
+              <mat-option>Szwajcarski</mat-option>
+              <mat-option>Pucharowy</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="control-btn">
+            <button mat-icon-button matStepperPrevious><mat-icon>navigate_before</mat-icon></button>
+            <button mat-icon-button matStepperNext><mat-icon>navigate_next</mat-icon></button>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <div class="summary">
+          <div class="column-style">
+            <div>a</div>
+            <div>a opis</div>
+          </div>
+          <div class="column-style">
+            <div>b</div>
+            <div>b opis</div>
+          </div>
+          <div class="column-style">
+            <div>c</div>
+            <div>c opis</div>
+          </div>
+        </div>
+        <div class="control-btn">
+          <button mat-icon-button matStepperPrevious><mat-icon>navigate_before</mat-icon></button>
+        </div>
+        <button mat-button style="float: right;">{{lm.end | translate}}</button>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+
+</div>

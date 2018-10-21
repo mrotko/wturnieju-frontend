@@ -1,0 +1,31 @@
+.container {
+  margin-top: 10px;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.control-btn {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+
+.column-style {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+}
+
+.step-content {
+  display: grid;
+}
+
+.container ::ng-deep .mat-step-label {
+  display: none;
+}
+
+.summary {
+  display: grid;
+  grid-gap: 20px;
+}

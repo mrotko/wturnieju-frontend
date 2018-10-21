@@ -26,3 +26,10 @@ export interface User {
   username: string;
   token?: string;
 }
+
+export interface TournamentCreatorConfig {
+  accessOptions: string [];
+  competitionTypes: string [];
+  systemTypes: { [key: string]: string [] };
+  participantTypes: { [key: string]: string [] };
+}

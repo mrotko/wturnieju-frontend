@@ -13,10 +13,10 @@
   "dependencies": {
     "@angular/animations": "latest",
     "@angular/cdk": "latest",
+    "@angular/cli": "latest",
     "@angular/common": "latest",
     "@angular/compiler": "latest",
     "@angular/core": "latest",
-    "@angular/cli": "latest",
     "@angular/forms": "latest",
     "@angular/http": "latest",
     "@angular/material": "latest",
@@ -31,11 +31,11 @@
     "core-js": "latest",
     "hammerjs": "latest",
     "npm": "latest",
-    "npm-registry-fetch": "^3.8.0",
+    "npm-registry-fetch": "latest",
     "rxjs": "latest",
-    "socks": "^2.2.1",
+    "socks": "latest",
     "webpack": "latest",
-    "zone.js": "^0.8.26"
+    "zone.js": "latest"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "latest",
@@ -56,6 +56,6 @@
     "protractor": "latest",
     "ts-node": "latest",
     "tslint": "latest",
-    "typescript": "^2.9.2"
+    "typescript": "latest"
   }
 }
