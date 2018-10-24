@@ -28,6 +28,7 @@ import {AuthRequiredGuard} from './guard/auth-required.guard';
 import {CanActivateAuthComponentGuard} from './guard/can-activate-auth-component.guard';
 import {TournamentCreatorComponent} from './tournament-creator/tournament-creator.component';
 import {TournamentCreatorService} from './service/tournament-creator.service';
+import {MapToArrayPipe} from './pipe/map-to-array.pipe';
 
 library.add(fas);
 
@@ -58,6 +59,7 @@ const appRoutes: Routes = [
     AuthComponent,
     UserSettingsComponent,
     TournamentCreatorComponent,
+    MapToArrayPipe,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -77,6 +79,7 @@ const appRoutes: Routes = [
     CanActivateAuthComponentGuard,
     AuthService,
     TournamentCreatorService,
+    MapToArrayPipe,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

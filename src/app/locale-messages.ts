@@ -1,3 +1,5 @@
+import {ACCESS_OPTION, COMPETITION_TYPE, TOURNAMENT_PARTICIPANT_TYPE, TOURNAMENT_SYSTEM_TYPE} from './model/model';
+
 export const LocaleMessages = {
   hello: 'hello',
   login: 'login',
@@ -36,14 +38,29 @@ export const LocaleMessages = {
   back: 'back',
   forward: 'forward',
   name: 'name',
-  availability: 'availability',
-  from: 'from',
-  to: 'to',
+  accessOption: 'accessOption',
+  fromDate: 'fromDate',
+  toDate: 'toDate',
   place: 'place',
   description: 'description',
-  playersFrom: 'playersFrom',
-  playersTo: 'playersTo',
-  discipline: 'discipline',
+  minParticipants: 'minParticipants',
+  maxParticipants: 'maxParticipants',
+  competition: 'competition',
   tournamentSystem: 'tournamentSystem',
   end: 'end',
+  participantType: 'participantType',
+  ACCESS_OPTION: {
+    PUBLIC: ACCESS_OPTION.PUBLIC,
+    PRIVATE: ACCESS_OPTION.PRIVATE
+  },
+  COMPETITION_TYPE: {
+    CHESS: COMPETITION_TYPE.CHESS
+  },
+  TOURNAMENT_SYSTEM_TYPE: {
+    SWISS: TOURNAMENT_SYSTEM_TYPE.SWISS
+  },
+  TOURNAMENT_PARTICIPANT_TYPE: {
+    SINGLE: TOURNAMENT_PARTICIPANT_TYPE.SINGLE,
+    TEAM: TOURNAMENT_PARTICIPANT_TYPE.TEAM
+  }
 };

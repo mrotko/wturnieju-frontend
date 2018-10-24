@@ -36,14 +36,29 @@
   "back": "Do tyłu",
   "forward": "Do przodu",
   "name": "Nazwa",
-  "availability": "Dostępność",
-  "from": "Od",
-  "to": "Do",
+  "accessOption": "Dostępność",
+  "fromDate": "Od",
+  "toDate": "Do",
   "place": "Miejsce",
   "description": "Opis",
-  "playersFrom": "Minimum uczestników",
-  "playersTo": "Maksimum uczestników",
-  "discipline": "Dyscyplina",
+  "minParticipants": "Minimum uczestników",
+  "maxParticipants": "Maksimum uczestników",
+  "competition": "Dyscyplina",
   "tournamentSystem": "System rozgrywki",
-  "end": "Zakończ"
+  "end": "Zakończ",
+  "participantType": "Typ uczestnika",
+  "ACCESS_OPTION": {
+    "PUBLIC": "Publiczny",
+    "PRIVATE": "Prywatny"
+  },
+  "COMPETITION_TYPE": {
+    "CHESS": "Szachy"
+  },
+  "TOURNAMENT_SYSTEM_TYPE": {
+    "SWISS": "Szwajcarski"
+  },
+  "TOURNAMENT_PARTICIPANT_TYPE": {
+    "SINGLE": "Indywidualny",
+    "TEAM": "Zespół"
+  }
 }
