@@ -6,14 +6,13 @@ import {HelloWorldComponent} from './hello-world/hello-world.component';
 import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {HelloWorldService} from './service/hello-world.service';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {HomeComponent} from './home/home.component';
 import {ProfileComponent} from './profile/profile.component';
 import {TopMenuComponent} from './top-menu/top-menu.component';
-import {SharedModule} from './shared/shared.module';
 import {AuthComponent} from './auth/auth.component';
 import {ForgetPasswordComponent} from './auth/forget-password/forget-password.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -29,6 +28,10 @@ import {CanActivateAuthComponentGuard} from './guard/can-activate-auth-component
 import {TournamentCreatorComponent} from './tournament-creator/tournament-creator.component';
 import {TournamentCreatorService} from './service/tournament-creator.service';
 import {MapToArrayPipe} from './pipe/map-to-array.pipe';
+import {MissingTranslationHandler, TranslateLoader, TranslateModule, TranslateStore} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {ConfigService} from './service/config.service';
+import {DefaultMissingTranslationHandler} from './default-missing-translation-handler';
 
 library.add(fas);
 
@@ -46,6 +49,10 @@ const appRoutes: Routes = [
   {path: 'create', component: TournamentCreatorComponent, canActivate: [AuthRequiredGuard]}
 ];
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,23 +66,33 @@ const appRoutes: Routes = [
     AuthComponent,
     UserSettingsComponent,
     TournamentCreatorComponent,
-    MapToArrayPipe,
+    MapToArrayPipe
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
-    SharedModule,
     HttpClientModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: DefaultMissingTranslationHandler},
+      useDefaultLang: false
+    }),
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [
     HelloWorldService,
     AuthRequiredGuard,
+    TranslateStore,
+    ConfigService,
     CanActivateAuthComponentGuard,
     AuthService,
     TournamentCreatorService,

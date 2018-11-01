@@ -7,6 +7,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {RouterUrl} from '../../config/routerUrl';
 import {Pattern, RegisterForm} from '../../model/model';
 import {Router} from '@angular/router';
+import {matchValidator} from '../../model/wt-validators';
 
 @Component({
   selector: 'app-register',
@@ -28,8 +29,9 @@ export class RegisterComponent implements OnInit {
     this.registerForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.pattern(Pattern.password)]),
-      repeatPassword: new FormControl('', [Validators.required])
-    }, this.passwordMatchValidator);
+      repeatPassword: new FormControl('')
+    });
+    this.registerForm.get('repeatPassword').setValidators(matchValidator('password'));
   }
 
   onSubmit() {
@@ -47,16 +49,5 @@ export class RegisterComponent implements OnInit {
         }
       );
     }
-  }
-
-  passwordMatchValidator(formGroup: FormGroup) {
-    if (!formGroup.get('password').value || !formGroup.get('repeatPassword').value) {
-      return null;
-    }
-    if (formGroup.get('password').value !== formGroup.get('repeatPassword').value) {
-      formGroup.get('repeatPassword').setErrors({mismatch: true});
-      return {'mismatch': true};
-    }
-    return null;
   }
 }

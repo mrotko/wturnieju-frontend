@@ -49,6 +49,8 @@ export const LocaleMessages = {
   tournamentSystem: 'tournamentSystem',
   end: 'end',
   participantType: 'participantType',
+  tournamentCreatorFormErrorMsg: 'tournamentCreatorFormErrorMsg',
+  badValueError: 'badValueError',
   ACCESS_OPTION: {
     PUBLIC: ACCESS_OPTION.PUBLIC,
     PRIVATE: ACCESS_OPTION.PRIVATE

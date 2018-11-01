@@ -46,6 +46,8 @@
   "competition": "Dyscyplina",
   "tournamentSystem": "System rozgrywki",
   "end": "Zakończ",
+  "tournamentCreatorErrorMsg": "Formularz zawiera błędy. Popraw je.",
+  "badValueError": "Zła wartość",
   "participantType": "Typ uczestnika",
   "ACCESS_OPTION": {
     "PUBLIC": "Publiczny",

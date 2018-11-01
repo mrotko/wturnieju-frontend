@@ -16,7 +16,7 @@
     <input matInput type="password" placeholder="{{lm.repeatPassword | translate}}" formControlName="repeatPassword">
     <mat-error *ngIf="registerForm.get('repeatPassword').hasError('required')">{{lm.requiredError | translate}}
     </mat-error>
-    <mat-error *ngIf="registerForm.get('repeatPassword').hasError('mismatch')">{{lm.differentPasswordsError |
+    <mat-error *ngIf="registerForm.get('repeatPassword').hasError('match')">{{lm.differentPasswordsError |
       translate}}
     </mat-error>
   </mat-form-field>
@@ -24,29 +24,4 @@
   <button mat-icon-button routerLink="{{routerUrl.login}}">
     <mat-icon>arrow_back</mat-icon>
   </button>
-
-
-  <!--<mat-form-field>-->
-  <!--<input matInput type="email" placeholder="{{lm.email | translate}}" formControlName="email"-->
-  <!--(focus)="clearErrors('email')" (focusout)="valid('email')">-->
-  <!--<mat-error *ngIf="registerForm.get('email') && registerForm.get('email').touched">-->
-
-  <!--</mat-error>-->
-  <!--</mat-form-field>-->
-  <!--<mat-form-field>-->
-  <!--<input matInput type="password" placeholder="{{lm.password | translate}}" formControlName="password"-->
-  <!--(focus)="clearErrors('password')" (focusout)="valid('password')">-->
-  <!--<mat-error *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched">-->
-
-  <!--<mat-error *ngIf="registerForm.get('password').hasError('minlength')" translate [translateParams]="{v: '8'}">{{lm.minLengthError}}</mat-error>-->
-  <!--</mat-error>-->
-  <!--</mat-form-field>-->
-  <!--<mat-form-field>-->
-  <!--<input matInput type="password" placeholder="{{lm.repeatPassword | translate}}" formControlName="repeatPassword"-->
-  <!--(focus)="clearErrors('repeatPassword')" (focusout)="valid('repeatPassword')">-->
-  <!--<mat-error *ngIf="registerForm.get('repeatPassword').invalid && registerForm.get('repeatPassword').touched">-->
-
-  <!--</mat-error>-->
-  <!--</mat-form-field>-->
-  <!--<button mat-button type="submit">{{lm.createAccount | translate}}</button>-->
 </form>

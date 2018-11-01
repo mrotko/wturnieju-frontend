@@ -36,7 +36,7 @@ export interface TournamentCreatorConfig {
 
 export interface TranslatableEnum {
   value: string;
-  translation: string;
+  translationKey: string;
 }
 
 export interface TournamentCreatorCommonForm {

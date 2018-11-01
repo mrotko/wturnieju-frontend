@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {LocaleMessages} from '../locale-messages';
 import {COMPETITION_TYPE, TournamentCreatorConfig, TranslatableEnum} from '../model/model';
 import {TournamentCreatorService} from '../service/tournament-creator.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {greaterEqThanValidator, lessEqThanValidator} from '../model/wt-validators';
 
 // TODO daty są w nieprawidłowym formacie
-// TODO walidacja
 // TODO przesyłanie na front
 
 @Component({
@@ -20,44 +20,56 @@ export class TournamentCreatorComponent implements OnInit {
   commonFormGroup: FormGroup;
   competitionDetailsFormGroup: FormGroup;
 
-  enum: TranslatableEnum;
-
   constructor(
     private service: TournamentCreatorService
   ) { }
 
   ngOnInit() {
-    this.service.getConfig().subscribe(config => this.config = config);
-    // TODO dodać sprawdzenie czy min jest mniejsze od max dla daty i uczestników
+    this.initConfig();
+    this.initCommonFormGroup();
+  }
+
+  private initCommonFormGroup() {
     this.commonFormGroup = new FormGroup({
-        name: new FormControl(''),
-        accessOption: new FormControl(''),
+      name: new FormControl('', Validators.required),
+      accessOption: new FormControl('', Validators.required),
         fromDate: new FormControl(''),
         toDate: new FormControl(''),
-        place: new FormControl(''),
+      place: new FormControl('', Validators.required),
         description: new FormControl(''),
         minParticipants: new FormControl(''),
         maxParticipants: new FormControl(''),
-        competition: new FormControl('')
+      competition: new FormControl('', Validators.required)
       }
     );
+
+    this.commonFormGroup.get('fromDate').setValidators([Validators.required, lessEqThanValidator('toDate')]);
+    this.commonFormGroup.get('toDate').setValidators([Validators.required, greaterEqThanValidator('fromDate')]);
+
+    this.commonFormGroup.get('minParticipants').setValidators([Validators.required, lessEqThanValidator('maxParticipants')]);
+    this.commonFormGroup.get('maxParticipants').setValidators([Validators.required, greaterEqThanValidator('minParticipants')]);
+  }
+
+  private initConfig() {
+    this.service.getConfig().subscribe(config => this.config = config);
   }
 
   public submitCommonForm() {
-    console.log(this.commonFormGroup.value['competition']);
-    if ((<TranslatableEnum> this.commonFormGroup.value['competition']).value === COMPETITION_TYPE.CHESS) {
-      this.competitionDetailsFormGroup = new FormGroup({
-        participantType: new FormControl(''),
-        tournamentSystem: new FormControl('')
-      });
+    if (this.commonFormGroup.valid) {
+      this.initCompetitionDetailsFormGroup();
     }
   }
 
-  submitCompetitionDetailsForm() {
-    console.log(this.commonFormGroup.value);
-    console.log(this.commonFormGroup.value);
+  public submitCompetitionDetailsFormGroup() {
 
-    console.log(Array.from(this.commonFormGroup.value));
-    console.log(this.competitionDetailsFormGroup.value);
+  }
+
+  private initCompetitionDetailsFormGroup() {
+    if ((<TranslatableEnum> this.commonFormGroup.value['competition']).value === COMPETITION_TYPE.CHESS) {
+      this.competitionDetailsFormGroup = new FormGroup({
+        participantType: new FormControl('', Validators.required),
+        tournamentSystem: new FormControl('', Validators.required)
+      });
+    }
   }
 }
