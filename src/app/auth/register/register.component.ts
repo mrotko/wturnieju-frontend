@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
         () => {
           this.snackBar.open(this.translate.instant(this.lm.accountCreated), this.translate.instant(this.lm.close),
             {panelClass: 'success-snackbar'});
-          this.router.navigate([this.routerUrl.login]);
+          this.router.navigate([this.routerUrl.login]).catch();
         },
         err => {
           if (err.status === 400) {

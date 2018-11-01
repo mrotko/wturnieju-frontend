@@ -6,8 +6,9 @@ export const RequestUrl = {
   forgetPassword: environment.apiUrl + '/auth/forget-password',
 
   tournamentCreator: {
-    config: environment.apiUrl + '/tournamentCreator/config'
+    config: environment.apiUrl + '/tournamentCreator/config',
+    create: environment.apiUrl + '/tournamentCreator/create'
   },
 
   helloWorld: environment.apiUrl + '/hello-world',
-}
+};

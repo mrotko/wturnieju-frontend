@@ -140,14 +140,14 @@
       <div class="summary" *ngIf="commonFormGroup && competitionDetailsFormGroup">
         <div class="column-style"
              *ngFor="let entry of commonFormGroup.value | mapToArray">
-          <div>{{entry.k | translate}}</div>
-          <div>{{entry.v.translationKey ? (entry.v.translationKey | translate) : entry.v}}</div>
+          <div>{{entry.first | translate}}</div>
+          <div>{{entry.second.translationKey ? (entry.second.translationKey | translate) : entry.second}}</div>
         </div>
         <mat-divider></mat-divider>
         <div class="column-style"
              *ngFor="let entry of competitionDetailsFormGroup.value | mapToArray">
-          <div>{{entry.k | translate}}</div>
-          <div>{{entry.v.translationKey ? (entry.v.translationKey | translate) : entry.v}}</div>
+          <div>{{entry.first | translate}}</div>
+          <div>{{entry.second.translationKey ? (entry.second.translationKey | translate) : entry.second}}</div>
         </div>
       </div>
       <div class="control-btn">
@@ -155,7 +155,7 @@
           <mat-icon>navigate_before</mat-icon>
         </button>
       </div>
-      <button mat-button style="float: right;">{{lm.end | translate}}</button>
+      <button mat-button style="float: right;" (click)="submitTournamentCreatorForm()">{{lm.end | translate}}</button>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

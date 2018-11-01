@@ -39,25 +39,9 @@ export interface TranslatableEnum {
   translationKey: string;
 }
 
-export interface TournamentCreatorCommonForm {
-  name: string;
-  accessOption: TranslatableEnum;
-  fromDate: Date;
-  toDate: Date;
-  place: string;
-  description: string;
-  minParticipants: number;
-  maxParticipants: number;
-  competition: TranslatableEnum;
-}
-
-export interface TournamentCreatorCompetitionCommonForm {
-  tournamentSystem: TranslatableEnum;
-  participantType: TranslatableEnum;
-}
-
-export interface TournamentCreatorChessForm extends TournamentCreatorCompetitionCommonForm {
-
+export interface Tuple2 {
+  first: any;
+  second: any;
 }
 
 export const COMPETITION_TYPE = {

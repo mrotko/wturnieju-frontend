@@ -22,6 +22,7 @@ export const LocaleMessages = {
   makeLogin: 'makeLogin',
   accountCreated: 'accountCreated',
   unknownError: 'unknownError',
+  serviceUnavailableErrorMsg: 'serviceUnavailableErrorMsg',
   emailExists: 'emailExists',
   loginError: 'loginError',
   logout: 'logout',
@@ -51,6 +52,7 @@ export const LocaleMessages = {
   participantType: 'participantType',
   tournamentCreatorFormErrorMsg: 'tournamentCreatorFormErrorMsg',
   badValueError: 'badValueError',
+  tournamentCreatorSuccessMsg: 'tournamentCreatorSuccessMsg',
   ACCESS_OPTION: {
     PUBLIC: ACCESS_OPTION.PUBLIC,
     PRIVATE: ACCESS_OPTION.PRIVATE

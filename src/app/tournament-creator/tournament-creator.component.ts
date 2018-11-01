@@ -4,9 +4,13 @@ import {COMPETITION_TYPE, TournamentCreatorConfig, TranslatableEnum} from '../mo
 import {TournamentCreatorService} from '../service/tournament-creator.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {greaterEqThanValidator, lessEqThanValidator} from '../model/wt-validators';
+import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
+import {MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {RouterUrl} from '../config/routerUrl';
 
 // TODO daty są w nieprawidłowym formacie
-// TODO przesyłanie na front
 
 @Component({
   selector: 'app-tournament-creator',
@@ -15,13 +19,19 @@ import {greaterEqThanValidator, lessEqThanValidator} from '../model/wt-validator
 })
 export class TournamentCreatorComponent implements OnInit {
 
+  routerUrl = RouterUrl;
   lm = LocaleMessages;
   config: TournamentCreatorConfig;
   commonFormGroup: FormGroup;
   competitionDetailsFormGroup: FormGroup;
+  tournamentCreatorData = {};
 
   constructor(
-    private service: TournamentCreatorService
+    private service: TournamentCreatorService,
+    private mapToArrayPipe: MapToArrayPipe,
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -56,12 +66,43 @@ export class TournamentCreatorComponent implements OnInit {
 
   public submitCommonForm() {
     if (this.commonFormGroup.valid) {
+      this.updateTournamentCreatorData();
       this.initCompetitionDetailsFormGroup();
     }
   }
 
-  public submitCompetitionDetailsFormGroup() {
+  private updateTournamentCreatorData() {
+    this.tournamentCreatorData = {};
 
+    if (this.commonFormGroup) {
+      this.mapToArrayPipe.transform(this.commonFormGroup.value).forEach(entry => {
+        this.tournamentCreatorData[entry.first] = entry.second.translationKey ? entry.second.value : entry.second;
+      });
+    }
+
+    if (this.competitionDetailsFormGroup) {
+      this.mapToArrayPipe.transform(this.competitionDetailsFormGroup.value).forEach(entry => {
+        this.tournamentCreatorData[entry.first] = entry.second.translationKey ? entry.second.value : entry.second;
+      });
+    }
+  }
+
+  public submitCompetitionDetailsFormGroup() {
+    if (this.competitionDetailsFormGroup.valid) {
+      this.updateTournamentCreatorData();
+    }
+  }
+
+  public submitTournamentCreatorForm() {
+    this.service.send(this.tournamentCreatorData).subscribe(() => {
+      // TODO zrobić url który przenosi do utworzonego turnieju (może idk w odpowiedzi)
+      this.router.navigate([this.routerUrl.home]).catch();
+      this.snackBar.open(this.translateService.instant(this.lm.tournamentCreatorSuccessMsg),
+        this.translateService.instant(this.lm.close), {panelClass: 'success-snackbar'});
+    }, () => {
+      this.snackBar.open(this.translateService.instant(this.lm.serviceUnavailableErrorMsg),
+        this.translateService.instant(this.lm.close), {panelClass: 'error-snackbar'});
+    });
   }
 
   private initCompetitionDetailsFormGroup() {

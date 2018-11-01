@@ -49,6 +49,8 @@
   "tournamentCreatorErrorMsg": "Formularz zawiera błędy. Popraw je.",
   "badValueError": "Zła wartość",
   "participantType": "Typ uczestnika",
+  "serviceUnavailableErrorMsg": "Usługa jest niedostępna",
+  "tournamentCreatorSuccessMsg": "Turniej zostaw utworzony",
   "ACCESS_OPTION": {
     "PUBLIC": "Publiczny",
     "PRIVATE": "Prywatny"
