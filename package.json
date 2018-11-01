@@ -13,7 +13,7 @@
   "dependencies": {
     "@angular/animations": "latest",
     "@angular/cdk": "latest",
-    "@angular/cli": "^7.0.3",
+    "@angular/cli": "^7.0.4",
     "@angular/common": "latest",
     "@angular/compiler": "^7.0.2",
     "@angular/core": "^7.0.2",
@@ -38,12 +38,12 @@
     "zone.js": "latest"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.10.3",
+    "@angular-devkit/build-angular": "^0.10.4",
     "@angular/compiler-cli": "^7.0.2",
     "@angular/language-service": "^7.0.2",
     "@types/jasmine": "latest",
     "@types/jasminewd2": "latest",
-    "@types/node": "^10.12.1",
+    "@types/node": "^10.12.2",
     "codelyzer": "latest",
     "jasmine-core": "^3.3.0",
     "jasmine-spec-reporter": "latest",
@@ -56,6 +56,6 @@
     "protractor": "latest",
     "ts-node": "latest",
     "tslint": "latest",
-    "typescript": "^3.1.5"
+    "typescript": "^3.1.6"
   }
 }

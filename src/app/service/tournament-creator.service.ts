@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {TournamentCreatorConfig} from '../model/model';
 import {RequestUrl} from '../config/requestUrl';
@@ -17,7 +17,7 @@ export class TournamentCreatorService {
     return this.http.get<TournamentCreatorConfig>(RequestUrl.tournamentCreator.config);
   }
 
-  send(tournamentCreatorData: {}): Observable<HttpResponse | HttpErrorResponse> {
+  send(tournamentCreatorData: {}): Observable<any> {
     return this.http.post(RequestUrl.tournamentCreator.create, tournamentCreatorData);
   }
 }

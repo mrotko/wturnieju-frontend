@@ -2,7 +2,7 @@ import {ValidatorFn} from '@angular/forms';
 
 type Comparator<T> = (a: T, b: T) => boolean;
 
-function twoFieldsValidator(siblingsName: string, errName: string, comp: Comparator): ValidatorFn {
+function twoFieldsValidator<T>(siblingsName: string, errName: string, comp: Comparator<T>): ValidatorFn {
   return control => {
     const otherField = control.parent.get(siblingsName);
     if (!otherField.value || !control.value) {
