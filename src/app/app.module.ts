@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {HelloWorldComponent} from './hello-world/hello-world.component';
@@ -32,6 +32,14 @@ import {MissingTranslationHandler, TranslateLoader, TranslateModule, TranslateSt
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {ConfigService} from './service/config.service';
 import {DefaultMissingTranslationHandler} from './default-missing-translation-handler';
+import {TournamentDashboardComponent} from './tournament-dashboard/tournament-dashboard.component';
+import {TournamentsComponent} from './my-tournaments/tournaments.component';
+import {LocaleService} from './service/locale.service';
+import {registerLocaleData} from '@angular/common';
+import localePl from '@angular/common/locales/pl';
+import {TournamentService} from './tournament.service';
+
+registerLocaleData(localePl);
 
 library.add(fas);
 
@@ -46,7 +54,9 @@ const appRoutes: Routes = [
       ]
   },
   {path: 'user', component: UserSettingsComponent, canActivate: [AuthRequiredGuard]},
-  {path: 'create', component: TournamentCreatorComponent, canActivate: [AuthRequiredGuard]}
+  {path: 'create', component: TournamentCreatorComponent, canActivate: [AuthRequiredGuard]},
+  {path: 'tournaments', component: TournamentsComponent},
+  {path: 'tournaments/:id/dashboard', component: TournamentDashboardComponent}
 ];
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -66,7 +76,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthComponent,
     UserSettingsComponent,
     TournamentCreatorComponent,
-    MapToArrayPipe
+    MapToArrayPipe,
+    TournamentDashboardComponent,
+    TournamentsComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -97,8 +109,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthService,
     TournamentCreatorService,
     MapToArrayPipe,
+    LocaleService,
+    TournamentService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {
+      provide: LOCALE_ID,
+      deps: [LocaleService],
+      useFactory: localeService => localeService.getCurrentLocaleInstant().code
+    }
   ],
   bootstrap: [AppComponent]
 })

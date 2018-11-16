@@ -6,10 +6,10 @@ import {Tuple2} from '../model/model';
 })
 export class MapToArrayPipe implements PipeTransform {
 
-  transform(value: {}, args?: any): Array<Tuple2> {
+  transform(value: {}, args?: any): Array<Tuple2<any, any>> {
     if (!value) {
       return [];
     }
-    return Object.entries(value).map(([first, second]) => (<Tuple2>{first, second}));
+    return Object.entries(value).map(([first, second]) => (<Tuple2<any, any>>{first, second}));
   }
 }

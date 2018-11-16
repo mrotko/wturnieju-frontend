@@ -10,5 +10,9 @@ export const RequestUrl = {
     create: environment.apiUrl + '/tournamentCreator/create'
   },
 
+  tournament: {
+    user: environment.apiUrl + '/tournaments?userId='
+  },
+
   helloWorld: environment.apiUrl + '/hello-world',
 };

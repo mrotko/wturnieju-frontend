@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LocaleMessages} from '../locale-messages';
-import {COMPETITION_TYPE, TournamentCreatorConfig, TranslatableEnum} from '../model/model';
+import {COMPETITION_TYPE, TournamentCreatorConfig, TranslatableValue} from '../model/model';
 import {TournamentCreatorService} from '../service/tournament-creator.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {greaterEqThanValidator, lessEqThanValidator} from '../model/wt-validators';
@@ -94,6 +94,7 @@ export class TournamentCreatorComponent implements OnInit {
   }
 
   public submitTournamentCreatorForm() {
+    console.log(this.commonFormGroup.get('toDate'));
     this.service.send(this.tournamentCreatorData).subscribe(() => {
       // TODO zrobić url który przenosi do utworzonego turnieju (może idk w odpowiedzi)
       this.router.navigate([this.routerUrl.home]).catch();
@@ -106,7 +107,7 @@ export class TournamentCreatorComponent implements OnInit {
   }
 
   private initCompetitionDetailsFormGroup() {
-    if ((<TranslatableEnum> this.commonFormGroup.value['competition']).value === COMPETITION_TYPE.CHESS) {
+    if ((<TranslatableValue<string>> this.commonFormGroup.value['competition']).value === COMPETITION_TYPE.CHESS) {
       this.competitionDetailsFormGroup = new FormGroup({
         participantType: new FormControl('', Validators.required),
         tournamentSystem: new FormControl('', Validators.required)

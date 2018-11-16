@@ -40,6 +40,10 @@ export class LocaleService {
     return this.currentLocale$.asObservable();
   }
 
+  getCurrentLocaleInstant(): Locale {
+    return this.currentLocale$.getValue();
+  }
+
   change(locale: Locale) {
     this.setLocaleToStorage(locale);
     this.translateService.use(locale.code);

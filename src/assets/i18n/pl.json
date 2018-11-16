@@ -51,6 +51,16 @@
   "participantType": "Typ uczestnika",
   "serviceUnavailableErrorMsg": "Usługa jest niedostępna",
   "tournamentCreatorSuccessMsg": "Turniej zostaw utworzony",
+  "myTournaments": "Moje turnieje",
+  "inProgress": "W trakcie",
+  "ended": "Zakończone",
+  "beforeStart": "Przed startem",
+  "lp": "Lp.",
+  "tournamentStart": "Początek",
+  "tournamentEnd": "Koniec",
+  "currentRound": "Aktualna runda",
+  "nextOpponent": "Następny przeciwnik",
+  "winner": "Zwycięzca",
   "ACCESS_OPTION": {
     "PUBLIC": "Publiczny",
     "PRIVATE": "Prywatny"

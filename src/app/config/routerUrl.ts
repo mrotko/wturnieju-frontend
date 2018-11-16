@@ -3,4 +3,5 @@ export const RouterUrl = {
   login: '/auth/login',
   register: '/auth/register',
   userSettings: '/user',
-}
+  tournaments: '/tournaments',
+};

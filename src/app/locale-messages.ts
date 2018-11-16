@@ -53,6 +53,16 @@ export const LocaleMessages = {
   tournamentCreatorFormErrorMsg: 'tournamentCreatorFormErrorMsg',
   badValueError: 'badValueError',
   tournamentCreatorSuccessMsg: 'tournamentCreatorSuccessMsg',
+  myTournaments: 'myTournaments',
+  inProgress: 'inProgress',
+  ended: 'ended',
+  beforeStart: 'beforeStart',
+  lp: 'lp',
+  tournamentStart: 'tournamentStart',
+  tournamentEnd: 'tournamentEnd',
+  currentRound: 'currentRound',
+  nextOpponent: 'nextOpponent',
+  winner: 'winner',
   ACCESS_OPTION: {
     PUBLIC: ACCESS_OPTION.PUBLIC,
     PRIVATE: ACCESS_OPTION.PRIVATE

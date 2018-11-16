@@ -1,0 +1,160 @@
+<div class="component-container">
+  <mat-card>
+    <mat-card-title>{{lm.inProgress | translate}}</mat-card-title>
+    <mat-card-content>
+      <table mat-table [dataSource]="inProgressTournamentRows">
+
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>{{lm.lp | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tournamentName">
+          <th mat-header-cell *matHeaderCellDef>{{lm.name | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.tournamentName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="competition">
+          <th mat-header-cell *matHeaderCellDef>{{lm.competition | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.competitionType.translationKey | translate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tournamentSystem">
+          <th mat-header-cell *matHeaderCellDef>{{lm.tournamentSystem | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.tournamentSystemType.translationKey | translate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="start">
+          <th mat-header-cell *matHeaderCellDef>{{lm.tournamentStart | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.startDate | date: 'short'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="end">
+          <th mat-header-cell *matHeaderCellDef>{{lm.tournamentEnd | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.endDate | date: 'short'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="currentRound">
+          <th mat-header-cell *matHeaderCellDef>{{lm.currentRound | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.currentRound}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nextOpponent">
+          <th mat-header-cell *matHeaderCellDef>{{lm.nextOpponent | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.nextOpponent.name + ' ' + element.nextOpponent.surname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actionButton">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="openTournament(element.tournamentId)"><mat-icon>open_in_new</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="inProgressTournamentColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: inProgressTournamentColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>{{lm.beforeStart | translate}}</mat-card-title>
+    <mat-card-content>
+      <table mat-table [dataSource]="beforeStartTournamentRows">
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>{{lm.lp | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tournamentName">
+          <th mat-header-cell *matHeaderCellDef>{{lm.name | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.tournamentName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="competition">
+          <th mat-header-cell *matHeaderCellDef>{{lm.competition | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.competitionType.translationKey | translate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tournamentSystem">
+          <th mat-header-cell *matHeaderCellDef>{{lm.tournamentSystem | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.tournamentSystemType.translationKey | translate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="start">
+          <th mat-header-cell *matHeaderCellDef>{{lm.tournamentStart | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.startDate | date: 'short'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="end">
+          <th mat-header-cell *matHeaderCellDef>{{lm.tournamentEnd | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.endDate | date: 'short'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actionButton">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="openTournament(element.tournamentId)"><mat-icon>open_in_new</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="beforeStartTournamentColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: beforeStartTournamentColumns;"></tr>
+      </table>
+    </mat-card-content>
+
+  </mat-card>
+  <mat-card>
+    <mat-card-title>{{lm.ended | translate}}</mat-card-title>
+    <mat-card-content>
+      <table mat-table [dataSource]="endedTournamentRows">
+
+
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>{{lm.lp | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tournamentName">
+          <th mat-header-cell *matHeaderCellDef>{{lm.name | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.tournamentName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="competition">
+          <th mat-header-cell *matHeaderCellDef>{{lm.competition | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.competitionType.translationKey | translate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tournamentSystem">
+          <th mat-header-cell *matHeaderCellDef>{{lm.tournamentSystem | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.tournamentSystemType.translationKey | translate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="start">
+          <th mat-header-cell *matHeaderCellDef>{{lm.tournamentStart | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.startDate | date: 'short'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="end">
+          <th mat-header-cell *matHeaderCellDef>{{lm.tournamentEnd | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.endDate | date: 'short'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="winner">
+          <th mat-header-cell *matHeaderCellDef>{{lm.winner | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.winner.name + ' ' + element.winner.surname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actionButton">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="openTournament(element.tournamentId)"><mat-icon>open_in_new</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="endedTournamentColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: endedTournamentColumns;"></tr>
+      </table>
+    </mat-card-content>
+
+  </mat-card>
+</div>

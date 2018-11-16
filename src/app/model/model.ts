@@ -34,14 +34,54 @@ export interface TournamentCreatorConfig {
   participantTypes: { [key: string]: string [] };
 }
 
-export interface TranslatableEnum {
-  value: string;
+export interface TranslatableValue<T> {
+  value: T;
   translationKey: string;
 }
 
-export interface Tuple2 {
-  first: any;
-  second: any;
+export interface Tuple2<FIRST, SECOND> {
+  first: FIRST | any;
+  second: SECOND | any;
+}
+
+export interface ProfileDTO {
+  id: string;
+}
+
+export interface TournamentParticipantDTO extends ProfileDTO {
+  firstName: string;
+  secondName: string;
+  participantStatus: string;
+}
+
+
+export interface TournamentDTO {
+  id: string;
+  name: string;
+  description: string;
+  place: string;
+  img: string;
+  status: string;
+  accessOption: string;
+  participants: TournamentParticipantDTO [];
+  owner: ProfileDTO;
+  startDate: Date;
+  endDate: Date;
+  systemType: string;
+  competitionType: string;
+  tournamentParticipantType: string;
+  staffIds: string [];
+  contributorsIds: string [];
+  tournamentSystemState: string;
+  minParticipants: number;
+  maxParticipants: number;
+  currentRound: number;
+  winner: TournamentParticipantDTO;
+  nextOpponent: TournamentParticipantDTO;
+}
+
+export interface UserTournamentsDTO {
+  tournaments: { [key: string]: TournamentDTO []; };
 }
 
 export const COMPETITION_TYPE = {
@@ -61,3 +101,9 @@ export const TOURNAMENT_PARTICIPANT_TYPE = {
   SINGLE: 'TOURNAMENT_PARTICIPANT_TYPE.SINGLE',
   TEAM: 'TOURNAMENT_PARTICIPANT_TYPE.TEAM'
 };
+
+export const TOURNAMENT_STATUS = {
+  BEFORE_START: 'TOURNAMENT_STATUS.BEFORE_START',
+  IN_PROGRESS: 'TOURNAMENT_STATUS.IN_PROGRESS',
+  ENDED: 'TOURNAMENT_STATUS.ENDED',
+}
