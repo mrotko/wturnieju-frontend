@@ -1,3 +1,27 @@
-<p>
-  tournament-dashboard works!
-</p>
+<div *ngIf="tournament" class="component-container">
+  <div class="dashboard-header">
+    <div class="mat-title dashboard-header-item">{{tournament.name}}</div>
+    <div class="dashboard-header-item">
+      <div>{{tournament.startDate | date: 'short'}}</div>
+      <div>{{tournament.endDate | date: 'short'}}</div>
+    </div>
+    <div class="tournament-control dashboard-header-item">
+      <button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.BEFORE_START">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+      <button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.IN_PROGRESS">
+        <mat-icon>pause</mat-icon>
+      </button>
+      <button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.IN_PROGRESS">
+        <mat-icon>stop</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="dashboard-content">
+    <app-tournament-details [tournamentId]="tournamentId"></app-tournament-details>
+    <app-participants [tournamentId]="tournamentId"></app-participants>
+  </div>
+</div>
+<div *ngIf="!tournament">
+  <mat-spinner></mat-spinner>
+</div>

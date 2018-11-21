@@ -5,13 +5,19 @@ export const RequestUrl = {
   register: environment.apiUrl + '/auth/register',
   forgetPassword: environment.apiUrl + '/auth/forget-password',
 
+  search: {
+    tournament: environment.apiUrl + '/search?tournament=',
+    user: environment.apiUrl + '/search/user?q='
+  },
+
   tournamentCreator: {
     config: environment.apiUrl + '/tournamentCreator/config',
     create: environment.apiUrl + '/tournamentCreator/create'
   },
 
   tournament: {
-    user: environment.apiUrl + '/tournaments?userId='
+    tournament: environment.apiUrl + '/tournaments/',
+    user: environment.apiUrl + '/tournaments?userId=',
   },
 
   helloWorld: environment.apiUrl + '/hello-world',

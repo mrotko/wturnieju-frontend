@@ -1,6 +1,7 @@
 import {ACCESS_OPTION, COMPETITION_TYPE, TOURNAMENT_PARTICIPANT_TYPE, TOURNAMENT_SYSTEM_TYPE} from './model/model';
 
 export const LocaleMessages = {
+  add: 'add',
   hello: 'hello',
   login: 'login',
   polish: 'polish',
@@ -63,6 +64,7 @@ export const LocaleMessages = {
   currentRound: 'currentRound',
   nextOpponent: 'nextOpponent',
   winner: 'winner',
+  participants: 'participants',
   ACCESS_OPTION: {
     PUBLIC: ACCESS_OPTION.PUBLIC,
     PRIVATE: ACCESS_OPTION.PRIVATE

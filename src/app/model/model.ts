@@ -1,3 +1,5 @@
+import {TournamentParticipant} from '../my-tournaments/tournaments.component';
+
 export interface RegisterForm {
   username: string;
   password: string;
@@ -27,6 +29,13 @@ export interface User {
   token?: string;
 }
 
+export interface UserDTO {
+  id: string;
+  name?: string;
+  surname?: string;
+  fullName?: string;
+}
+
 export interface TournamentCreatorConfig {
   accessOptions: string [];
   competitionTypes: string [];
@@ -51,9 +60,10 @@ export interface ProfileDTO {
 export interface TournamentParticipantDTO extends ProfileDTO {
   firstName: string;
   secondName: string;
+  name: string;
+  fullName: string;
   participantStatus: string;
 }
-
 
 export interface TournamentDTO {
   id: string;
@@ -78,6 +88,22 @@ export interface TournamentDTO {
   currentRound: number;
   winner: TournamentParticipantDTO;
   nextOpponent: TournamentParticipantDTO;
+}
+
+export interface Fixture {
+  players: Tuple2<TournamentParticipant, TournamentParticipant>;
+  result?: Tuple2<number, number>;
+
+}
+
+export interface RoundToFixturesDTO {
+  round: number;
+  fixtures: Fixture[];
+}
+
+export interface Cache<T> {
+  expirationDate: Date;
+  value: T;
 }
 
 export interface UserTournamentsDTO {
@@ -106,4 +132,12 @@ export const TOURNAMENT_STATUS = {
   BEFORE_START: 'TOURNAMENT_STATUS.BEFORE_START',
   IN_PROGRESS: 'TOURNAMENT_STATUS.IN_PROGRESS',
   ENDED: 'TOURNAMENT_STATUS.ENDED',
-}
+};
+
+export const PARTICIPANT_STATUS = {
+  ACTIVE: 'PARTICIPANT_STATUS.ACTIVE',
+  DISQUALIFIED: 'PARTICIPANT_STATUS.DISQUALIFIED',
+  RESIGNED: 'PARTICIPANT_STATUS.RESIGNED',
+  INVITED: 'PARTICIPANT_STATUS.INVITED'
+};
+

@@ -1,0 +1,30 @@
+<div *ngIf="tournament" class="component-container">
+  <mat-card>
+    <mat-card-title>
+      <span>{{lm.participants | translate}}</span>
+      <span>{{' (' + participants?.length + '/' + tournament?.maxParticipants  + ')'}}</span>
+    </mat-card-title>
+    <mat-card-content>
+      <ol class="participants">
+        <li *ngFor="let participant of participants">
+          <div>{{participant.name}}</div>
+          <div *ngIf="!participant.confirmed"><mat-icon>email</mat-icon></div>
+        </li>
+      </ol>
+    </mat-card-content>
+    <mat-card-footer class="mat-elevation-z1" *ngIf="isSearchVisible()">
+      <form class="search-box">
+        <mat-form-field>
+          <input type="text" class="search-box-item mat-elevation-z2" matInput [matAutocomplete]="auto" [formControl]="searchFormControl"/>
+          <mat-autocomplete #auto="matAutocomplete" [panelWidth]="500">
+            <mat-option *ngFor="let option of searchAutocompleteOptions | async" [value]="option.name">
+              <button mat-icon-button (click)="inviteParticipant(option.id)"><mat-icon>person_add</mat-icon></button>
+              <span>{{option.name}}</span>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button type="submit" mat-button class="search-box-item">{{lm.add | translate}}</button>
+      </form>
+    </mat-card-footer>
+  </mat-card>
+</div>

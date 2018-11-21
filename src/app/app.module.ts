@@ -38,6 +38,10 @@ import {LocaleService} from './service/locale.service';
 import {registerLocaleData} from '@angular/common';
 import localePl from '@angular/common/locales/pl';
 import {TournamentService} from './tournament.service';
+import {TournamentDetailsComponent} from './tournament-details/tournament-details.component';
+import {ParticipantsComponent} from './participants/participants.component';
+import {FixturePlannerComponent} from './fixture-planner/fixture-planner.component';
+import {TournamentParticipantsService} from './tournament-participants.service';
 
 registerLocaleData(localePl);
 
@@ -78,7 +82,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     TournamentCreatorComponent,
     MapToArrayPipe,
     TournamentDashboardComponent,
-    TournamentsComponent
+    TournamentsComponent,
+    TournamentDetailsComponent,
+    ParticipantsComponent,
+    FixturePlannerComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -111,6 +118,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MapToArrayPipe,
     LocaleService,
     TournamentService,
+    TournamentParticipantsService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {
