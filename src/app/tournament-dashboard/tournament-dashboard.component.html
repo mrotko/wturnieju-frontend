@@ -6,20 +6,20 @@
       <div>{{tournament.endDate | date: 'short'}}</div>
     </div>
     <div class="tournament-control dashboard-header-item">
-      <button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.BEFORE_START">
+      <button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.BEFORE_START" (click)="startTournament()">
         <mat-icon>play_arrow</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.IN_PROGRESS">
+      <button mat-icon-button *ngIf="false && tournament.status === TOURNAMENT_STATUS.IN_PROGRESS">
         <mat-icon>pause</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.IN_PROGRESS">
+      <button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.IN_PROGRESS" (click)="endTournament()">
         <mat-icon>stop</mat-icon>
       </button>
     </div>
   </div>
   <div class="dashboard-content">
     <app-tournament-details [tournamentId]="tournamentId"></app-tournament-details>
-    <app-participants [tournamentId]="tournamentId"></app-participants>
+    <app-participants [tournament]="tournament"></app-participants>
   </div>
 </div>
 <div *ngIf="!tournament">

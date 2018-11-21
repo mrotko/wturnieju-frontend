@@ -1,7 +1,7 @@
 import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {RoundToFixturesDTO, TournamentDTO, UserTournamentsDTO} from './model/model';
+import {RoundToFixturesDTO, TournamentBundleUpdate, TournamentDTO, UserTournamentsDTO} from './model/model';
 import {RequestUrl} from './config/requestUrl';
 
 @Injectable()
@@ -25,5 +25,9 @@ export class TournamentService implements OnInit {
 
   getTournament(tournamentId: string): Observable<TournamentDTO> {
     return this.http.get<TournamentDTO>(RequestUrl.tournament.tournament + tournamentId);
+  }
+
+  updateTournament(bundle: TournamentBundleUpdate): Observable<TournamentDTO> {
+    return this.http.put<TournamentDTO>(RequestUrl.tournament.tournament + bundle.tournamentId, bundle);
   }
 }

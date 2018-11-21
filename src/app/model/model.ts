@@ -53,11 +53,11 @@ export interface Tuple2<FIRST, SECOND> {
   second: SECOND | any;
 }
 
-export interface ProfileDTO {
+export interface Profile {
   id: string;
 }
 
-export interface TournamentParticipantDTO extends ProfileDTO {
+export interface TournamentParticipantDTO extends Profile {
   firstName: string;
   secondName: string;
   name: string;
@@ -74,10 +74,10 @@ export interface TournamentDTO {
   status: string;
   accessOption: string;
   participants: TournamentParticipantDTO [];
-  owner: ProfileDTO;
+  owner: Profile;
   startDate: Date;
   endDate: Date;
-  systemType: string;
+  systemType: TournamentSystemType;
   competitionType: string;
   tournamentParticipantType: string;
   staffIds: string [];
@@ -89,6 +89,27 @@ export interface TournamentDTO {
   winner: TournamentParticipantDTO;
   nextOpponent: TournamentParticipantDTO;
 }
+
+
+export interface TournamentBundleUpdate {
+  timestamp: Date;
+  changedBy: Profile;
+  tournamentId: string;
+  tournamentSystemType: TournamentSystemType;
+  content: StartTournamentBundleUpdateContent | EndTournamentBundleUpdateContent;
+}
+
+
+export interface StartTournamentBundleUpdateContent {
+  startDate: Date;
+  type: TournamentBundleUpdateContentType;
+}
+
+export interface EndTournamentBundleUpdateContent {
+  endDate: Date;
+  type: TournamentBundleUpdateContentType;
+}
+
 
 export interface Fixture {
   players: Tuple2<TournamentParticipant, TournamentParticipant>;
@@ -119,9 +140,13 @@ export const ACCESS_OPTION = {
   PRIVATE: 'ACCESS_OPTION.PRIVATE'
 };
 
-export const TOURNAMENT_SYSTEM_TYPE = {
-  SWISS: 'TOURNAMENT_SYSTEM_TYPE.SWISS'
-};
+// export const TOURNAMENT_SYSTEM_TYPE = {
+//   SWISS: 'TOURNAMENT_SYSTEM_TYPE.SWISS'
+// };
+
+export enum TournamentSystemType {
+  SWISS = 'TOURNAMENT_SYSTEM_TYPE.SWISS'
+}
 
 export const TOURNAMENT_PARTICIPANT_TYPE = {
   SINGLE: 'TOURNAMENT_PARTICIPANT_TYPE.SINGLE',
@@ -141,3 +166,17 @@ export const PARTICIPANT_STATUS = {
   INVITED: 'PARTICIPANT_STATUS.INVITED'
 };
 
+
+export const enum TournamentBundleUpdateContentType {
+  START = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.START',
+  NEXT_ROUND = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.NEXT_ROUND',
+  PAUSE = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.PAUSE',
+  END = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.END'
+}
+
+// export const TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE = {
+//   START: 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.START',
+//   NEXT_ROUND: 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.NEXT_ROUND',
+//   PAUSE: 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.PAUSE',
+//   END: 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.END'
+// };

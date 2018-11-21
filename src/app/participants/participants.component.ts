@@ -11,7 +11,6 @@ import {TournamentService} from '../tournament.service';
 
 interface ParticipantItem {
   id: string;
-  position: number;
   name: string;
   confirmed?: boolean;
 }
@@ -30,15 +29,13 @@ export class ParticipantsComponent implements OnInit {
 
   lm = LocaleMessages;
 
-  @Input() tournamentId: string;
-
   searchFormControl = new FormControl();
 
   searchAutocompleteOptions: Observable<AutocompleteOption []>;
 
-  tournament: TournamentDTO;
+  @Input() tournament: TournamentDTO;
 
-  participants: ParticipantItem [];
+  participants: ParticipantItem [] = [];
 
   selectedUserId: string;
 
@@ -50,20 +47,10 @@ export class ParticipantsComponent implements OnInit {
   }
 
   isSearchVisible(): boolean {
-    return this.countConfirmedParticipants() < this.tournament.maxParticipants && this.tournament.status === TOURNAMENT_STATUS.BEFORE_START;
+    return this.participants.length < this.tournament.maxParticipants && this.tournament.status === TOURNAMENT_STATUS.BEFORE_START;
   }
-
-  countConfirmedParticipants(): number {
-    let counter = 0;
-    this.participants
-      .filter(pItem => pItem.confirmed)
-      .forEach(() => counter = counter + 1);
-    return counter;
-  }
-
 
   ngOnInit() {
-    this.tournamentService.getTournament(this.tournamentId).subscribe(dto => this.tournament = dto);
     this.prepareParticipants();
   }
 
@@ -76,12 +63,11 @@ export class ParticipantsComponent implements OnInit {
   }
 
   private prepareParticipants() {
-    this.tournamentParticipantsService.getParticipants(this.tournamentId)
+    this.tournamentParticipantsService.getParticipants(this.tournament.id)
       .pipe(map((dtos): ParticipantItem [] => {
-        return dtos.map((dto, index): ParticipantItem => {
+        return dtos.map((dto): ParticipantItem => {
           return {
             id: dto.id,
-            position: index + 1,
             name: dto.fullName,
             confirmed: (dto.participantStatus !== PARTICIPANT_STATUS.INVITED)
           };
@@ -94,7 +80,7 @@ export class ParticipantsComponent implements OnInit {
 
   inviteParticipant(participantId?: string) {
     if (participantId || this.selectedUserId) {
-      this.tournamentParticipantsService.invite(this.tournamentId, participantId || this.selectedUserId).subscribe(() => {
+      this.tournamentParticipantsService.invite(this.tournament.id, participantId || this.selectedUserId).subscribe(() => {
         this.selectedUserId = null;
 
         for (let i = 0; i < this.participants.length; i++) {

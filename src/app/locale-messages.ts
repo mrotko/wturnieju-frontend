@@ -1,4 +1,4 @@
-import {ACCESS_OPTION, COMPETITION_TYPE, TOURNAMENT_PARTICIPANT_TYPE, TOURNAMENT_SYSTEM_TYPE} from './model/model';
+import {ACCESS_OPTION, COMPETITION_TYPE, TOURNAMENT_PARTICIPANT_TYPE, TournamentSystemType} from './model/model';
 
 export const LocaleMessages = {
   add: 'add',
@@ -63,6 +63,7 @@ export const LocaleMessages = {
   tournamentEnd: 'tournamentEnd',
   currentRound: 'currentRound',
   nextOpponent: 'nextOpponent',
+  doSearch: 'doSearch',
   winner: 'winner',
   participants: 'participants',
   ACCESS_OPTION: {
@@ -73,7 +74,7 @@ export const LocaleMessages = {
     CHESS: COMPETITION_TYPE.CHESS
   },
   TOURNAMENT_SYSTEM_TYPE: {
-    SWISS: TOURNAMENT_SYSTEM_TYPE.SWISS
+    SWISS: TournamentSystemType.SWISS
   },
   TOURNAMENT_PARTICIPANT_TYPE: {
     SINGLE: TOURNAMENT_PARTICIPANT_TYPE.SINGLE,
