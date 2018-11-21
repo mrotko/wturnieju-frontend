@@ -24,7 +24,7 @@
     <button *ngIf="currentUser" mat-icon-button (click)="logout()" title="{{lm.logout | translate}}">
       <mat-icon>exit_to_app</mat-icon>
     </button>
-    <div>
+    <div style="display: none">
       <button mat-flat-button [matMenuTriggerFor]="langMenu">{{currentLocale?.name | translate}}</button>
       <mat-menu #langMenu>
         <button mat-menu-item *ngFor="let locale of locales" (click)="changeLocale(locale)">{{locale.name | translate}}
