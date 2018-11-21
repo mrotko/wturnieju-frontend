@@ -12,10 +12,10 @@
         </li>
       </ol>
     </mat-card-content>
-    <mat-card-footer class="mat-elevation-z1" *ngIf="isSearchVisible()">
+    <mat-card-footer *ngIf="isSearchVisible()">
       <form class="search-box">
         <mat-form-field>
-          <input type="text" class="search-box-item mat-elevation-z2" matInput [matAutocomplete]="auto"
+          <input type="text" matInput [matAutocomplete]="auto"
                  [formControl]="searchFormControl" [placeholder]="lm.doSearch | translate"/>
           <mat-autocomplete #auto="matAutocomplete" [panelWidth]="500">
             <mat-option *ngFor="let option of searchAutocompleteOptions | async"
@@ -25,7 +25,6 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-        <button type="submit" mat-button class="search-box-item">{{lm.add | translate}}</button>
       </form>
     </mat-card-footer>
   </mat-card>

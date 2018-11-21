@@ -1,5 +1,7 @@
 .search-box {
-  display: flex;
+  //display: flex;
+  padding-left: 40px;
+  padding-top: 20px;
 }
 
 
@@ -11,6 +13,6 @@ ol > li{
   padding: 10px;
 }
 
-.search-box-item {
-  padding: 5px;
+mat-form-field {
+  width: 30%;
 }
