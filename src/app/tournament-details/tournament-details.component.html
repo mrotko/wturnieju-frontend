@@ -1,5 +1,35 @@
-<div class="component-container" *ngIf="fixtures?.length > 0">
-    <mat-card>
+<div class="component-container" *ngIf="tournament">
+  <mat-card>
+    <mat-card-title>
+      <span>{{lm.table | translate}}</span>
+      <button mat-icon-button class="rotate-hover" (click)="refreshTournamentTable()">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+    </mat-card-title>
+    <mat-card-content>
+      <table mat-table [dataSource]="tournamentTable.rows">
+
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>{{lm.position | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.position}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef>{{lm.name | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{getFullName(element.profile)}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="points">
+          <th mat-header-cell *matHeaderCellDef>{{lm.points | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.points}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="swissTournamentColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: swissTournamentColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="fixtures?.length > 0">
       <mat-card-title class="tournament-schedule-control">
         <button mat-icon-button (click)="showPrevFixtures()" [disabled]="!isPrevRound()">
           <mat-icon>arrow_left</mat-icon>

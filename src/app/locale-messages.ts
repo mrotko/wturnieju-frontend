@@ -64,6 +64,9 @@ export const LocaleMessages = {
   currentRound: 'currentRound',
   nextOpponent: 'nextOpponent',
   doSearch: 'doSearch',
+  table: 'table',
+  position: 'position',
+  points: 'points',
   winner: 'winner',
   participants: 'participants',
   ACCESS_OPTION: {

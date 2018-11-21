@@ -61,7 +61,10 @@
   "tournamentEnd": "Koniec",
   "currentRound": "Aktualna runda",
   "doSearch": "Szukaj",
+  "table": "Tabela",
+  "position": "Pozycja",
   "nextOpponent": "Następny przeciwnik",
+  "points": "Punkty",
   "winner": "Zwycięzca",
   "participants": "Uczestnicy",
   "ACCESS_OPTION": {

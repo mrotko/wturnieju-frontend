@@ -1,12 +1,23 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TournamentService} from '../tournament.service';
-import {Fixture, Tuple2} from '../model/model';
+import {Fixture, Profile, TournamentDTO, TournamentTableDTO, Tuple2} from '../model/model';
 import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
+import {LocaleMessages} from '../locale-messages';
 
-//
-// interface TournamentTableRow {
-//
-// }
+
+interface SwissTournamentTable {
+  rows: SwissTournamentTableRow [];
+}
+
+interface SwissTournamentTableRow {
+  position: number;
+  profile: Profile;
+  points: number;
+  wins: number;
+  draws: number;
+  loses: number;
+  smallPoints: number;
+}
 
 @Component({
   selector: 'app-tournament-details',
@@ -15,7 +26,9 @@ import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
 })
 export class TournamentDetailsComponent implements OnInit {
 
-  @Input() tournamentId: string;
+  lm = LocaleMessages;
+
+  @Input() tournament: TournamentDTO;
 
   currentRound: number;
 
@@ -30,6 +43,10 @@ export class TournamentDetailsComponent implements OnInit {
 
   roundFixtures: {key: number, value: Fixture[]};
 
+  tournamentTable: TournamentTableDTO;
+
+  swissTournamentColumns: string [] = ['position', 'fullName', 'points'];
+
   constructor(
     private tournamentService: TournamentService,
     private mapToArray: MapToArrayPipe,
@@ -37,12 +54,13 @@ export class TournamentDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.roundFixtures = {} as {key: number, value: Fixture[]};
-      this.tournamentService.getRoundsToFixtures(this.tournamentId).subscribe(roundsToFixturesDTO => {
+    this.tournamentService.getRoundsToFixtures(this.tournament.id).subscribe(roundsToFixturesDTO => {
       roundsToFixturesDTO.forEach(dto => {
         this.roundFixtures[dto.round] = dto.fixtures;
       });
     });
     this.updateRoundsBoundaries();
+    this.refreshTournamentTable();
     this.currentRound = 1;
   }
 
@@ -75,5 +93,16 @@ export class TournamentDetailsComponent implements OnInit {
     if (this.isPrevRound()) {
       this.currentRound = this.currentRound - 1;
     }
+  }
+
+  refreshTournamentTable() {
+    this.tournamentService.getTournamentTable(this.tournament.id).subscribe(dto => this.tournamentTable = dto);
+  }
+
+  getFullName(profile: Profile): string {
+    console.log(this.tournamentTable);
+    const participant = this.tournament.participants.find(p => p.id === profile.id);
+    console.log(participant);
+    return participant ? participant.fullName : '';
   }
 }

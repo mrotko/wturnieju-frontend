@@ -114,7 +114,30 @@ export interface EndTournamentBundleUpdateContent {
 export interface Fixture {
   players: Tuple2<TournamentParticipant, TournamentParticipant>;
   result?: Tuple2<number, number>;
+}
 
+export interface TournamentTableDTO {
+  rows: TournamentTableRowDTO [];
+}
+
+export interface TournamentTableRowDTO {
+  position: number;
+  profile: Profile;
+  points: number;
+  wins: number;
+  draws: number;
+  loses: number;
+  smallPoints: number;
+}
+
+export enum SwissTournamentTableColumns {
+  POSITION = 'SWISS_TOURNAMENT_COLUMN.POSITION',
+  FULL_NAME = 'SWISS_TOURNAMENT_COLUMN.FULL_NAME',
+  POINTS = 'SWISS_TOURNAMENT_COLUMN.POINTS',
+  WINS = 'SWISS_TOURNAMENT_COLUMN.WINS',
+  DRAWS = 'SWISS_TOURNAMENT_COLUMN.DRAWS',
+  LOSES = 'SWISS_TOURNAMENT_COLUMN.LOSES',
+  SMALL_POINTS = 'SWISS_TOURNAMENT_COLUMN.SMALL_POINTS',
 }
 
 export interface RoundToFixturesDTO {
