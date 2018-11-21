@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {TournamentService} from '../tournament.service';
 import {Fixture, Profile, TournamentDTO, TournamentTableDTO, Tuple2} from '../model/model';
 import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
@@ -24,7 +24,7 @@ interface SwissTournamentTableRow {
   templateUrl: './tournament-details.component.html',
   styleUrls: ['./tournament-details.component.scss']
 })
-export class TournamentDetailsComponent implements OnInit {
+export class TournamentDetailsComponent implements OnInit, OnChanges {
 
   lm = LocaleMessages;
 
@@ -104,5 +104,9 @@ export class TournamentDetailsComponent implements OnInit {
     const participant = this.tournament.participants.find(p => p.id === profile.id);
     console.log(participant);
     return participant ? participant.fullName : '';
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.refreshTournamentTable();
   }
 }
