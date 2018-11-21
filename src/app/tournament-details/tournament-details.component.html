@@ -7,7 +7,7 @@
       </button>
     </mat-card-title>
     <mat-card-content>
-      <table mat-table [dataSource]="tournamentTable.rows">
+      <table mat-table [dataSource]="tournamentTable?.rows || []">
 
         <ng-container matColumnDef="position">
           <th mat-header-cell *matHeaderCellDef>{{lm.position | translate}}</th>
