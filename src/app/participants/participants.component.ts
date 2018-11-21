@@ -64,7 +64,6 @@ export class ParticipantsComponent implements OnInit {
 
   ngOnInit() {
     this.tournamentService.getTournament(this.tournamentId).subscribe(dto => this.tournament = dto);
-    this.initAutocompleteOptions();
     this.prepareParticipants();
   }
 
@@ -87,7 +86,10 @@ export class ParticipantsComponent implements OnInit {
             confirmed: (dto.participantStatus !== PARTICIPANT_STATUS.INVITED)
           };
         });
-      })).subscribe(participants => this.participants = participants);
+      })).subscribe(participants => {
+      this.participants = participants;
+      this.initAutocompleteOptions();
+    });
   }
 
   inviteParticipant(participantId?: string) {

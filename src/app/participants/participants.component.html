@@ -17,8 +17,9 @@
         <mat-form-field>
           <input type="text" class="search-box-item mat-elevation-z2" matInput [matAutocomplete]="auto" [formControl]="searchFormControl"/>
           <mat-autocomplete #auto="matAutocomplete" [panelWidth]="500">
-            <mat-option *ngFor="let option of searchAutocompleteOptions | async" [value]="option.name">
-              <button mat-icon-button (click)="inviteParticipant(option.id)"><mat-icon>person_add</mat-icon></button>
+            <mat-option *ngFor="let option of searchAutocompleteOptions | async" [value]="option.name"
+                        (onSelectionChange)="inviteParticipant(option.id)">
+              <mat-icon>person_add</mat-icon>
               <span>{{option.name}}</span>
             </mat-option>
           </mat-autocomplete>
