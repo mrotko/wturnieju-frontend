@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {TournamentService} from '../tournament.service';
-import {Fixture, Profile, TournamentDTO, TournamentTableDTO, Tuple2} from '../model/model';
+import {Fixture, Profile, TournamentDTO, TournamentTableDTO} from '../model/model';
 import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
 import {LocaleMessages} from '../locale-messages';
 
@@ -32,8 +32,6 @@ export class TournamentDetailsComponent implements OnInit, OnChanges {
 
   currentRound: number;
 
-  roundsBoundary: Tuple2<number, number>;
-
   /*
   * TODO komponent zawiera aktualną tabelę i terminarz
   * w terminarzu można wprowadzać nowe wyniki
@@ -54,49 +52,17 @@ export class TournamentDetailsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.roundFixtures = {} as {key: number, value: Fixture[]};
-    // this.tournamentService.getRoundsToFixtures(this.tournament.id).subscribe(roundsToFixturesDTO => {
-    //   roundsToFixturesDTO.forEach(dto => {
-    //     this.roundFixtures[dto.round] = dto.fixtures;
-    //   });
-    // });
-    // this.updateRoundsBoundaries();
-    // this.refreshTournamentTable();
-    // this.currentRound = 1;
+    this.tournamentService.getRoundsToFixtures(this.tournament.id).subscribe(roundsToFixturesDTO => {
+      roundsToFixturesDTO.forEach(dto => {
+        this.roundFixtures[dto.round] = dto.fixtures;
+      });
+    });
+    this.refreshTournamentTable();
+    this.currentRound = 1;
 
     this.tournamentService.prepareNextRound(this.tournament.id).subscribe(response => {
       console.log(response);
     });
-  }
-
-  updateRoundsBoundaries() {
-    const min = 1;
-    const max = this.mapToArray.transform(this.roundFixtures).map((tuple: Tuple2<number, any>) => tuple.first).length;
-
-    if (min <= max) {
-      this.roundsBoundary = {first: min, second: max};
-    }
-  }
-
-  isExistsNextRound(): boolean {
-    if (!this.roundsBoundary) { return false; }
-    return this.currentRound < this.roundsBoundary.second;
-  }
-
-  isExistsPrevRound(): boolean {
-    if (!this.roundsBoundary) { return false; }
-    return this.currentRound > this.roundsBoundary.first;
-  }
-
-  showNextFixtures() {
-    if (this.isExistsNextRound()) {
-      this.currentRound = this.currentRound + 1;
-    }
-  }
-
-  showPrevFixtures() {
-    if (this.isExistsPrevRound()) {
-      this.currentRound = this.currentRound - 1;
-    }
   }
 
   refreshTournamentTable() {

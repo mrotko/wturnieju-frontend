@@ -82,12 +82,12 @@ export interface TournamentDTO {
   tournamentParticipantType: string;
   staffIds: string [];
   contributorsIds: string [];
-  tournamentSystemState: string;
   minParticipants: number;
   maxParticipants: number;
   currentRound: number;
   winner: TournamentParticipantDTO;
   nextOpponent: TournamentParticipantDTO;
+  plannedRounds: number;
 }
 
 

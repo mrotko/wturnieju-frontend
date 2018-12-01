@@ -29,18 +29,4 @@
       </table>
     </mat-card-content>
   </mat-card>
-  <mat-card *ngIf="fixtures?.length > 0">
-      <mat-card-title class="tournament-schedule-control">
-        <button mat-icon-button (click)="showPrevFixtures()" [disabled]="!isExistsPrevRound()">
-          <mat-icon>arrow_left</mat-icon>
-        </button>
-        <div>{{currentRound}}</div>
-        <button mat-icon-button (click)="showNextFixtures()" [disabled]="!isExistsNextRound()">
-          <mat-icon>arrow_right</mat-icon>
-        </button>
-      </mat-card-title>
-      <mat-card-content>
-
-      </mat-card-content>
-    </mat-card>
 </div>
