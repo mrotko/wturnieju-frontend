@@ -23,14 +23,12 @@ export class HelloWorldComponent implements OnInit {
   }
 
   addMessage(input: any) {
-    console.log(input.value);
     this.helloWorldService.addMessage(input.value).subscribe(() => this.getAllMessages());
     input.value = null;
   }
 
   getAllMessages() {
-    this.helloWorldService.getAllMessages().subscribe(
-      messages => this.messages = messages, err => console.log(err));
+    this.helloWorldService.getAllMessages().subscribe();
   }
 
   deleteMessage(id: string) {
@@ -38,7 +36,6 @@ export class HelloWorldComponent implements OnInit {
   }
 
   deleteSelectedMessages() {
-    console.log(this.selectedMessages);
     this.helloWorldService.deleteMessages(this.selectedMessages).subscribe(() => this.getAllMessages());
     this.clearSelectedMessages();
   }

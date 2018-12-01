@@ -94,7 +94,6 @@ export class TournamentCreatorComponent implements OnInit {
   }
 
   public submitTournamentCreatorForm() {
-    console.log(this.commonFormGroup.get('toDate'));
     this.service.send(this.tournamentCreatorData).subscribe(() => {
       // TODO zrobić url który przenosi do utworzonego turnieju (może idk w odpowiedzi)
       this.router.navigate([this.routerUrl.home]).catch();

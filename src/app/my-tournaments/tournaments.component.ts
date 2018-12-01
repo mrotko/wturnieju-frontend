@@ -79,7 +79,6 @@ export class TournamentsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.authService);
     const loggedUser = this.authService.getUserFromStorage();
     if (loggedUser) {
       this.tournamentService.getAllUserTournaments(loggedUser.id)

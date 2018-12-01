@@ -54,14 +54,18 @@ export class TournamentDetailsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.roundFixtures = {} as {key: number, value: Fixture[]};
-    this.tournamentService.getRoundsToFixtures(this.tournament.id).subscribe(roundsToFixturesDTO => {
-      roundsToFixturesDTO.forEach(dto => {
-        this.roundFixtures[dto.round] = dto.fixtures;
-      });
+    // this.tournamentService.getRoundsToFixtures(this.tournament.id).subscribe(roundsToFixturesDTO => {
+    //   roundsToFixturesDTO.forEach(dto => {
+    //     this.roundFixtures[dto.round] = dto.fixtures;
+    //   });
+    // });
+    // this.updateRoundsBoundaries();
+    // this.refreshTournamentTable();
+    // this.currentRound = 1;
+
+    this.tournamentService.prepareNextRound(this.tournament.id).subscribe(response => {
+      console.log(response);
     });
-    this.updateRoundsBoundaries();
-    this.refreshTournamentTable();
-    this.currentRound = 1;
   }
 
   updateRoundsBoundaries() {
@@ -73,24 +77,24 @@ export class TournamentDetailsComponent implements OnInit, OnChanges {
     }
   }
 
-  isNextRound(): boolean {
+  isExistsNextRound(): boolean {
     if (!this.roundsBoundary) { return false; }
     return this.currentRound < this.roundsBoundary.second;
   }
 
-  isPrevRound(): boolean {
+  isExistsPrevRound(): boolean {
     if (!this.roundsBoundary) { return false; }
     return this.currentRound > this.roundsBoundary.first;
   }
 
   showNextFixtures() {
-    if (this.isNextRound()) {
+    if (this.isExistsNextRound()) {
       this.currentRound = this.currentRound + 1;
     }
   }
 
   showPrevFixtures() {
-    if (this.isPrevRound()) {
+    if (this.isExistsPrevRound()) {
       this.currentRound = this.currentRound - 1;
     }
   }
@@ -100,9 +104,7 @@ export class TournamentDetailsComponent implements OnInit, OnChanges {
   }
 
   getFullName(profile: Profile): string {
-    console.log(this.tournamentTable);
     const participant = this.tournament.participants.find(p => p.id === profile.id);
-    console.log(participant);
     return participant ? participant.fullName : '';
   }
 
