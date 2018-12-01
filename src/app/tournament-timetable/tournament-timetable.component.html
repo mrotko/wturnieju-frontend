@@ -1,0 +1,49 @@
+<div class="component-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{lm.timetable | translate}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div *ngFor="let round of roundToTimetableRows">
+            <div class="round-header mat-title">{{(lm.round | translate) + ' ' + round.round}}</div>
+            <table mat-table [dataSource]="round.timetableRows || []">
+                <ng-container matColumnDef="date" style="width: min-content">
+                    <td mat-cell *matCellDef="let element"> {{element.date | date: 'short'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="firstPlayer">
+                    <td mat-cell *matCellDef="let element" style="text-align: right">
+                        {{getFullName(element.players.first)}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="firstPlayerResult">
+                    <td mat-cell *matCellDef="let element" style="text-align: right"> {{element.result.first}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="divider">
+                    <td mat-cell *matCellDef="let element" style="text-align: center">:</td>
+                </ng-container>
+
+                <ng-container matColumnDef="secondPlayerResult">
+                    <td mat-cell *matCellDef="let element"> {{element.result.second}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="secondPlayer">
+                    <td mat-cell *matCellDef="let element"> {{getFullName(element.players.second)}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <td mat-cell *matCellDef="let element" style="text-align: right">
+                        <button mat-icon-button (click)="editFixture(element)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-row *matRowDef="let row; columns: timetableColumns;"></tr>
+            </table>
+        </div>
+    </mat-card-content>
+  </mat-card>
+</div>

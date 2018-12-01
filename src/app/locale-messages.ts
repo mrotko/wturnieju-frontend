@@ -1,4 +1,5 @@
 import {ACCESS_OPTION, COMPETITION_TYPE, TOURNAMENT_PARTICIPANT_TYPE, TournamentSystemType} from './model/model';
+import {toDate} from '@angular/common/src/i18n/format_date';
 
 export const LocaleMessages = {
   add: 'add',
@@ -8,6 +9,9 @@ export const LocaleMessages = {
   englishUs: 'englishUs',
   email: 'email',
   password: 'password',
+  generateRound: 'generateRound',
+  timetable: 'timetable',
+  round: 'round',
   registration: 'registration',
   forgetPassword: 'forgetPassword',
   homePage: 'homePage',

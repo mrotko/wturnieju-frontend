@@ -8,6 +8,7 @@ import {
 } from '../model/model';
 import {TournamentService} from '../tournament.service';
 import {AuthService} from '../service/auth.service';
+import {LocaleMessages} from '../locale-messages';
 
 @Component({
   selector: 'app-tournament-dashboard',
@@ -19,6 +20,8 @@ export class TournamentDashboardComponent implements OnInit {
   /* TODO zarządzanie czasem turnieju
   * start, koniec turnieju
   * */
+
+  lm = LocaleMessages;
 
   TOURNAMENT_STATUS = TOURNAMENT_STATUS;
 
