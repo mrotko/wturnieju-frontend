@@ -11,10 +11,10 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^7.1.0",
+    "@angular/animations": "^7.1.1",
     "@angular/cdk": "^7.1.0",
     "@angular/cli": "^7.1.0",
-    "@angular/common": "^7.1.0",
+    "@angular/common": "^7.1.1",
     "@angular/compiler": "^7.1.1",
     "@angular/core": "^7.1.1",
     "@angular/forms": "^7.1.1",
@@ -33,15 +33,15 @@
     "npm": "^6.4.1",
     "npm-registry-fetch": "^3.8.0",
     "rxjs": "^6.3.3",
-    "socks": "latest",
+    "socks": "^2.2.2",
     "webpack": "^4.26.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.10.7",
+    "@angular-devkit/build-angular": "^0.11.0",
     "@angular/compiler-cli": "^7.1.1",
     "@angular/language-service": "^7.1.1",
-    "@types/jasmine": "^2.8.12",
+    "@types/jasmine": "^3.3.0",
     "@types/jasminewd2": "^2.0.6",
     "@types/node": "^10.12.11",
     "codelyzer": "^4.5.0",
@@ -56,6 +56,6 @@
     "protractor": "^5.4.1",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
-    "typescript": "^3.2.1"
+    "typescript": "3.1.6"
   }
 }
