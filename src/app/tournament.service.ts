@@ -2,11 +2,12 @@ import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {
-  Fixture,
+  FixtureDTO,
   RoundToFixturesDTO,
   TournamentBundleUpdate,
   TournamentDTO,
   TournamentTableDTO,
+  Tuple2,
   UserTournamentsDTO
 } from './model/model';
 import {RequestUrl} from './config/requestUrl';
@@ -43,11 +44,15 @@ export class TournamentService implements OnInit {
     return this.http.get<TournamentTableDTO>(RequestUrl.tournament.tournament + tournamentId + '/table');
   }
 
-  prepareNextRound(tournamentId: string): Observable<Fixture []> {
-    return this.http.get<Fixture []>(RequestUrl.tournament.tournament + tournamentId + '/prepareNextRound');
+  prepareNextRound(tournamentId: string): Observable<FixtureDTO []> {
+    return this.http.get<FixtureDTO []>(RequestUrl.tournament.tournament + tournamentId + '/prepareNextRound');
   }
 
-  addNextRound(tournamentId: string, fixtures: Fixture []) {
+  addNextRound(tournamentId: string, fixtures: FixtureDTO []) {
     return this.http.post(RequestUrl.tournament.tournament + tournamentId + '/prepareNextRound', fixtures);
+  }
+
+  updateFixtureResult(tournamentId: string, fixtureId: string, result: Tuple2<number, number>): Observable<FixtureDTO> {
+    return this.http.put<FixtureDTO>(RequestUrl.tournament.tournament + tournamentId + '/fixture/' + fixtureId + '/result', result);
   }
 }

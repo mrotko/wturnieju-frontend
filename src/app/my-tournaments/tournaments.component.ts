@@ -60,13 +60,16 @@ export interface PeriodicElement {
 })
 export class TournamentsComponent implements OnInit {
   inProgressTournamentRows: InProgressTableRow[];
-  inProgressTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start', 'end', 'currentRound', 'nextOpponent', 'actionButton'];
+  inProgressTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start',
+    'end', 'currentRound', 'nextOpponent', 'actionButton'];
 
   endedTournamentRows: EndedTableRow[];
-  endedTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start', 'end', 'winner', 'actionButton'];
+  endedTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start', 'end',
+    'winner', 'actionButton'];
 
   beforeStartTournamentRows: BeforeStartTableRow[];
-  beforeStartTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start', 'end', 'actionButton'];
+  beforeStartTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start',
+    'end', 'actionButton'];
 
   lm = LocaleMessages;
 
@@ -88,8 +91,8 @@ export class TournamentsComponent implements OnInit {
           this.endedTournamentRows = [];
 
           this.mapToArray.transform(dto.tournaments).forEach((tuple: Tuple2<string, TournamentDTO[]>) => {
-            if (tuple.first === TOURNAMENT_STATUS.BEFORE_START) {
-              tuple.second.forEach(tournamentDto => {
+            if (tuple.left === TOURNAMENT_STATUS.BEFORE_START) {
+              tuple.right.forEach(tournamentDto => {
                 const pos = this.beforeStartTournamentRows.length + 1;
                 this.beforeStartTournamentRows.push({
                   position: pos,
@@ -101,8 +104,8 @@ export class TournamentsComponent implements OnInit {
                   tournamentId: tournamentDto.id
                 });
               });
-            } else if (tuple.first === TOURNAMENT_STATUS.IN_PROGRESS) {
-              tuple.second.forEach(tournamentDto => {
+            } else if (tuple.left === TOURNAMENT_STATUS.IN_PROGRESS) {
+              tuple.right.forEach(tournamentDto => {
                 const pos = this.inProgressTournamentRows.length + 1;
                 this.inProgressTournamentRows.push({
                   position: pos,
@@ -116,8 +119,8 @@ export class TournamentsComponent implements OnInit {
                   tournamentId: tournamentDto.id
                 });
               });
-            } else if (tuple.first === TOURNAMENT_STATUS.ENDED) {
-              tuple.second.forEach(tournamentDto => {
+            } else if (tuple.left === TOURNAMENT_STATUS.ENDED) {
+              tuple.right.forEach(tournamentDto => {
                 const pos = this.endedTournamentRows.length + 1;
                 this.endedTournamentRows.push({
                   position: pos,
@@ -146,7 +149,7 @@ export class TournamentsComponent implements OnInit {
 // const tournamentInProgressMockRows: InProgressTableRow[] = [
 //   {position: 1,
 //     tournamentName: 'Turniej 1',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     currentRound: 2,
 //     endDate: new Date(),
 //     nextOpponent: {id: '123', name: 'Adam', surname: 'Smith'},
@@ -156,7 +159,7 @@ export class TournamentsComponent implements OnInit {
 //   },
 //   {position: 2,
 //     tournamentName: 'Turniej 2',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     currentRound: 2,
 //     endDate: new Date(),
 //     nextOpponent: {id: '123', name: 'Adam', surname: 'Smith'},
@@ -166,7 +169,7 @@ export class TournamentsComponent implements OnInit {
 //   },
 //   {position: 3,
 //     tournamentName: 'Turniej 3',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     currentRound: 2,
 //     startDate: new Date(),
 //     endDate: new Date(),
@@ -176,7 +179,7 @@ export class TournamentsComponent implements OnInit {
 //   },
 //   {position: 4,
 //     tournamentName: 'Turniej 4',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     currentRound: 2,
 //     endDate: new Date(),
 //     nextOpponent: {id: '123', name: 'Adam', surname: 'Smith'},
@@ -186,7 +189,7 @@ export class TournamentsComponent implements OnInit {
 //   },
 //   {position: 5,
 //     tournamentName: 'Turniej 5',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     currentRound: 2,
 //     startDate: new Date(),
 //     endDate: new Date(),
@@ -199,7 +202,7 @@ export class TournamentsComponent implements OnInit {
 // const tournamentBeforeStartMockRows: BeforeStartTableRow[] = [
 //   {position: 1,
 //     tournamentName: 'Turniej 1',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     endDate: new Date(),
 //     startDate: new Date(),
 //     tournamentId: '1234',
@@ -207,7 +210,7 @@ export class TournamentsComponent implements OnInit {
 //   },
 //   {position: 2,
 //     tournamentName: 'Turniej 2',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     endDate: new Date(),
 //     startDate: new Date(),
 //     tournamentId: '1234',
@@ -215,7 +218,7 @@ export class TournamentsComponent implements OnInit {
 //   },
 //   {position: 3,
 //     tournamentName: 'Turniej 3',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     startDate: new Date(),
 //     endDate: new Date(),
 //     tournamentId: '1234',
@@ -223,7 +226,7 @@ export class TournamentsComponent implements OnInit {
 //   },
 //   {position: 4,
 //     tournamentName: 'Turniej 4',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     endDate: new Date(),
 //     tournamentId: '1234',
 //     startDate: new Date(),
@@ -231,7 +234,7 @@ export class TournamentsComponent implements OnInit {
 //   },
 //   {position: 5,
 //     tournamentName: 'Turniej 5',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     startDate: new Date(),
 //     endDate: new Date(),
 //     tournamentId: '1234',
@@ -242,7 +245,7 @@ export class TournamentsComponent implements OnInit {
 // const tournamentEndedMockRows: EndedTableRow[] = [
 //   {position: 1,
 //     tournamentName: 'Turniej 1',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     endDate: new Date(),
 //     winner: {id: '123', name: 'Adam', surname: 'Smith'},
 //     startDate: new Date(),
@@ -251,7 +254,7 @@ export class TournamentsComponent implements OnInit {
 //   },
 //   {position: 2,
 //     tournamentName: 'Turniej 2',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     endDate: new Date(),
 //     winner: {id: '123', name: 'Adam', surname: 'Smith'},
 //     startDate: new Date(),
@@ -260,7 +263,7 @@ export class TournamentsComponent implements OnInit {
 //   },
 //   {position: 3,
 //     tournamentName: 'Turniej 3',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     startDate: new Date(),
 //     endDate: new Date(),
 //     winner: {id: '123', name: 'Adam', surname: 'Smith'},
@@ -269,7 +272,7 @@ export class TournamentsComponent implements OnInit {
 //   },
 //   {position: 4,
 //     tournamentName: 'Turniej 4',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     endDate: new Date(),
 //     winner: {id: '123', name: 'Adam', surname: 'Smith'},
 //     tournamentId: '1234',
@@ -278,7 +281,7 @@ export class TournamentsComponent implements OnInit {
 //   },
 //   {position: 5,
 //     tournamentName: 'Turniej 5',
-//     competitionType: {value: COMPETITION_TYPE.CHESS, translationKey: COMPETITION_TYPE.CHESS},
+//     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     startDate: new Date(),
 //     endDate: new Date(),
 //     winner: {id: '123', name: 'Adam', surname: 'Smith'},

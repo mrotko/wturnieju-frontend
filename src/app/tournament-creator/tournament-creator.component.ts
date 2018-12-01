@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LocaleMessages} from '../locale-messages';
-import {COMPETITION_TYPE, TournamentCreatorConfig, TranslatableValue} from '../model/model';
+import {CompetitionType, TournamentCreatorConfig, TranslatableValue} from '../model/model';
 import {TournamentCreatorService} from '../service/tournament-creator.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {greaterEqThanValidator, lessEqThanValidator} from '../model/wt-validators';
@@ -76,13 +76,13 @@ export class TournamentCreatorComponent implements OnInit {
 
     if (this.commonFormGroup) {
       this.mapToArrayPipe.transform(this.commonFormGroup.value).forEach(entry => {
-        this.tournamentCreatorData[entry.first] = entry.second.translationKey ? entry.second.value : entry.second;
+        this.tournamentCreatorData[entry.left] = entry.right.translationKey ? entry.right.value : entry.right;
       });
     }
 
     if (this.competitionDetailsFormGroup) {
       this.mapToArrayPipe.transform(this.competitionDetailsFormGroup.value).forEach(entry => {
-        this.tournamentCreatorData[entry.first] = entry.second.translationKey ? entry.second.value : entry.second;
+        this.tournamentCreatorData[entry.left] = entry.right.translationKey ? entry.right.value : entry.right;
       });
     }
   }
@@ -106,7 +106,7 @@ export class TournamentCreatorComponent implements OnInit {
   }
 
   private initCompetitionDetailsFormGroup() {
-    if ((<TranslatableValue<string>> this.commonFormGroup.value['competition']).value === COMPETITION_TYPE.CHESS) {
+    if ((<TranslatableValue<string>> this.commonFormGroup.value['competition']).value === CompetitionType.CHESS) {
       this.competitionDetailsFormGroup = new FormGroup({
         participantType: new FormControl('', Validators.required),
         tournamentSystem: new FormControl('', Validators.required)

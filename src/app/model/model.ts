@@ -1,5 +1,3 @@
-import {TournamentParticipant} from '../my-tournaments/tournaments.component';
-
 export interface RegisterForm {
   username: string;
   password: string;
@@ -48,9 +46,9 @@ export interface TranslatableValue<T> {
   translationKey: string;
 }
 
-export interface Tuple2<FIRST, SECOND> {
-  first: FIRST | any;
-  second: SECOND | any;
+export interface Tuple2<LEFT, RIGHT> {
+  left: LEFT | any;
+  right: RIGHT | any;
 }
 
 export interface Profile {
@@ -111,28 +109,26 @@ export interface EndTournamentBundleUpdateContent {
 }
 
 
-export interface Fixture {
-  players: Tuple2<TournamentParticipant, TournamentParticipant>;
+export interface FixtureDTO {
+  id: string;
+  timestamp: Date;
+  players: Tuple2<string, string>;
   result?: Tuple2<number, number>;
+  winner: string;
+  fixtureStatus: FixtureStatus;
+  competitionType: CompetitionType;
+  round: number;
 }
 
 export enum FixtureStatus {
   BEFORE_START = 'FIXTURE_STATUS.BEFORE_START',
-
   IN_PROGRESS = 'FIXTURE_STATUS.IN_PROGRESS',
-
   CANCELED = 'FIXTURE_STATUS.CANCELED',
-
   DELAYED = 'FIXTURE_STATUS.DELAYED',
-
   FIRST_PLAYER_WON = 'FIXTURE_STATUS.FIRST_PLAYER_WON',
-
   FIRST_PLAYER_WON_WALKOVER = 'FIXTURE_STATUS.FIRST_PLAYER_WON_WALKOVER',
-
   SECOND_PLAYER_WON = 'FIXTURE_STATUS.SECOND_PLAYER_WON',
-
   SECOND_PLAYER_WON_WALKOVER = 'FIXTURE_STATUS.SECOND_PLAYER_WON_WALKOVER',
-
   DRAW = 'FIXTURE_STATUS.DRAW'
 }
 
@@ -162,7 +158,7 @@ export enum SwissTournamentTableColumns {
 
 export interface RoundToFixturesDTO {
   round: number;
-  fixtures: Fixture[];
+  fixtures: FixtureDTO[];
 }
 
 export interface Cache<T> {
@@ -174,9 +170,9 @@ export interface UserTournamentsDTO {
   tournaments: { [key: string]: TournamentDTO []; };
 }
 
-export const COMPETITION_TYPE = {
-  CHESS: 'COMPETITION_TYPE.CHESS'
-};
+export enum CompetitionType {
+  CHESS = 'CompetitionType.CHESS'
+}
 
 export const ACCESS_OPTION = {
   PUBLIC: 'ACCESS_OPTION.PUBLIC',
@@ -216,10 +212,3 @@ export const enum TournamentBundleUpdateContentType {
   PAUSE = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.PAUSE',
   END = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.END'
 }
-
-// export const TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE = {
-//   START: 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.START',
-//   NEXT_ROUND: 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.NEXT_ROUND',
-//   PAUSE: 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.PAUSE',
-//   END: 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.END'
-// };

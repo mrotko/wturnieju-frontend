@@ -7,18 +7,24 @@
         <div *ngFor="let round of roundToTimetableRows">
             <div class="round-header mat-title">{{(lm.round | translate) + ' ' + round.round}}</div>
             <table mat-table [dataSource]="round.timetableRows || []">
-                <ng-container matColumnDef="date" style="width: min-content">
-                    <td mat-cell *matCellDef="let element"> {{element.date | date: 'short'}}</td>
+                <ng-container matColumnDef="date">
+                    <td mat-cell *matCellDef="let element" style="width: 11em;"> {{element.date | date: 'short'}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="firstPlayer">
-                    <td mat-cell *matCellDef="let element" style="text-align: right">
-                        {{getFullName(element.players.first)}}
+                    <td mat-cell *matCellDef="let element" style="text-align: right"
+                        [class.winner]="element.players.left.id === element.winnerId">
+                        {{getFullName(element.players.left)}}
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="firstPlayerResult">
-                    <td mat-cell *matCellDef="let element" style="text-align: right"> {{element.result.first}}</td>
+                    <td mat-cell *matCellDef="let element" style="text-align: right"
+                        [class.winner]="element.players.left.id === element.winnerId">
+                        <input class="mat-input-element" type="text" [class.mat-elevation-z1]="isEditMode(element)"
+                               [(ngModel)]="element.result.left"
+                               [disabled]="!isEditMode(element)">
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="divider">
@@ -26,17 +32,34 @@
                 </ng-container>
 
                 <ng-container matColumnDef="secondPlayerResult">
-                    <td mat-cell *matCellDef="let element"> {{element.result.second}}</td>
+                    <td mat-cell *matCellDef="let element"
+                        [class.winner]="element.players.right.id === element.winnerId">
+                        <input class="mat-input-element" type="text" [class.mat-elevation-z1]="isEditMode(element)"
+                               [(ngModel)]="element.result.right"
+                               [disabled]="!isEditMode(element)">
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="secondPlayer">
-                    <td mat-cell *matCellDef="let element"> {{getFullName(element.players.second)}}</td>
+                    <td mat-cell *matCellDef="let element"
+                        [class.winner]="element.players.right.id === element.winnerId">
+                        {{getFullName(element.players.right)}}
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="action">
-                    <td mat-cell *matCellDef="let element" style="text-align: right">
-                        <button mat-icon-button (click)="editFixture(element)">
+                    <td mat-cell *matCellDef="let element" style="text-align: right; width: 7em">
+                        <button mat-icon-button *ngIf="isActionActive(element)"
+                                (click)="startEditFixture(element)">
                             <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button *ngIf="isEditMode(element)"
+                                (click)="confirmFixtureChange(element)">
+                            <mat-icon>done</mat-icon>
+                        </button>
+                        <button mat-icon-button *ngIf="isEditMode(element)"
+                                (click)="cancelEditFixture(element)">
+                            <mat-icon>cancel</mat-icon>
                         </button>
                     </td>
                 </ng-container>

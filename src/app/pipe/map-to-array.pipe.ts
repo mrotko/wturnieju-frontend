@@ -10,6 +10,6 @@ export class MapToArrayPipe implements PipeTransform {
     if (!value) {
       return [];
     }
-    return Object.entries(value).map(([first, second]) => (<Tuple2<any, any>>{first, second}));
+    return Object.entries(value).map(([first, second]) => (<Tuple2<any, any>>{left: first, right: second}));
   }
 }

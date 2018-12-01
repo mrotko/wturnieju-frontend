@@ -1,15 +1,23 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Fixture, FixtureStatus, Profile, TournamentDTO, Tuple2} from '../model/model';
+import {FixtureDTO, FixtureStatus, Profile, TournamentDTO, Tuple2} from '../model/model';
 import {LocaleMessages} from '../locale-messages';
 import {TournamentService} from '../tournament.service';
 
+enum ActionType {
+  EDIT_MODE,
+  ACTION_ACTIVE,
+  NONE
+}
+
 interface TimetableRow {
-  editMode: boolean;
   fixtureStatus: FixtureStatus;
   fixtureId: string;
   date: Date;
   players: Tuple2<Profile, Profile>;
+  winnerId?: string;
   result: Tuple2<number, number>;
+  resultTemp?: Tuple2<number, number>;
+  action: ActionType;
 }
 
 interface RoundToTimetableRows {
@@ -26,9 +34,11 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
 
   @Input() tournament: TournamentDTO;
 
+  fixtureStatus = FixtureStatus;
+
   lm = LocaleMessages;
 
-  roundFixtures: { key: number, value: Fixture[] };
+  roundFixtures: { key: number, value: FixtureDTO[] };
 
   timetableColumns = ['date', 'firstPlayer', 'firstPlayerResult', 'divider', 'secondPlayerResult', 'secondPlayer', 'action'];
 
@@ -41,12 +51,13 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
   ngOnInit() {
     for (const round of this.roundToTimetableRows) {
       for (const timetableRow of round.timetableRows) {
-        timetableRow.players.first.id = this.tournament.participants[0].id;
-        timetableRow.players.second.id = this.tournament.participants[1].id;
+        timetableRow.players.left.id = this.tournament.participants[0].id;
+        timetableRow.players.right.id = this.tournament.participants[1].id;
+        timetableRow.winnerId = this.tournament.participants[0].id;
       }
     }
 
-    this.roundFixtures = {} as { key: number, value: Fixture[]; };
+    this.roundFixtures = {} as { key: number, value: FixtureDTO[]; };
     this.tournamentService.getRoundsToFixtures(this.tournament.id).subscribe(roundsToFixturesDTO => {
       for (const dto of roundsToFixturesDTO) {
         this.roundFixtures[dto.round] = dto.fixtures;
@@ -70,10 +81,39 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
     return participant ? participant.fullName : '';
   }
 
-  editFixture(row: TimetableRow) {
-    console.log(row);
+  isActionActive(row: TimetableRow): boolean {
+    return row.action === ActionType.ACTION_ACTIVE;
   }
 
+  isEditMode(row: TimetableRow): boolean {
+    return row.action === ActionType.EDIT_MODE;
+  }
+
+  startEditFixture(row: TimetableRow) {
+    row.resultTemp = {left: row.result.left, right: row.result.right};
+    row.action = ActionType.EDIT_MODE;
+  }
+
+  confirmFixtureChange(row: TimetableRow) {
+    this.tournamentService.updateFixtureResult(this.tournament.id, row.fixtureId, row.result).subscribe(dto => {
+
+      row.resultTemp = null;
+
+
+      row.result = dto.result;
+      row.winnerId = dto.winner;
+      row.fixtureStatus = dto.fixtureStatus;
+      row.action = ActionType.NONE;
+    });
+  }
+
+  cancelEditFixture(row: TimetableRow) {
+    console.log(row.result);
+    console.log(row.resultTemp);
+    row.result = row.resultTemp;
+    row.resultTemp = null;
+    row.action = ActionType.ACTION_ACTIVE;
+  }
 }
 
 const timetableMock: RoundToTimetableRows [] = [
@@ -82,43 +122,48 @@ const timetableMock: RoundToTimetableRows [] = [
     timetableRows: [
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '1',
         date: new Date(),
-        players: {first: {id: '1'}, second: {id: '2'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '1'}, right: {id: '2'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.NONE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '2',
         date: new Date(),
-        players: {first: {id: '2'}, second: {id: '3'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '2'}, right: {id: '3'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.NONE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '3',
         date: new Date(),
-        players: {first: {id: '3'}, second: {id: '4'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '3'}, right: {id: '4'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.NONE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '4',
         date: new Date(),
-        players: {first: {id: '4'}, second: {id: '5'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '4'}, right: {id: '5'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.NONE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: true,
         fixtureId: '5',
         date: new Date(),
-        players: {first: {id: '5'}, second: {id: '6'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '5'}, right: {id: '6'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.NONE,
       }
     ]
   },
@@ -127,43 +172,48 @@ const timetableMock: RoundToTimetableRows [] = [
     timetableRows: [
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '1',
         date: new Date(),
-        players: {first: {id: '1'}, second: {id: '2'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '1'}, right: {id: '2'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.NONE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '2',
         date: new Date(),
-        players: {first: {id: '2'}, second: {id: '3'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '2'}, right: {id: '3'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '3',
         date: new Date(),
-        players: {first: {id: '3'}, second: {id: '4'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '3'}, right: {id: '4'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '4',
         date: new Date(),
-        players: {first: {id: '4'}, second: {id: '5'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '4'}, right: {id: '5'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: true,
         fixtureId: '5',
         date: new Date(),
-        players: {first: {id: '5'}, second: {id: '6'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '5'}, right: {id: '6'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       }
     ]
   },
@@ -172,43 +222,48 @@ const timetableMock: RoundToTimetableRows [] = [
     timetableRows: [
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '1',
         date: new Date(),
-        players: {first: {id: '1'}, second: {id: '2'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '1'}, right: {id: '2'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '2',
         date: new Date(),
-        players: {first: {id: '2'}, second: {id: '3'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '2'}, right: {id: '3'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '3',
         date: new Date(),
-        players: {first: {id: '3'}, second: {id: '4'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '3'}, right: {id: '4'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '4',
         date: new Date(),
-        players: {first: {id: '4'}, second: {id: '5'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '4'}, right: {id: '5'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: true,
         fixtureId: '5',
         date: new Date(),
-        players: {first: {id: '5'}, second: {id: '6'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '5'}, right: {id: '6'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       }
     ]
   },
@@ -217,43 +272,48 @@ const timetableMock: RoundToTimetableRows [] = [
     timetableRows: [
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '1',
         date: new Date(),
-        players: {first: {id: '1'}, second: {id: '2'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '1'}, right: {id: '2'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
         fixtureId: '2',
         date: new Date(),
-        players: {first: {id: '2'}, second: {id: '3'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '2'}, right: {id: '3'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       },
       {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
+        fixtureStatus: FixtureStatus.FIRST_PLAYER_WON,
         fixtureId: '3',
         date: new Date(),
-        players: {first: {id: '3'}, second: {id: '4'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '3'}, right: {id: '4'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       },
       {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: false,
+        fixtureStatus: FixtureStatus.FIRST_PLAYER_WON,
         fixtureId: '4',
         date: new Date(),
-        players: {first: {id: '4'}, second: {id: '5'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '4'}, right: {id: '5'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       },
       {
         fixtureStatus: FixtureStatus.BEFORE_START,
-        editMode: true,
         fixtureId: '5',
         date: new Date(),
-        players: {first: {id: '5'}, second: {id: '6'}},
-        result: {first: 0, second: 1},
+        players: {left: {id: '5'}, right: {id: '6'}},
+        winnerId: '',
+        result: {left: 0, right: 1},
+        action: ActionType.ACTION_ACTIVE,
       }
     ]
   }

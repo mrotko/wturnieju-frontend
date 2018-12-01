@@ -1,4 +1,4 @@
-import {ACCESS_OPTION, COMPETITION_TYPE, TOURNAMENT_PARTICIPANT_TYPE, TournamentSystemType} from './model/model';
+import {ACCESS_OPTION, CompetitionType, TOURNAMENT_PARTICIPANT_TYPE, TournamentSystemType} from './model/model';
 import {toDate} from '@angular/common/src/i18n/format_date';
 
 export const LocaleMessages = {
@@ -78,7 +78,7 @@ export const LocaleMessages = {
     PRIVATE: ACCESS_OPTION.PRIVATE
   },
   COMPETITION_TYPE: {
-    CHESS: COMPETITION_TYPE.CHESS
+    CHESS: CompetitionType.CHESS
   },
   TOURNAMENT_SYSTEM_TYPE: {
     SWISS: TournamentSystemType.SWISS
