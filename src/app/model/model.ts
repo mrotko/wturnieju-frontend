@@ -115,7 +115,7 @@ export interface FixtureDTO {
   playersIds: Tuple2<string, string>;
   result?: Tuple2<number, number>;
   winnerId: string;
-  fixtureStatus: FixtureStatus;
+  status: FixtureStatus;
   competitionType: CompetitionType;
   round: number;
 }

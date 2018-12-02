@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {FixtureDTO, FixtureStatus, Profile, TournamentDTO, Tuple2} from '../model/model';
 import {LocaleMessages} from '../locale-messages';
 import {TournamentService} from '../tournament.service';
+import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
 
 enum ActionType {
   EDIT_MODE,
@@ -34,36 +35,65 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
 
   @Input() tournament: TournamentDTO;
 
-  fixtureStatus = FixtureStatus;
-
   lm = LocaleMessages;
 
-  roundFixtures: { key: number, value: FixtureDTO[] };
+  // roundFixtures: { key: number, value: FixtureDTO[] };
 
   timetableColumns = ['date', 'firstPlayer', 'firstPlayerResult', 'divider', 'secondPlayerResult', 'secondPlayer', 'action'];
 
-  roundToTimetableRows: RoundToTimetableRows [] = timetableMock;
+  roundToTimetableRows: RoundToTimetableRows [];
 
   constructor(
-    private tournamentService: TournamentService) {
+    private tournamentService: TournamentService,
+    private mapToArray: MapToArrayPipe
+  ) {
   }
 
   ngOnInit() {
-    for (const round of this.roundToTimetableRows) {
-      for (const timetableRow of round.timetableRows) {
-        timetableRow.players.left.id = this.tournament.participants[0].id;
-        timetableRow.players.right.id = this.tournament.participants[1].id;
-        timetableRow.winnerId = this.tournament.participants[0].id;
-      }
-    }
+    // for (const round of this.roundToTimetableRows) {
+    //   for (const timetableRow of round.timetableRows) {
+    //     timetableRow.players.left.id = this.tournament.participants[0].id;
+    //     timetableRow.players.right.id = this.tournament.participants[1].id;
+    //     timetableRow.winnerId = this.tournament.participants[0].id;
+    //   }
+    // }
 
-    this.roundFixtures = {} as { key: number, value: FixtureDTO[]; };
+    // this.roundFixtures = {} as { key: number, value: FixtureDTO[]; };
+    this.roundToTimetableRows = [];
     this.tournamentService.getRoundsToFixtures(this.tournament.id).subscribe(roundsToFixturesDTO => {
-      for (const dto of roundsToFixturesDTO) {
-        this.roundFixtures[dto.round] = dto.fixtures;
+      for (const dto of this.mapToArray.transform(roundsToFixturesDTO)) {
+        console.log(dto);
+        let rows: TimetableRow [] = [];
+        for (const fixture of dto.right) {
+          rows.push({
+            fixtureStatus: fixture.fixtureStatus,
+            winnerId: fixture.winnerId,
+            result: fixture.result,
+            fixtureId: fixture.id,
+            resultTemp: null,
+            players: fixture.playersIds,
+            date: fixture.timestamp,
+            action: this.determineActionType(fixture)
+          });
+          console.debug('rows');
+          console.debug(rows);
+        }
+        this.roundToTimetableRows.push({
+          round: dto.left,
+          timetableRows: rows
+        });
+        console.log(this.roundToTimetableRows);
       }
-      console.log(this.roundFixtures);
+      console.log(roundsToFixturesDTO);
+      console.log(this.roundToTimetableRows);
     });
+  }
+
+  determineActionType(fixture: FixtureDTO): ActionType {
+    if (fixture.winnerId) {
+      return ActionType.NONE;
+    }
+    return ActionType.ACTION_ACTIVE;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -98,11 +128,9 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
     this.tournamentService.updateFixtureResult(this.tournament.id, row.fixtureId, row.result).subscribe(dto => {
 
       row.resultTemp = null;
-
-
       row.result = dto.result;
       row.winnerId = dto.winnerId;
-      row.fixtureStatus = dto.fixtureStatus;
+      row.fixtureStatus = dto.status;
       row.action = ActionType.NONE;
     });
   }
@@ -114,207 +142,8 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
     row.resultTemp = null;
     row.action = ActionType.ACTION_ACTIVE;
   }
-}
 
-const timetableMock: RoundToTimetableRows [] = [
-  {
-    round: 1,
-    timetableRows: [
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '1',
-        date: new Date(),
-        players: {left: {id: '1'}, right: {id: '2'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.NONE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '2',
-        date: new Date(),
-        players: {left: {id: '2'}, right: {id: '3'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.NONE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '3',
-        date: new Date(),
-        players: {left: {id: '3'}, right: {id: '4'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.NONE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '4',
-        date: new Date(),
-        players: {left: {id: '4'}, right: {id: '5'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.NONE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '5',
-        date: new Date(),
-        players: {left: {id: '5'}, right: {id: '6'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.NONE,
-      }
-    ]
-  },
-  {
-    round: 2,
-    timetableRows: [
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '1',
-        date: new Date(),
-        players: {left: {id: '1'}, right: {id: '2'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.NONE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '2',
-        date: new Date(),
-        players: {left: {id: '2'}, right: {id: '3'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '3',
-        date: new Date(),
-        players: {left: {id: '3'}, right: {id: '4'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '4',
-        date: new Date(),
-        players: {left: {id: '4'}, right: {id: '5'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '5',
-        date: new Date(),
-        players: {left: {id: '5'}, right: {id: '6'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      }
-    ]
-  },
-  {
-    round: 3,
-    timetableRows: [
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '1',
-        date: new Date(),
-        players: {left: {id: '1'}, right: {id: '2'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '2',
-        date: new Date(),
-        players: {left: {id: '2'}, right: {id: '3'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '3',
-        date: new Date(),
-        players: {left: {id: '3'}, right: {id: '4'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '4',
-        date: new Date(),
-        players: {left: {id: '4'}, right: {id: '5'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '5',
-        date: new Date(),
-        players: {left: {id: '5'}, right: {id: '6'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      }
-    ]
-  },
-  {
-    round: 4,
-    timetableRows: [
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '1',
-        date: new Date(),
-        players: {left: {id: '1'}, right: {id: '2'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '2',
-        date: new Date(),
-        players: {left: {id: '2'}, right: {id: '3'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      },
-      {
-        fixtureStatus: FixtureStatus.FIRST_PLAYER_WON,
-        fixtureId: '3',
-        date: new Date(),
-        players: {left: {id: '3'}, right: {id: '4'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      },
-      {
-        fixtureStatus: FixtureStatus.FIRST_PLAYER_WON,
-        fixtureId: '4',
-        date: new Date(),
-        players: {left: {id: '4'}, right: {id: '5'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      },
-      {
-        fixtureStatus: FixtureStatus.BEFORE_START,
-        fixtureId: '5',
-        date: new Date(),
-        players: {left: {id: '5'}, right: {id: '6'}},
-        winnerId: '',
-        result: {left: 0, right: 1},
-        action: ActionType.ACTION_ACTIVE,
-      }
-    ]
+  checkResultValidity(row: TimetableRow): boolean {
+    return row.result.left && row.result.right;
   }
-];
+}

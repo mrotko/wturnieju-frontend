@@ -24,6 +24,7 @@
                         <input class="mat-input-element" type="text" [class.mat-elevation-z1]="isEditMode(element)"
                                [(ngModel)]="element.result.left"
                                [disabled]="!isEditMode(element)">
+                        <!--[placeholder]="element.result.left ? '' : '?'"-->
                     </td>
                 </ng-container>
 
@@ -37,6 +38,7 @@
                         <input class="mat-input-element" type="text" [class.mat-elevation-z1]="isEditMode(element)"
                                [(ngModel)]="element.result.right"
                                [disabled]="!isEditMode(element)">
+                        <!--[placeholder]="element.result.right ? '' : '?'"-->
                     </td>
                 </ng-container>
 
@@ -53,7 +55,7 @@
                                 (click)="startEditFixture(element)">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-icon-button *ngIf="isEditMode(element)"
+                        <button mat-icon-button *ngIf="isEditMode(element) && checkResultValidity(element)"
                                 (click)="confirmFixtureChange(element)">
                             <mat-icon>done</mat-icon>
                         </button>
