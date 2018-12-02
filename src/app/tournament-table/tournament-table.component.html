@@ -2,7 +2,7 @@
   <mat-card>
     <mat-card-title>
       <span>{{lm.table | translate}}</span>
-      <button mat-icon-button class="rotate-hover" (click)="refreshTournamentTable()">
+      <button mat-icon-button class="rotate-hover" (click)="initTournamentTable()">
         <mat-icon>autorenew</mat-icon>
       </button>
     </mat-card-title>
@@ -16,7 +16,7 @@
 
         <ng-container matColumnDef="fullName">
           <th mat-header-cell *matHeaderCellDef>{{lm.name | translate}}</th>
-          <td mat-cell *matCellDef="let element"> {{getFullName(element.profile)}}</td>
+          <td mat-cell *matCellDef="let element"> {{getFullName(element.profileId)}}</td>
         </ng-container>
 
         <ng-container matColumnDef="points">

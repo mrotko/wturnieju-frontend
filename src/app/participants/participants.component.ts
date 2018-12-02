@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LocaleMessages} from '../locale-messages';
 import {TournamentParticipantsService} from '../tournament-participants.service';
 import {PARTICIPANT_STATUS, TOURNAMENT_STATUS, TournamentDTO} from '../model/model';
@@ -34,6 +34,8 @@ export class ParticipantsComponent implements OnInit {
   searchAutocompleteOptions: Observable<AutocompleteOption []>;
 
   @Input() tournament: TournamentDTO;
+
+  @Output() reloadRequiredEvent: EventEmitter<boolean> = new EventEmitter();
 
   participants: ParticipantItem [] = [];
 

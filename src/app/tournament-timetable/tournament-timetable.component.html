@@ -13,14 +13,14 @@
 
                 <ng-container matColumnDef="firstPlayer">
                     <td mat-cell *matCellDef="let element" style="text-align: right"
-                        [class.winner]="element.players.left.id === element.winnerId">
+                        [class.winner]="element.players.left === element.winnerId">
                         {{getFullName(element.players.left)}}
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="firstPlayerResult">
                     <td mat-cell *matCellDef="let element" style="text-align: right"
-                        [class.winner]="element.players.left.id === element.winnerId">
+                        [class.winner]="element.players.left === element.winnerId">
                         <input class="mat-input-element" type="text" [class.mat-elevation-z1]="isEditMode(element)"
                                [(ngModel)]="element.result.left"
                                [disabled]="!isEditMode(element)">
@@ -34,7 +34,7 @@
 
                 <ng-container matColumnDef="secondPlayerResult">
                     <td mat-cell *matCellDef="let element"
-                        [class.winner]="element.players.right.id === element.winnerId">
+                        [class.winner]="element.players.right === element.winnerId">
                         <input class="mat-input-element" type="text" [class.mat-elevation-z1]="isEditMode(element)"
                                [(ngModel)]="element.result.right"
                                [disabled]="!isEditMode(element)">
@@ -44,7 +44,7 @@
 
                 <ng-container matColumnDef="secondPlayer">
                     <td mat-cell *matCellDef="let element"
-                        [class.winner]="element.players.right.id === element.winnerId">
+                        [class.winner]="element.players.right === element.winnerId">
                         {{getFullName(element.players.right)}}
                     </td>
                 </ng-container>

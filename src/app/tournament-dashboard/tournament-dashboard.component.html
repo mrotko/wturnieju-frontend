@@ -15,14 +15,15 @@
       <button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.IN_PROGRESS" (click)="endTournament()">
         <mat-icon>stop</mat-icon>
       </button>
-        <button mat-button (click)="openPrepareTournamentRoundFixturesDialog()">{{lm.generateRound | translate}}
+      <button mat-button (click)="openPrepareTournamentRoundFixturesDialog()" *ngIf="isNextRoundAvailable()">
+        {{lm.generateRound | translate}}
         </button>
     </div>
   </div>
   <div class="dashboard-content">
-    <app-tournament-table [tournament]="tournament"></app-tournament-table>
-    <app-participants [tournament]="tournament"></app-participants>
-    <app-tournament-timetable [tournament]="tournament"></app-tournament-timetable>
+    <app-tournament-table [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-tournament-table>
+    <app-participants [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-participants>
+    <app-tournament-timetable [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-tournament-timetable>
   </div>
 </div>
 <div *ngIf="!tournament">

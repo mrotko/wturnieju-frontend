@@ -55,4 +55,8 @@ export class TournamentService implements OnInit {
   updateFixtureResult(tournamentId: string, fixtureId: string, result: Tuple2<number, number>): Observable<FixtureDTO> {
     return this.http.put<FixtureDTO>(RequestUrl.tournament.tournament + tournamentId + '/fixture/' + fixtureId + '/result', result);
   }
+
+  getCurrentRound(tournamentId: string): Observable<number> {
+    return this.http.get(RequestUrl.tournament.tournament + tournamentId + '/currentRound');
+  }
 }

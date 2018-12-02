@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FixtureDTO, FixtureStatus, Profile, TournamentDTO, Tuple2} from '../model/model';
 import {LocaleMessages} from '../locale-messages';
 import {TournamentService} from '../tournament.service';
@@ -35,6 +35,8 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
 
   @Input() tournament: TournamentDTO;
 
+  @Output() reloadRequiredEvent: EventEmitter<boolean> = new EventEmitter();
+
   lm = LocaleMessages;
 
   timetableColumns = ['date', 'firstPlayer', 'firstPlayerResult', 'divider', 'secondPlayerResult', 'secondPlayer', 'action'];
@@ -48,7 +50,10 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.roundToTimetableRows = [];
+  }
+
+  private initTable() {
+    let tempRows: RoundToTimetableRows [] = [];
     this.tournamentService.getRoundsToFixtures(this.tournament.id).subscribe(roundsToFixturesDTO => {
       for (const dto of this.mapToArray.transform(roundsToFixturesDTO)) {
         console.log(dto);
@@ -65,27 +70,28 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
             action: this.determineActionType(fixture)
           });
         }
-        this.roundToTimetableRows.push({
+        tempRows.push({
           round: dto.left,
           timetableRows: rows
         });
       }
+      this.roundToTimetableRows = tempRows;
     });
   }
 
   determineActionType(fixture: FixtureDTO): ActionType {
-    if (fixture.winnerId) {
+    if (fixture.status === FixtureStatus.ENDED) {
       return ActionType.NONE;
     }
     return ActionType.ACTION_ACTIVE;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
+    this.initTable();
   }
 
-  getFullName(profile: Profile): string {
-    const participant = this.tournament.participants.find(p => p.id === profile.id);
+  getFullName(profileId: string): string {
+    const participant = this.tournament.participants.find(p => p.id === profileId);
     return participant ? participant.fullName : '';
   }
 
@@ -109,6 +115,7 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
       row.winnerId = dto.winnerId;
       row.fixtureStatus = dto.status;
       row.action = ActionType.NONE;
+      this.reloadRequiredEvent.emit(true);
     });
   }
 

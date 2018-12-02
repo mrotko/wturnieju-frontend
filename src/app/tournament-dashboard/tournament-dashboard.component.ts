@@ -31,6 +31,8 @@ export class TournamentDashboardComponent implements OnInit {
 
   tournamentId: string;
 
+  currentRound: number;
+
   constructor(
     private router: ActivatedRoute,
     private tournamentService: TournamentService,
@@ -41,7 +43,12 @@ export class TournamentDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.tournamentId = this.router.snapshot.paramMap.get('id');
+    this.initTournament();
+  }
+
+  initTournament() {
     this.tournamentService.getTournament(this.tournamentId).subscribe(dto => this.tournament = dto);
+    this.tournamentService.getCurrentRound(this.tournamentId).subscribe(round => this.currentRound = round);
   }
 
   startTournament() {
@@ -53,6 +60,10 @@ export class TournamentDashboardComponent implements OnInit {
 
   }
 
+  isNextRoundAvailable(): boolean {
+    return this.currentRound ? this.currentRound < this.tournament.plannedRounds : true;
+  }
+
   openPrepareTournamentRoundFixturesDialog() {
     const dialogRef = this.dialog.open(PrepareTournamentRoundFixturesDialogComponent, {
       width: '50vw',
@@ -60,7 +71,7 @@ export class TournamentDashboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      console.log('close');
+      this.reload();
     });
   }
 
@@ -88,5 +99,9 @@ export class TournamentDashboardComponent implements OnInit {
         type: TournamentBundleUpdateContentType.END
       }
     };
+  }
+
+  reload() {
+    this.initTournament();
   }
 }

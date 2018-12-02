@@ -1,6 +1,6 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TournamentService} from '../tournament.service';
-import {Profile, TournamentDTO, TournamentTableDTO} from '../model/model';
+import {TournamentDTO, TournamentTableDTO} from '../model/model';
 import {LocaleMessages} from '../locale-messages';
 
 
@@ -10,7 +10,7 @@ interface SwissTournamentTable {
 
 interface SwissTournamentTableRow {
   position: number;
-  profile: Profile;
+  profileId: string;
   played: number;
   points: number;
   wins: number;
@@ -28,6 +28,8 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
   @Input() tournament: TournamentDTO;
 
+  @Output() reloadRequiredEvent: EventEmitter<boolean> = new EventEmitter();
+
   lm = LocaleMessages;
 
   tournamentTable: TournamentTableDTO;
@@ -39,19 +41,20 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.refreshTournamentTable();
   }
 
-  refreshTournamentTable() {
+  initTournamentTable() {
     this.tournamentService.getTournamentTable(this.tournament.id).subscribe(dto => this.tournamentTable = dto);
   }
 
-  getFullName(profile: Profile): string {
-    const participant = this.tournament.participants.find(p => p.id === profile.id);
+  E
+
+  getFullName(profileId: String): string {
+    const participant = this.tournament.participants.find(p => p.id === profileId);
     return participant ? participant.fullName : '';
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.refreshTournamentTable();
+    this.initTournamentTable();
   }
 }
