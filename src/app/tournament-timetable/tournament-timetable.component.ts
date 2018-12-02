@@ -37,8 +37,6 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
 
   lm = LocaleMessages;
 
-  // roundFixtures: { key: number, value: FixtureDTO[] };
-
   timetableColumns = ['date', 'firstPlayer', 'firstPlayerResult', 'divider', 'secondPlayerResult', 'secondPlayer', 'action'];
 
   roundToTimetableRows: RoundToTimetableRows [];
@@ -50,15 +48,6 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    // for (const round of this.roundToTimetableRows) {
-    //   for (const timetableRow of round.timetableRows) {
-    //     timetableRow.players.left.id = this.tournament.participants[0].id;
-    //     timetableRow.players.right.id = this.tournament.participants[1].id;
-    //     timetableRow.winnerId = this.tournament.participants[0].id;
-    //   }
-    // }
-
-    // this.roundFixtures = {} as { key: number, value: FixtureDTO[]; };
     this.roundToTimetableRows = [];
     this.tournamentService.getRoundsToFixtures(this.tournament.id).subscribe(roundsToFixturesDTO => {
       for (const dto of this.mapToArray.transform(roundsToFixturesDTO)) {
@@ -75,17 +64,12 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
             date: fixture.timestamp,
             action: this.determineActionType(fixture)
           });
-          console.debug('rows');
-          console.debug(rows);
         }
         this.roundToTimetableRows.push({
           round: dto.left,
           timetableRows: rows
         });
-        console.log(this.roundToTimetableRows);
       }
-      console.log(roundsToFixturesDTO);
-      console.log(this.roundToTimetableRows);
     });
   }
 
@@ -98,12 +82,6 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
 
-  }
-
-  prepareNextRound() {
-    this.tournamentService.prepareNextRound(this.tournament.id).subscribe(response => {
-      console.log(response);
-    });
   }
 
   getFullName(profile: Profile): string {
@@ -126,7 +104,6 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
 
   confirmFixtureChange(row: TimetableRow) {
     this.tournamentService.updateFixtureResult(this.tournament.id, row.fixtureId, row.result).subscribe(dto => {
-
       row.resultTemp = null;
       row.result = dto.result;
       row.winnerId = dto.winnerId;
