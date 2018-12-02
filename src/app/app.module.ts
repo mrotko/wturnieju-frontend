@@ -42,7 +42,8 @@ import {TournamentTableComponent} from './tournament-table/tournament-table.comp
 import {ParticipantsComponent} from './participants/participants.component';
 import {FixturePlannerComponent} from './fixture-planner/fixture-planner.component';
 import {TournamentParticipantsService} from './tournament-participants.service';
-import { TournamentTimetableComponent } from './tournament-timetable/tournament-timetable.component';
+import {TournamentTimetableComponent} from './tournament-timetable/tournament-timetable.component';
+import {PrepareTournamentRoundFixturesDialogComponent} from './prepare-tournament-round-fixtures-dialog/prepare-tournament-round-fixtures-dialog.component';
 
 registerLocaleData(localePl);
 
@@ -87,7 +88,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     TournamentTableComponent,
     ParticipantsComponent,
     FixturePlannerComponent,
-    TournamentTimetableComponent
+    TournamentTimetableComponent,
+    PrepareTournamentRoundFixturesDialogComponent
+  ],
+  entryComponents: [
+    PrepareTournamentRoundFixturesDialogComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

@@ -15,7 +15,8 @@
       <button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.IN_PROGRESS" (click)="endTournament()">
         <mat-icon>stop</mat-icon>
       </button>
-      <button mat-button>{{lm.generateRound | translate}}</button>
+        <button mat-button (click)="openPrepareTournamentRoundFixturesDialog()">{{lm.generateRound | translate}}
+        </button>
     </div>
   </div>
   <div class="dashboard-content">

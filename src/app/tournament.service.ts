@@ -48,7 +48,7 @@ export class TournamentService implements OnInit {
     return this.http.get<FixtureDTO []>(RequestUrl.tournament.tournament + tournamentId + '/prepareNextRound');
   }
 
-  addNextRound(tournamentId: string, fixtures: FixtureDTO []) {
+  confirmNextRound(tournamentId: string, fixtures: FixtureDTO []) {
     return this.http.post(RequestUrl.tournament.tournament + tournamentId + '/prepareNextRound', fixtures);
   }
 

@@ -247,7 +247,7 @@ export class TournamentsComponent implements OnInit {
 //     tournamentName: 'Turniej 1',
 //     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     endDate: new Date(),
-//     winner: {id: '123', name: 'Adam', surname: 'Smith'},
+//     winnerId: {id: '123', name: 'Adam', surname: 'Smith'},
 //     startDate: new Date(),
 //     tournamentId: '1234',
 //     tournamentSystemType: {value: TOURNAMENT_SYSTEM_TYPE.SWISS, translationKey: TOURNAMENT_SYSTEM_TYPE.SWISS}
@@ -256,7 +256,7 @@ export class TournamentsComponent implements OnInit {
 //     tournamentName: 'Turniej 2',
 //     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     endDate: new Date(),
-//     winner: {id: '123', name: 'Adam', surname: 'Smith'},
+//     winnerId: {id: '123', name: 'Adam', surname: 'Smith'},
 //     startDate: new Date(),
 //     tournamentId: '1234',
 //     tournamentSystemType: {value: TOURNAMENT_SYSTEM_TYPE.SWISS, translationKey: TOURNAMENT_SYSTEM_TYPE.SWISS}
@@ -266,7 +266,7 @@ export class TournamentsComponent implements OnInit {
 //     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     startDate: new Date(),
 //     endDate: new Date(),
-//     winner: {id: '123', name: 'Adam', surname: 'Smith'},
+//     winnerId: {id: '123', name: 'Adam', surname: 'Smith'},
 //     tournamentId: '1234',
 //     tournamentSystemType: {value: TOURNAMENT_SYSTEM_TYPE.SWISS, translationKey: TOURNAMENT_SYSTEM_TYPE.SWISS}
 //   },
@@ -274,7 +274,7 @@ export class TournamentsComponent implements OnInit {
 //     tournamentName: 'Turniej 4',
 //     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     endDate: new Date(),
-//     winner: {id: '123', name: 'Adam', surname: 'Smith'},
+//     winnerId: {id: '123', name: 'Adam', surname: 'Smith'},
 //     tournamentId: '1234',
 //     startDate: new Date(),
 //     tournamentSystemType: {value: TOURNAMENT_SYSTEM_TYPE.SWISS, translationKey: TOURNAMENT_SYSTEM_TYPE.SWISS},
@@ -284,7 +284,7 @@ export class TournamentsComponent implements OnInit {
 //     competitionType: {value: CompetitionType.CHESS, translationKey: CompetitionType.CHESS},
 //     startDate: new Date(),
 //     endDate: new Date(),
-//     winner: {id: '123', name: 'Adam', surname: 'Smith'},
+//     winnerId: {id: '123', name: 'Adam', surname: 'Smith'},
 //     tournamentId: '1234',
 //     tournamentSystemType: {value: TOURNAMENT_SYSTEM_TYPE.SWISS, translationKey: TOURNAMENT_SYSTEM_TYPE.SWISS}
 //   }

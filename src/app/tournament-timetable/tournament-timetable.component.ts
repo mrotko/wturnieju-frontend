@@ -101,7 +101,7 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
 
 
       row.result = dto.result;
-      row.winnerId = dto.winner;
+      row.winnerId = dto.winnerId;
       row.fixtureStatus = dto.fixtureStatus;
       row.action = ActionType.NONE;
     });

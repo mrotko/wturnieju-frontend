@@ -112,9 +112,9 @@ export interface EndTournamentBundleUpdateContent {
 export interface FixtureDTO {
   id: string;
   timestamp: Date;
-  players: Tuple2<string, string>;
+  playersIds: Tuple2<string, string>;
   result?: Tuple2<number, number>;
-  winner: string;
+  winnerId: string;
   fixtureStatus: FixtureStatus;
   competitionType: CompetitionType;
   round: number;

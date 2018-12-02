@@ -63,6 +63,8 @@ export const LocaleMessages = {
   ended: 'ended',
   beforeStart: 'beforeStart',
   lp: 'lp',
+  confirm: 'confirm',
+  cancel: 'cancel',
   tournamentStart: 'tournamentStart',
   tournamentEnd: 'tournamentEnd',
   currentRound: 'currentRound',

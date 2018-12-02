@@ -9,6 +9,8 @@ import {
 import {TournamentService} from '../tournament.service';
 import {AuthService} from '../service/auth.service';
 import {LocaleMessages} from '../locale-messages';
+import {MatDialog} from '@angular/material';
+import {PrepareTournamentRoundFixturesDialogComponent} from '../prepare-tournament-round-fixtures-dialog/prepare-tournament-round-fixtures-dialog.component';
 
 @Component({
   selector: 'app-tournament-dashboard',
@@ -32,7 +34,8 @@ export class TournamentDashboardComponent implements OnInit {
   constructor(
     private router: ActivatedRoute,
     private tournamentService: TournamentService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {
   }
 
@@ -48,6 +51,17 @@ export class TournamentDashboardComponent implements OnInit {
   endTournament() {
     this.tournamentService.updateTournament(this.prepareEndTournamentBundle()).subscribe(dto => this.tournament = dto);
 
+  }
+
+  openPrepareTournamentRoundFixturesDialog() {
+    const dialogRef = this.dialog.open(PrepareTournamentRoundFixturesDialogComponent, {
+      width: '50vw',
+      data: this.tournament
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('close');
+    });
   }
 
   prepareStartTournamentBundle(): TournamentBundleUpdate {
