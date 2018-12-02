@@ -140,14 +140,14 @@
       <div class="summary" *ngIf="commonFormGroup && competitionDetailsFormGroup">
         <div class="column-style"
              *ngFor="let entry of commonFormGroup.value | mapToArray">
-          <div>{{entry.first | translate}}</div>
-          <div>{{entry.second.translationKey ? (entry.second.translationKey | translate) : entry.second}}</div>
+          <div>{{entry.left | translate}}</div>
+          <div>{{entry.right.translationKey ? (entry.right.translationKey | translate) : entry.right}}</div>
         </div>
         <mat-divider></mat-divider>
         <div class="column-style"
              *ngFor="let entry of competitionDetailsFormGroup.value | mapToArray">
-          <div>{{entry.first | translate}}</div>
-          <div>{{entry.second.translationKey ? (entry.second.translationKey | translate) : entry.second}}</div>
+          <div>{{entry.left | translate}}</div>
+          <div>{{entry.right.translationKey ? (entry.right.translationKey | translate) : entry.right}}</div>
         </div>
       </div>
       <div class="control-btn">

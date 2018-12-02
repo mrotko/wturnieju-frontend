@@ -106,7 +106,7 @@ export class TournamentCreatorComponent implements OnInit {
   }
 
   private initCompetitionDetailsFormGroup() {
-    if ((<TranslatableValue<string>> this.commonFormGroup.value['competition']).value === CompetitionType.CHESS) {
+    if ((<TranslatableValue<CompetitionType>> this.commonFormGroup.value['competition']).value === CompetitionType.CHESS) {
       this.competitionDetailsFormGroup = new FormGroup({
         participantType: new FormControl('', Validators.required),
         tournamentSystem: new FormControl('', Validators.required)

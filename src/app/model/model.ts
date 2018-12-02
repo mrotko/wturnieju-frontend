@@ -36,7 +36,7 @@ export interface UserDTO {
 
 export interface TournamentCreatorConfig {
   accessOptions: string [];
-  competitionTypes: string [];
+  competitionTypes: CompetitionType [];
   systemTypes: { [key: string]: string [] };
   participantTypes: { [key: string]: string [] };
 }
@@ -171,7 +171,7 @@ export interface UserTournamentsDTO {
 }
 
 export enum CompetitionType {
-  CHESS = 'CompetitionType.CHESS'
+  CHESS = 'COMPETITION_TYPE.CHESS'
 }
 
 export const ACCESS_OPTION = {
