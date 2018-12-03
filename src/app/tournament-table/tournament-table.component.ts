@@ -47,8 +47,6 @@ export class TournamentTableComponent implements OnInit, OnChanges {
     this.tournamentService.getTournamentTable(this.tournament.id).subscribe(dto => this.tournamentTable = dto);
   }
 
-  E
-
   getFullName(profileId: String): string {
     const participant = this.tournament.participants.find(p => p.id === profileId);
     return participant ? participant.fullName : '';
