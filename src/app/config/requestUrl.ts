@@ -10,6 +10,11 @@ export const RequestUrl = {
     user: environment.apiUrl + '/search/user?q='
   },
 
+  userSettings: {
+    authority: environment.apiUrl + '/userSettings/authority',
+    config: environment.apiUrl + '/userSettings/config'
+  },
+
   tournamentCreator: {
     config: environment.apiUrl + '/tournamentCreator/config',
     create: environment.apiUrl + '/tournamentCreator/create'

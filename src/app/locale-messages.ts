@@ -1,4 +1,10 @@
-import {ACCESS_OPTION, CompetitionType, TOURNAMENT_PARTICIPANT_TYPE, TournamentSystemType} from './model/model';
+import {
+  ACCESS_OPTION,
+  AuthorityType,
+  CompetitionType,
+  TOURNAMENT_PARTICIPANT_TYPE,
+  TournamentSystemType
+} from './model/model';
 import {toDate} from '@angular/common/src/i18n/format_date';
 
 export const LocaleMessages = {
@@ -10,6 +16,7 @@ export const LocaleMessages = {
   email: 'email',
   password: 'password',
   generateRound: 'generateRound',
+  configuration: 'configuration',
   timetable: 'timetable',
   round: 'round',
   registration: 'registration',
@@ -88,5 +95,8 @@ export const LocaleMessages = {
   TOURNAMENT_PARTICIPANT_TYPE: {
     SINGLE: TOURNAMENT_PARTICIPANT_TYPE.SINGLE,
     TEAM: TOURNAMENT_PARTICIPANT_TYPE.TEAM
+  },
+  AUTHORITY_TYPE: {
+    CLI: AuthorityType.CLI
   }
 };

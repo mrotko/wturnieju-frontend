@@ -25,6 +25,15 @@ export interface User {
   imgPath?: string;
   username: string;
   token?: string;
+  authorities: UserGrantedAuthority [];
+}
+
+export interface UserConfig {
+  authorityTypes: AuthorityType [];
+}
+
+export interface UserGrantedAuthority {
+  authorityType: AuthorityType
 }
 
 export interface UserDTO {
@@ -211,4 +220,8 @@ export const enum TournamentBundleUpdateContentType {
   NEXT_ROUND = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.NEXT_ROUND',
   PAUSE = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.PAUSE',
   END = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.END'
+}
+
+export const enum AuthorityType {
+  CLI = "AUTHORITY_TYPE.CLI",
 }

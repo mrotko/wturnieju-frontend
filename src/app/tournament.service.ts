@@ -57,6 +57,6 @@ export class TournamentService implements OnInit {
   }
 
   getCurrentRound(tournamentId: string): Observable<number> {
-    return this.http.get(RequestUrl.tournament.tournament + tournamentId + '/currentRound');
+    return this.http.get<number>(RequestUrl.tournament.tournament + tournamentId + '/currentRound');
   }
 }

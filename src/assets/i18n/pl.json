@@ -10,6 +10,7 @@
   "englishUs": "English US",
   "email": "Email",
   "generateRound": "Dodaj nową rundę",
+  "configuration": "Konfiguracja",
   "password": "Hasło",
   "registration": "Rejestracja",
   "forgetPassword": "Zapomniałem hasła",
@@ -85,5 +86,8 @@
   "TOURNAMENT_PARTICIPANT_TYPE": {
     "SINGLE": "Indywidualny",
     "TEAM": "Zespół"
+  },
+  "AUTHORITY_TYPE": {
+    "CLI": "CLI"
   }
 }
