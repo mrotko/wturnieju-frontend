@@ -44,6 +44,7 @@ import {FixturePlannerComponent} from './fixture-planner/fixture-planner.compone
 import {TournamentParticipantsService} from './tournament-participants.service';
 import {TournamentTimetableComponent} from './tournament-timetable/tournament-timetable.component';
 import {PrepareTournamentRoundFixturesDialogComponent} from './prepare-tournament-round-fixtures-dialog/prepare-tournament-round-fixtures-dialog.component';
+import {CliComponent} from './cli/cli.component';
 
 registerLocaleData(localePl);
 
@@ -62,6 +63,7 @@ const appRoutes: Routes = [
   {path: 'user', component: UserSettingsComponent, canActivate: [AuthRequiredGuard]},
   {path: 'create', component: TournamentCreatorComponent, canActivate: [AuthRequiredGuard]},
   {path: 'tournaments', component: TournamentsComponent},
+  {path: 'cli', component: CliComponent},
   {path: 'tournaments/:id/dashboard', component: TournamentDashboardComponent}
 ];
 
@@ -89,7 +91,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ParticipantsComponent,
     FixturePlannerComponent,
     TournamentTimetableComponent,
-    PrepareTournamentRoundFixturesDialogComponent
+    PrepareTournamentRoundFixturesDialogComponent,
+    CliComponent
   ],
   entryComponents: [
     PrepareTournamentRoundFixturesDialogComponent

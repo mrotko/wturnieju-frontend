@@ -5,8 +5,9 @@ import {Locale} from '../model/locale';
 import {Subscription} from 'rxjs/internal/Subscription';
 import {LocaleMessages} from '../locale-messages';
 import {AuthService} from '../service/auth.service';
-import {User} from '../model/model';
+import {AuthorityType, User} from '../model/model';
 import {RouterUrl} from '../config/routerUrl';
+import {UserSettingsService} from '../user-settings.service';
 
 @Component({
   selector: 'app-top-menu',
@@ -28,7 +29,8 @@ export class TopMenuComponent implements OnInit, OnDestroy {
   constructor(
     private translateService: TranslateService,
     private localeService: LocaleService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userSettingsService: UserSettingsService
     ) {
   }
 
@@ -63,5 +65,9 @@ export class TopMenuComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authService.logout();
+  }
+
+  showCliButton(): boolean {
+    return this.userSettingsService.hasAuthority(AuthorityType.CLI);
   }
 }

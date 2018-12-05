@@ -25,5 +25,7 @@ export const RequestUrl = {
     user: environment.apiUrl + '/tournaments?userId=',
   },
 
+  cli: environment.apiUrl + '/cli/',
+
   helloWorld: environment.apiUrl + '/hello-world',
 };

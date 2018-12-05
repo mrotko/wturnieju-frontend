@@ -1,0 +1,9 @@
+<div class="component-container">
+    <div class="console-output mat-elevation-z1">
+        <pre *ngIf="formattedResponse">{{formattedResponse}}</pre>
+    </div>
+    <div class="controls">
+        <input matInput class="mat-elevation-z1" #inputValue placeholder="{{lm.startTypingCommand | translate}}">
+        <button mat-stroked-button (click)="performCommand(inputValue.value)">Wyślij</button>
+    </div>
+</div>

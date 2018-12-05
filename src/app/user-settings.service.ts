@@ -31,7 +31,7 @@ export class UserSettingsService {
 
   hasAuthority(authorityType: AuthorityType): boolean {
     const user = this.authService.getUserFromStorage();
-    if (user.authorities) {
+    if (user && user.authorities) {
       const authority = user.authorities.find(value => value.authorityType === authorityType);
       return authority !== undefined;
     }

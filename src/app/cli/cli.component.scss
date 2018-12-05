@@ -1,0 +1,21 @@
+.component-container {
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: 0.5fr 1fr 0.5fr;
+}
+
+.console-output {
+	grid-column: 2;
+}
+
+.controls {
+	grid-column: 2;
+	display: grid;
+	grid-gap: 10px;
+}
+
+.controls input {
+	padding: 10px;
+	width: auto;
+	font-size: 1.4em;
+}
