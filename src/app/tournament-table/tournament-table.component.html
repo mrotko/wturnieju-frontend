@@ -2,9 +2,6 @@
   <mat-card>
     <mat-card-title>
       <span>{{lm.table | translate}}</span>
-      <button mat-icon-button class="rotate-hover" (click)="initTournamentTable()">
-        <mat-icon>autorenew</mat-icon>
-      </button>
     </mat-card-title>
     <mat-card-content>
       <table mat-table [dataSource]="tournamentTable?.rows || []">
