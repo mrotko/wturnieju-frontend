@@ -34,7 +34,6 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>{{lm.email | translate}}</mat-panel-title>
-        <!--<mat-panel-description>Type your name and age</mat-panel-description>-->
       </mat-expansion-panel-header>
       <mat-form-field>
         <input matInput placeholder="First name">
@@ -46,15 +45,35 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>{{lm.password | translate}}</mat-panel-title>
-        <!--<mat-panel-description>Type your name and age</mat-panel-description>-->
       </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <input matInput placeholder="First name">
-      </mat-form-field>
-      <mat-action-row>
-        <button mat-button color="primary">Wyślij</button>
-      </mat-action-row>
+      <form class="password-form" [formGroup]="changePasswordForm" (submit)="changePasswordSubmit()">
+        <mat-form-field>
+          <input matInput type="password" placeholder="{{lm.oldPassword | translate}}" formControlName="oldPassword">
+          <mat-error *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
+            {{lm.requiredError | translate}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="{{lm.newPassword | translate}}" formControlName="newPassword">
+          <mat-error *ngIf="changePasswordForm.get('newPassword').hasError('required')">
+            {{lm.requiredError | translate}}
+          </mat-error>
+          <mat-error *ngIf="changePasswordForm.get('newPassword').hasError('pattern')">
+            {{lm.passwordPatternError | translate}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="{{lm.repeatPassword | translate}}"
+                 formControlName="repeatPassword">
+          <mat-error *ngIf="changePasswordForm.get('repeatPassword').hasError('match')">
+            {{lm.differentPasswordsError | translate}}
+          </mat-error>
+        </mat-form-field>
+        <mat-action-row>
+          <button mat-button type="submit" color="primary">{{lm.send | translate}}</button>
+        </mat-action-row>
+      </form>
     </mat-expansion-panel>
     <mat-expansion-panel>
       <mat-expansion-panel-header>

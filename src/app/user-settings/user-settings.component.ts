@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {LocaleMessages} from '../locale-messages';
-import {AuthorityType, User, UserConfig} from '../model/model';
+import {AuthorityType, ExceptionErrorDTO, Pattern, User, UserConfig} from '../model/model';
 import {AuthService} from '../service/auth.service';
 import {UserSettingsService} from '../user-settings.service';
-import {MatSnackBar} from '@angular/material';
-import {TranslateService} from '@ngx-translate/core';
+import {SnackBarService} from '../snack-bar.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {matchValidator} from '../model/wt-validators';
+import {HttpErrorResponse} from '@angular/common/http';
 
 interface AuthorityItem {
   authorityType: AuthorityType,
@@ -26,11 +28,12 @@ export class UserSettingsComponent implements OnInit {
 
   authorityItems: AuthorityItem [];
 
+  changePasswordForm: FormGroup;
+
   constructor(
     private authService: AuthService,
     private userSettingsService: UserSettingsService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private snackbarService: SnackBarService
   ) {
   }
 
@@ -40,6 +43,17 @@ export class UserSettingsComponent implements OnInit {
       this.userConfig = config;
       this.initAuthorityItems();
     });
+
+    this.prepareChangePasswordForm();
+  }
+
+  private prepareChangePasswordForm() {
+    this.changePasswordForm = new FormGroup({
+      oldPassword: new FormControl('', [Validators.required]),
+      newPassword: new FormControl('', [Validators.required, Validators.pattern(Pattern.password)]),
+      repeatPassword: new FormControl()
+    });
+    this.changePasswordForm.get('repeatPassword').setValidators(matchValidator('newPassword'));
   }
 
   initAuthorityItems() {
@@ -58,10 +72,33 @@ export class UserSettingsComponent implements OnInit {
 
     this.userSettingsService.setAuthorities(onlyEnabled).subscribe(userAuthorities => {
       this.authService.setAuthorities(userAuthorities);
-      this.snackBar.open(this.translate.instant(this.lm.success), this.translate.instant(this.lm.close), {
-        duration: 1000,
-        panelClass: 'success-snackbar'
-      });
+      this.snackbarService.openSuccess(this.lm.success, this.lm.close);
     });
+  }
+
+  changePasswordSubmit() {
+    if (this.changePasswordForm.valid) {
+      const newPassword = this.changePasswordForm.get('newPassword').value;
+      const oldPassword = this.changePasswordForm.get('oldPassword').value;
+
+      this.userSettingsService.changePassword(newPassword, oldPassword).subscribe(() => {
+        this.authService.logout();
+        this.snackbarService.openSuccess(this.lm.changePasswordSuccess, this.lm.close);
+      }, (error: HttpErrorResponse) => {
+        if (error.status === 422) {
+          const errorBody: ExceptionErrorDTO = error.error;
+
+          if (errorBody.simpleClassName === 'IncorrectPasswordException') {
+            this.snackbarService.openError(this.lm.incorrectOldPassword, this.lm.close);
+          } else if (errorBody.simpleClassName === 'InvalidFormatException') {
+            this.snackbarService.openError(this.lm.passwordPatternError, this.lm.close);
+          } else {
+            this.snackbarService.openError(this.lm.unknownError, this.lm.close);
+          }
+        } else {
+          this.snackbarService.openError(this.lm.unknownError, this.lm.close);
+        }
+      })
+    }
   }
 }

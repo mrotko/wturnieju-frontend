@@ -11,6 +11,11 @@ interface ChangeAuthorityDTO {
   value: boolean
 }
 
+interface ChangePasswordDTO {
+  oldPassword: string;
+  newPassword: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,5 +43,12 @@ export class UserSettingsService {
     return false;
   }
 
+  changePassword(newPassword: string, oldPassword: string): Observable<any> {
+    const dto: ChangePasswordDTO = {
+      newPassword: newPassword,
+      oldPassword: oldPassword
+    };
 
+    return this.http.put(RequestUrl.userSettings.password, dto);
+  }
 }

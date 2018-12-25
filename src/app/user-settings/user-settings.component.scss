@@ -9,3 +9,12 @@ mat-accordion {
   padding-top: 100px;
   width: 100%;
 }
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.password-form mat-form-field:first-child {
+  padding-bottom: 10px;
+}

@@ -18,6 +18,11 @@ export class Pattern {
   public static password = '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d].{8,}$';
 }
 
+export interface ExceptionErrorDTO {
+  message: string;
+  simpleClassName: string;
+}
+
 export interface User {
   id: string;
   name?: string;
