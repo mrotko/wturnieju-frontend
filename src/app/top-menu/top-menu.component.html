@@ -1,8 +1,9 @@
 <mat-toolbar class="top-menu mat-elevation-z1">
   <div class="top-menu-left">
     <button mat-button [routerLink]="routerUrl.home">{{lm.homePage | translate}}</button>
-    <button mat-button [routerLink]="routerUrl.tournaments">{{lm.myTournaments | translate}}</button>
-    <button mat-button *ngIf="showCliButton()" [routerLink]="routerUrl.cli">{{lm.cli | translate}}</button>
+    <button mat-button *ngIf="showTournamentsBtn()"
+            [routerLink]="routerUrl.tournaments">{{lm.myTournaments | translate}}</button>
+    <button mat-button *ngIf="showCliBtn()" [routerLink]="routerUrl.cli">{{lm.cli | translate}}</button>
   </div>
   <div class="top-menu-center">
     <form>

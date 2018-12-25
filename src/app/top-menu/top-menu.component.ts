@@ -67,7 +67,11 @@ export class TopMenuComponent implements OnInit, OnDestroy {
     this.authService.logout();
   }
 
-  showCliButton(): boolean {
+  showCliBtn(): boolean {
     return this.userSettingsService.hasAuthority(AuthorityType.CLI);
+  }
+
+  showTournamentsBtn() {
+    return this.currentUser;
   }
 }
