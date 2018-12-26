@@ -44,6 +44,7 @@
   "unknownError": "Nieznany błąd",
   "emailExists": "Taki email już istnieje",
   "loginError": "Podałeś zły email lub hasło",
+  "accountInactiveErrorMsg": "Twoje konto jest nieaktywne",
   "logout": "Wyloguj",
   "remindPassword": "Przypomnij hasło",
   "send": "Wyślij",

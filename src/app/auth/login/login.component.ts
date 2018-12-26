@@ -5,9 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
 import {LocaleMessages} from '../../locale-messages';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatSnackBar} from '@angular/material';
-import {TranslateService} from '@ngx-translate/core';
 import {LoginForm} from '../../model/model';
+import {SnackBarService} from '../../snack-bar.service';
 
 @Component({
   selector: 'app-login',
@@ -25,8 +24,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private snackbarService: SnackBarService
     ) { }
 
   ngOnInit() {
@@ -44,10 +42,22 @@ export class LoginComponent implements OnInit {
         () => this.router.navigate([this.returnUrl]),
         err => {
           if (err.status === 401) {
-            this.snackBar.open(this.translate.instant(this.lm.loginError), this.translate.instant(this.lm.close));
+            const email = this.loginFormGroup.get('username').value;
+            this.authService.isAccountActive(email).subscribe(response => {
+              if (response) {
+                this.snackbarService.openError(this.lm.loginError);
+              } else {
+                this.snackbarService.openError(this.lm.accountInactiveErrorMsg);
+              }
+            }, err => {
+              if (err.status === 404) {
+                this.snackbarService.openError(this.lm.loginError);
+              } else {
+                this.snackbarService.openError(this.lm.unknownError);
+              }
+            });
           } else {
-            console.log(err);
-            this.snackBar.open(this.translate.instant(this.lm.unknownError), this.translate.instant(this.lm.close));
+            this.snackbarService.openError(this.lm.unknownError);
           }
         }
       );

@@ -53,6 +53,7 @@ export const LocaleMessages = {
   serviceUnavailableErrorMsg: 'serviceUnavailableErrorMsg',
   emailExists: 'emailExists',
   loginError: 'loginError',
+  accountInactiveErrorMsg: 'accountInactiveErrorMsg',
   logout: 'logout',
   remindPassword: 'remindPassword',
   send: 'send',

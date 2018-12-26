@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
 import {MatSnackBar, MatSnackBarConfig, MatSnackBarRef, SimpleSnackBar} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
+import {LocaleMessages} from './locale-messages';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SnackBarService {
+
+  private lm = LocaleMessages;
 
   private baseConfig: MatSnackBarConfig = {
     duration: 5000,
@@ -25,7 +28,7 @@ export class SnackBarService {
   }
 
   private openSnackBar(translatableMessage: string, translatableAction?: string, config?: MatSnackBarConfig): MatSnackBarRef<SimpleSnackBar> {
-    return this.snackBar.open(this.translate.instant(translatableMessage), this.translate.instant(translatableAction), config);
+    return this.snackBar.open(this.translate.instant(translatableMessage), this.translate.instant(translatableAction || this.lm.close), config);
   }
 
   openInfo(translatableMessage: string, translatableAction?: string): MatSnackBarRef<SimpleSnackBar> {
