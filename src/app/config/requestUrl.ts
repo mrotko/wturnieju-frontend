@@ -26,6 +26,11 @@ export const RequestUrl = {
     user: environment.apiUrl + '/tournaments?userId=',
   },
 
+  verification: {
+    emailChange: environment.apiUrl + "/verification/email?token=",
+    newAccount: environment.apiUrl + "/verification/account?token="
+  },
+
   cli: environment.apiUrl + '/cli/',
 
   helloWorld: environment.apiUrl + '/hello-world',

@@ -1,0 +1,11 @@
+<div class="component-container">
+  <div *ngIf="verificationStatus === null">
+    {{lm.loading | translate}}
+  </div>
+  <div *ngIf="verificationStatus === false">
+    {{lm.accountVerificationErrorMsg | translate}}
+  </div>
+  <div *ngIf="verificationStatus === true">
+    {{lm.accountVerificationSuccessMsg | translate}}
+  </div>
+</div>

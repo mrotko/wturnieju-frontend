@@ -45,6 +45,9 @@ import {TournamentParticipantsService} from './tournament-participants.service';
 import {TournamentTimetableComponent} from './tournament-timetable/tournament-timetable.component';
 import {PrepareTournamentRoundFixturesDialogComponent} from './prepare-tournament-round-fixtures-dialog/prepare-tournament-round-fixtures-dialog.component';
 import {CliComponent} from './cli/cli.component';
+import {VerificationComponent} from './verification/verification.component';
+import {AccountVerificationComponent} from './account-verification/account-verification.component';
+import {EmailVerificationComponent} from './email-verification/email-verification.component';
 
 registerLocaleData(localePl);
 
@@ -64,7 +67,13 @@ const appRoutes: Routes = [
   {path: 'create', component: TournamentCreatorComponent, canActivate: [AuthRequiredGuard]},
   {path: 'tournaments', component: TournamentsComponent},
   {path: 'cli', component: CliComponent},
-  {path: 'tournaments/:id/dashboard', component: TournamentDashboardComponent}
+  {path: 'tournaments/:id/dashboard', component: TournamentDashboardComponent},
+  {
+    path: 'verification', children: [
+      {path: 'account', component: AccountVerificationComponent},
+      {path: 'email', component: EmailVerificationComponent}
+    ]
+  }
 ];
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -92,7 +101,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     FixturePlannerComponent,
     TournamentTimetableComponent,
     PrepareTournamentRoundFixturesDialogComponent,
-    CliComponent
+    CliComponent,
+    VerificationComponent,
+    AccountVerificationComponent,
+    EmailVerificationComponent
   ],
   entryComponents: [
     PrepareTournamentRoundFixturesDialogComponent
