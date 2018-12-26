@@ -4,9 +4,8 @@ import {LocaleMessages} from '../../locale-messages';
 import {RouterUrl} from '../../config/routerUrl';
 import {AuthService} from '../../service/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material';
-import {TranslateService} from '@ngx-translate/core';
 import {ForgetPasswordForm} from '../../model/model';
+import {SnackBarService} from '../../snack-bar.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -24,8 +23,7 @@ export class ForgetPasswordComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private snackbarService: SnackBarService
   ) {
   }
 
@@ -38,8 +36,8 @@ export class ForgetPasswordComponent implements OnInit {
   onSubmit() {
     if (this.forgetPasswordFormGroup.valid) {
       this.authService.forgetPassword(<ForgetPasswordForm>this.forgetPasswordFormGroup.value).subscribe(
-        () => this.snackBar.open(this.translate.instant(this.lm.success), this.translate.instant(this.lm.close)),
-        () => this.snackBar.open(this.translate.instant(this.lm.unknownError), this.translate.instant(this.lm.close))
+        () => this.snackbarService.openSuccess(this.lm.forgetPasswordSuccessMsg),
+        () => this.snackbarService.openError(this.lm.unknownError)
       );
     }
   }

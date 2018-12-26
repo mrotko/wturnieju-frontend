@@ -33,7 +33,8 @@ export const RequestUrl = {
 
   verification: {
     emailChange: environment.apiUrl + "/verification/email?token=",
-    newAccount: environment.apiUrl + "/verification/account?token="
+    newAccount: environment.apiUrl + "/verification/account?token=",
+    resetPassword: environment.apiUrl + "/verification/password?token="
   },
 
   cli: environment.apiUrl + '/cli/',

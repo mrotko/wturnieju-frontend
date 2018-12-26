@@ -19,4 +19,8 @@ export class VerificationService {
   verifyAccount(token: string): Observable<any> {
     return this.http.patch(RequestUrl.verification.newAccount + token, null);
   }
+
+  verifyResetPassword(token: string, password: string): Observable<any> {
+    return this.http.patch(RequestUrl.verification.resetPassword + token, password);
+  }
 }

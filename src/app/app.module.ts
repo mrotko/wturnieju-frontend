@@ -48,6 +48,7 @@ import {CliComponent} from './cli/cli.component';
 import {VerificationComponent} from './verification/verification.component';
 import {AccountVerificationComponent} from './account-verification/account-verification.component';
 import {EmailVerificationComponent} from './email-verification/email-verification.component';
+import {PasswordVerificationComponent} from './password-verification/password-verification.component';
 
 registerLocaleData(localePl);
 
@@ -71,6 +72,7 @@ const appRoutes: Routes = [
   {
     path: 'verification', children: [
       {path: 'account', component: AccountVerificationComponent},
+      {path: 'password', component: PasswordVerificationComponent},
       {path: 'email', component: EmailVerificationComponent}
     ]
   }
@@ -104,7 +106,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CliComponent,
     VerificationComponent,
     AccountVerificationComponent,
-    EmailVerificationComponent
+    EmailVerificationComponent,
+    PasswordVerificationComponent
   ],
   entryComponents: [
     PrepareTournamentRoundFixturesDialogComponent

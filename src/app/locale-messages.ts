@@ -21,6 +21,7 @@ export const LocaleMessages = {
   configuration: 'configuration',
   timetable: 'timetable',
   changeEmailForm: 'changeEmailForm',
+  forgetPasswordSuccessMsg: 'forgetPasswordSuccessMsg',
   changePasswordForm: 'changePasswordForm',
   newEmail: 'newEmail',
   incorrectPassword: 'incorrectPassword',
