@@ -13,7 +13,8 @@ export const RequestUrl = {
   userSettings: {
     authority: environment.apiUrl + '/userSettings/authority',
     config: environment.apiUrl + '/userSettings/config',
-    password: environment.apiUrl + '/userSettings/password'
+    password: environment.apiUrl + '/userSettings/password',
+    email: environment.apiUrl + '/userSettings/email'
   },
 
   tournamentCreator: {

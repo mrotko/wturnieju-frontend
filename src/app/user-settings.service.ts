@@ -16,6 +16,11 @@ interface ChangePasswordDTO {
   newPassword: string;
 }
 
+interface ChangeEmailDTO {
+  username: string;
+  password: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -50,5 +55,14 @@ export class UserSettingsService {
     };
 
     return this.http.put(RequestUrl.userSettings.password, dto);
+  }
+
+  changeEmail(email: string, password: string): Observable<any> {
+    const dto: ChangeEmailDTO = {
+      username: email,
+      password: password
+    };
+
+    return this.http.put(RequestUrl.userSettings.email, dto);
   }
 }

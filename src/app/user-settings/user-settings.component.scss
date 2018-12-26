@@ -18,3 +18,8 @@ mat-accordion {
 .password-form mat-form-field:first-child {
   padding-bottom: 10px;
 }
+
+.email-form {
+  display: flex;
+  flex-direction: column;
+}

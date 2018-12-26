@@ -8,7 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class SnackBarService {
 
   private baseConfig: MatSnackBarConfig = {
-    duration: 2000,
+    duration: 5000,
     panelClass: 'success-snackbar',
   };
 

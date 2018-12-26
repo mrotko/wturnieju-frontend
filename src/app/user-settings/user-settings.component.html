@@ -33,18 +33,29 @@
     <!--</mat-expansion-panel>-->
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>{{lm.email | translate}}</mat-panel-title>
+        <mat-panel-title>{{lm.changeEmailForm | translate}}</mat-panel-title>
       </mat-expansion-panel-header>
-      <mat-form-field>
-        <input matInput placeholder="First name">
-      </mat-form-field>
-      <mat-action-row>
-        <button mat-button color="primary">Wyślij</button>
-      </mat-action-row>
+      <form class="email-form" [formGroup]="changeEmailForm" (submit)="changeEmailSubmit()">
+        <mat-form-field>
+          <input matInput type="email" placeholder="{{lm.newEmail | translate}}" formControlName="email">
+          <mat-error
+                  *ngIf="changeEmailForm.get('email').hasError('required')">{{lm.requiredError | translate}}</mat-error>
+          <mat-error
+                  *ngIf="changeEmailForm.get('email').hasError('pattern')">{{lm.badEmailError | translate}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="{{lm.password | translate}}" formControlName="password">
+          <mat-error
+                  *ngIf="changeEmailForm.get('password').hasError('required')">{{lm.requiredError | translate}}</mat-error>
+        </mat-form-field>
+        <mat-action-row>
+          <button mat-button type="submit" color="primary">{{lm.send | translate}}</button>
+        </mat-action-row>
+      </form>
     </mat-expansion-panel>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>{{lm.password | translate}}</mat-panel-title>
+        <mat-panel-title>{{lm.changePasswordForm | translate}}</mat-panel-title>
       </mat-expansion-panel-header>
 
       <form class="password-form" [formGroup]="changePasswordForm" (submit)="changePasswordSubmit()">

@@ -30,6 +30,8 @@ export class UserSettingsComponent implements OnInit {
 
   changePasswordForm: FormGroup;
 
+  changeEmailForm: FormGroup;
+
   constructor(
     private authService: AuthService,
     private userSettingsService: UserSettingsService,
@@ -45,6 +47,7 @@ export class UserSettingsComponent implements OnInit {
     });
 
     this.prepareChangePasswordForm();
+    this.prepareChangeEmailForm();
   }
 
   private prepareChangePasswordForm() {
@@ -54,6 +57,13 @@ export class UserSettingsComponent implements OnInit {
       repeatPassword: new FormControl()
     });
     this.changePasswordForm.get('repeatPassword').setValidators(matchValidator('newPassword'));
+  }
+
+  private prepareChangeEmailForm() {
+    this.changeEmailForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required])
+    });
   }
 
   initAuthorityItems() {
@@ -98,7 +108,33 @@ export class UserSettingsComponent implements OnInit {
         } else {
           this.snackbarService.openError(this.lm.unknownError, this.lm.close);
         }
-      })
+      });
+    }
+  }
+
+  changeEmailSubmit() {
+    if (this.changeEmailForm.valid) {
+      const email = this.changeEmailForm.get('email').value;
+      const password = this.changeEmailForm.get('password').value;
+
+      this.userSettingsService.changeEmail(email, password).subscribe(() => {
+        this.authService.logout();
+        this.snackbarService.openSuccess(this.lm.changeEmailSuccessMsg, this.lm.close);
+      }, (error: HttpErrorResponse) => {
+        if (error.status === 409) {
+          this.snackbarService.openError(this.lm.emailExists, this.lm.close);
+        } else if (error.status === 422) {
+          const errorBody: ExceptionErrorDTO = error.error;
+
+          if (errorBody.simpleClassName === 'IncorrectPasswordException') {
+            this.snackbarService.openError(this.lm.incorrectPassword, this.lm.close);
+          } else if (errorBody.simpleClassName === 'InvalidFormatException') {
+            this.snackbarService.openError(this.lm.badEmailError, this.lm.close);
+          }
+        } else {
+          this.snackbarService.openError(this.lm.unknownError, this.lm.close);
+        }
+      });
     }
   }
 }
