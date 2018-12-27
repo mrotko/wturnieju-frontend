@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TournamentService} from '../tournament.service';
 import {TOURNAMENT_STATUS, TournamentDTO, TranslatableValue, Tuple2} from '../model/model';
 import {AuthService} from '../service/auth.service';
@@ -6,6 +6,7 @@ import {LocaleMessages} from '../locale-messages';
 import {Router} from '@angular/router';
 import {RouterUrl} from '../config/routerUrl';
 import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
+import {FloatingButtonService} from '../floating-button.service';
 
 export interface TournamentParticipant {
   id: string;
@@ -58,7 +59,7 @@ export interface PeriodicElement {
   templateUrl: './tournaments.component.html',
   styleUrls: ['./tournaments.component.scss']
 })
-export class TournamentsComponent implements OnInit {
+export class TournamentsComponent implements OnInit, OnDestroy {
   inProgressTournamentRows: InProgressTableRow[];
   inProgressTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start',
     'end', 'currentRound', 'nextOpponent', 'actionButton'];
@@ -77,7 +78,8 @@ export class TournamentsComponent implements OnInit {
     private tournamentService: TournamentService,
     private authService: AuthService,
     private router: Router,
-    private mapToArray: MapToArrayPipe
+    private mapToArray: MapToArrayPipe,
+    private floatButtonService: FloatingButtonService
   ) {
   }
 
@@ -137,11 +139,24 @@ export class TournamentsComponent implements OnInit {
           });
         });
     }
-  }
 
+    this.prepareFloatButton();
+  }
 
   openTournament(tournamentId: string) {
     this.router.navigate([RouterUrl.tournaments, tournamentId, 'dashboard']).catch();
+  }
+
+  private prepareFloatButton() {
+    this.floatButtonService.setButtonClickAction(() => this.router.navigate([RouterUrl.createTournament]))
+  }
+
+  private cleanFloatButton() {
+    this.floatButtonService.setButtonClickAction(null);
+  }
+
+  ngOnDestroy(): void {
+    this.cleanFloatButton();
   }
 }
 //

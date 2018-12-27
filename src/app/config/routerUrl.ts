@@ -5,4 +5,5 @@ export const RouterUrl = {
   userSettings: '/user',
   tournaments: '/tournaments',
   cli: '/cli',
+  createTournament: '/create',
 };

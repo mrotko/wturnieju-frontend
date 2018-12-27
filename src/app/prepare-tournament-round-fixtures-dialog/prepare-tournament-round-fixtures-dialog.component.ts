@@ -26,7 +26,6 @@ export class PrepareTournamentRoundFixturesDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.tournament);
     this.tournamentService.prepareNextRound(this.tournament.id).subscribe(response => {
       return this.fixtures = response;
     });
