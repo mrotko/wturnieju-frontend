@@ -1,0 +1,26 @@
+.component-container {
+	display: flex;
+	padding: 10px;
+	border-radius: 15px;
+	margin-bottom: 5px;
+	justify-content: space-between;
+}
+
+.participant-content {
+	margin-top: auto;
+	margin-bottom: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.action-panel {
+	display: flex;
+	z-index: 0;
+}
+
+.action-panel:hover {
+}
+
+.rejected-participant {
+	color: gray;
+}

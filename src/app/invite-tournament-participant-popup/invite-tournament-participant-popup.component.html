@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>{{lm.inviteParticipantsMsg | translate}}</h1>
+<div mat-dialog-content class="dialog-content" >
+    <div>
+        <form class="search-box">
+            <mat-form-field>
+                <input type="text" matInput [matAutocomplete]="auto"
+                       [formControl]="searchFormControl" [placeholder]="lm.doSearch | translate"/>
+                <mat-autocomplete  #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of searchAutocompleteOptions | async"
+                                (onSelectionChange)="addUserToSelected(option)">
+                        <mat-icon>person_add</mat-icon>
+                        <span>{{option.name}}</span>
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
+    </div>
+    <div>
+        <mat-chip-list>
+            <mat-chip *ngFor="let user of selectedUsers">
+                {{user.name}}
+                <mat-icon matChipRemove (click)="removeUserFromSelected(user.id)">cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="cancelBtnClick()">{{lm.cancel | translate}}</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="getSelectedUsersIds()">{{lm.invite | translate}}</button>
+</div>

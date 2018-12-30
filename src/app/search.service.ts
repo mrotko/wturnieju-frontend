@@ -28,11 +28,11 @@ export class SearchService {
       this.buildExcluded(excluded));
   }
 
-  buildLimit(limit: number) {
+  private buildLimit(limit: number) {
     return (limit ? ('&limit=' + limit) : '');
   }
 
-  buildExcluded(excluded: string []) {
+  private buildExcluded(excluded: string []) {
     return (excluded ? ('&excluded=' + excluded.join(',')) : '');
   }
 }

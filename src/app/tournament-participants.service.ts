@@ -15,7 +15,18 @@ export class TournamentParticipantsService {
     return this.http.get<TournamentParticipantDTO []>(RequestUrl.tournament.tournament + tournamentId + '/participants');
   }
 
-  invite(tournamentId: string, participantId: string): Observable<any> {
-    return this.http.post(RequestUrl.tournament.tournament + tournamentId + '/invite/' + participantId, {});
+  invite(tournamentId: string, invitedIds: string []): Observable<any> {
+    if (!invitedIds) {
+      invitedIds = [];
+    }
+    return this.http.post(RequestUrl.tournament.tournament + tournamentId + '/participants/', invitedIds);
+  }
+
+  remove(tournamentId: string, participantId: string): Observable<any> {
+    return this.http.delete(RequestUrl.tournament.tournament + tournamentId + '/participants/' + participantId);
+  }
+
+  accept(tournamentId: string, participantId: string): Observable<any> {
+    return this.http.patch(RequestUrl.tournament.tournament + tournamentId + '/participants/', participantId);
   }
 }

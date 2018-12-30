@@ -21,9 +21,10 @@
     </div>
   </div>
   <div class="dashboard-content">
-    <app-tournament-table [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-tournament-table>
-    <app-participants [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-participants>
-    <app-tournament-timetable [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-tournament-timetable>
+    <app-tournament-participants-configuration [tournament]="tournament"></app-tournament-participants-configuration>
+    <!--<app-tournament-table [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-tournament-table>-->
+    <!--<app-participants [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-participants>-->
+    <!--<app-tournament-timetable [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-tournament-timetable>-->
   </div>
 </div>
 <div *ngIf="!tournament">

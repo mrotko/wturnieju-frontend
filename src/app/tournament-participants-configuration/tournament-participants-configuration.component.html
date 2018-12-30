@@ -1,0 +1,24 @@
+<div class="component-container">
+    <mat-card>
+        <mat-card-title>{{lm.acceptedParticipants | translate}}</mat-card-title>
+        <mat-card-content>
+            <app-participant *ngFor="let participant of acceptedParticipants"
+                             [participant]="participant" (removeBtnClick)="removeParticipant($event)"></app-participant>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-title>{{lm.invitedParticipants | translate}}</mat-card-title>
+        <mat-card-content>
+            <app-participant *ngFor="let participant of invitedParticipants"
+                             [participant]="participant" (removeBtnClick)="removeParticipant($event)"></app-participant>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-title>{{lm.wantToJoinParticipants | translate}}</mat-card-title>
+        <mat-card-content>
+            <app-participant *ngFor="let participant of requestedParticipants"
+                             [participant]="participant" (acceptBtnClick)="acceptParticipant($event)"
+                             (removeBtnClick)="removeParticipant($event)"></app-participant>
+        </mat-card-content>
+    </mat-card>
+</div>

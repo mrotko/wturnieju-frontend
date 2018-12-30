@@ -81,19 +81,19 @@ export class ParticipantsComponent implements OnInit {
   }
 
   inviteParticipant(participantId?: string) {
-    if (participantId || this.selectedUserId) {
-      this.tournamentParticipantsService.invite(this.tournament.id, participantId || this.selectedUserId).subscribe(() => {
-        this.selectedUserId = null;
-
-        for (let i = 0; i < this.participants.length; i++) {
-          if (this.participants[i].id === participantId) {
-            this.participants.splice(i, 1);
-          }
-        }
-
-        this.refresh();
-      });
-    }
+    // if (participantId || this.selectedUserId) {
+    //   this.tournamentParticipantsService.invite(this.tournament.id, participantId || this.selectedUserId).subscribe(() => {
+    //     this.selectedUserId = null;
+    //
+    //     for (let i = 0; i < this.participants.length; i++) {
+    //       if (this.participants[i].id === participantId) {
+    //         this.participants.splice(i, 1);
+    //       }
+    //     }
+    //
+    //     this.refresh();
+    //   });
+    // }
   }
 
   refresh() {

@@ -1,0 +1,20 @@
+<div class="mat-elevation-z1 component-container" [ngClass]="isRejected() ? 'rejected-participant': ''">
+    <div class="participant-content">
+        <span class="mat-body-1">{{participant.fullName}}</span>
+        <span class="mat-caption">{{participant.email}}</span>
+    </div>
+    <div class="action-panel">
+        <button mat-icon-button *ngIf="acceptBtnClick.observers.length > 0"
+                (click)="acceptBtnClick.emit(participant.id)">
+            <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="messageBtnClick.observers.length > 0"
+                (click)="messageBtnClick.emit(participant.id)">
+            <mat-icon>mail</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="removeBtnClick.observers.length > 0"
+                (click)="removeBtnClick.emit(participant.id)">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+</div>

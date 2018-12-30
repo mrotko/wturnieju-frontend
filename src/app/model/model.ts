@@ -74,7 +74,9 @@ export interface TournamentParticipantDTO extends Profile {
   secondName: string;
   name: string;
   fullName: string;
+  email: string;
   participantStatus: string;
+  invitationStatus: InvitationStatus;
 }
 
 export interface TournamentDTO {
@@ -229,4 +231,12 @@ export const enum TournamentBundleUpdateContentType {
 
 export const enum AuthorityType {
   CLI = "AUTHORITY_TYPE.CLI",
+}
+
+export const enum InvitationStatus {
+  ACCEPTED = "INVITATION_STATUS.ACCEPTED",
+  INVITED = "INVITATION_STATUS.DISQUALIFIED",
+  PARTICIPATION_REQUEST = "INVITATION_STATUS.PARTICIPATION_REQUEST",
+  REJECTED = "INVITATION_STATUS.REJECTED"
+
 }

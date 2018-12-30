@@ -52,6 +52,7 @@ import {PasswordVerificationComponent} from './password-verification/password-ve
 import {TournamentParticipantsConfigurationComponent} from './tournament-participants-configuration/tournament-participants-configuration.component';
 import {FloatingButtonComponent} from './floating-button/floating-button.component';
 import {InviteTournamentParticipantPopupComponent} from './invite-tournament-participant-popup/invite-tournament-participant-popup.component';
+import { ParticipantComponent } from './participant/participant.component';
 
 registerLocaleData(localePl);
 
@@ -111,10 +112,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     FloatingButtonComponent,
     AccountVerificationComponent,
     EmailVerificationComponent,
-    PasswordVerificationComponent
+    PasswordVerificationComponent,
+    TournamentParticipantsConfigurationComponent,
+    InviteTournamentParticipantPopupComponent,
+    ParticipantComponent
   ],
   entryComponents: [
-    PrepareTournamentRoundFixturesDialogComponent
+    PrepareTournamentRoundFixturesDialogComponent,
+    InviteTournamentParticipantPopupComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
