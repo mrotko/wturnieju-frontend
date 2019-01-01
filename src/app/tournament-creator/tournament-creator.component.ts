@@ -5,10 +5,9 @@ import {TournamentCreatorService} from '../service/tournament-creator.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {greaterEqThanValidator, lessEqThanValidator} from '../model/wt-validators';
 import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
-import {MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
 import {RouterUrl} from '../config/routerUrl';
+import {SnackBarService} from '../snack-bar.service';
 
 // TODO daty są w nieprawidłowym formacie
 
@@ -29,10 +28,10 @@ export class TournamentCreatorComponent implements OnInit {
   constructor(
     private service: TournamentCreatorService,
     private mapToArrayPipe: MapToArrayPipe,
-    private snackBar: MatSnackBar,
     private router: Router,
-    private translateService: TranslateService
-  ) { }
+    private snackbarService: SnackBarService
+  ) {
+  }
 
   ngOnInit() {
     this.initConfig();
@@ -43,15 +42,15 @@ export class TournamentCreatorComponent implements OnInit {
     this.commonFormGroup = new FormGroup({
       name: new FormControl('', Validators.required),
       accessOption: new FormControl('', Validators.required),
-        fromDate: new FormControl(''),
-        toDate: new FormControl(''),
+      fromDate: new FormControl(''),
+      toDate: new FormControl(''),
       place: new FormControl('', Validators.required),
-        description: new FormControl(''),
-        minParticipants: new FormControl(''),
-        maxParticipants: new FormControl(''),
-      competition: new FormControl('', Validators.required)
-      }
-    );
+      description: new FormControl(''),
+      minParticipants: new FormControl(''),
+      maxParticipants: new FormControl(''),
+      competition: new FormControl('', Validators.required),
+      invitationLink: new FormControl('')
+    });
 
     this.commonFormGroup.get('fromDate').setValidators([Validators.required, lessEqThanValidator('toDate')]);
     this.commonFormGroup.get('toDate').setValidators([Validators.required, greaterEqThanValidator('fromDate')]);
@@ -94,19 +93,21 @@ export class TournamentCreatorComponent implements OnInit {
   }
 
   public submitTournamentCreatorForm() {
-    this.service.send(this.tournamentCreatorData).subscribe(() => {
-      // TODO zrobić url który przenosi do utworzonego turnieju (może idk w odpowiedzi)
-      this.router.navigate([this.routerUrl.home]).catch();
-      this.snackBar.open(this.translateService.instant(this.lm.tournamentCreatorSuccessMsg),
-        this.translateService.instant(this.lm.close), {panelClass: 'success-snackbar'});
-    }, () => {
-      this.snackBar.open(this.translateService.instant(this.lm.serviceUnavailableErrorMsg),
-        this.translateService.instant(this.lm.close), {panelClass: 'error-snackbar'});
-    });
+    this.service.send(this.tournamentCreatorData).subscribe(
+      response => {
+        this.snackbarService.openSuccess(this.lm.tournamentCreatorSuccessMsg);
+        this.redirectToTournament(response.tournamentId);
+      }, () => this.snackbarService.openError(this.lm.serviceUnavailableErrorMsg));
+  }
+
+  private redirectToTournament(tournamentId: string) {
+    this.router.navigate([RouterUrl.tournaments, tournamentId]).catch(
+      () => this.snackbarService.openError(this.lm.redirectErrorMsg)
+    );
   }
 
   private initCompetitionDetailsFormGroup() {
-    if ((<TranslatableValue<CompetitionType>> this.commonFormGroup.value['competition']).value === CompetitionType.CHESS) {
+    if ((<TranslatableValue<CompetitionType>>this.commonFormGroup.value['competition']).value === CompetitionType.CHESS) {
       this.competitionDetailsFormGroup = new FormGroup({
         participantType: new FormControl('', Validators.required),
         tournamentSystem: new FormControl('', Validators.required)

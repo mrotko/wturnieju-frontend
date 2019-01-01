@@ -15,6 +15,11 @@
     </mat-card>
     <mat-card>
         <mat-card-title>{{lm.wantToJoinParticipants | translate}}</mat-card-title>
+        <mat-card-subtitle>
+            <button mat-raised-button (click)="copyToClipboard(createInvitationLink())"
+                    [disabled]="!tournament.invitationToken"
+                    style="width: 100%">{{lm.copyInvitationLink | translate}}</button>
+        </mat-card-subtitle>
         <mat-card-content>
             <app-participant *ngFor="let participant of requestedParticipants"
                              [participant]="participant" (acceptBtnClick)="acceptParticipant($event)"

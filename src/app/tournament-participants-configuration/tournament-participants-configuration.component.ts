@@ -8,6 +8,7 @@ import {InviteTournamentParticipantPopupService} from '../invite-tournament-part
 import {MatDialog} from '@angular/material';
 import {InviteTournamentParticipantPopupComponent} from '../invite-tournament-participant-popup/invite-tournament-participant-popup.component';
 import {SearchService} from '../search.service';
+import {ClipboardService} from 'ngx-clipboard';
 
 @Component({
   selector: 'app-tournament-participants-configuration',
@@ -32,7 +33,8 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
     private tournamentService: TournamentParticipantsService,
     private snackbarService: SnackBarService,
     private floatButtonService: FloatingButtonService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private clipboardService: ClipboardService
   ) { }
 
   ngOnInit() {
@@ -132,5 +134,23 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
         () => this.snackbarService.openError(this.lm.unknownError),
         () => this.initTournamentParticipants()
       );
+  }
+
+  private createInvitationLink(): string | null {
+    if (!this.tournament.invitationToken) {
+      return null;
+    }
+    return location.host + "/verification/tournament-participation-request?token={1}&tournamentId={2}"
+      .replace('{1}', this.tournament.invitationToken)
+      .replace('{2}', this.tournament.id);
+  }
+
+  private copyToClipboard(data: string) {
+    const result = this.clipboardService.copyFromContent(data);
+    if (result) {
+      this.snackbarService.openSuccess(this.lm.clipboardCopySuccessMsg);
+    } else {
+      this.snackbarService.openError(this.lm.clipboardCopyErrorMsg);
+    }
   }
 }

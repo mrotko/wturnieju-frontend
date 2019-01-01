@@ -102,6 +102,7 @@ export interface TournamentDTO {
   winner: TournamentParticipantDTO;
   nextOpponent: TournamentParticipantDTO;
   plannedRounds: number;
+  invitationToken?: string;
 }
 
 

@@ -34,7 +34,10 @@ export const RequestUrl = {
   verification: {
     emailChange: environment.apiUrl + "/verification/email?token=",
     newAccount: environment.apiUrl + "/verification/account?token=",
-    resetPassword: environment.apiUrl + "/verification/password?token="
+    resetPassword: environment.apiUrl + "/verification/password?token=",
+    checkToken: environment.apiUrl + "/verification/checkToken?token={1}&service={2}",
+    tournamentInvitation: environment.apiUrl + "/verification/tournament-invitation?token=",
+    tournamentParticipationRequest: environment.apiUrl + "/verification/tournament-participation-request?token="
   },
 
   cli: environment.apiUrl + '/cli/',

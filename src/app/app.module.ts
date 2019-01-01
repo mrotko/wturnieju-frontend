@@ -52,7 +52,11 @@ import {PasswordVerificationComponent} from './password-verification/password-ve
 import {TournamentParticipantsConfigurationComponent} from './tournament-participants-configuration/tournament-participants-configuration.component';
 import {FloatingButtonComponent} from './floating-button/floating-button.component';
 import {InviteTournamentParticipantPopupComponent} from './invite-tournament-participant-popup/invite-tournament-participant-popup.component';
-import { ParticipantComponent } from './participant/participant.component';
+import {ParticipantComponent} from './participant/participant.component';
+import {TournamentInviteVerificationComponent} from './tournament-invite-verification/tournament-invite-verification.component';
+import {VerificationComponentGuard} from './verification-component.guard';
+import {TournamentParticipationRequestVerificationComponent} from './tournament-participation-request-verification/tournament-participation-request-verification.component';
+import {ClipboardModule} from 'ngx-clipboard';
 
 registerLocaleData(localePl);
 
@@ -72,11 +76,17 @@ const appRoutes: Routes = [
   {path: 'create', component: TournamentCreatorComponent, canActivate: [AuthRequiredGuard]},
   {path: 'tournaments', component: TournamentsComponent},
   {path: 'cli', component: CliComponent},
+  {path: 'tournaments/:id', redirectTo: 'tournaments/:id/dashboard', pathMatch: 'full'},
   {path: 'tournaments/:id/dashboard', component: TournamentDashboardComponent},
   {
-    path: 'verification', children: [
+    path: 'verification', canActivate: [VerificationComponentGuard], children: [
       {path: 'account', component: AccountVerificationComponent},
       {path: 'password', component: PasswordVerificationComponent},
+      {path: 'tournament-invitation', component: TournamentInviteVerificationComponent},
+      {
+        path: 'tournament-participation-request', canActivate: [AuthRequiredGuard],
+        component: TournamentParticipationRequestVerificationComponent
+      },
       {path: 'email', component: EmailVerificationComponent}
     ]
   }
@@ -115,7 +125,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     PasswordVerificationComponent,
     TournamentParticipantsConfigurationComponent,
     InviteTournamentParticipantPopupComponent,
-    ParticipantComponent
+    ParticipantComponent,
+    TournamentInviteVerificationComponent,
+    TournamentParticipationRequestVerificationComponent
   ],
   entryComponents: [
     PrepareTournamentRoundFixturesDialogComponent,
@@ -140,6 +152,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    ClipboardModule,
   ],
   providers: [
     HelloWorldService,

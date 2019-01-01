@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {VerificationService} from '../verification.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LocaleMessages} from '../locale-messages';
+import {RouterUrl} from '../config/routerUrl';
 
 @Component({
   selector: 'app-verification',
@@ -18,10 +19,15 @@ export class VerificationComponent implements OnInit {
 
   constructor(
     protected verificationService: VerificationService,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    protected router: Router
   ) { }
 
   ngOnInit() {
     this.token = this.route.snapshot.queryParamMap.get('token');
+  }
+
+  redirectToMainPage() {
+    this.router.navigate([RouterUrl.home]).catch();
   }
 }

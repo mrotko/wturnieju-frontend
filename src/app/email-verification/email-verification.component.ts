@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {VerificationService} from '../verification.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {VerificationComponent} from '../verification/verification.component';
 
 @Component({
@@ -12,9 +12,10 @@ export class EmailVerificationComponent extends VerificationComponent{
 
   constructor(
     verificationService: VerificationService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    router: Router
   ) {
-    super(verificationService, route);
+    super(verificationService, route, router);
   }
 
   ngOnInit() {

@@ -1,0 +1,7 @@
+<div class="component-container mat-elevation-z1">
+  <p class="mat-h1 header">{{lm.invitationVerificationMsg | translate: tournament}}</p>
+  <div class="action-panel">
+    <button mat-button (click)="onDiscardClick()">{{lm.discard | translate}}</button>
+    <button mat-raised-button (click)="onJoinClick()">{{lm.join | translate}}</button>
+  </div>
+</div>

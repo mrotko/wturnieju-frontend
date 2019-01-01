@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {VerificationComponent} from '../verification/verification.component';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {VerificationService} from '../verification.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Pattern} from '../model/model';
@@ -20,9 +20,10 @@ export class PasswordVerificationComponent extends VerificationComponent{
   constructor(
     verificationService: VerificationService,
     route: ActivatedRoute,
+    router: Router,
     private snackBarService: SnackBarService
   ) {
-    super(verificationService, route);
+    super(verificationService, route, router);
   }
 
   ngOnInit() {
