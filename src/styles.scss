@@ -13,6 +13,11 @@ $lato-typography: mat-typography-config(
 
 @include angular-material-typography($lato-typography);
 
+
+body {
+  width: auto;
+}
+
 .success-snackbar {
   background: green;
 }
