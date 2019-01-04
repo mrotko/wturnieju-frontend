@@ -8,7 +8,7 @@ import {LocaleMessages} from './locale-messages';
 })
 export class SnackBarService {
 
-  private lm = LocaleMessages;
+  lm = LocaleMessages;
 
   private baseConfig: MatSnackBarConfig = {
     duration: 5000,

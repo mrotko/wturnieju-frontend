@@ -16,9 +16,9 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class TournamentParticipationRequestVerificationComponent extends VerificationComponent{
 
-  private currentUser: User;
+  currentUser: User;
 
-  private tournament: TournamentDTO;
+  tournament: TournamentDTO;
 
   constructor(
     private authService: AuthService,

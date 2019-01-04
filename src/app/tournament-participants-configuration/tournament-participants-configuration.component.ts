@@ -19,7 +19,7 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
 
   @Input() tournament: TournamentDTO;
 
-  private lm = LocaleMessages;
+  lm = LocaleMessages;
 
   private tournamentParticipants: TournamentParticipantDTO [];
 
@@ -136,7 +136,7 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
       );
   }
 
-  private createInvitationLink(): string | null {
+  createInvitationLink(): string | null {
     if (!this.tournament.invitationToken) {
       return null;
     }
@@ -145,7 +145,7 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
       .replace('{2}', this.tournament.id);
   }
 
-  private copyToClipboard(data: string) {
+  copyToClipboard(data: string) {
     const result = this.clipboardService.copyFromContent(data);
     if (result) {
       this.snackbarService.openSuccess(this.lm.clipboardCopySuccessMsg);

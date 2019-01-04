@@ -14,7 +14,7 @@ import {RouterUrl} from '../config/routerUrl';
 })
 export class TournamentInviteVerificationComponent extends VerificationComponent {
 
-  private tournament: TournamentDTO;
+  tournament: TournamentDTO;
 
   constructor(
     private tournamentService: TournamentService,

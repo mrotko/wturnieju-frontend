@@ -26,13 +26,13 @@ interface AutocompleteOption {
 })
 export class InviteTournamentParticipantPopupComponent implements OnInit {
 
-  private lm = LocaleMessages;
+  lm = LocaleMessages;
 
-  private searchFormControl = new FormControl('', [Validators.min(3)]);
+  searchFormControl = new FormControl('', [Validators.min(3)]);
 
-  private searchAutocompleteOptions: Observable<AutocompleteOption []>;
+  searchAutocompleteOptions: Observable<AutocompleteOption []>;
 
-  private selectedUsers: UserItem [];
+  selectedUsers: UserItem [];
 
   constructor(
     private dialogRef: MatDialogRef<InviteTournamentParticipantPopupComponent>,
@@ -86,7 +86,7 @@ export class InviteTournamentParticipantPopupComponent implements OnInit {
     }
   }
 
-  private getSelectedUsersIds(): string [] {
+  getSelectedUsersIds(): string [] {
     return this.selectedUsers.map(user => user.id);
   }
 

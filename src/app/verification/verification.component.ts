@@ -11,11 +11,11 @@ import {RouterUrl} from '../config/routerUrl';
 })
 export class VerificationComponent implements OnInit {
 
-  protected token: string;
+  token: string;
 
-  protected verificationStatus: boolean | null = null;
+  verificationStatus: boolean | null = null;
 
-  protected lm = LocaleMessages;
+  lm = LocaleMessages;
 
   constructor(
     protected verificationService: VerificationService,
