@@ -12,6 +12,7 @@
   "email": "Email",
   "invitationVerificationMsg": "Zostałeś zaproszony do turnieju {{name}}",
   "join": "Dołącz",
+  "start": "Start",
   "discard": "Odrzuć",
   "acceptTournamentInvitationMsg": "Dołączyłeś do turnieju",
   "tournamentParticipationRequestMsg": "Dołącz do turnieju {{name}}",

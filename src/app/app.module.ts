@@ -57,6 +57,7 @@ import {TournamentInviteVerificationComponent} from './tournament-invite-verific
 import {VerificationComponentGuard} from './verification-component.guard';
 import {TournamentParticipationRequestVerificationComponent} from './tournament-participation-request-verification/tournament-participation-request-verification.component';
 import {ClipboardModule} from 'ngx-clipboard';
+import { ParticipantsProgressBarComponent } from './participants-progress-bar/participants-progress-bar.component';
 
 registerLocaleData(localePl);
 
@@ -127,7 +128,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     InviteTournamentParticipantPopupComponent,
     ParticipantComponent,
     TournamentInviteVerificationComponent,
-    TournamentParticipationRequestVerificationComponent
+    TournamentParticipationRequestVerificationComponent,
+    ParticipantsProgressBarComponent
   ],
   entryComponents: [
     PrepareTournamentRoundFixturesDialogComponent,

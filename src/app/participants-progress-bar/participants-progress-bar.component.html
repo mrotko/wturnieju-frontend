@@ -1,0 +1,11 @@
+<div class="component-container" [matTooltip]="currentValue">
+  <span class="bar-value">{{begin}}</span>
+  <div class="left-bar" [style.width.%]="leftPanelData.width">
+    <mat-progress-bar mode="determinate" [value]="leftPanelData.value" [color]="getBarColor()"></mat-progress-bar>
+  </div>
+  <span class="bar-value">{{internalValue}}</span>
+  <div class="right-bar" [style.width.%]="rightPanelData.width">
+    <mat-progress-bar mode="determinate" [value]="rightPanelData.value" [color]="getBarColor()"></mat-progress-bar>
+  </div>
+  <span class="bar-value">{{end}}</span>
+</div>

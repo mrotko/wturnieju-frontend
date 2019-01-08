@@ -153,4 +153,17 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
       this.snackbarService.openError(this.lm.clipboardCopyErrorMsg);
     }
   }
+
+  countAcceptedParticipants(): number {
+    if (this.acceptedParticipants) {
+      return this.acceptedParticipants.length;
+    }
+    return 0;
+  }
+
+  isValidNumberOfParticipants() {
+    const participants = this.countAcceptedParticipants();
+    return this.tournament.minParticipants <= participants &&
+      participants <= this.tournament.maxParticipants;
+  }
 }

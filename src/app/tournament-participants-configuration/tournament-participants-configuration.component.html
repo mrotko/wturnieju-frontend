@@ -1,29 +1,39 @@
 <div class="component-container">
-    <mat-card>
-        <mat-card-title>{{lm.acceptedParticipants | translate}}</mat-card-title>
-        <mat-card-content>
-            <app-participant *ngFor="let participant of acceptedParticipants"
-                             [participant]="participant" (removeBtnClick)="removeParticipant($event)"></app-participant>
-        </mat-card-content>
-    </mat-card>
-    <mat-card>
-        <mat-card-title>{{lm.invitedParticipants | translate}}</mat-card-title>
-        <mat-card-content>
-            <app-participant *ngFor="let participant of invitedParticipants"
-                             [participant]="participant" (removeBtnClick)="removeParticipant($event)"></app-participant>
-        </mat-card-content>
-    </mat-card>
-    <mat-card>
-        <mat-card-title>{{lm.wantToJoinParticipants | translate}}</mat-card-title>
-        <mat-card-subtitle>
-            <button mat-raised-button (click)="copyToClipboard(createInvitationLink())"
-                    [disabled]="!tournament.invitationToken"
-                    style="width: 100%">{{lm.copyInvitationLink | translate}}</button>
-        </mat-card-subtitle>
-        <mat-card-content>
-            <app-participant *ngFor="let participant of requestedParticipants"
-                             [participant]="participant" (acceptBtnClick)="acceptParticipant($event)"
-                             (removeBtnClick)="removeParticipant($event)"></app-participant>
-        </mat-card-content>
-    </mat-card>
+    <div class="participants-info-panel">
+        <app-participants-progress-bar [begin]="0" [end]="tournament.maxParticipants"
+                                       [internalValue]="tournament.minParticipants"
+                                       [currentValue]="countAcceptedParticipants()"></app-participants-progress-bar>
+        <button mat-raised-button [disabled]="!isValidNumberOfParticipants()">{{lm.start | translate}}</button>
+    </div>
+    <div class="participants-tables">
+        <mat-card>
+            <mat-card-title>{{lm.acceptedParticipants | translate}}</mat-card-title>
+            <mat-card-content>
+                <app-participant *ngFor="let participant of acceptedParticipants"
+                                 [participant]="participant"
+                                 (removeBtnClick)="removeParticipant($event)"></app-participant>
+            </mat-card-content>
+        </mat-card>
+        <mat-card>
+            <mat-card-title>{{lm.invitedParticipants | translate}}</mat-card-title>
+            <mat-card-content>
+                <app-participant *ngFor="let participant of invitedParticipants"
+                                 [participant]="participant"
+                                 (removeBtnClick)="removeParticipant($event)"></app-participant>
+            </mat-card-content>
+        </mat-card>
+        <mat-card>
+            <mat-card-title>{{lm.wantToJoinParticipants | translate}}</mat-card-title>
+            <mat-card-subtitle>
+                <button mat-raised-button (click)="copyToClipboard(createInvitationLink())"
+                        [disabled]="!tournament.invitationToken"
+                        style="width: 100%">{{lm.copyInvitationLink | translate}}</button>
+            </mat-card-subtitle>
+            <mat-card-content>
+                <app-participant *ngFor="let participant of requestedParticipants"
+                                 [participant]="participant" (acceptBtnClick)="acceptParticipant($event)"
+                                 (removeBtnClick)="removeParticipant($event)"></app-participant>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>
