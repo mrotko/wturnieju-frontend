@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LocaleMessages} from '../locale-messages';
 import {TournamentParticipantsService} from '../tournament-participants.service';
-import {PARTICIPANT_STATUS, TOURNAMENT_STATUS, TournamentDTO} from '../model/model';
+import {PARTICIPANT_STATUS, TournamentDTO, TournamentStatus} from '../model/model';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -49,7 +49,7 @@ export class ParticipantsComponent implements OnInit {
   }
 
   isSearchVisible(): boolean {
-    return this.participants.length < this.tournament.maxParticipants && this.tournament.status === TOURNAMENT_STATUS.BEFORE_START;
+    return this.participants.length < this.tournament.maxParticipants && this.tournament.status === TournamentStatus.BEFORE_START;
   }
 
   ngOnInit() {

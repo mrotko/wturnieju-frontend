@@ -3,7 +3,8 @@
         <app-participants-progress-bar [begin]="0" [end]="tournament.maxParticipants"
                                        [internalValue]="tournament.minParticipants"
                                        [currentValue]="countAcceptedParticipants()"></app-participants-progress-bar>
-        <button mat-raised-button [disabled]="!isValidNumberOfParticipants()">{{lm.start | translate}}</button>
+        <button mat-raised-button [disabled]="!isValidNumberOfParticipants()"
+                (click)="startTournament()">{{lm.start | translate}}</button>
     </div>
     <div class="participants-tables">
         <mat-card>

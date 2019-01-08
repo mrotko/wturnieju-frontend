@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {TournamentParticipantsService} from '../tournament-participants.service';
 import {SnackBarService} from '../snack-bar.service';
 import {InvitationStatus, TournamentDTO, TournamentParticipantDTO} from '../model/model';
@@ -9,6 +9,7 @@ import {MatDialog} from '@angular/material';
 import {InviteTournamentParticipantPopupComponent} from '../invite-tournament-participant-popup/invite-tournament-participant-popup.component';
 import {SearchService} from '../search.service';
 import {ClipboardService} from 'ngx-clipboard';
+import {TournamentService} from '../tournament.service';
 
 @Component({
   selector: 'app-tournament-participants-configuration',
@@ -18,6 +19,8 @@ import {ClipboardService} from 'ngx-clipboard';
 export class TournamentParticipantsConfigurationComponent implements OnInit, OnDestroy {
 
   @Input() tournament: TournamentDTO;
+
+  @Output() startTournamentBtnClickEvent: EventEmitter<any> = new EventEmitter();
 
   lm = LocaleMessages;
 
@@ -30,7 +33,7 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
   constructor(
     private searchService: SearchService,
     private tournamentParticipantsService: TournamentParticipantsService,
-    private tournamentService: TournamentParticipantsService,
+    private tournamentService: TournamentService,
     private snackbarService: SnackBarService,
     private floatButtonService: FloatingButtonService,
     private dialog: MatDialog,
@@ -165,5 +168,9 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
     const participants = this.countAcceptedParticipants();
     return this.tournament.minParticipants <= participants &&
       participants <= this.tournament.maxParticipants;
+  }
+
+  startTournament() {
+    this.startTournamentBtnClickEvent.emit();
   }
 }

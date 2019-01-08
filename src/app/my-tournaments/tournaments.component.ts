@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TournamentService} from '../tournament.service';
-import {TOURNAMENT_STATUS, TournamentDTO, TranslatableValue, Tuple2} from '../model/model';
+import {TournamentDTO, TournamentStatus, TranslatableValue, Tuple2} from '../model/model';
 import {AuthService} from '../service/auth.service';
 import {LocaleMessages} from '../locale-messages';
 import {Router} from '@angular/router';
@@ -92,8 +92,8 @@ export class TournamentsComponent implements OnInit, OnDestroy {
           this.inProgressTournamentRows = [];
           this.endedTournamentRows = [];
 
-          this.mapToArray.transform(dto.tournaments).forEach((tuple: Tuple2<string, TournamentDTO[]>) => {
-            if (tuple.left === TOURNAMENT_STATUS.BEFORE_START) {
+          this.mapToArray.transform(dto.tournaments).forEach((tuple: Tuple2<TournamentStatus, TournamentDTO[]>) => {
+            if (tuple.left === TournamentStatus.BEFORE_START) {
               tuple.right.forEach(tournamentDto => {
                 const pos = this.beforeStartTournamentRows.length + 1;
                 this.beforeStartTournamentRows.push({
@@ -106,7 +106,7 @@ export class TournamentsComponent implements OnInit, OnDestroy {
                   tournamentId: tournamentDto.id
                 });
               });
-            } else if (tuple.left === TOURNAMENT_STATUS.IN_PROGRESS) {
+            } else if (tuple.left === TournamentStatus.IN_PROGRESS) {
               tuple.right.forEach(tournamentDto => {
                 const pos = this.inProgressTournamentRows.length + 1;
                 this.inProgressTournamentRows.push({
@@ -121,7 +121,7 @@ export class TournamentsComponent implements OnInit, OnDestroy {
                   tournamentId: tournamentDto.id
                 });
               });
-            } else if (tuple.left === TOURNAMENT_STATUS.ENDED) {
+            } else if (tuple.left === TournamentStatus.ENDED) {
               tuple.right.forEach(tournamentDto => {
                 const pos = this.endedTournamentRows.length + 1;
                 this.endedTournamentRows.push({

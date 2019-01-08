@@ -5,26 +5,31 @@
       <div>{{tournament.startDate | date: 'short'}}</div>
       <div>{{tournament.endDate | date: 'short'}}</div>
     </div>
-    <div class="tournament-control dashboard-header-item">
-      <button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.BEFORE_START" (click)="startTournament()">
-        <mat-icon>play_arrow</mat-icon>
-      </button>
-      <button mat-icon-button *ngIf="false && tournament.status === TOURNAMENT_STATUS.IN_PROGRESS">
-        <mat-icon>pause</mat-icon>
-      </button>
-      <button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.IN_PROGRESS" (click)="endTournament()">
-        <mat-icon>stop</mat-icon>
-      </button>
-      <button mat-button (click)="openPrepareTournamentRoundFixturesDialog()" *ngIf="isNextRoundAvailable()">
-        {{lm.generateRound | translate}}
-        </button>
-    </div>
+    <!--<div class="tournament-control dashboard-header-item">-->
+    <!--<button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.BEFORE_START" (click)="startTournament()">-->
+    <!--<mat-icon>play_arrow</mat-icon>-->
+    <!--</button>-->
+    <!--<button mat-icon-button *ngIf="false && tournament.status === TOURNAMENT_STATUS.IN_PROGRESS">-->
+    <!--<mat-icon>pause</mat-icon>-->
+    <!--</button>-->
+    <!--<button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.IN_PROGRESS" (click)="endTournament()">-->
+    <!--<mat-icon>stop</mat-icon>-->
+    <!--</button>-->
+    <!--<button mat-button (click)="openPrepareTournamentRoundFixturesDialog()" *ngIf="isNextRoundAvailable()">-->
+    <!--{{lm.generateRound | translate}}-->
+    <!--</button>-->
+    <!--</div>-->
   </div>
   <div class="dashboard-content">
-    <app-tournament-participants-configuration [tournament]="tournament"></app-tournament-participants-configuration>
-    <!--<app-tournament-table [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-tournament-table>-->
-    <!--<app-participants [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-participants>-->
-    <!--<app-tournament-timetable [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-tournament-timetable>-->
+    <app-tournament-participants-configuration *ngIf="isTournamentBeforeStart()"
+                                               (startTournamentBtnClickEvent)="startTournament()"
+                                               [tournament]="tournament"></app-tournament-participants-configuration>
+    <app-tournament-table *ngIf="isTournamentInProgress()" [tournament]="tournament"
+                          (reloadRequiredEvent)="reload()"></app-tournament-table>
+    <app-participants *ngIf="isTournamentInProgress()" [tournament]="tournament"
+                      (reloadRequiredEvent)="reload()"></app-participants>
+    <app-tournament-timetable *ngIf="isTournamentInProgress()" [tournament]="tournament"
+                              (reloadRequiredEvent)="reload()"></app-tournament-timetable>
   </div>
 </div>
 <div *ngIf="!tournament">

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {
-  TOURNAMENT_STATUS,
   TournamentBundleUpdate,
   TournamentBundleUpdateContentType,
-  TournamentDTO
+  TournamentDTO,
+  TournamentStatus
 } from '../model/model';
 import {TournamentService} from '../tournament.service';
 import {AuthService} from '../service/auth.service';
@@ -24,8 +24,6 @@ export class TournamentDashboardComponent implements OnInit {
   * */
 
   lm = LocaleMessages;
-
-  TOURNAMENT_STATUS = TOURNAMENT_STATUS;
 
   tournament: TournamentDTO;
 
@@ -103,5 +101,13 @@ export class TournamentDashboardComponent implements OnInit {
 
   reload() {
     this.initTournament();
+  }
+
+  isTournamentBeforeStart() {
+    return this.tournament.status === TournamentStatus.BEFORE_START;
+  }
+
+  isTournamentInProgress() {
+    return this.tournament.status === TournamentStatus.IN_PROGRESS;
   }
 }

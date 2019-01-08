@@ -85,7 +85,7 @@ export interface TournamentDTO {
   description: string;
   place: string;
   img: string;
-  status: string;
+  status: TournamentStatus;
   accessOption: string;
   participants: TournamentParticipantDTO [];
   owner: Profile;
@@ -209,11 +209,11 @@ export const TOURNAMENT_PARTICIPANT_TYPE = {
   TEAM: 'TOURNAMENT_PARTICIPANT_TYPE.TEAM'
 };
 
-export const TOURNAMENT_STATUS = {
-  BEFORE_START: 'TOURNAMENT_STATUS.BEFORE_START',
-  IN_PROGRESS: 'TOURNAMENT_STATUS.IN_PROGRESS',
-  ENDED: 'TOURNAMENT_STATUS.ENDED',
-};
+export const enum TournamentStatus {
+  BEFORE_START = 'TOURNAMENT_STATUS.BEFORE_START',
+  IN_PROGRESS = 'TOURNAMENT_STATUS.IN_PROGRESS',
+  ENDED = 'TOURNAMENT_STATUS.ENDED'
+}
 
 export const PARTICIPANT_STATUS = {
   ACTIVE: 'PARTICIPANT_STATUS.ACTIVE',
@@ -239,5 +239,4 @@ export const enum InvitationStatus {
   INVITED = "INVITATION_STATUS.DISQUALIFIED",
   PARTICIPATION_REQUEST = "INVITATION_STATUS.PARTICIPATION_REQUEST",
   REJECTED = "INVITATION_STATUS.REJECTED"
-
 }
