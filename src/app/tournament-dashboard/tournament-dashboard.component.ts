@@ -50,12 +50,19 @@ export class TournamentDashboardComponent implements OnInit {
   }
 
   startTournament() {
-    this.tournamentService.updateTournament(this.prepareStartTournamentBundle()).subscribe(dto => this.tournament = dto);
+    this.tournamentService.updateTournament(
+      {
+        tournamentId: this.tournamentId,
+        status: 'START'
+      }
+    ).subscribe(dto => this.tournament = dto);
   }
 
   endTournament() {
-    this.tournamentService.updateTournament(this.prepareEndTournamentBundle()).subscribe(dto => this.tournament = dto);
-
+    this.tournamentService.updateTournament({
+      tournamentId: this.tournamentId,
+      status: 'END'
+    }).subscribe(dto => this.tournament = dto);
   }
 
   isNextRoundAvailable(): boolean {

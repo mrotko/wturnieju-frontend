@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {
   FixtureDTO,
   RoundToFixturesDTO,
-  TournamentBundleUpdate,
   TournamentDTO,
   TournamentTableDTO,
   Tuple2,
@@ -12,8 +11,16 @@ import {
 } from './model/model';
 import {RequestUrl} from './config/requestUrl';
 
+
+export interface UpdateTournamentStatusDTO {
+  tournamentId: string;
+  status: 'START' | 'END';
+}
+
+
 @Injectable()
 export class TournamentService implements OnInit {
+
 
   constructor(
     private http: HttpClient
@@ -22,7 +29,6 @@ export class TournamentService implements OnInit {
   ngOnInit(): void {
 
   }
-
 
   getAllUserTournaments(userId: string): Observable<UserTournamentsDTO> {
     return this.http.get<UserTournamentsDTO>(RequestUrl.tournament.user + userId);
@@ -36,13 +42,14 @@ export class TournamentService implements OnInit {
     return this.http.get<TournamentDTO>(RequestUrl.tournament.tournament + tournamentId);
   }
 
-  updateTournament(bundle: TournamentBundleUpdate): Observable<TournamentDTO> {
-    return this.http.put<TournamentDTO>(RequestUrl.tournament.tournament + bundle.tournamentId, bundle);
+  updateTournament(updateDto: UpdateTournamentStatusDTO): Observable<TournamentDTO> {
+    return this.http.put<TournamentDTO>(RequestUrl.tournament.tournament + updateDto.tournamentId, updateDto);
   }
 
   getTournamentTable(tournamentId: string): Observable<TournamentTableDTO> {
     return this.http.get<TournamentTableDTO>(RequestUrl.tournament.tournament + tournamentId + '/table');
   }
+
 
   prepareNextRound(tournamentId: string): Observable<FixtureDTO []> {
     return this.http.get<FixtureDTO []>(RequestUrl.tournament.tournament + tournamentId + '/prepareNextRound');
