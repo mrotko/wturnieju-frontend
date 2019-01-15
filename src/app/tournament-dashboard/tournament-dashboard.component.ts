@@ -117,4 +117,10 @@ export class TournamentDashboardComponent implements OnInit {
   isTournamentInProgress() {
     return this.tournament.status === TournamentStatus.IN_PROGRESS;
   }
+
+  isCurrentUserTournamentOwner() {
+    const currentUserId = this.authService.getUserFromStorage().id;
+    const ownerId = this.tournament.owner.id;
+    return ownerId === currentUserId;
+  }
 }

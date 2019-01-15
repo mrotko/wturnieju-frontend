@@ -24,12 +24,23 @@
     <app-tournament-participants-configuration *ngIf="isTournamentBeforeStart()"
                                                (startTournamentBtnClickEvent)="startTournament()"
                                                [tournament]="tournament"></app-tournament-participants-configuration>
-    <app-tournament-table *ngIf="isTournamentInProgress()" [tournament]="tournament"
-                          (reloadRequiredEvent)="reload()"></app-tournament-table>
-    <app-participants *ngIf="isTournamentInProgress()" [tournament]="tournament"
-                      (reloadRequiredEvent)="reload()"></app-participants>
-    <app-tournament-timetable *ngIf="isTournamentInProgress()" [tournament]="tournament"
-                              (reloadRequiredEvent)="reload()"></app-tournament-timetable>
+    <mat-tab-group *ngIf="isTournamentInProgress()">
+      <mat-tab [label]="lm.results | translate">
+        <app-tournament-table [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-tournament-table>
+      </mat-tab>
+      <mat-tab [label]="lm.stats | translate">
+        Statystyki
+      </mat-tab>
+      <mat-tab [label]="lm.schedule | translate">
+        <app-tournament-timetable [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-tournament-timetable>
+      </mat-tab>
+      <mat-tab [label]="lm.participants | translate">
+        <app-participants [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-participants>
+      </mat-tab>
+      <mat-tab *ngIf="isCurrentUserTournamentOwner()" [label]="lm.resultEdit | translate">
+        Edycja wyników
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>
 <div *ngIf="!tournament">
