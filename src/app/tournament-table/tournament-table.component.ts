@@ -1,23 +1,9 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TournamentService} from '../tournament.service';
-import {TournamentDTO, TournamentTableDTO} from '../model/model';
+import {TournamentDTO, TournamentSystemType, TournamentTableColumnType, TournamentTableDTO} from '../model/model';
 import {LocaleMessages} from '../locale-messages';
 
 
-interface SwissTournamentTable {
-  rows: SwissTournamentTableRow [];
-}
-
-interface SwissTournamentTableRow {
-  position: number;
-  profileId: string;
-  played: number;
-  points: number;
-  wins: number;
-  draws: number;
-  loses: number;
-  smallPoints: number;
-}
 
 @Component({
   selector: 'app-tournament-table',
@@ -34,25 +20,52 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
   tournamentTable: TournamentTableDTO;
 
-  swissTournamentColumns: string [] = ['position', 'fullName', 'points'];
+  tableColumns: TournamentTableColumnType [];
 
   constructor(
     private tournamentService: TournamentService
   ) { }
 
   ngOnInit() {
+    this.setCurrentTournamentColumns();
   }
 
   initTournamentTable() {
     this.tournamentService.getTournamentTable(this.tournament.id).subscribe(dto => this.tournamentTable = dto);
   }
 
-  getFullName(profileId: String): string {
-    const participant = this.tournament.participants.find(p => p.id === profileId);
-    return participant ? participant.fullName : '';
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     this.initTournamentTable();
+  }
+
+  private setCurrentTournamentColumns() {
+    switch (this.tournament.systemType) {
+      case TournamentSystemType.SWISS:
+        this.useSwissTournamentColumns();
+        break;
+      default:
+        this.useDefaultColumns();
+    }
+  }
+
+  private useSwissTournamentColumns() {
+    this.tableColumns = [
+      TournamentTableColumnType.LP,
+      TournamentTableColumnType.NAME,
+      TournamentTableColumnType.TOTAL_GAMES,
+      TournamentTableColumnType.LOSES,
+      TournamentTableColumnType.DRAWS,
+      TournamentTableColumnType.WINS,
+      TournamentTableColumnType.POINTS,
+      TournamentTableColumnType.SMALL_POINTS
+    ];
+  }
+
+  private useDefaultColumns() {
+    this.tableColumns = [
+      TournamentTableColumnType.LP,
+      TournamentTableColumnType.NAME,
+      TournamentTableColumnType.POINTS
+    ];
   }
 }

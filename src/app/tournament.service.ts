@@ -17,7 +17,6 @@ export interface UpdateTournamentStatusDTO {
   status: 'START' | 'END';
 }
 
-
 @Injectable()
 export class TournamentService implements OnInit {
 

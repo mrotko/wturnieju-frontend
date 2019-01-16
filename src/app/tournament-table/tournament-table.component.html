@@ -6,23 +6,48 @@
     <mat-card-content>
       <table mat-table [dataSource]="tournamentTable?.rows || []">
 
-        <ng-container matColumnDef="position">
+        <ng-container matColumnDef="COLUMN_TYPE.LP">
           <th mat-header-cell *matHeaderCellDef>{{lm.position | translate}}</th>
-          <td mat-cell *matCellDef="let element"> {{element.position}}</td>
+          <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="fullName">
+        <ng-container matColumnDef="COLUMN_TYPE.NAME">
           <th mat-header-cell *matHeaderCellDef>{{lm.name | translate}}</th>
-          <td mat-cell *matCellDef="let element"> {{getFullName(element.profileId)}}</td>
+          <td mat-cell *matCellDef="let element"> {{element.name}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="points">
+        <ng-container matColumnDef="COLUMN_TYPE.TOTAL_GAMES">
+          <th mat-header-cell *matHeaderCellDef>{{lm.totalGames | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.totalGames}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="COLUMN_TYPE.WINS">
+          <th mat-header-cell *matHeaderCellDef>{{lm.wins | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.wins}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="COLUMN_TYPE.DRAWS">
+          <th mat-header-cell *matHeaderCellDef>{{lm.draws | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.draws}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="COLUMN_TYPE.LOSES">
+          <th mat-header-cell *matHeaderCellDef>{{lm.loses | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.loses}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="COLUMN_TYPE.POINTS">
           <th mat-header-cell *matHeaderCellDef>{{lm.points | translate}}</th>
           <td mat-cell *matCellDef="let element"> {{element.points}}</td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="swissTournamentColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: swissTournamentColumns;"></tr>
+        <ng-container matColumnDef="COLUMN_TYPE.SMALL_POINTS">
+          <th mat-header-cell *matHeaderCellDef>{{lm.smallPoints | translate}}</th>
+          <td mat-cell *matCellDef="let element"> {{element.smallPoints}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
       </table>
     </mat-card-content>
   </mat-card>

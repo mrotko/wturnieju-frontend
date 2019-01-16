@@ -150,16 +150,19 @@ export enum FixtureStatus {
 }
 
 export interface TournamentTableDTO {
+  tournamentId: string;
   rows: TournamentTableRowDTO [];
 }
 
 export interface TournamentTableRowDTO {
-  position: number;
-  profile: Profile;
-  points: number;
-  wins: number;
+  baseOrderNum: number;
+  teamId: string;
+  name: string;
   draws: number;
+  wins: number;
   loses: number;
+  points: number;
+  totalGames: number;
   smallPoints: number;
 }
 
@@ -239,4 +242,15 @@ export const enum InvitationStatus {
   INVITED = "INVITATION_STATUS.DISQUALIFIED",
   PARTICIPATION_REQUEST = "INVITATION_STATUS.PARTICIPATION_REQUEST",
   REJECTED = "INVITATION_STATUS.REJECTED"
+}
+
+export const enum TournamentTableColumnType {
+  LP = 'COLUMN_TYPE.LP',
+  NAME = 'COLUMN_TYPE.NAME',
+  WINS = 'COLUMN_TYPE.WINS',
+  LOSES = 'COLUMN_TYPE.LOSES',
+  DRAWS = 'COLUMN_TYPE.DRAWS',
+  POINTS = 'COLUMN_TYPE.POINTS',
+  TOTAL_GAMES = 'COLUMN_TYPE.TOTAL_GAMES',
+  SMALL_POINTS = 'COLUMN_TYPE.SMALL_POINTS'
 }
