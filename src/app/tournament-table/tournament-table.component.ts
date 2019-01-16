@@ -4,7 +4,6 @@ import {TournamentDTO, TournamentSystemType, TournamentTableColumnType, Tourname
 import {LocaleMessages} from '../locale-messages';
 
 
-
 @Component({
   selector: 'app-tournament-table',
   templateUrl: './tournament-table.component.html',

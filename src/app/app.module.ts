@@ -2,16 +2,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {HelloWorldComponent} from './hello-world/hello-world.component';
 import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import {HelloWorldService} from './service/hello-world.service';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {HomeComponent} from './home/home.component';
-import {ProfileComponent} from './profile/profile.component';
 import {TopMenuComponent} from './top-menu/top-menu.component';
 import {AuthComponent} from './auth/auth.component';
 import {ForgetPasswordComponent} from './auth/forget-password/forget-password.component';
@@ -40,7 +37,6 @@ import localePl from '@angular/common/locales/pl';
 import {TournamentService} from './tournament.service';
 import {TournamentTableComponent} from './tournament-table/tournament-table.component';
 import {ParticipantsComponent} from './participants/participants.component';
-import {FixturePlannerComponent} from './fixture-planner/fixture-planner.component';
 import {TournamentParticipantsService} from './tournament-participants.service';
 import {TournamentTimetableComponent} from './tournament-timetable/tournament-timetable.component';
 import {PrepareTournamentRoundFixturesDialogComponent} from './prepare-tournament-round-fixtures-dialog/prepare-tournament-round-fixtures-dialog.component';
@@ -57,14 +53,13 @@ import {TournamentInviteVerificationComponent} from './tournament-invite-verific
 import {VerificationComponentGuard} from './verification-component.guard';
 import {TournamentParticipationRequestVerificationComponent} from './tournament-participation-request-verification/tournament-participation-request-verification.component';
 import {ClipboardModule} from 'ngx-clipboard';
-import { ParticipantsProgressBarComponent } from './participants-progress-bar/participants-progress-bar.component';
+import {ParticipantsProgressBarComponent} from './participants-progress-bar/participants-progress-bar.component';
 
 registerLocaleData(localePl);
 
 library.add(fas);
 
 const appRoutes: Routes = [
-  {path: 'hello-world', component: HelloWorldComponent},
   {
     path: 'auth', component: AuthComponent, canActivate: [CanActivateAuthComponentGuard], children:
       [
@@ -100,12 +95,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    HelloWorldComponent,
     LoginComponent,
     RegisterComponent,
     ForgetPasswordComponent,
     HomeComponent,
-    ProfileComponent,
     TopMenuComponent,
     AuthComponent,
     UserSettingsComponent,
@@ -115,7 +108,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     TournamentsComponent,
     TournamentTableComponent,
     ParticipantsComponent,
-    FixturePlannerComponent,
     TournamentTimetableComponent,
     PrepareTournamentRoundFixturesDialogComponent,
     CliComponent,
@@ -157,7 +149,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ClipboardModule,
   ],
   providers: [
-    HelloWorldService,
     AuthRequiredGuard,
     TranslateStore,
     ConfigService,
