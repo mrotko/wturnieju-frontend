@@ -15,6 +15,7 @@
   "wins": "Zwycięstwa",
   "draws": "Remisy",
   "smallPoints": "Małe punkty",
+  "emptyDatesErrorMsg": "Uzupełnij terminarz",
   "invitationVerificationMsg": "Zostałeś zaproszony do turnieju {{name}}",
   "join": "Dołącz",
   "start": "Start",

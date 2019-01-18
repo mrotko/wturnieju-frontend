@@ -1,29 +1,10 @@
-table {
-	width: 100%;
+.component-container {
+	width: 500px;
+	margin-right: auto;
+	margin-left: auto;
+
 }
 
-thead {
-	display: none;
+mat-expansion-panel {
+	margin: 3px;
 }
-
-.round-header {
-	padding-top: 30px;
-	text-align: center;
-}
-
-.winner {
-	font-weight: bold;
-}
-
-input {
-	border: 0;
-	background-color: inherit;
-	width: 1.5em;
-	height: 1.5em;
-	text-align: center;
-}
-
-.mat-input-element:disabled {
-	color: inherit;
-}
-

@@ -1,0 +1,29 @@
+<div *ngIf="isLoaded()" class="component-container">
+    <table mat-table [dataSource]="schedule.elements || []">
+
+        <ng-container matColumnDef="homeTeam">
+            <td mat-cell *matCellDef="let element"> {{element.homeTeam.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="awayTeam">
+            <td mat-cell *matCellDef="let element"> {{!element.bye ? element.awayTeam.name : null}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="startDate">
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="!element.bye">
+                    <mat-datepicker-toggle matSuffix [for]="tournamentToDate"></mat-datepicker-toggle>
+                    <mat-datepicker #tournamentToDate></mat-datepicker>
+                    <input class="mat-input-element" [matDatepicker]="tournamentToDate" [(ngModel)]="element.startDate">
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+    </table>
+    <mat-dialog-actions style="margin: auto; float: right;">
+        <button mat-button (click)="cancel()">{{lm.cancel | translate}}</button>
+        <button mat-raised-button (click)="confirm()">{{lm.confirm | translate}}</button>
+    </mat-dialog-actions>
+</div>
+<app-spinner *ngIf="!isLoaded()"></app-spinner>

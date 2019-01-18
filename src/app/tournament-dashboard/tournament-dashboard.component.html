@@ -1,48 +1,61 @@
 <div *ngIf="tournament" class="component-container">
-  <div class="dashboard-header">
-    <div class="mat-title dashboard-header-item">{{tournament.name}}</div>
-    <div class="dashboard-header-item">
-      <div>{{tournament.startDate | date: 'short'}}</div>
-      <div>{{tournament.endDate | date: 'short'}}</div>
+    <div class="dashboard-header">
+        <div class="mat-title dashboard-header-item">{{tournament.name}}</div>
+        <div class="dashboard-header-item">
+            <div>{{tournament.startDate | date: 'short'}}</div>
+            <div>{{tournament.endDate | date: 'short'}}</div>
+        </div>
+        <!--<div class="tournament-control dashboard-header-item">-->
+        <!--<button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.BEFORE_START" (click)="startTournament()">-->
+        <!--<mat-icon>play_arrow</mat-icon>-->
+        <!--</button>-->
+        <!--<button mat-icon-button *ngIf="false && tournament.status === TOURNAMENT_STATUS.IN_PROGRESS">-->
+        <!--<mat-icon>pause</mat-icon>-->
+        <!--</button>-->
+        <!--<button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.IN_PROGRESS" (click)="endTournament()">-->
+        <!--<mat-icon>stop</mat-icon>-->
+        <!--</button>-->
+        <!--<button mat-button (click)="openPrepareTournamentRoundFixturesDialog()" *ngIf="isNextRoundAvailable()">-->
+        <!--{{lm.generateRound | translate}}-->
+        <!--</button>-->
+        <!--</div>-->
     </div>
-    <!--<div class="tournament-control dashboard-header-item">-->
-    <!--<button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.BEFORE_START" (click)="startTournament()">-->
-    <!--<mat-icon>play_arrow</mat-icon>-->
-    <!--</button>-->
-    <!--<button mat-icon-button *ngIf="false && tournament.status === TOURNAMENT_STATUS.IN_PROGRESS">-->
-    <!--<mat-icon>pause</mat-icon>-->
-    <!--</button>-->
-    <!--<button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.IN_PROGRESS" (click)="endTournament()">-->
-    <!--<mat-icon>stop</mat-icon>-->
-    <!--</button>-->
-    <!--<button mat-button (click)="openPrepareTournamentRoundFixturesDialog()" *ngIf="isNextRoundAvailable()">-->
-    <!--{{lm.generateRound | translate}}-->
-    <!--</button>-->
-    <!--</div>-->
-  </div>
-  <div class="dashboard-content">
-    <app-tournament-participants-configuration *ngIf="isTournamentBeforeStart()"
-                                               (startTournamentBtnClickEvent)="startTournament()"
-                                               [tournament]="tournament"></app-tournament-participants-configuration>
-    <mat-tab-group *ngIf="isTournamentInProgress()">
-      <mat-tab [label]="lm.results | translate">
-        <app-tournament-table [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-tournament-table>
-      </mat-tab>
-      <mat-tab [label]="lm.stats | translate">
-        Statystyki
-      </mat-tab>
-      <mat-tab [label]="lm.schedule | translate">
-        <app-tournament-timetable [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-tournament-timetable>
-      </mat-tab>
-      <mat-tab [label]="lm.participants | translate">
-        <app-participants [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-participants>
-      </mat-tab>
-      <mat-tab *ngIf="isCurrentUserTournamentOwner()" [label]="lm.resultEdit | translate">
-        Edycja wyników
-      </mat-tab>
-    </mat-tab-group>
-  </div>
+    <div class="dashboard-content">
+        <app-tournament-participants-configuration *ngIf="isTournamentBeforeStart()"
+                                                   (startTournamentBtnClickEvent)="startTournament()"
+                                                   [tournament]="tournament"></app-tournament-participants-configuration>
+        <mat-tab-group *ngIf="isTournamentInProgress()" (selectedIndexChange)="handleTabChange($event)">
+            <mat-tab [label]="lm.results | translate">
+                <mat-card>
+                    <app-tournament-table [tournament]="tournament"
+                                          (reloadRequiredEvent)="reload()"></app-tournament-table>
+                </mat-card>
+                <mat-card>
+                    <app-tournament-timetable [tournament]="tournament"
+                                              (reloadRequiredEvent)="reload()"></app-tournament-timetable>
+                </mat-card>
+            </mat-tab>
+            <mat-tab [label]="lm.stats | translate">
+                Statystyki
+            </mat-tab>
+            <mat-tab
+                    [label]="lm.schedule | translate">
+                <mat-card>
+                    <app-tournament-timetable [tournament]="tournament"
+                                              (reloadRequiredEvent)="reload()"></app-tournament-timetable>
+                </mat-card>
+            </mat-tab>
+            <mat-tab [label]="lm.participants | translate">
+                <mat-card>
+                    <app-participants [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-participants>
+                </mat-card>
+            </mat-tab>
+            <mat-tab *ngIf="isCurrentUserTournamentOwner()" [label]="lm.resultEdit | translate">
+                <mat-card>Edycja wyników</mat-card>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
 </div>
 <div *ngIf="!tournament">
-  <mat-spinner></mat-spinner>
+    <mat-spinner></mat-spinner>
 </div>

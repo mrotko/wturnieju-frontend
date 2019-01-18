@@ -21,6 +21,7 @@ export const LocaleMessages = {
   generateRound: 'generateRound',
   configuration: 'configuration',
   timetable: 'timetable',
+  emptyDatesErrorMsg: 'emptyDatesErrorMsg',
   changeEmailForm: 'changeEmailForm',
   acceptedParticipants: 'acceptedParticipants',
   invitedParticipants: 'invitedParticipants',

@@ -39,7 +39,7 @@ import {TournamentTableComponent} from './tournament-table/tournament-table.comp
 import {ParticipantsComponent} from './participants/participants.component';
 import {TournamentParticipantsService} from './tournament-participants.service';
 import {TournamentTimetableComponent} from './tournament-timetable/tournament-timetable.component';
-import {PrepareTournamentRoundFixturesDialogComponent} from './prepare-tournament-round-fixtures-dialog/prepare-tournament-round-fixtures-dialog.component';
+import {TournamentScheduleDialogComponent} from './prepare-tournament-round-fixtures-dialog/tournament-schedule-dialog.component';
 import {CliComponent} from './cli/cli.component';
 import {VerificationComponent} from './verification/verification.component';
 import {AccountVerificationComponent} from './account-verification/account-verification.component';
@@ -54,6 +54,8 @@ import {VerificationComponentGuard} from './verification-component.guard';
 import {TournamentParticipationRequestVerificationComponent} from './tournament-participation-request-verification/tournament-participation-request-verification.component';
 import {ClipboardModule} from 'ngx-clipboard';
 import {ParticipantsProgressBarComponent} from './participants-progress-bar/participants-progress-bar.component';
+import {TournamentTimetableItemComponent} from './tournament-timetable-item/tournament-timetable-item.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 registerLocaleData(localePl);
 
@@ -109,7 +111,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TournamentTableComponent,
     ParticipantsComponent,
     TournamentTimetableComponent,
-    PrepareTournamentRoundFixturesDialogComponent,
+    TournamentScheduleDialogComponent,
     CliComponent,
     VerificationComponent,
     FloatingButtonComponent,
@@ -121,10 +123,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     ParticipantComponent,
     TournamentInviteVerificationComponent,
     TournamentParticipationRequestVerificationComponent,
-    ParticipantsProgressBarComponent
+    ParticipantsProgressBarComponent,
+    TournamentTimetableItemComponent,
+    SpinnerComponent,
   ],
   entryComponents: [
-    PrepareTournamentRoundFixturesDialogComponent,
+    TournamentScheduleDialogComponent,
     InviteTournamentParticipantPopupComponent
   ],
   imports: [

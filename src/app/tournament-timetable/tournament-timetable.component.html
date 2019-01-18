@@ -1,85 +1,34 @@
 <div class="component-container">
     <mat-expansion-panel>
-        <mat-expansion-panel-header>{{lm.beforeStart | translate}}</mat-expansion-panel-header>
-    </mat-expansion-panel>
-    <mat-expansion-panel *ngIf="false">
-        <mat-expasion-panel-header>{{lm.inProgress | translate}}</mat-expasion-panel-header>
+        <mat-expansion-panel-header>Runda 20</mat-expansion-panel-header>
+        <mat-card-content>
+            <app-tournament-timetable-item *ngFor="let tuple of getMockItems()" [shortDate]="true"
+                                           [homeTeamData]="tuple.left" [awayTeamData]="tuple.right">
+            </app-tournament-timetable-item>
+        </mat-card-content>
     </mat-expansion-panel>
     <mat-expansion-panel>
-        <mat-expansion-panel-header>{{lm.ended | translate}}</mat-expansion-panel-header>
+        <mat-expansion-panel-header>Runda 21</mat-expansion-panel-header>
+        <mat-card-content>
+            <app-tournament-timetable-item *ngFor="let tuple of getMockItems()" [shortDate]="true"
+                                           [homeTeamData]="tuple.left" [awayTeamData]="tuple.right">
+            </app-tournament-timetable-item>
+        </mat-card-content>
     </mat-expansion-panel>
-
-
-    <!--<mat-card>-->
-    <!--<mat-card-header>-->
-    <!--<mat-card-title>{{lm.timetable | translate}}</mat-card-title>-->
-    <!--</mat-card-header>-->
-    <!--<mat-card-content>-->
-    <!--<div *ngFor="let round of roundToTimetableRows">-->
-    <!--<div class="round-header mat-title">{{(lm.round | translate) + ' ' + round.round}}</div>-->
-    <!--<table mat-table [dataSource]="round.timetableRows || []">-->
-    <!--<ng-container matColumnDef="date">-->
-    <!--<td mat-cell *matCellDef="let element" style="width: 11em;"> {{element.date | date: 'short'}}</td>-->
-    <!--</ng-container>-->
-
-    <!--<ng-container matColumnDef="firstPlayer">-->
-    <!--<td mat-cell *matCellDef="let element" style="text-align: right"-->
-    <!--[class.winner]="element.players.left === element.winnerId">-->
-    <!--{{getFullName(element.players.left)}}-->
-    <!--</td>-->
-    <!--</ng-container>-->
-
-    <!--<ng-container matColumnDef="firstPlayerResult">-->
-    <!--<td mat-cell *matCellDef="let element" style="text-align: right"-->
-    <!--[class.winner]="element.players.left === element.winnerId">-->
-    <!--<input class="mat-input-element" type="text" [class.mat-elevation-z1]="isEditMode(element)"-->
-    <!--[(ngModel)]="element.result.left"-->
-    <!--[disabled]="!isEditMode(element)">-->
-    <!--&lt;!&ndash;[placeholder]="element.result.left ? '' : '?'"&ndash;&gt;-->
-    <!--</td>-->
-    <!--</ng-container>-->
-
-    <!--<ng-container matColumnDef="divider">-->
-    <!--<td mat-cell *matCellDef="let element" style="text-align: center">:</td>-->
-    <!--</ng-container>-->
-
-    <!--<ng-container matColumnDef="secondPlayerResult">-->
-    <!--<td mat-cell *matCellDef="let element"-->
-    <!--[class.winner]="element.players.right === element.winnerId">-->
-    <!--<input class="mat-input-element" type="text" [class.mat-elevation-z1]="isEditMode(element)"-->
-    <!--[(ngModel)]="element.result.right"-->
-    <!--[disabled]="!isEditMode(element)">-->
-    <!--&lt;!&ndash;[placeholder]="element.result.right ? '' : '?'"&ndash;&gt;-->
-    <!--</td>-->
-    <!--</ng-container>-->
-
-    <!--<ng-container matColumnDef="secondPlayer">-->
-    <!--<td mat-cell *matCellDef="let element"-->
-    <!--[class.winner]="element.players.right === element.winnerId">-->
-    <!--{{getFullName(element.players.right)}}-->
-    <!--</td>-->
-    <!--</ng-container>-->
-
-    <!--<ng-container matColumnDef="action">-->
-    <!--<td mat-cell *matCellDef="let element" style="text-align: right; width: 7em">-->
-    <!--<button mat-icon-button *ngIf="isActionActive(element)"-->
-    <!--(click)="startEditFixture(element)">-->
-    <!--<mat-icon>edit</mat-icon>-->
-    <!--</button>-->
-    <!--<button mat-icon-button *ngIf="isEditMode(element) && checkResultValidity(element)"-->
-    <!--(click)="confirmFixtureChange(element)">-->
-    <!--<mat-icon>done</mat-icon>-->
-    <!--</button>-->
-    <!--<button mat-icon-button *ngIf="isEditMode(element)"-->
-    <!--(click)="cancelEditFixture(element)">-->
-    <!--<mat-icon>cancel</mat-icon>-->
-    <!--</button>-->
-    <!--</td>-->
-    <!--</ng-container>-->
-
-    <!--<tr mat-row *matRowDef="let row; columns: timetableColumns;"></tr>-->
-    <!--</table>-->
-    <!--</div>-->
-    <!--</mat-card-content>-->
-    <!--</mat-card>-->
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>Runda 22</mat-expansion-panel-header>
+        <mat-card-content>
+            <app-tournament-timetable-item *ngFor="let tuple of getMockItems()" [shortDate]="true"
+                                           [homeTeamData]="tuple.left" [awayTeamData]="tuple.right">
+            </app-tournament-timetable-item>
+        </mat-card-content>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>Runda 23</mat-expansion-panel-header>
+        <mat-card-content>
+            <app-tournament-timetable-item *ngFor="let tuple of getMockItems()" [shortDate]="true"
+                                           [homeTeamData]="tuple.left" [awayTeamData]="tuple.right">
+            </app-tournament-timetable-item>
+        </mat-card-content>
+    </mat-expansion-panel>
 </div>

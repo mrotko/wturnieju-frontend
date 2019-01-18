@@ -106,47 +106,34 @@ export interface TournamentDTO {
 }
 
 
-export interface TournamentBundleUpdate {
-  timestamp: Date;
-  changedBy: Profile;
+export interface ScheduleDto {
   tournamentId: string;
-  tournamentSystemType: TournamentSystemType;
-  content: StartTournamentBundleUpdateContent | EndTournamentBundleUpdateContent;
-}
-
-
-export interface StartTournamentBundleUpdateContent {
-  startDate: Date;
-  type: TournamentBundleUpdateContentType;
-}
-
-export interface EndTournamentBundleUpdateContent {
-  endDate: Date;
-  type: TournamentBundleUpdateContentType;
-}
-
-
-export interface FixtureDTO {
-  id: string;
-  timestamp: Date;
-  playersIds: Tuple2<string, string>;
-  result?: Tuple2<number, number>;
-  winnerId: string;
-  status: FixtureStatus;
-  competitionType: CompetitionType;
   round: number;
+  elements: ScheduleElementDto [];
 }
 
-export enum FixtureStatus {
-  BEFORE_START = 'FIXTURE_STATUS.BEFORE_START',
-  IN_PROGRESS = 'FIXTURE_STATUS.IN_PROGRESS',
-  ENDED = 'FIXTURE_STATUS.ENDED',
-  // DELAYED = 'FIXTURE_STATUS.DELAYED',
-  // FIRST_PLAYER_WON = 'FIXTURE_STATUS.FIRST_PLAYER_WON',
-  // FIRST_PLAYER_WON_WALKOVER = 'FIXTURE_STATUS.FIRST_PLAYER_WON_WALKOVER',
-  // SECOND_PLAYER_WON = 'FIXTURE_STATUS.SECOND_PLAYER_WON',
-  // SECOND_PLAYER_WON_WALKOVER = 'FIXTURE_STATUS.SECOND_PLAYER_WON_WALKOVER',
-  // DRAW = 'FIXTURE_STATUS.DRAW'
+export interface ScheduleElementDto {
+  gameId: string;
+  startDate: string;
+  endDate: string;
+  shortDate: string;
+  homeTeam: TeamDto;
+  awayTeam: TeamDto;
+  bye: boolean;
+  gameStatus: GameStatus;
+}
+
+export interface TeamDto {
+  id: string;
+  name: string;
+  membersIds: string [];
+}
+
+
+export enum GameStatus {
+  BEFORE_START = 'GAME_STATUS.BEFORE_START',
+  IN_PROGRESS = 'GAME_STATUS.IN_PROGRESS',
+  ENDED = 'GAME_STATUS.ENDED',
 }
 
 export interface TournamentTableDTO {
@@ -174,11 +161,6 @@ export enum SwissTournamentTableColumns {
   DRAWS = 'SWISS_TOURNAMENT_COLUMN.DRAWS',
   LOSES = 'SWISS_TOURNAMENT_COLUMN.LOSES',
   SMALL_POINTS = 'SWISS_TOURNAMENT_COLUMN.SMALL_POINTS',
-}
-
-export interface RoundToFixturesDTO {
-  round: number;
-  fixtures: FixtureDTO[];
 }
 
 export interface Cache<T> {
@@ -225,13 +207,6 @@ export const PARTICIPANT_STATUS = {
   INVITED: 'PARTICIPANT_STATUS.INVITED'
 };
 
-
-export const enum TournamentBundleUpdateContentType {
-  START = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.START',
-  NEXT_ROUND = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.NEXT_ROUND',
-  PAUSE = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.PAUSE',
-  END = 'TOURNAMENT_BUNDLE_UPDATE_CONTENT_TYPE.END'
-}
 
 export const enum AuthorityType {
   CLI = "AUTHORITY_TYPE.CLI",
