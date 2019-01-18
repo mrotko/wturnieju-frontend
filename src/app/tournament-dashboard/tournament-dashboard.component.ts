@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ScheduleDto, ScheduleElementDto, TournamentDTO, TournamentStatus} from '../model/model';
 import {TournamentService} from '../tournament.service';
@@ -15,7 +15,7 @@ import {SnackBarService} from '../snack-bar.service';
   templateUrl: './tournament-dashboard.component.html',
   styleUrls: ['./tournament-dashboard.component.scss']
 })
-export class TournamentDashboardComponent implements OnInit {
+export class TournamentDashboardComponent implements OnInit, OnDestroy {
 
   lm = LocaleMessages;
 
@@ -45,7 +45,6 @@ export class TournamentDashboardComponent implements OnInit {
 
   initTournament() {
     this.tournamentService.getTournament(this.tournamentId).subscribe(dto => this.tournament = dto);
-    // this.tournamentService.getCurrentRound(this.tournamentId).subscribe(round => this.currentRound = round);
   }
 
   private initSchedule() {
@@ -75,6 +74,7 @@ export class TournamentDashboardComponent implements OnInit {
 
   reload() {
     this.initTournament();
+    this.initSchedule();
   }
 
   isTournamentBeforeStart() {
@@ -159,5 +159,9 @@ export class TournamentDashboardComponent implements OnInit {
       });
     }
     return gamesData;
+  }
+
+  ngOnDestroy(): void {
+    this.setScheduleFloatingBtnAction(false);
   }
 }

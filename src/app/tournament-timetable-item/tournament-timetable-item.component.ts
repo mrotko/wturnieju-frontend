@@ -30,7 +30,6 @@ export class TournamentTimetableItemComponent implements OnInit {
   }
 
   getTeams(): TeamData [] {
-    console.log(this.awayTeamData);
     if (this.bye) {
       return [this.homeTeamData, {
         name: '',
