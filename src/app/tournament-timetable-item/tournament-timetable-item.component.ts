@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Tuple2} from '../model/model';
 
 export interface TeamData {
   teamId: string;
   name: string;
   winner: boolean;
   currentResult: number;
-  periodsResult: number [];
+  periodsResult: Tuple2<number, number> [];
 }
 @Component({
   selector: 'app-tournament-timetable-item',

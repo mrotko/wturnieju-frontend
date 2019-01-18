@@ -115,10 +115,13 @@ export interface ScheduleDto {
 export interface ScheduleElementDto {
   gameId: string;
   startDate: Date;
-  endDate: Date;
+  endDate?: Date;
   shortDate: boolean;
   homeTeam: TeamDto;
+  homeScore?: ScoreDto;
   awayTeam?: TeamDto;
+  awayScore?: ScoreDto
+  winner: number,
   bye: boolean;
   gameStatus: GameStatus;
 }
@@ -127,6 +130,11 @@ export interface TeamDto {
   id: string;
   name: string;
   membersIds: string [];
+}
+
+export interface ScoreDto {
+  current: number;
+  periods: { [key: number]: number };
 }
 
 

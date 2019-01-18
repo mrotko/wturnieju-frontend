@@ -9,6 +9,7 @@ import {TournamentScheduleDialogComponent} from '../prepare-tournament-round-fix
 import {FloatingButtonService} from '../floating-button.service';
 import {GameData, TimetableData, TimetableElement} from '../tournament-timetable/tournament-timetable.component';
 import {SnackBarService} from '../snack-bar.service';
+import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
 
 @Component({
   selector: 'app-tournament-dashboard',
@@ -27,30 +28,43 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
 
   futureGamesTimetableData: TimetableData;
 
+  endedGamesTimetableData: TimetableData;
+
   constructor(
     private router: ActivatedRoute,
     private tournamentService: TournamentService,
     private authService: AuthService,
     private dialog: MatDialog,
     private snackbarService: SnackBarService,
-    private floatingButtonService: FloatingButtonService
+    private floatingButtonService: FloatingButtonService,
+    private mapToArray: MapToArrayPipe
   ) {
   }
 
   ngOnInit() {
     this.tournamentId = this.router.snapshot.paramMap.get('id');
     this.initTournament();
-    this.initSchedule();
+    this.initFutureGamesSchedule();
+    this.initEndedGamesSchedule();
   }
 
   initTournament() {
     this.tournamentService.getTournament(this.tournamentId).subscribe(dto => this.tournament = dto);
   }
 
-  private initSchedule() {
-    this.tournamentService.getSchedule(this.tournamentId).subscribe(
+  private initFutureGamesSchedule() {
+    this.tournamentService.getFutureGamesSchedule(this.tournamentId).subscribe(
       response => {
-        this.createFutureGamesTimetableData(response);
+        this.createFutureSchedulesTimetableData(response);
+      },
+      error => this.snackbarService.openError(this.lm.unknownError)
+    );
+  }
+
+  private initEndedGamesSchedule() {
+    this.tournamentService.getEndedGamesSchedule(this.tournamentId).subscribe(
+      response => {
+        this.createEndedGamesTimetableData(response);
       },
       error => this.snackbarService.openError(this.lm.unknownError)
     );
@@ -74,7 +88,7 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
 
   reload() {
     this.initTournament();
-    this.initSchedule();
+    this.initFutureGamesSchedule();
   }
 
   isTournamentBeforeStart() {
@@ -118,7 +132,16 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  createFutureGamesTimetableData(schedule: ScheduleDto []) {
+  createFutureSchedulesTimetableData(schedule: ScheduleDto []) {
+    this.futureGamesTimetableData = this.createTimetableData(schedule);
+  }
+
+  createEndedGamesTimetableData(schedule: ScheduleDto []) {
+    this.endedGamesTimetableData = this.createTimetableData(schedule);
+    this.endedGamesTimetableData.elements.reverse();
+  }
+
+  createTimetableData(schedule: ScheduleDto []): TimetableData {
     let timetableElements: TimetableElement [] = [];
 
     for (let roundSchedule of (schedule || [])) {
@@ -128,9 +151,9 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
       });
     }
 
-    this.futureGamesTimetableData = {
+    return {
       elements: timetableElements
-    };
+    }
   }
 
   private createTimetableGamesData(scheduleElements: ScheduleElementDto []): GameData [] {
@@ -144,16 +167,16 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
           left: {
             teamId: scheduleElement.homeTeam.id,
             name: scheduleElement.homeTeam.name,
-            currentResult: null,
-            periodsResult: [],
-            winner: null
+            currentResult: scheduleElement.homeScore ? scheduleElement.homeScore.current : null,
+            periodsResult: scheduleElement.homeScore ? this.mapToArray.transform(scheduleElement.homeScore.periods) : null,
+            winner: scheduleElement.winner === 1
           },
           right: scheduleElement.awayTeam ? {
             teamId: scheduleElement.awayTeam.id,
             name: scheduleElement.awayTeam.name,
-            currentResult: null,
-            periodsResult: [],
-            winner: null
+            currentResult: scheduleElement.awayScore ? scheduleElement.awayScore.current : null,
+            periodsResult: scheduleElement.awayScore ? this.mapToArray.transform(scheduleElement.awayScore.periods) : null,
+            winner: scheduleElement.winner === 2
           } : null
         }
       });

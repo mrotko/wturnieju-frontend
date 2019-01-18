@@ -42,8 +42,12 @@ export class TournamentService implements OnInit {
     return this.http.get<ScheduleDto>(RequestUrl.tournament.tournament + tournamentId + '/schedule/generate');
   }
 
-  getSchedule(tournamentId: string): Observable<ScheduleDto []> {
-    return this.http.get<ScheduleDto []>(RequestUrl.tournament.tournament + tournamentId + '/schedule');
+  getFutureGamesSchedule(tournamentId: string): Observable<ScheduleDto []> {
+    return this.http.get<ScheduleDto []>(RequestUrl.tournament.tournament + tournamentId + '/schedule?game_status=BEFORE_START');
+  }
+
+  getEndedGamesSchedule(tournamentId: string): Observable<ScheduleDto []> {
+    return this.http.get<ScheduleDto []>(RequestUrl.tournament.tournament + tournamentId + '/schedule?game_status=ENDED');
   }
 
   saveSchedule(tournamentId: string, schedule: ScheduleDto): Observable<ScheduleDto> {
