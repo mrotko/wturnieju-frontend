@@ -22,12 +22,24 @@ export class TournamentTimetableItemComponent implements OnInit {
 
   @Input() awayTeamData: TeamData;
 
+  @Input() bye: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
   getTeams(): TeamData [] {
+    console.log(this.awayTeamData);
+    if (this.bye) {
+      return [this.homeTeamData, {
+        name: '',
+        periodsResult: [],
+        winner: null,
+        teamId: null,
+        currentResult: null
+      }]
+    }
     return [this.homeTeamData, this.awayTeamData];
   }
 }

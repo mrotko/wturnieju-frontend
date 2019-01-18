@@ -42,6 +42,7 @@
                     [label]="lm.schedule | translate">
                 <mat-card>
                     <app-tournament-timetable [tournament]="tournament"
+                                              [timetableData]="futureGamesTimetableData"
                                               (reloadRequiredEvent)="reload()"></app-tournament-timetable>
                 </mat-card>
             </mat-tab>

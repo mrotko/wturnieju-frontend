@@ -2,6 +2,23 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {TournamentDTO, Tuple2} from '../model/model';
 import {LocaleMessages} from '../locale-messages';
 import {TeamData} from '../tournament-timetable-item/tournament-timetable-item.component';
+import {ObjectUtils} from '../utils/ObjectUtils';
+
+
+export interface TimetableData {
+  elements: TimetableElement [];
+}
+
+export interface TimetableElement {
+  round: number;
+  games: GameData [];
+}
+
+export interface GameData {
+  date: Date;
+  bye: boolean;
+  teams: Tuple2<TeamData, TeamData>;
+}
 
 @Component({
   selector: 'app-tournament-timetable',
@@ -16,6 +33,8 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
 
   @Input() title: string;
 
+  @Input() timetableData: TimetableData;
+
   lm = LocaleMessages;
 
   constructor(
@@ -26,56 +45,10 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+
   }
 
-  getMockItems(): Tuple2<TeamData, TeamData> [] {
-    return [
-      {
-        left: {
-          name: 'liverpool',
-          winner: true,
-          currentResult: 3,
-          periodsResult: [1, 2],
-          teamId: '123',
-        },
-        right: {
-          name: 'man city',
-          winner: false,
-          currentResult: 1,
-          periodsResult: [1, 0],
-          teamId: '123',
-        }
-      }, {
-        left: {
-          name: 'ars',
-          winner: false,
-          currentResult: 0,
-          periodsResult: [0, 0],
-          teamId: '123',
-        },
-        right: {
-          name: 'che',
-          winner: false,
-          currentResult: 0,
-          periodsResult: [0, 0],
-          teamId: '123',
-        }
-      }, {
-        left: {
-          name: 'whu',
-          winner: false,
-          currentResult: 2,
-          periodsResult: [1, 1],
-          teamId: '123',
-        },
-        right: {
-          name: 'tot',
-          winner: true,
-          currentResult: 3,
-          periodsResult: [1, 2],
-          teamId: '123',
-        }
-      }
-    ]
+  isLoaded(): boolean {
+    return ObjectUtils.exists(this.timetableData);
   }
 }

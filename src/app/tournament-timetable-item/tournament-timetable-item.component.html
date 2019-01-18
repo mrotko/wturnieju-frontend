@@ -1,6 +1,9 @@
-<div class="component-container" *ngIf="awayTeamData && homeTeamData">
+<div class="component-container" *ngIf="homeTeamData">
   <mat-card>
-    <div class="date">{{date}}</div>
+    <div class="date">
+      <div>{{date | date: 'shortDate'}}</div>
+      <div *ngIf="!shortDate">{{date | date: 'shortTime'}}</div>
+    </div>
     <div class="content">
       <div *ngFor="let team of getTeams()" class="team" [ngClass]="team.winner ? 'winner' : ''">
         <div>{{team.name}}</div>

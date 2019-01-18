@@ -1,34 +1,13 @@
-<div class="component-container">
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>Runda 20</mat-expansion-panel-header>
-        <mat-card-content>
-            <app-tournament-timetable-item *ngFor="let tuple of getMockItems()" [shortDate]="true"
-                                           [homeTeamData]="tuple.left" [awayTeamData]="tuple.right">
-            </app-tournament-timetable-item>
-        </mat-card-content>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>Runda 21</mat-expansion-panel-header>
-        <mat-card-content>
-            <app-tournament-timetable-item *ngFor="let tuple of getMockItems()" [shortDate]="true"
-                                           [homeTeamData]="tuple.left" [awayTeamData]="tuple.right">
-            </app-tournament-timetable-item>
-        </mat-card-content>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>Runda 22</mat-expansion-panel-header>
-        <mat-card-content>
-            <app-tournament-timetable-item *ngFor="let tuple of getMockItems()" [shortDate]="true"
-                                           [homeTeamData]="tuple.left" [awayTeamData]="tuple.right">
-            </app-tournament-timetable-item>
-        </mat-card-content>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>Runda 23</mat-expansion-panel-header>
-        <mat-card-content>
-            <app-tournament-timetable-item *ngFor="let tuple of getMockItems()" [shortDate]="true"
-                                           [homeTeamData]="tuple.left" [awayTeamData]="tuple.right">
-            </app-tournament-timetable-item>
-        </mat-card-content>
+<div class="component-container" *ngIf="isLoaded()">
+    <mat-expansion-panel *ngFor="let element of timetableData.elements">
+        <mat-expansion-panel-header>{{lm.round | translate}} {{element.round}}</mat-expansion-panel-header>
+        <app-tournament-timetable-item
+                *ngFor="let game of element.games"
+                [date]="game.date"
+                [homeTeamData]="game.teams.left"
+                [awayTeamData]="game.teams.right"
+                [bye]="game.bye"
+                [shortDate]="true"></app-tournament-timetable-item>
     </mat-expansion-panel>
 </div>
+<app-spinner *ngIf="!isLoaded()"></app-spinner>

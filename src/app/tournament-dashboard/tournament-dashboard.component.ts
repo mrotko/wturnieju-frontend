@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {TournamentDTO, TournamentStatus} from '../model/model';
+import {ScheduleDto, ScheduleElementDto, TournamentDTO, TournamentStatus} from '../model/model';
 import {TournamentService} from '../tournament.service';
 import {AuthService} from '../service/auth.service';
 import {LocaleMessages} from '../locale-messages';
 import {MatDialog} from '@angular/material';
 import {TournamentScheduleDialogComponent} from '../prepare-tournament-round-fixtures-dialog/tournament-schedule-dialog.component';
 import {FloatingButtonService} from '../floating-button.service';
+import {GameData, TimetableData, TimetableElement} from '../tournament-timetable/tournament-timetable.component';
+import {SnackBarService} from '../snack-bar.service';
 
 @Component({
   selector: 'app-tournament-dashboard',
@@ -23,11 +25,14 @@ export class TournamentDashboardComponent implements OnInit {
 
   currentRound: number;
 
+  futureGamesTimetableData: TimetableData;
+
   constructor(
     private router: ActivatedRoute,
     private tournamentService: TournamentService,
     private authService: AuthService,
     private dialog: MatDialog,
+    private snackbarService: SnackBarService,
     private floatingButtonService: FloatingButtonService
   ) {
   }
@@ -35,11 +40,21 @@ export class TournamentDashboardComponent implements OnInit {
   ngOnInit() {
     this.tournamentId = this.router.snapshot.paramMap.get('id');
     this.initTournament();
+    this.initSchedule();
   }
 
   initTournament() {
     this.tournamentService.getTournament(this.tournamentId).subscribe(dto => this.tournament = dto);
     // this.tournamentService.getCurrentRound(this.tournamentId).subscribe(round => this.currentRound = round);
+  }
+
+  private initSchedule() {
+    this.tournamentService.getSchedule(this.tournamentId).subscribe(
+      response => {
+        this.createFutureGamesTimetableData(response);
+      },
+      error => this.snackbarService.openError(this.lm.unknownError)
+    );
   }
 
   startTournament() {
@@ -101,5 +116,48 @@ export class TournamentDashboardComponent implements OnInit {
     } else {
       this.setScheduleFloatingBtnAction(false);
     }
+  }
+
+  createFutureGamesTimetableData(schedule: ScheduleDto []) {
+    let timetableElements: TimetableElement [] = [];
+
+    for (let roundSchedule of (schedule || [])) {
+      timetableElements.push({
+        round: roundSchedule.round,
+        games: this.createTimetableGamesData(roundSchedule.elements)
+      });
+    }
+
+    this.futureGamesTimetableData = {
+      elements: timetableElements
+    };
+  }
+
+  private createTimetableGamesData(scheduleElements: ScheduleElementDto []): GameData [] {
+    let gamesData: GameData [] = [];
+
+    for (let scheduleElement of (scheduleElements || [])) {
+      gamesData.push({
+        date: scheduleElement.startDate,
+        bye: scheduleElement.bye,
+        teams: {
+          left: {
+            teamId: scheduleElement.homeTeam.id,
+            name: scheduleElement.homeTeam.name,
+            currentResult: null,
+            periodsResult: [],
+            winner: null
+          },
+          right: scheduleElement.awayTeam ? {
+            teamId: scheduleElement.awayTeam.id,
+            name: scheduleElement.awayTeam.name,
+            currentResult: null,
+            periodsResult: [],
+            winner: null
+          } : null
+        }
+      });
+    }
+    return gamesData;
   }
 }

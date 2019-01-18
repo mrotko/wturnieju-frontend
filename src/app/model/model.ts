@@ -114,11 +114,11 @@ export interface ScheduleDto {
 
 export interface ScheduleElementDto {
   gameId: string;
-  startDate: string;
-  endDate: string;
-  shortDate: string;
+  startDate: Date;
+  endDate: Date;
+  shortDate: boolean;
   homeTeam: TeamDto;
-  awayTeam: TeamDto;
+  awayTeam?: TeamDto;
   bye: boolean;
   gameStatus: GameStatus;
 }
