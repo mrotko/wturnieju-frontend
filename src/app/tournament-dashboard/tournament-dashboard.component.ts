@@ -28,6 +28,8 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
 
   futureGamesTimetableData: TimetableData;
 
+  inProgressGamesTimetableData: TimetableData;
+
   endedGamesTimetableData: TimetableData;
 
   constructor(
@@ -46,6 +48,7 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
     this.initTournament();
     this.initFutureGamesSchedule();
     this.initEndedGamesSchedule();
+    this.initInProgressGamesSchedule();
   }
 
   initTournament() {
@@ -63,9 +66,14 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
 
   private initEndedGamesSchedule() {
     this.tournamentService.getEndedGamesSchedule(this.tournamentId).subscribe(
-      response => {
-        this.createEndedGamesTimetableData(response);
-      },
+      response => this.createEndedGamesTimetableData(response),
+      error => this.snackbarService.openError(this.lm.unknownError)
+    );
+  }
+
+  private initInProgressGamesSchedule() {
+    this.tournamentService.getInProgressGamesSchedule(this.tournamentId).subscribe(
+      response => this.createInProgressGamesTimetableData(response),
       error => this.snackbarService.openError(this.lm.unknownError)
     );
   }
@@ -139,6 +147,10 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
   createEndedGamesTimetableData(schedule: ScheduleDto []) {
     this.endedGamesTimetableData = this.createTimetableData(schedule);
     this.endedGamesTimetableData.elements.reverse();
+  }
+
+  createInProgressGamesTimetableData(schedule: ScheduleDto []) {
+    this.inProgressGamesTimetableData = this.createTimetableData(schedule);
   }
 
   createTimetableData(schedule: ScheduleDto []): TimetableData {

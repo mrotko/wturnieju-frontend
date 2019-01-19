@@ -1,0 +1,81 @@
+$base-column-width: 200px;
+
+.game-content {
+
+}
+
+.team-header {
+	width: $base-column-width;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	text-align: center;
+}
+
+.team-logo {
+	width: 150px;
+	height: 150px;
+	margin-left: auto;
+	margin-right: auto;
+
+	img {
+		height: 100%;
+	}
+}
+
+mat-toolbar {
+	border-radius: 50px;
+	height: auto;
+	padding: 15px;
+}
+
+.toolbar-content {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	flex-wrap: wrap;
+	* {
+		margin-left: 20px;
+		margin-right: 20px;
+		margin-top: 5px;
+	}
+}
+
+.team-name {
+	font-size: larger;
+	padding: 0.5em;
+}
+
+.team-result {
+	font-size: 2em;
+	padding: 0.5em;
+}
+
+.game-content-row, .game-content-full-row {
+	display: grid;
+	grid-gap: 5px;
+	padding: 5px;
+}
+
+.game-content-row {
+	grid-template-columns: 1fr 1fr;
+	div {
+		&:first-child {
+			justify-self: end;
+		}
+		&:last-child {
+			justify-self: start;
+		}
+	}
+}
+.game-content-full-row {
+	grid-template-columns: 1fr;
+	justify-items: center;
+}
+
+.team-action-btn {
+	width: $base-column-width;
+	button {
+		width: 100%;
+	}
+}

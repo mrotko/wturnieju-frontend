@@ -69,6 +69,28 @@ export interface Profile {
   id: string;
 }
 
+export interface GameEventDto {
+  tournamentId: string;
+  gameId: string;
+  competitionType: CompetitionType;
+  gameEventType: GameEventType;
+}
+
+export interface TeamEventDto extends GameEventDto {
+  teamId: string;
+}
+
+export interface StartGameEventDto extends GameEventDto {
+  startDate: Date;
+}
+
+export interface FinishGameEventDto extends GameEventDto {
+  finishedDate: Date;
+  homeScore: ScoreDto;
+  awayScore: ScoreDto;
+  winner: number;
+}
+
 export interface TournamentParticipantDTO extends Profile {
   firstName: string;
   secondName: string;
@@ -77,6 +99,24 @@ export interface TournamentParticipantDTO extends Profile {
   email: string;
   participantStatus: string;
   invitationStatus: InvitationStatus;
+}
+
+export interface GameFixtureDto {
+  gameId: string;
+  startDate: Date;
+  endDate: Date;
+  finishedDate: Date;
+  homeTeam: TeamDto;
+  homeScore: ScoreDto;
+  awayTeam: TeamDto;
+  awayScore: ScoreDto;
+  gameStatus: GameStatus;
+  winner: number;
+  round: number;
+  bye: boolean;
+  live: boolean;
+  competitionType: CompetitionType;
+  tournamentId: string;
 }
 
 export interface TournamentDTO {
@@ -92,7 +132,7 @@ export interface TournamentDTO {
   startDate: Date;
   endDate: Date;
   systemType: TournamentSystemType;
-  competitionType: string;
+  competitionType: CompetitionType;
   tournamentParticipantType: string;
   staffIds: string [];
   contributorsIds: string [];
@@ -189,10 +229,6 @@ export const ACCESS_OPTION = {
   PRIVATE: 'ACCESS_OPTION.PRIVATE'
 };
 
-// export const TOURNAMENT_SYSTEM_TYPE = {
-//   SWISS: 'TOURNAMENT_SYSTEM_TYPE.SWISS'
-// };
-
 export enum TournamentSystemType {
   SWISS = 'TOURNAMENT_SYSTEM_TYPE.SWISS'
 }
@@ -236,4 +272,9 @@ export const enum TournamentTableColumnType {
   POINTS = 'COLUMN_TYPE.POINTS',
   TOTAL_GAMES = 'COLUMN_TYPE.TOTAL_GAMES',
   SMALL_POINTS = 'COLUMN_TYPE.SMALL_POINTS'
+}
+
+export const enum GameEventType {
+  GAME_START = 'GAME_EVENT_TYPE.GAME_START',
+  GAME_FINISHED = 'GAME_EVENT_TYPE.GAME_FINISHED'
 }

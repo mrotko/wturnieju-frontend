@@ -1,0 +1,21 @@
+<div class="component-container">
+    <h1 mat-dialog-title>{{lm.startGame | translate}}</h1>
+    <div class="dialog-content">
+        <div class="dialog-common-content">
+            <div class="date-time-picker">
+                <mat-form-field>
+                    <input matInput [matDatepicker]="startGameDateDatepicker" [value]="eventData.startDate"
+                           label="lm.startGameDate | translate">
+                    <mat-datepicker-toggle matSuffix [for]="startGameDateDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startGameDateDatepicker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!--<app-start-chess-game-dialog-content *ngIf="isChessTournament()"></app-start-chess-game-dialog-content>-->
+    </div>
+    <mat-dialog-actions>
+        <button (click)="cancelBtnClick()" mat-flat-button>{{lm.cancel | translate}}</button>
+        <button (click)="confirmBtnClick()" mat-raised-button color="primary">{{lm.confirm | translate}}</button>
+    </mat-dialog-actions>
+</div>

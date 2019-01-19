@@ -1,7 +1,7 @@
 import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ScheduleDto, TournamentDTO, TournamentTableDTO, UserTournamentsDTO} from './model/model';
+import {GameFixtureDto, ScheduleDto, TournamentDTO, TournamentTableDTO, UserTournamentsDTO} from './model/model';
 import {RequestUrl} from './config/requestUrl';
 
 
@@ -48,6 +48,14 @@ export class TournamentService implements OnInit {
 
   getEndedGamesSchedule(tournamentId: string): Observable<ScheduleDto []> {
     return this.http.get<ScheduleDto []>(RequestUrl.tournament.tournament + tournamentId + '/schedule?game_status=ENDED');
+  }
+
+  getGameFixture(tournamentId: string): Observable<GameFixtureDto []> {
+    return this.http.get<GameFixtureDto []>(RequestUrl.tournament.tournament + tournamentId + '/game-fixtures');
+  }
+
+  getInProgressGamesSchedule(tournamentId: string): Observable<ScheduleDto []> {
+    return this.http.get<ScheduleDto []>(RequestUrl.tournament.tournament + tournamentId + '/schedule?game_status=IN_PROGRESS');
   }
 
   saveSchedule(tournamentId: string, schedule: ScheduleDto): Observable<ScheduleDto> {

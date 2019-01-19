@@ -1,0 +1,41 @@
+<div class="component-container" *ngIf="gameFixture.homeTeam && gameFixture.awayTeam">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>{{getGameHeaderText()}}</mat-expansion-panel-header>
+        <div class="game-content">
+            <div class="game-content-full-row">
+                <mat-toolbar color="primary" class="mat-elevation-z1">
+                    <div class="toolbar-content">
+                        <button *ngIf="isGameBeforeStart()" mat-raised-button
+                                (click)="startGameBtnClick()">{{lm.begin | translate}}</button>
+                        <button *ngIf="isGameInProgress()" mat-raised-button
+                                (click)="finishGameBtnClick()">{{lm.finish | translate}}</button>
+                    </div>
+                </mat-toolbar>
+            </div>
+            <div class="game-content-row">
+                <div class="team-header">
+                    <div class="team-logo">
+                        <img src="../../../assets/img/img-placeholder.png">
+                    </div>
+                    <span class="team-name">{{gameFixture.homeTeam.name}}</span>
+                    <span class="team-result">{{gameFixture.homeScore.current}}</span>
+                </div>
+                <div class="team-header">
+                    <div class="team-logo">
+                        <img src="../../../assets/img/img-placeholder.png">
+                    </div>
+                    <span class="team-name">{{gameFixture.awayTeam.name}}</span>
+                    <span class="team-result">{{gameFixture.awayScore.current}}</span>
+                </div>
+            </div>
+            <!--<div class="game-content-row">-->
+                <!--<div class="team-action-btn">-->
+                    <!--<button mat-raised-button color="primary">{{lm.add | translate}}</button>-->
+                <!--</div>-->
+                <!--<div class="team-action-btn">-->
+                    <!--<button mat-raised-button color="primary">{{lm.add | translate}}</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </mat-expansion-panel>
+</div>

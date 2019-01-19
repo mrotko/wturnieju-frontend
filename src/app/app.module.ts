@@ -2,9 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MaterialModule} from './material/material.module';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
@@ -50,45 +48,18 @@ import {FloatingButtonComponent} from './floating-button/floating-button.compone
 import {InviteTournamentParticipantPopupComponent} from './invite-tournament-participant-popup/invite-tournament-participant-popup.component';
 import {ParticipantComponent} from './participant/participant.component';
 import {TournamentInviteVerificationComponent} from './tournament-invite-verification/tournament-invite-verification.component';
-import {VerificationComponentGuard} from './verification-component.guard';
 import {TournamentParticipationRequestVerificationComponent} from './tournament-participation-request-verification/tournament-participation-request-verification.component';
 import {ClipboardModule} from 'ngx-clipboard';
 import {ParticipantsProgressBarComponent} from './participants-progress-bar/participants-progress-bar.component';
 import {TournamentTimetableItemComponent} from './tournament-timetable-item/tournament-timetable-item.component';
-import { SpinnerComponent } from './spinner/spinner.component';
+import {AppRoutingModule} from './app-routing.module';
+import {GameEditorModule} from './game-editor/game-editor.module';
+import {SharedModule} from './shared.module';
 
 registerLocaleData(localePl);
 
 library.add(fas);
 
-const appRoutes: Routes = [
-  {
-    path: 'auth', component: AuthComponent, canActivate: [CanActivateAuthComponentGuard], children:
-      [
-        {path: 'login', component: LoginComponent},
-        {path: 'register', component: RegisterComponent},
-        {path: 'forget-password', component: ForgetPasswordComponent}
-      ]
-  },
-  {path: 'user', component: UserSettingsComponent, canActivate: [AuthRequiredGuard]},
-  {path: 'create', component: TournamentCreatorComponent, canActivate: [AuthRequiredGuard]},
-  {path: 'tournaments', component: TournamentsComponent},
-  {path: 'cli', component: CliComponent},
-  {path: 'tournaments/:id', redirectTo: 'tournaments/:id/dashboard', pathMatch: 'full'},
-  {path: 'tournaments/:id/dashboard', component: TournamentDashboardComponent},
-  {
-    path: 'verification', canActivate: [VerificationComponentGuard], children: [
-      {path: 'account', component: AccountVerificationComponent},
-      {path: 'password', component: PasswordVerificationComponent},
-      {path: 'tournament-invitation', component: TournamentInviteVerificationComponent},
-      {
-        path: 'tournament-participation-request', canActivate: [AuthRequiredGuard],
-        component: TournamentParticipationRequestVerificationComponent
-      },
-      {path: 'email', component: EmailVerificationComponent}
-    ]
-  }
-];
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -124,18 +95,17 @@ export function HttpLoaderFactory(http: HttpClient) {
     TournamentInviteVerificationComponent,
     TournamentParticipationRequestVerificationComponent,
     ParticipantsProgressBarComponent,
-    TournamentTimetableItemComponent,
-    SpinnerComponent,
+    TournamentTimetableItemComponent
   ],
   entryComponents: [
     TournamentScheduleDialogComponent,
     InviteTournamentParticipantPopupComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes),
+    AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    TranslateModule.forChild({
+    TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
@@ -145,12 +115,12 @@ export function HttpLoaderFactory(http: HttpClient) {
       useDefaultLang: false
     }),
     BrowserAnimationsModule,
-    MaterialModule,
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
     ClipboardModule,
+    GameEditorModule,
+    SharedModule
   ],
   providers: [
     AuthRequiredGuard,

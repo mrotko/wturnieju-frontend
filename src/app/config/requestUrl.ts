@@ -31,6 +31,11 @@ export const RequestUrl = {
     user: environment.apiUrl + '/tournaments?userId=',
   },
 
+  gameEditor: {
+    startGame: environment.apiUrl + '/game-editor/start-game',
+    finishGame: environment.apiUrl + '/game-editor/finish-game'
+  },
+
   verification: {
     emailChange: environment.apiUrl + "/verification/email?token=",
     newAccount: environment.apiUrl + "/verification/account?token=",
