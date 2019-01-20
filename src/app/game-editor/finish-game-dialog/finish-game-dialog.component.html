@@ -1,3 +1,31 @@
-<p>
-  finish-game-dialog works!
-</p>
+<div class="component-container">
+    <h1 mat-dialog-title>{{lm.finishGame | translate}}</h1>
+    <div class="dialog-content">
+        <div class="dialog-common-content">
+            <div class="date-time-picker">
+                <mat-form-field>
+                    <input matInput [matDatepicker]="finishGameDateDatepicker" [value]="eventData.finishedDate"
+                           [placeholder]="lm.finishGameDate | translate">
+                    <mat-datepicker-toggle matSuffix [for]="finishGameDateDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #finishGameDateDatepicker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="select-winner">
+                <div class="mat-subheading-1">{{lm.selectWinner | translate}}</div>
+                <mat-radio-group [value]="eventData.winner" (change)="eventData.winner = $event.value">
+                    <mat-radio-button class="select-winner-radio-btn"
+                                      [value]="1">{{popupData.homeName}}</mat-radio-button>
+                    <mat-radio-button class="select-winner-radio-btn"
+                                      [value]="0">{{lm.draw | translate}}</mat-radio-button>
+                    <mat-radio-button class="select-winner-radio-btn"
+                                      [value]="2">{{popupData.awayName}}</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <!--<app-start-chess-game-dialog-content *ngIf="isChessTournament()"></app-start-chess-game-dialog-content>-->
+    </div>
+    <mat-dialog-actions>
+        <button (click)="onCancelBtnClick()" mat-flat-button>{{lm.cancel | translate}}</button>
+        <button (click)="onConfirmBtnClick()" mat-raised-button color="primary">{{lm.confirm | translate}}</button>
+    </mat-dialog-actions>
+</div>

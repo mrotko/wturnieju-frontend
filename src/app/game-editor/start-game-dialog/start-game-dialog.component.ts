@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {CompetitionType, GameEventType, GameFixtureDto, StartGameEventDto} from '../../model/model';
-import {LocaleMessages} from '../../locale-messages';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {GameEditorService} from '../game-editor.service';
 import {SnackBarService} from '../../snack-bar.service';
+import {AbstractGameDialog, GameEditorDialogData} from '../AbstractGameDialog';
 
-export interface StartGameEditorDialogData {
+export interface StartGameEditorDialogData extends GameEditorDialogData {
   gameId: string;
   tournamentId: string;
   competitionType: CompetitionType,
@@ -16,11 +16,9 @@ export interface StartGameEditorDialogData {
   templateUrl: './start-game-dialog.component.html',
   styleUrls: ['./start-game-dialog.component.scss']
 })
-export class StartGameDialogComponent implements OnInit {
+export class StartGameDialogComponent extends AbstractGameDialog implements OnInit {
 
   eventData: StartGameEventDto;
-
-  lm = LocaleMessages;
 
   constructor(
     private dialogRef: MatDialogRef<StartGameDialogComponent>,
@@ -28,6 +26,7 @@ export class StartGameDialogComponent implements OnInit {
     private snackbarService: SnackBarService,
     @Inject(MAT_DIALOG_DATA) private popupData: StartGameEditorDialogData
   ) {
+    super();
   }
 
   ngOnInit() {

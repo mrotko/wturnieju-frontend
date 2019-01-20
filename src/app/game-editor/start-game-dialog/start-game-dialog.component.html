@@ -5,7 +5,7 @@
             <div class="date-time-picker">
                 <mat-form-field>
                     <input matInput [matDatepicker]="startGameDateDatepicker" [value]="eventData.startDate"
-                           label="lm.startGameDate | translate">
+                           [placeholder]="lm.startGameDate | translate">
                     <mat-datepicker-toggle matSuffix [for]="startGameDateDatepicker"></mat-datepicker-toggle>
                     <mat-datepicker #startGameDateDatepicker></mat-datepicker>
                 </mat-form-field>

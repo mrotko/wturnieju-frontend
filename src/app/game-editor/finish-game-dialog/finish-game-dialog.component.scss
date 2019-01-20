@@ -1,0 +1,24 @@
+mat-dialog-actions {
+	justify-content: flex-end;
+
+	* {
+		margin: 10px;
+	}
+}
+
+.date-time-picker {
+	display: flex;
+	flex-direction: column;
+}
+
+.select-winner {
+	mat-radio-group {
+		display: inline-flex;
+		flex-direction: column;
+		margin-left: 5px;
+	}
+
+	mat-radio-button {
+		margin: 5px;
+	}
+}

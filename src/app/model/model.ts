@@ -86,8 +86,8 @@ export interface StartGameEventDto extends GameEventDto {
 
 export interface FinishGameEventDto extends GameEventDto {
   finishedDate: Date;
-  homeScore: ScoreDto;
-  awayScore: ScoreDto;
+  homeScore?: ScoreDto;
+  awayScore?: ScoreDto;
   winner: number;
 }
 

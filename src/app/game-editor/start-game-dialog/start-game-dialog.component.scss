@@ -1,0 +1,12 @@
+mat-dialog-actions {
+	justify-content: flex-end;
+
+	* {
+		margin: 10px;
+	}
+}
+
+.date-time-picker {
+	display: flex;
+	flex-direction: column;
+}

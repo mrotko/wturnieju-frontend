@@ -46,9 +46,13 @@ export class GameComponent implements OnInit {
 
   finishGameBtnClick(): void {
     this.dialog.open(FinishGameDialogComponent, {
-      width: '500vh',
+      width: '100vh',
       data: {
         competitionType: this.gameFixture.competitionType,
+        gameId: this.gameFixture.gameId,
+        tournamentId: this.gameFixture.tournamentId,
+        homeName: this.gameFixture.homeTeam.name,
+        awayName: this.gameFixture.awayTeam.name
       }
     }).afterClosed().subscribe(game => {
       if(game) {
