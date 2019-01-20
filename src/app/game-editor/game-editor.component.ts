@@ -1,6 +1,6 @@
 import {LocaleMessages} from '../locale-messages';
 import {GameEditorService} from './game-editor.service';
-import {GameFixtureDto, TournamentDTO} from '../model/model';
+import {GameFixtureDto, GameStatus, TournamentDTO} from '../model/model';
 import {Component, Input, OnInit} from '@angular/core';
 import {TournamentService} from '../tournament.service';
 import {SnackBarService} from '../snack-bar.service';
@@ -30,7 +30,7 @@ export class GameEditorComponent implements OnInit {
 
   private initGameFixtures() {
     this.tournamentService.getGameFixture(this.tournament.id).subscribe(
-      response => this.gameFixtures = response,
+      response => this.gameFixtures = response.filter(game => game.gameStatus !== GameStatus.ENDED),
       error => this.snackbarService.openError(this.lm.unknownError)
     );
   }

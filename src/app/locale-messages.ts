@@ -17,6 +17,7 @@ export const LocaleMessages = {
   start: 'start',
   cli: 'cli',
   email: 'email',
+  noTimetableDataMsg: 'noTimetableDataMsg',
   password: 'password',
   generateRound: 'generateRound',
   configuration: 'configuration',

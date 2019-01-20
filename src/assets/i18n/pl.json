@@ -24,6 +24,7 @@
   "finishGameDate": "Data zakończenia pojedynku",
   "draw": "Remis",
   "selectWinner": "Wybierz zwycięzcę",
+  "noTimetableDataMsg": "Brak pojedynków do wyświetlenia",
   "begin": "Rozpocznij",
   "break": "Przerwa",
   "startGameDate": "Data rozpoczęcia gry",

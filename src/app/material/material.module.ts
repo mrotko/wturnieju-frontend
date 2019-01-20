@@ -36,7 +36,6 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   imports: [

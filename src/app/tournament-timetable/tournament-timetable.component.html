@@ -9,5 +9,7 @@
                 [bye]="game.bye"
                 [shortDate]="true"></app-tournament-timetable-item>
     </mat-expansion-panel>
+    <div class="message mat-headline"
+         *ngIf="timetableData.elements.length === 0">{{lm.noTimetableDataMsg | translate}}</div>
 </div>
 <app-spinner *ngIf="!isLoaded()"></app-spinner>
