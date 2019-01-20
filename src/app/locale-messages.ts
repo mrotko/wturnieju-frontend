@@ -22,6 +22,8 @@ export const LocaleMessages = {
   generateRound: 'generateRound',
   configuration: 'configuration',
   timetable: 'timetable',
+  loggedOut: 'loggedOut',
+  loggedOutToken: 'loggedOutToken',
   emptyDatesErrorMsg: 'emptyDatesErrorMsg',
   draw: 'draw',
   selectWinner: 'selectWinner',

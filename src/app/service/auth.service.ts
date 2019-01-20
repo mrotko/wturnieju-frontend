@@ -5,6 +5,8 @@ import {ForgetPasswordForm, LoginForm, RegisterForm, User, UserGrantedAuthority}
 import {Observable} from 'rxjs/internal/Observable';
 import {map} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import {Router} from '@angular/router';
+import {RouterUrl} from '../config/routerUrl';
 
 @Injectable()
 export class AuthService {
@@ -12,6 +14,7 @@ export class AuthService {
   loggedIn$ = new BehaviorSubject<User>(this.getUserFromStorage());
 
   constructor(
+    private router: Router,
     private http: HttpClient
   ) { }
 
@@ -42,6 +45,7 @@ export class AuthService {
 
   logout() {
     this.updateUserInStorage(null);
+    this.router.navigate([RouterUrl.home]).catch();
   }
 
   isLoggedIn(): Observable<User> {

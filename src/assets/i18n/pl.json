@@ -18,6 +18,8 @@
   "emptyDatesErrorMsg": "Uzupełnij terminarz",
   "invitationVerificationMsg": "Zostałeś zaproszony do turnieju {{name}}",
   "join": "Dołącz",
+  "loggedOut": "Nastąpiło wylogowanie",
+  "loggedOutToken": "Nastąpiło wylogowanie z powodu wygaśnięcia tokena. Zaloguj się ponownie",
   "start": "Start",
   "startGame": "Rozpocznij pojedynek",
   "finishGame": "Zakończ pojedynek",
