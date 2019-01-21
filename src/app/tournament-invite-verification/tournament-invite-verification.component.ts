@@ -42,7 +42,10 @@ export class TournamentInviteVerificationComponent extends VerificationComponent
         this.snackbarService.openSuccess(this.lm.acceptTournamentInvitationMsg);
         this.redirectToToTournamentPage();
       },
-      () => this.snackbarService.openError(this.lm.unknownError)
+      () => {
+        this.snackbarService.openError(this.lm.unknownError);
+        this.redirectToHomePage();
+      }
     );
   }
 
@@ -50,9 +53,9 @@ export class TournamentInviteVerificationComponent extends VerificationComponent
     this.verificationService.reactToTournamentInvitation(this.token, false).subscribe(
       () => {
         this.snackbarService.openSuccess(this.lm.discardTournamentInvitationMsg);
-        this.redirectToMainPage();
       },
-      () => this.snackbarService.openError(this.lm.unknownError)
+      () => this.snackbarService.openError(this.lm.unknownError),
+      () => this.redirectToHomePage()
     );
   }
 

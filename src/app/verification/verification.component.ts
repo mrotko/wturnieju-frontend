@@ -27,7 +27,7 @@ export class VerificationComponent implements OnInit {
     this.token = this.route.snapshot.queryParamMap.get('token');
   }
 
-  redirectToMainPage() {
+  redirectToHomePage() {
     this.router.navigate([RouterUrl.home]).catch();
   }
 }
