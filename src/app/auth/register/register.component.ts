@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate([this.routerUrl.login]).catch();
         },
         err => {
-          if (err.status === 400) {
+          if (err.status === 409) {
             this.registerForm.get('username').setErrors({emailExists: true});
           }
         }
