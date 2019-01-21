@@ -27,6 +27,7 @@ export class AuthService {
           token = token.substr('Bearer '.length);
           const user = response.body;
           user.token = token;
+          this.setKeepLogin(loginForm.keepLogin);
           this.updateUserInStorage(user);
         }
     }));
@@ -59,14 +60,15 @@ export class AuthService {
   }
 
   getUserFromStorage(): User {
-    return JSON.parse(localStorage.getItem('currentUser'));
+    return JSON.parse(this.getUserStorage().getItem('currentUser'));
   }
 
   saveUserInStorage(user: User) {
     if (user === null) {
-      localStorage.removeItem('currentUser');
+      this.getUserStorage().removeItem('currentUser');
+      localStorage.removeItem('keepLogin');
     } else {
-      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.getUserStorage().setItem('currentUser', JSON.stringify(user));
     }
   }
 
@@ -83,5 +85,21 @@ export class AuthService {
     let user = this.getUserFromStorage();
     user.authorities = authorities;
     this.saveUserInStorage(user);
+  }
+
+  private getUserStorage(): Storage {
+    if (this.isKeepLogin()) {
+      return localStorage;
+    } else {
+      return sessionStorage;
+    }
+  }
+
+  private setKeepLogin(keepLogin: boolean) {
+    localStorage.setItem('keepLogin', JSON.stringify(keepLogin));
+  }
+
+  private isKeepLogin(): boolean {
+    return JSON.parse(localStorage.getItem('keepLogin'));
   }
 }

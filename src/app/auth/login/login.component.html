@@ -12,7 +12,7 @@
     </mat-error>
   </mat-form-field>
   <div class="login-options">
-    <mat-checkbox formGroupName="keepLogin">{{lm.remember | translate}}</mat-checkbox>
+    <mat-checkbox formControlName="keepLogin" [value]="false">{{lm.remember | translate}}</mat-checkbox>
     <span class="forget-password mat-caption"><a
       routerLink="/auth/forget-password">{{lm.forgetPassword | translate}}</a></span>
   </div>
