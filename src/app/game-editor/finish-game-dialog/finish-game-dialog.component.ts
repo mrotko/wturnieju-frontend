@@ -39,6 +39,10 @@ export class FinishGameDialogComponent extends AbstractGameDialog implements OnI
     }
   }
 
+  getPopupData(): FinishGameEditorDialogData {
+    return this.popupData;
+  }
+
   onConfirmBtnClick() {
     this.gameEditorService.finishGame(this.eventData).subscribe(
       response => this.close(response),

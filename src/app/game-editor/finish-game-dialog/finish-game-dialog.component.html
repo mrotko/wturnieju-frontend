@@ -14,11 +14,11 @@
                 <div class="mat-subheading-1">{{lm.selectWinner | translate}}</div>
                 <mat-radio-group [value]="eventData.winner" (change)="eventData.winner = $event.value">
                     <mat-radio-button class="select-winner-radio-btn"
-                                      [value]="1">{{popupData.homeName}}</mat-radio-button>
+                                      [value]="1">{{getPopupData().homeName}}</mat-radio-button>
                     <mat-radio-button class="select-winner-radio-btn"
                                       [value]="0">{{lm.draw | translate}}</mat-radio-button>
                     <mat-radio-button class="select-winner-radio-btn"
-                                      [value]="2">{{popupData.awayName}}</mat-radio-button>
+                                      [value]="2">{{getPopupData().awayName}}</mat-radio-button>
                 </mat-radio-group>
             </div>
         </div>

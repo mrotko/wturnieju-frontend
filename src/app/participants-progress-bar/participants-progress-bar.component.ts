@@ -72,7 +72,7 @@ export class ParticipantsProgressBarComponent implements OnInit, OnChanges {
     }
   }
 
-  private getBarColor(): string {
+  getBarColor(): string {
     return this.isWarn() ? 'warn' : 'primary';
   }
 }
