@@ -88,8 +88,7 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
 
   private createPopupService(): InviteTournamentParticipantPopupService {
     const currentParticipantsIds = this.getCurrentParticipantsIds();
-    const ownerId = this.tournament.owner.id;
-    return new InviteTournamentParticipantPopupService(this.searchService, currentParticipantsIds, ownerId);
+    return new InviteTournamentParticipantPopupService(this.searchService, currentParticipantsIds);
   }
 
   ngOnDestroy(): void {
