@@ -10,6 +10,7 @@ import {InviteTournamentParticipantPopupComponent} from '../invite-tournament-pa
 import {SearchService} from '../search.service';
 import {ClipboardService} from 'ngx-clipboard';
 import {TournamentService} from '../tournament.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-tournament-participants-configuration',
@@ -143,7 +144,7 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
     if (!this.tournament.invitationToken) {
       return null;
     }
-    return location.host + "/verification/tournament-participation-request?token={1}&tournamentId={2}"
+    return environment.hostname + "/verification/tournament-participation-request?token={1}&tournamentId={2}"
       .replace('{1}', this.tournament.invitationToken)
       .replace('{2}', this.tournament.id);
   }

@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://wturnieju.pl/api'
+  hostname: 'https://wturnieju.herokuapp.com',
+  apiUrl: 'https://wturnieju-backend.herokuapp.com/api'
 };
