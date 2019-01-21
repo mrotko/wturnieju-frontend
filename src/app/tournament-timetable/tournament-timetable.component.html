@@ -1,5 +1,5 @@
 <div class="component-container" *ngIf="isLoaded()">
-    <mat-expansion-panel *ngFor="let element of timetableData.elements">
+    <mat-expansion-panel *ngFor="let element of timetableData.elements; let i = index" [expanded]="i === 0">
         <mat-expansion-panel-header>{{lm.round | translate}} {{element.round}}</mat-expansion-panel-header>
         <app-tournament-timetable-item
                 *ngFor="let game of element.games"
