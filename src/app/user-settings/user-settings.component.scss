@@ -2,6 +2,11 @@
   display: grid;
 }
 
+.password-form, .email-form, .personal-data-form {
+  display: flex;
+  flex-direction: column;
+}
+
 mat-accordion {
   display: grid;
   max-width: 500px;
@@ -10,16 +15,7 @@ mat-accordion {
   width: 100%;
 }
 
-.password-form {
-  display: flex;
-  flex-direction: column;
-}
-
 .password-form mat-form-field:first-child {
   padding-bottom: 10px;
 }
 
-.email-form {
-  display: flex;
-  flex-direction: column;
-}

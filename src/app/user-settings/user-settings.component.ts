@@ -32,6 +32,8 @@ export class UserSettingsComponent implements OnInit {
 
   changeEmailForm: FormGroup;
 
+  changePersonalDataForm: FormGroup;
+
   constructor(
     private authService: AuthService,
     private userSettingsService: UserSettingsService,
@@ -48,6 +50,7 @@ export class UserSettingsComponent implements OnInit {
 
     this.prepareChangePasswordForm();
     this.prepareChangeEmailForm();
+    this.prepareChangePersonalDataForm();
   }
 
   private prepareChangePasswordForm() {
@@ -63,6 +66,13 @@ export class UserSettingsComponent implements OnInit {
     this.changeEmailForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
+    });
+  }
+
+  private prepareChangePersonalDataForm() {
+    this.changePersonalDataForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      surname: new FormControl('', [Validators.required])
     });
   }
 
@@ -135,6 +145,22 @@ export class UserSettingsComponent implements OnInit {
           this.snackbarService.openError(this.lm.unknownError, this.lm.close);
         }
       });
+    }
+  }
+
+  changePersonalDataSubmit() {
+    if (this.changePersonalDataForm.valid) {
+      const name = this.changePersonalDataForm.get('name').value;
+      const surname = this.changePersonalDataForm.get('surname').value;
+
+      this.userSettingsService.changePersonalData(name, surname).subscribe(
+        user => {
+          this.authService.updatePersonalData(user);
+          this.currentUser = this.authService.getUserFromStorage();
+          this.snackbarService.openSuccess(this.lm.success);
+        },
+        error => this.snackbarService.openError(this.lm.unknownError)
+      );
     }
   }
 }

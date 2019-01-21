@@ -46,6 +46,7 @@ export interface UserDTO {
   name?: string;
   surname?: string;
   fullName?: string;
+  username?: string;
 }
 
 export interface TournamentCreatorConfig {

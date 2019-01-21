@@ -76,7 +76,7 @@ export class InviteTournamentParticipantPopupComponent implements OnInit {
             return {
               id: user.id,
               icon: "",
-              name: user.fullName,
+              name: (user.name || '') + " " + (user.surname || '') + " " + ' [' + user.username + ']',
               description: ""
             };
           });

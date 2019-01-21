@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AuthorityType, UserConfig, UserGrantedAuthority} from './model/model';
+import {AuthorityType, UserConfig, UserDTO, UserGrantedAuthority} from './model/model';
 import {HttpClient} from '@angular/common/http';
 import {RequestUrl} from './config/requestUrl';
 import {Observable} from 'rxjs';
@@ -19,6 +19,11 @@ interface ChangePasswordDTO {
 interface ChangeEmailDTO {
   username: string;
   password: string;
+}
+
+interface ChangePersonalDataDto {
+  name: string;
+  surname: string;
 }
 
 @Injectable({
@@ -46,6 +51,14 @@ export class UserSettingsService {
       return authority !== undefined;
     }
     return false;
+  }
+
+  changePersonalData(name: string, surname: string): Observable<UserDTO> {
+    const dto: ChangePersonalDataDto = {
+      name: name,
+      surname: surname
+    };
+    return this.http.patch<UserDTO>(RequestUrl.userSettings.personalData, dto);
   }
 
   changePassword(newPassword: string, oldPassword: string): Observable<any> {

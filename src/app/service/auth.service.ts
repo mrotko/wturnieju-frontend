@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {RequestUrl} from '../config/requestUrl';
-import {ForgetPasswordForm, LoginForm, RegisterForm, User, UserGrantedAuthority} from '../model/model';
+import {ForgetPasswordForm, LoginForm, RegisterForm, User, UserDTO, UserGrantedAuthority} from '../model/model';
 import {Observable} from 'rxjs/internal/Observable';
 import {map} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import {Router} from '@angular/router';
 import {RouterUrl} from '../config/routerUrl';
+import {ObjectUtils} from '../utils/ObjectUtils';
 
 @Injectable()
 export class AuthService {
@@ -66,6 +67,15 @@ export class AuthService {
       localStorage.removeItem('currentUser');
     } else {
       localStorage.setItem('currentUser', JSON.stringify(user));
+    }
+  }
+
+  updatePersonalData(userDto: UserDTO) {
+    const user = this.getUserFromStorage();
+    if (ObjectUtils.exists(user)) {
+      user.name = userDto.name;
+      user.surname = userDto.surname;
+      this.saveUserInStorage(user);
     }
   }
 

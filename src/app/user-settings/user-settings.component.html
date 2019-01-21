@@ -1,101 +1,97 @@
 <div class="user-settings-container">
-  <mat-accordion>
-    <!--<mat-expansion-panel>-->
-    <!--<mat-expansion-panel-header>-->
-    <!--<mat-panel-title>{{lm.personalData | translate}}</mat-panel-title>-->
-    <!--&lt;!&ndash;<mat-panel-description>Type your name and age</mat-panel-description>&ndash;&gt;-->
-    <!--</mat-expansion-panel-header>-->
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{lm.personalData | translate}}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <form class="personal-data-form" [formGroup]="changePersonalDataForm" (submit)="changePersonalDataSubmit()">
+                <mat-form-field>
+                    <input matInput type="text" [placeholder]="lm.firstName | translate" formControlName="name"
+                           [value]="currentUser.name">
+                    <mat-error *ngIf="changePersonalDataForm.get('name').hasError('required')">
+                        {{lm.requiredError | translate}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="text" [placeholder]="lm.secondName | translate" formControlName="surname"
+                           [value]="currentUser.surname">
+                    <mat-error *ngIf="changePersonalDataForm.get('surname').hasError('required')">
+                        {{lm.requiredError | translate}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-action-row>
+                    <button mat-button type="submit" color="primary">{{lm.send | translate}}</button>
+                </mat-action-row>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{lm.changeEmailForm | translate}}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <form class="email-form" [formGroup]="changeEmailForm" (submit)="changeEmailSubmit()">
+                <mat-form-field>
+                    <input matInput type="email" placeholder="{{lm.newEmail | translate}}" formControlName="email">
+                    <mat-error
+                            *ngIf="changeEmailForm.get('email').hasError('required')">{{lm.requiredError | translate}}</mat-error>
+                    <mat-error
+                            *ngIf="changeEmailForm.get('email').hasError('pattern')">{{lm.badEmailError | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="password" placeholder="{{lm.password | translate}}"
+                           formControlName="password">
+                    <mat-error
+                            *ngIf="changeEmailForm.get('password').hasError('required')">{{lm.requiredError | translate}}</mat-error>
+                </mat-form-field>
+                <mat-action-row>
+                    <button mat-button type="submit" color="primary">{{lm.send | translate}}</button>
+                </mat-action-row>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{lm.changePasswordForm | translate}}</mat-panel-title>
+            </mat-expansion-panel-header>
 
-    <!--<form>-->
-    <!--<mat-form-field>-->
-    <!--&lt;!&ndash;<mat-label>{{lm.firstName | translate}}</mat-label>&ndash;&gt;-->
-    <!--<input matInput placeholder="from service">-->
-    <!--</mat-form-field>-->
-    <!--<mat-form-field>-->
-    <!--<mat-label>{{lm.secondName | translate}}</mat-label>-->
-    <!--<input matInput placeholder="from service">-->
-    <!--</mat-form-field>-->
-    <!--<mat-form-field>-->
-    <!--<mat-label>{{lm.birthDate | translate}}</mat-label>-->
-    <!--<input matInput placeholder="from service">-->
-    <!--</mat-form-field>-->
-    <!--</form>-->
-
-    <!--<mat-form-field>-->
-    <!--<input matInput placeholder="First name">-->
-    <!--</mat-form-field>-->
-    <!--<mat-action-row>-->
-    <!--<button mat-button color="primary">Wyślij</button>-->
-    <!--</mat-action-row>-->
-    <!--<mat-form-field>-->
-    <!--<input matInput placeholder="Age">-->
-    <!--</mat-form-field>-->
-    <!--</mat-expansion-panel>-->
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{lm.changeEmailForm | translate}}</mat-panel-title>
-      </mat-expansion-panel-header>
-      <form class="email-form" [formGroup]="changeEmailForm" (submit)="changeEmailSubmit()">
-        <mat-form-field>
-          <input matInput type="email" placeholder="{{lm.newEmail | translate}}" formControlName="email">
-          <mat-error
-                  *ngIf="changeEmailForm.get('email').hasError('required')">{{lm.requiredError | translate}}</mat-error>
-          <mat-error
-                  *ngIf="changeEmailForm.get('email').hasError('pattern')">{{lm.badEmailError | translate}}</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="password" placeholder="{{lm.password | translate}}" formControlName="password">
-          <mat-error
-                  *ngIf="changeEmailForm.get('password').hasError('required')">{{lm.requiredError | translate}}</mat-error>
-        </mat-form-field>
-        <mat-action-row>
-          <button mat-button type="submit" color="primary">{{lm.send | translate}}</button>
-        </mat-action-row>
-      </form>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{lm.changePasswordForm | translate}}</mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <form class="password-form" [formGroup]="changePasswordForm" (submit)="changePasswordSubmit()">
-        <mat-form-field>
-          <input matInput type="password" placeholder="{{lm.oldPassword | translate}}" formControlName="oldPassword">
-          <mat-error *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
-            {{lm.requiredError | translate}}
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="password" placeholder="{{lm.newPassword | translate}}" formControlName="newPassword">
-          <mat-error *ngIf="changePasswordForm.get('newPassword').hasError('required')">
-            {{lm.requiredError | translate}}
-          </mat-error>
-          <mat-error *ngIf="changePasswordForm.get('newPassword').hasError('pattern')">
-            {{lm.passwordPatternError | translate}}
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="password" placeholder="{{lm.repeatPassword | translate}}"
-                 formControlName="repeatPassword">
-          <mat-error *ngIf="changePasswordForm.get('repeatPassword').hasError('match')">
-            {{lm.differentPasswordsError | translate}}
-          </mat-error>
-        </mat-form-field>
-        <mat-action-row>
-          <button mat-button type="submit" color="primary">{{lm.send | translate}}</button>
-        </mat-action-row>
-      </form>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{lm.configuration | translate}}</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-checkbox *ngFor="let authorityItem of authorityItems" [(ngModel)]="authorityItem.enabled">
-        {{authorityItem.authorityType | translate}}
-      </mat-checkbox>
-      <mat-action-row>
-        <button mat-button color="primary" (click)="setAuthorities()">{{lm.send | translate}}</button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </mat-accordion>
+            <form class="password-form" [formGroup]="changePasswordForm" (submit)="changePasswordSubmit()">
+                <mat-form-field>
+                    <input matInput type="password" placeholder="{{lm.oldPassword | translate}}"
+                           formControlName="oldPassword">
+                    <mat-error *ngIf="changePasswordForm.get('oldPassword').hasError('required')">
+                        {{lm.requiredError | translate}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="password" placeholder="{{lm.newPassword | translate}}"
+                           formControlName="newPassword">
+                    <mat-error *ngIf="changePasswordForm.get('newPassword').hasError('required')">
+                        {{lm.requiredError | translate}}
+                    </mat-error>
+                    <mat-error *ngIf="changePasswordForm.get('newPassword').hasError('pattern')">
+                        {{lm.passwordPatternError | translate}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="password" placeholder="{{lm.repeatPassword | translate}}"
+                           formControlName="repeatPassword">
+                    <mat-error *ngIf="changePasswordForm.get('repeatPassword').hasError('match')">
+                        {{lm.differentPasswordsError | translate}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-action-row>
+                    <button mat-button type="submit" color="primary">{{lm.send | translate}}</button>
+                </mat-action-row>
+            </form>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{lm.configuration | translate}}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-checkbox *ngFor="let authorityItem of authorityItems" [(ngModel)]="authorityItem.enabled">
+                {{authorityItem.authorityType | translate}}
+            </mat-checkbox>
+            <mat-action-row>
+                <button mat-button color="primary" (click)="setAuthorities()">{{lm.send | translate}}</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>

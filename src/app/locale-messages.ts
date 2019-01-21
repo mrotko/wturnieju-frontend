@@ -106,6 +106,7 @@ export const LocaleMessages = {
   back: 'back',
   forward: 'forward',
   name: 'name',
+  surname: 'surname',
   accessOption: 'accessOption',
   fromDate: 'fromDate',
   toDate: 'toDate',
