@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(<LoginForm>this.loginFormGroup.value).subscribe(
         () => this.router.navigate([this.returnUrl]),
         err => {
-          if (err.status === 401) {
+          if (err.status === 403) {
             const email = this.loginFormGroup.get('username').value;
             this.authService.isAccountActive(email).subscribe(response => {
               if (response) {
