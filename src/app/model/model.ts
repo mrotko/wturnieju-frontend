@@ -149,7 +149,8 @@ export interface TournamentDTO {
 
 export interface ScheduleDto {
   tournamentId: string;
-  round: number;
+  tournamentName?: string;
+  round?: number;
   elements: ScheduleElementDto [];
 }
 

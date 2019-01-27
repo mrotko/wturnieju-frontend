@@ -30,6 +30,7 @@ export const RequestUrl = {
   tournament: {
     tournament: environment.apiUrl + '/tournaments/',
     user: environment.apiUrl + '/tournaments?userId=',
+    fixtures: environment.apiUrl + '/tournaments/schedule',
   },
 
   gameEditor: {
@@ -44,6 +45,10 @@ export const RequestUrl = {
     checkToken: environment.apiUrl + "/verification/checkToken?token={1}&service={2}",
     tournamentInvitation: environment.apiUrl + "/verification/tournament-invitation?token=",
     tournamentParticipationRequest: environment.apiUrl + "/verification/tournament-participation-request?token="
+  },
+
+  schedule: {
+    schedule: environment.apiUrl + "/schedule"
   },
 
   cli: environment.apiUrl + '/cli/',

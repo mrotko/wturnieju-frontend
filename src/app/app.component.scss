@@ -1,7 +1,26 @@
+.component-container {
+
+}
+
+.content {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 app-top-menu {
   display: block;
   padding-bottom: 5px;
 }
 
-.component-container {
+@media screen and (max-width: 1050px) {
+  .content {
+    max-width: 800px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .content {
+    max-width: 600px;
+  }
 }

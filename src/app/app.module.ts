@@ -56,6 +56,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {GameEditorModule} from './game-editor/game-editor.module';
 import {SharedModule} from './shared.module';
 import { FilterMenuComponent } from './filter-menu/filter-menu.component';
+import { TournamentScheduleComponent } from './tournament-schedule/tournament-schedule.component';
 
 registerLocaleData(localePl);
 
@@ -97,7 +98,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TournamentParticipationRequestVerificationComponent,
     ParticipantsProgressBarComponent,
     TournamentTimetableItemComponent,
-    FilterMenuComponent
+    FilterMenuComponent,
+    TournamentScheduleComponent
   ],
   entryComponents: [
     TournamentScheduleDialogComponent,

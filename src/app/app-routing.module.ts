@@ -18,8 +18,13 @@ import {PasswordVerificationComponent} from './password-verification/password-ve
 import {TournamentInviteVerificationComponent} from './tournament-invite-verification/tournament-invite-verification.component';
 import {TournamentParticipationRequestVerificationComponent} from './tournament-participation-request-verification/tournament-participation-request-verification.component';
 import {EmailVerificationComponent} from './email-verification/email-verification.component';
+import {HomeComponent} from './home/home.component';
 
 const routes: Routes = [
+
+  {
+    path: '', component: HomeComponent
+  },
   {
     path: 'auth', component: AuthComponent, canActivate: [CanActivateAuthComponentGuard], children:
       [

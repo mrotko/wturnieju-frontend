@@ -16,7 +16,8 @@ export class TournamentService implements OnInit {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
 
@@ -60,5 +61,13 @@ export class TournamentService implements OnInit {
 
   saveSchedule(tournamentId: string, schedule: ScheduleDto): Observable<ScheduleDto> {
     return this.http.put<ScheduleDto>(RequestUrl.tournament.tournament + tournamentId + '/schedule', schedule);
+  }
+
+  getPublicTournamentsIds(): Observable<string []> {
+    return this.http.get<string []>(RequestUrl.tournament.tournament, {
+      params: {
+        access: 'PUBLIC'
+      }
+    });
   }
 }

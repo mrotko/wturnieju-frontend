@@ -1,0 +1,12 @@
+<div class="component-container" *ngIf="isComponentVisible()">
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>{{tournamentSchedule.tournamentName}}</mat-expansion-panel-header>
+        <app-tournament-timetable-item
+                *ngFor="let game of tournamentSchedule.elements"
+                [date]="game.startDate"
+                [homeTeamData]="getHomeTeamData(game)"
+                [awayTeamData]="getAwayTeamData(game)"
+                [bye]="game.bye"
+                [shortDate]="true"></app-tournament-timetable-item>
+    </mat-expansion-panel>
+</div>
