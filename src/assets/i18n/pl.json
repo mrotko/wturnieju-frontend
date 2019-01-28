@@ -140,10 +140,17 @@
     "PRIVATE": "Prywatny"
   },
   "COMPETITION_TYPE": {
-    "CHESS": "Szachy"
+    "CHESS": "Szachy",
+    "FOOTBALL": "Piłka nożna",
+    "TENNIS": "Tenis",
+    "CUSTOM": "Własny"
   },
   "TOURNAMENT_SYSTEM_TYPE": {
-    "SWISS": "Szwajcarski"
+    "SWISS": "Szwajcarski",
+    "KNOCKOUT": "Turniejowy",
+    "GROUP": "Grupa",
+    "LEAGUE": "Liga",
+    "ROUND_ROBIN": "Każdy z każdym"
   },
   "TOURNAMENT_PARTICIPANT_TYPE": {
     "SINGLE": "Indywidualny",

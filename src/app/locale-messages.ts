@@ -150,10 +150,17 @@ export const LocaleMessages = {
     PRIVATE: ACCESS_OPTION.PRIVATE
   },
   COMPETITION_TYPE: {
-    CHESS: CompetitionType.CHESS
+    CHESS: CompetitionType.CHESS,
+    FOOTBALL: CompetitionType.FOOTBALL,
+    TENNIS: CompetitionType.TENNIS,
+    CUSTOM: CompetitionType.CUSTOM
   },
   TOURNAMENT_SYSTEM_TYPE: {
-    SWISS: TournamentSystemType.SWISS
+    SWISS: TournamentSystemType.SWISS,
+    KNOCKOUT: TournamentSystemType.KNOCKOUT,
+    GROUP: TournamentSystemType.GROUP,
+    LEAGUE: TournamentSystemType.LEAGUE,
+    ROUND_ROBIN: TournamentSystemType.ROUND_ROBIN
   },
   TOURNAMENT_PARTICIPANT_TYPE: {
     SINGLE: TOURNAMENT_PARTICIPANT_TYPE.SINGLE,
