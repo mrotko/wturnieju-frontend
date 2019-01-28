@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LocaleMessages} from '../locale-messages';
 import {TournamentParticipantsService} from '../tournament-participants.service';
-import {PARTICIPANT_STATUS, TournamentDTO, TournamentStatus} from '../model/model';
+import {ParticipantStatus, TournamentDTO, TournamentStatus} from '../model/model';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -71,29 +71,13 @@ export class ParticipantsComponent implements OnInit {
           return {
             id: dto.id,
             name: dto.fullName,
-            confirmed: (dto.participantStatus !== PARTICIPANT_STATUS.INVITED)
+            confirmed: (dto.participantStatus !== ParticipantStatus.INVITED)
           };
         });
       })).subscribe(participants => {
       this.participants = participants;
       this.initAutocompleteOptions();
     });
-  }
-
-  inviteParticipant(participantId?: string) {
-    // if (participantId || this.selectedUserId) {
-    //   this.tournamentParticipantsService.invite(this.tournament.id, participantId || this.selectedUserId).subscribe(() => {
-    //     this.selectedUserId = null;
-    //
-    //     for (let i = 0; i < this.participants.length; i++) {
-    //       if (this.participants[i].id === participantId) {
-    //         this.participants.splice(i, 1);
-    //       }
-    //     }
-    //
-    //     this.refresh();
-    //   });
-    // }
   }
 
   refresh() {
@@ -119,9 +103,3 @@ export class ParticipantsComponent implements OnInit {
       }));
   }
 }
-
-// const ParticipantsMock: ParticipantItem [] = [
-//   {id: '1', position: 1, name: 'John Smith', confirmed: true},
-//   {id: '2', position: 2, name: 'Ann Smith', confirmed: false},
-//   {id: '3', position: 3, name: 'Kal-El', confirmed: false}
-// ];

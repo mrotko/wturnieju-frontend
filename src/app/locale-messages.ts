@@ -1,8 +1,8 @@
 import {
-  ACCESS_OPTION,
+  AccessOption,
   AuthorityType,
   CompetitionType,
-  TOURNAMENT_PARTICIPANT_TYPE,
+  TournamentParticipantType,
   TournamentSystemType
 } from './model/model';
 import {toDate} from '@angular/common/src/i18n/format_date';
@@ -146,8 +146,8 @@ export const LocaleMessages = {
   winner: 'winner',
   participants: 'participants',
   ACCESS_OPTION: {
-    PUBLIC: ACCESS_OPTION.PUBLIC,
-    PRIVATE: ACCESS_OPTION.PRIVATE
+    PUBLIC: AccessOption.PUBLIC,
+    PRIVATE: AccessOption.PRIVATE
   },
   COMPETITION_TYPE: {
     CHESS: CompetitionType.CHESS,
@@ -163,8 +163,8 @@ export const LocaleMessages = {
     ROUND_ROBIN: TournamentSystemType.ROUND_ROBIN
   },
   TOURNAMENT_PARTICIPANT_TYPE: {
-    SINGLE: TOURNAMENT_PARTICIPANT_TYPE.SINGLE,
-    TEAM: TOURNAMENT_PARTICIPANT_TYPE.TEAM
+    SINGLE: TournamentParticipantType.SINGLE,
+    TEAM: TournamentParticipantType.TEAM
   },
   AUTHORITY_TYPE: {
     CLI: AuthorityType.CLI
