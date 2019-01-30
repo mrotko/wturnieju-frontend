@@ -14,8 +14,7 @@
                     <mat-form-field>
                         <mat-label>{{lm.accessOption | translate}}</mat-label>
                         <mat-select formControlName="accessOption">
-                            <mat-option *ngFor="let accessOption of config['accessOptions']"
-                                        [value]="{value: accessOption, translationKey: accessOption}">
+                            <mat-option *ngFor="let accessOption of config['accessOptions']" [value]="accessOption">
                                 {{accessOption | translate}}
                             </mat-option>
                         </mat-select>
@@ -24,27 +23,28 @@
                     <div class="column-style">
                         <mat-form-field>
                             <mat-label>{{lm.fromDate | translate}}</mat-label>
-                            <input matInput [matDatepicker]="tournamentFromDate" formControlName="fromDate">
+                            <input matInput [matDatepicker]="tournamentFromDate" formControlName="startDate">
                             <mat-datepicker-toggle matSuffix [for]="tournamentFromDate"></mat-datepicker-toggle>
                             <mat-datepicker #tournamentFromDate></mat-datepicker>
-                            <mat-error *ngIf="commonFormGroup.get('fromDate').hasError('required')">{{lm.requiredError |
+                            <mat-error
+                                    *ngIf="commonFormGroup.get('startDate').hasError('required')">{{lm.requiredError |
                               translate}}
                             </mat-error>
                             <mat-error
-                                    *ngIf="commonFormGroup.get('fromDate').hasError('lessEqThan')">{{lm.badValueError |
+                                    *ngIf="commonFormGroup.get('startDate').hasError('lessEqThan')">{{lm.badValueError |
                               translate}}
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>{{lm.toDate | translate}}</mat-label>
-                            <input matInput [matDatepicker]="tournamentToDate" formControlName="toDate">
+                            <input matInput [matDatepicker]="tournamentToDate" formControlName="endDate">
                             <mat-datepicker-toggle matSuffix [for]="tournamentToDate"></mat-datepicker-toggle>
                             <mat-datepicker #tournamentToDate></mat-datepicker>
                             <mat-error
-                                    *ngIf="commonFormGroup.get('toDate').hasError('required')">{{lm.requiredError | translate}}
+                                    *ngIf="commonFormGroup.get('endDate').hasError('required')">{{lm.requiredError | translate}}
                             </mat-error>
                             <mat-error
-                                    *ngIf="commonFormGroup.get('toDate').hasError('greaterEqThan')">{{lm.badValueError |
+                                    *ngIf="commonFormGroup.get('endDate').hasError('greaterEqThan')">{{lm.badValueError |
                               translate}}
                             </mat-error>
                         </mat-form-field>
@@ -82,10 +82,29 @@
                     </div>
                     <mat-form-field>
                         <mat-label>{{lm.competition | translate}}</mat-label>
-                        <mat-select formControlName="competition">
-                            <mat-option *ngFor="let competitionType of config['competitionTypes']"
-                                        [value]="{value: competitionType, translationKey: competitionType}">
+                        <mat-select formControlName="competitionType">
+                            <mat-option *ngFor="let competitionType of getAvailableCompetitionTypes()"
+                                        [value]="competitionType">
                                 {{competitionType | translate}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{lm.requiredError | translate}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{lm.tournamentSystem | translate}}</mat-label>
+                        <mat-select formControlName="systemType">
+                            <mat-option *ngFor="let systemType of getAvailableSystemTypes()" [value]="systemType">
+                                {{systemType | translate}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{lm.requiredError | translate}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{lm.participantType | translate}}</mat-label>
+                        <mat-select formControlName="tournamentParticipantType">
+                            <mat-option *ngFor="let tournamentParticipantType of getAvailableParticipantTypes()"
+                                        [value]="tournamentParticipantType">
+                                {{tournamentParticipantType | translate}}
                             </mat-option>
                         </mat-select>
                         <mat-error>{{lm.requiredError | translate}}</mat-error>
@@ -93,71 +112,6 @@
                     <mat-checkbox formControlName="invitationLink">{{lm.invitationLink | translate}}</mat-checkbox>
                 </div>
             </form>
-            <div class="control-btn">
-                <button mat-icon-button matStepperNext (click)="submitCommonForm()">
-                    <mat-icon>navigate_next</mat-icon>
-                </button>
-            </div>
-        </mat-step>
-        <mat-step [stepControl]="competitionDetailsFormGroup"
-                  [errorMessage]="lm.tournamentCreatorFormErrorMsg | translate">
-            <div *ngIf="!competitionDetailsFormGroup">
-                <app-spinner></app-spinner>
-            </div>
-            <form [formGroup]="competitionDetailsFormGroup" *ngIf="competitionDetailsFormGroup">
-                <div class="step-content">
-                    <mat-form-field *ngIf="competitionDetailsFormGroup.contains('participantType')">
-                        <mat-label>{{lm.participantType | translate}}</mat-label>
-                        <mat-select formControlName="participantType">
-                            <mat-option
-                                    *ngFor="let participantType of config['participantTypes'][commonFormGroup.value['competition'].value]"
-                                    [value]="{value: participantType, translationKey: participantType}">
-                                {{participantType | translate}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error>{{lm.requiredError | translate}}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field *ngIf="competitionDetailsFormGroup.contains('tournamentSystem')">
-                        <mat-label>{{lm.tournamentSystem | translate}}</mat-label>
-                        <mat-select formControlName="tournamentSystem">
-                            <mat-option
-                                    *ngFor="let tournamentSystem of config['systemTypes'][commonFormGroup.value['competition'].value]"
-                                    [value]="{value: tournamentSystem, translationKey: tournamentSystem}">
-                                {{tournamentSystem | translate}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error>{{lm.requiredError | translate}}</mat-error>
-                    </mat-form-field>
-                </div>
-            </form>
-            <div class="control-btn">
-                <button mat-icon-button matStepperPrevious>
-                    <mat-icon>navigate_before</mat-icon>
-                </button>
-                <button mat-icon-button matStepperNext (click)="submitCompetitionDetailsFormGroup()">
-                    <mat-icon>navigate_next</mat-icon>
-                </button>
-            </div>
-        </mat-step>
-
-        <mat-step>
-            <div class="summary" *ngIf="commonFormGroup && competitionDetailsFormGroup">
-                <div class="column-style" *ngFor="let entry of commonFormGroup.value | mapToArray">
-                    <div>{{entry.left | translate}}</div>
-                    <div>{{entry.right.translationKey ? (entry.right.translationKey | translate) : entry.right}}</div>
-                </div>
-                <mat-divider></mat-divider>
-                <div class="column-style"
-                     *ngFor="let entry of competitionDetailsFormGroup.value | mapToArray">
-                    <div>{{entry.left | translate}}</div>
-                    <div>{{entry.right.translationKey ? (entry.right.translationKey | translate) : entry.right}}</div>
-                </div>
-            </div>
-            <div class="control-btn">
-                <button mat-icon-button matStepperPrevious>
-                    <mat-icon>navigate_before</mat-icon>
-                </button>
-            </div>
             <button mat-button style="float: right;"
                     (click)="submitTournamentCreatorForm()">{{lm.end | translate}}</button>
         </mat-step>

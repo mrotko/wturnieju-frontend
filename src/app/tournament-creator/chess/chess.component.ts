@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-chess',
+  selector: 'tournament-creator-chess',
   templateUrl: './chess.component.html',
   styleUrls: ['./chess.component.scss']
 })
 export class ChessComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

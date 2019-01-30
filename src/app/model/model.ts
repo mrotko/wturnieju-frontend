@@ -82,10 +82,10 @@ export interface UserDTO {
 }
 
 export interface TournamentCreatorConfig {
-  accessOptions: string [];
+  accessOptions: AccessOption [];
   competitionTypes: CompetitionType [];
-  systemTypes: { [key: string]: string [] };
-  participantTypes: { [key: string]: string [] };
+  systemTypes: { [key: string]: TournamentSystemType [] };
+  participantTypes: { [key: string]: TournamentParticipantType [] };
 }
 
 export interface TranslatableValue<T> {
