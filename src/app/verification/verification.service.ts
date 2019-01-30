@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {RequestUrl} from './config/requestUrl';
 import {Observable} from 'rxjs';
+import {RequestUrl} from '../config/requestUrl';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,8 @@ export class VerificationService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
   verifyEmailChange(token: string): Observable<any> {
     return this.http.patch(RequestUrl.verification.emailChange + token, null);

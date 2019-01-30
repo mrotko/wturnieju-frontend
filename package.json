@@ -44,16 +44,15 @@
     "npm": "^6.7.0",
     "npm-registry-fetch": "^3.9.0",
     "path": "^0.12.7",
-    "rxjs": "^6.3.3",
+    "rxjs": "^6.4.0",
     "socks": "^2.2.3",
-    "webpack": "^4.29.0",
     "webpack-dev-server": "^3.1.14",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
     "@types/jasmine": "^3.3.8",
     "@types/jasminewd2": "^2.0.6",
-    "@types/node": "^10.12.18",
+    "@types/node": "^10.12.19",
     "codelyzer": "^4.5.0",
     "enhanced-resolve": "^3.4.1",
     "jasmine-core": "^3.3.0",

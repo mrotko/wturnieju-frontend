@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
 import {VerificationService} from '../verification.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {VerificationComponent} from '../verification/verification.component';
+import {AbstractVerification} from '../abstract.verification';
 
 @Component({
   selector: 'app-email-verification',
   templateUrl: './email-verification.component.html',
   styleUrls: ['./email-verification.component.scss']
 })
-export class EmailVerificationComponent extends VerificationComponent{
+export class EmailVerificationComponent extends AbstractVerification {
 
   constructor(
     verificationService: VerificationService,

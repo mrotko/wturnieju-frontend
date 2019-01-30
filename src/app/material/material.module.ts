@@ -12,6 +12,7 @@ import {
   MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
+  MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
   MatInputModule,
@@ -34,7 +35,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule,
+  MatTreeModule
 } from '@angular/material';
 
 @NgModule({
@@ -74,6 +75,7 @@ import {
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
+    MatFormFieldModule
   ],
   exports: [
     MatAutocompleteModule,
@@ -114,4 +116,5 @@ import {
   ],
   declarations: []
 })
-export class MaterialModule { }
+export class MaterialModule {
+}

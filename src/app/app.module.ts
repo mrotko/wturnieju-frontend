@@ -3,25 +3,20 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {HomeComponent} from './home/home.component';
 import {TopMenuComponent} from './top-menu/top-menu.component';
 import {AuthComponent} from './auth/auth.component';
 import {ForgetPasswordComponent} from './auth/forget-password/forget-password.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from './service/auth.service';
-import {JwtInterceptor} from './helper/jwt.interceptor';
-import {ErrorInterceptor} from './helper/error.interceptor';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {fas} from '@fortawesome/free-solid-svg-icons';
 import {UserSettingsComponent} from './user-settings/user-settings.component';
 import {AuthRequiredGuard} from './guard/auth-required.guard';
 import {CanActivateAuthComponentGuard} from './guard/can-activate-auth-component.guard';
-import {TournamentCreatorComponent} from './tournament-creator/tournament-creator.component';
-import {TournamentCreatorService} from './service/tournament-creator.service';
 import {MapToArrayPipe} from './pipe/map-to-array.pipe';
 import {MissingTranslationHandler, TranslateLoader, TranslateModule, TranslateStore} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -39,24 +34,18 @@ import {TournamentParticipantsService} from './tournament-participants.service';
 import {TournamentTimetableComponent} from './tournament-timetable/tournament-timetable.component';
 import {TournamentScheduleDialogComponent} from './prepare-tournament-round-fixtures-dialog/tournament-schedule-dialog.component';
 import {CliComponent} from './cli/cli.component';
-import {VerificationComponent} from './verification/verification.component';
-import {AccountVerificationComponent} from './account-verification/account-verification.component';
-import {EmailVerificationComponent} from './email-verification/email-verification.component';
-import {PasswordVerificationComponent} from './password-verification/password-verification.component';
 import {TournamentParticipantsConfigurationComponent} from './tournament-participants-configuration/tournament-participants-configuration.component';
 import {FloatingButtonComponent} from './floating-button/floating-button.component';
 import {InviteTournamentParticipantPopupComponent} from './invite-tournament-participant-popup/invite-tournament-participant-popup.component';
 import {ParticipantComponent} from './participant/participant.component';
-import {TournamentInviteVerificationComponent} from './tournament-invite-verification/tournament-invite-verification.component';
-import {TournamentParticipationRequestVerificationComponent} from './tournament-participation-request-verification/tournament-participation-request-verification.component';
 import {ClipboardModule} from 'ngx-clipboard';
 import {ParticipantsProgressBarComponent} from './participants-progress-bar/participants-progress-bar.component';
 import {TournamentTimetableItemComponent} from './tournament-timetable-item/tournament-timetable-item.component';
 import {AppRoutingModule} from './app-routing.module';
 import {GameEditorModule} from './game-editor/game-editor.module';
 import {SharedModule} from './shared.module';
-import { FilterMenuComponent } from './filter-menu/filter-menu.component';
-import { TournamentScheduleComponent } from './tournament-schedule/tournament-schedule.component';
+import {FilterMenuComponent} from './filter-menu/filter-menu.component';
+import {TournamentScheduleComponent} from './tournament-schedule/tournament-schedule.component';
 
 registerLocaleData(localePl);
 
@@ -77,8 +66,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     TopMenuComponent,
     AuthComponent,
     UserSettingsComponent,
-    TournamentCreatorComponent,
-    MapToArrayPipe,
     TournamentDashboardComponent,
     TournamentsComponent,
     TournamentTableComponent,
@@ -86,16 +73,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     TournamentTimetableComponent,
     TournamentScheduleDialogComponent,
     CliComponent,
-    VerificationComponent,
     FloatingButtonComponent,
-    AccountVerificationComponent,
-    EmailVerificationComponent,
-    PasswordVerificationComponent,
     TournamentParticipantsConfigurationComponent,
     InviteTournamentParticipantPopupComponent,
     ParticipantComponent,
-    TournamentInviteVerificationComponent,
-    TournamentParticipationRequestVerificationComponent,
     ParticipantsProgressBarComponent,
     TournamentTimetableItemComponent,
     FilterMenuComponent,
@@ -108,7 +89,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     AppRoutingModule,
     BrowserModule,
-    HttpClientModule,
+    SharedModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -119,12 +100,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       useDefaultLang: false
     }),
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
     FontAwesomeModule,
     ClipboardModule,
-    GameEditorModule,
-    SharedModule
+    GameEditorModule
   ],
   providers: [
     AuthRequiredGuard,
@@ -132,13 +110,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConfigService,
     CanActivateAuthComponentGuard,
     AuthService,
-    TournamentCreatorService,
     MapToArrayPipe,
     LocaleService,
     TournamentService,
     TournamentParticipantsService,
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {
       provide: LOCALE_ID,
       deps: [LocaleService],
@@ -147,4 +122,5 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

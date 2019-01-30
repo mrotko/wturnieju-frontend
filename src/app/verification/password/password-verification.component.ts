@@ -1,19 +1,19 @@
 import {Component} from '@angular/core';
-import {VerificationComponent} from '../verification/verification.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {VerificationService} from '../verification.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Pattern} from '../model/model';
-import {matchValidator} from '../model/wt-validators';
-import {SnackBarService} from '../snack-bar.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {AbstractVerification} from '../abstract.verification';
+import {SnackBarService} from '../../snack-bar.service';
+import {Pattern} from '../../model/model';
+import {matchValidator} from '../../model/wt-validators';
 
 @Component({
   selector: 'app-password-verification',
   templateUrl: './password-verification.component.html',
   styleUrls: ['./password-verification.component.scss']
 })
-export class PasswordVerificationComponent extends VerificationComponent{
+export class PasswordVerificationComponent extends AbstractVerification {
 
   resetPasswordFormGroup: FormGroup;
 

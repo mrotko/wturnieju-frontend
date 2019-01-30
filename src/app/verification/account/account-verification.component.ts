@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
-import {VerificationComponent} from '../verification/verification.component';
 import {VerificationService} from '../verification.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AbstractVerification} from '../abstract.verification';
 
 @Component({
   selector: 'app-account-verification',
   templateUrl: './account-verification.component.html',
   styleUrls: ['./account-verification.component.scss']
 })
-export class AccountVerificationComponent extends VerificationComponent{
+export class AccountVerificationComponent extends AbstractVerification {
 
   constructor(
     verificationService: VerificationService,
@@ -20,6 +20,7 @@ export class AccountVerificationComponent extends VerificationComponent{
 
   ngOnInit() {
     super.ngOnInit();
+    console.log('run');
     this.verificationService.verifyAccount(this.token).subscribe(() => this.verificationStatus = true,
       () => this.verificationStatus = false)
   }

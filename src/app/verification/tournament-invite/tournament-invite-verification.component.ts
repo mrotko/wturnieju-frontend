@@ -1,18 +1,18 @@
 import {Component} from '@angular/core';
-import {VerificationComponent} from '../verification/verification.component';
+import {AbstractVerification} from '../abstract.verification';
 import {VerificationService} from '../verification.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TournamentService} from '../tournament.service';
-import {TournamentDTO} from '../model/model';
-import {SnackBarService} from '../snack-bar.service';
-import {RouterUrl} from '../config/routerUrl';
+import {TournamentService} from '../../tournament.service';
+import {TournamentDTO} from '../../model/model';
+import {SnackBarService} from '../../snack-bar.service';
+import {RouterUrl} from '../../config/routerUrl';
 
 @Component({
   selector: 'app-tournament-invite-verification',
   templateUrl: './tournament-invite-verification.component.html',
   styleUrls: ['./tournament-invite-verification.component.scss']
 })
-export class TournamentInviteVerificationComponent extends VerificationComponent {
+export class TournamentInviteVerificationComponent extends AbstractVerification {
 
   tournament: TournamentDTO;
 

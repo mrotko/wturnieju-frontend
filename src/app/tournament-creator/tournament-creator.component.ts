@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {LocaleMessages} from '../locale-messages';
 import {CompetitionType, TournamentCreatorConfig, TranslatableValue} from '../model/model';
-import {TournamentCreatorService} from '../service/tournament-creator.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {greaterEqThanValidator, lessEqThanValidator} from '../model/wt-validators';
-import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
-import {Router} from '@angular/router';
 import {RouterUrl} from '../config/routerUrl';
+import {TournamentCreatorService} from './tournament-creator.service';
+import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
 import {SnackBarService} from '../snack-bar.service';
+import {Router} from '@angular/router';
 
 // TODO daty są w nieprawidłowym formacie
 
@@ -93,11 +93,11 @@ export class TournamentCreatorComponent implements OnInit {
   }
 
   public submitTournamentCreatorForm() {
-    this.service.send(this.tournamentCreatorData).subscribe(
-      response => {
-        this.snackbarService.openSuccess(this.lm.tournamentCreatorSuccessMsg);
-        this.redirectToTournament(response.tournamentId);
-      }, () => this.snackbarService.openError(this.lm.serviceUnavailableErrorMsg));
+    // this.service.send(this.tournamentCreatorData).subscribe(
+    //   response => {
+    //     this.snackbarService.openSuccess(this.lm.tournamentCreatorSuccessMsg);
+    //     this.redirectToTournament(response.tournamentId);
+    //   }, () => this.snackbarService.openError(this.lm.serviceUnavailableErrorMsg));
   }
 
   private redirectToTournament(tournamentId: string) {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {TournamentCreatorConfig} from '../model/model';
+import {TournamentCreatorConfig, TournamentTemplateDto} from '../model/model';
 import {RequestUrl} from '../config/requestUrl';
 
 @Injectable({
@@ -11,13 +11,14 @@ export class TournamentCreatorService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
   getConfig(): Observable<TournamentCreatorConfig> {
     return this.http.get<TournamentCreatorConfig>(RequestUrl.tournamentCreator.config);
   }
 
-  send(tournamentCreatorData: {}): Observable<any> {
+  send<T extends TournamentTemplateDto>(tournamentCreatorData: T): Observable<any> {
     return this.http.post(RequestUrl.tournamentCreator.create, tournamentCreatorData);
   }
 }

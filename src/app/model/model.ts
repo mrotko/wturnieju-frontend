@@ -1,3 +1,35 @@
+export interface TournamentTemplateDto {
+  name: string;
+  description: string;
+  place: string;
+  startDate: Date;
+  endDate: Date;
+  accessOption: AccessOption;
+  maxParticipants: number;
+  minParticipants: number;
+  plannedRounds: number;
+  competitionType: CompetitionType;
+  invitationLink: boolean;
+  systemType: TournamentSystemType;
+  tournamentParticipantType: TournamentParticipantType;
+}
+
+export interface ChessTournamentTemplateDto extends TournamentTemplateDto {
+
+}
+
+export interface FootballTournamentTemplateDto extends TournamentTemplateDto {
+
+}
+
+export interface CustomTournamentTemplateDto extends TournamentTemplateDto {
+
+}
+
+export interface TennisTournamentTemplateDto extends TournamentTemplateDto {
+
+}
+
 export interface RegisterForm {
   username: string;
   password: string;

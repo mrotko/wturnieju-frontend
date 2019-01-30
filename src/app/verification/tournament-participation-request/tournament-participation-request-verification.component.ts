@@ -1,20 +1,20 @@
 import {Component} from '@angular/core';
-import {VerificationComponent} from '../verification/verification.component';
 import {VerificationService} from '../verification.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../service/auth.service';
-import {TournamentDTO, User} from '../model/model';
-import {SnackBarService} from '../snack-bar.service';
-import {RouterUrl} from '../config/routerUrl';
-import {TournamentService} from '../tournament.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {AbstractVerification} from '../abstract.verification';
+import {TournamentDTO, User} from '../../model/model';
+import {AuthService} from '../../service/auth.service';
+import {SnackBarService} from '../../snack-bar.service';
+import {TournamentService} from '../../tournament.service';
+import {RouterUrl} from '../../config/routerUrl';
 
 @Component({
   selector: 'app-tournament-participation-request-verification',
   templateUrl: './tournament-participation-request-verification.component.html',
   styleUrls: ['./tournament-participation-request-verification.component.scss']
 })
-export class TournamentParticipationRequestVerificationComponent extends VerificationComponent{
+export class TournamentParticipationRequestVerificationComponent extends AbstractVerification {
 
   currentUser: User;
 

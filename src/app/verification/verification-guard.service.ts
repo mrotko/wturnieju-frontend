@@ -6,11 +6,12 @@ import {VerificationService} from './verification.service';
 @Injectable({
   providedIn: 'root'
 })
-export class VerificationComponentGuard implements CanActivate {
+export class VerificationGuard implements CanActivate {
 
   constructor(
     private verificationService: VerificationService
-  ) {}
+  ) {
+  }
 
   canActivate(
     next: ActivatedRouteSnapshot,
