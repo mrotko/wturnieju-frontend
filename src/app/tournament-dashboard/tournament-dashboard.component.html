@@ -5,20 +5,6 @@
             <div>{{tournament.startDate | date: 'short'}}</div>
             <div>{{tournament.endDate | date: 'short'}}</div>
         </div>
-        <!--<div class="tournament-control dashboard-header-item">-->
-        <!--<button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.BEFORE_START" (click)="startTournament()">-->
-        <!--<mat-icon>play_arrow</mat-icon>-->
-        <!--</button>-->
-        <!--<button mat-icon-button *ngIf="false && tournament.status === TOURNAMENT_STATUS.IN_PROGRESS">-->
-        <!--<mat-icon>pause</mat-icon>-->
-        <!--</button>-->
-        <!--<button mat-icon-button *ngIf="tournament.status === TOURNAMENT_STATUS.IN_PROGRESS" (click)="endTournament()">-->
-        <!--<mat-icon>stop</mat-icon>-->
-        <!--</button>-->
-        <!--<button mat-button (click)="openPrepareTournamentRoundFixturesDialog()" *ngIf="isNextRoundAvailable()">-->
-        <!--{{lm.generateRound | translate}}-->
-        <!--</button>-->
-        <!--</div>-->
     </div>
     <div class="dashboard-content">
         <app-tournament-participants-configuration *ngIf="isTournamentBeforeStart()"
@@ -35,9 +21,6 @@
                                               [timetableData]="endedGamesTimetableData"
                                               (reloadRequiredEvent)="reload()"></app-tournament-timetable>
                 </mat-card>
-            </mat-tab>
-            <mat-tab [label]="lm.stats | translate">
-                Statystyki
             </mat-tab>
             <mat-tab
                     [label]="lm.schedule | translate">

@@ -67,14 +67,14 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
   private initEndedGamesSchedule() {
     this.tournamentService.getEndedGamesSchedule(this.tournamentId).subscribe(
       response => this.createEndedGamesTimetableData(response),
-      error => this.snackbarService.openError(this.lm.unknownError)
+      () => this.snackbarService.openError(this.lm.unknownError)
     );
   }
 
   private initInProgressGamesSchedule() {
     this.tournamentService.getInProgressGamesSchedule(this.tournamentId).subscribe(
       response => this.createInProgressGamesTimetableData(response),
-      error => this.snackbarService.openError(this.lm.unknownError)
+      () => this.snackbarService.openError(this.lm.unknownError)
     );
   }
 
@@ -133,7 +133,7 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
   }
 
   handleTabChange(index: number) {
-    if (index === 2) {
+    if (index === 1) {
       this.setScheduleFloatingBtnAction(true);
     } else {
       this.setScheduleFloatingBtnAction(false);
