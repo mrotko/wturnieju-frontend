@@ -1,7 +1,6 @@
 <div class="mat-elevation-z1 component-container" [ngClass]="isRejected() ? 'rejected-participant': ''">
     <div class="participant-content">
-        <span class="mat-body-1">{{participant.fullName}}</span>
-        <span class="mat-caption">{{participant.email}}</span>
+        <span class="mat-body-1">{{participant.name}}</span>
     </div>
     <div class="action-panel">
         <button mat-icon-button *ngIf="acceptBtnClick.observers.length > 0"

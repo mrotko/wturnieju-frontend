@@ -1,13 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tuple2} from '../model/model';
 
-export interface TeamData {
-  teamId: string;
+export interface ParticipantData {
+  participantId: string;
   name: string;
   winner: boolean;
   currentResult: number;
   periodsResult: Tuple2<number, number> [];
 }
+
 @Component({
   selector: 'app-tournament-timetable-item',
   templateUrl: './tournament-timetable-item.component.html',
@@ -19,27 +20,28 @@ export class TournamentTimetableItemComponent implements OnInit {
 
   @Input() shortDate: boolean = false;
 
-  @Input() homeTeamData: TeamData;
+  @Input() homeParticipantData: ParticipantData;
 
-  @Input() awayTeamData: TeamData;
+  @Input() awayParticipantData: ParticipantData;
 
   @Input() bye: boolean = false;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  getTeams(): TeamData [] {
+  getParticipants(): ParticipantData [] {
     if (this.bye) {
-      return [this.homeTeamData, {
+      return [this.homeParticipantData, {
         name: '',
         periodsResult: [],
         winner: null,
-        teamId: null,
+        participantId: null,
         currentResult: null
       }]
     }
-    return [this.homeTeamData, this.awayTeamData];
+    return [this.homeParticipantData, this.awayParticipantData];
   }
 }

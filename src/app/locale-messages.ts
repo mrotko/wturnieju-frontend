@@ -1,10 +1,4 @@
-import {
-  AccessOption,
-  AuthorityType,
-  CompetitionType,
-  TournamentParticipantType,
-  TournamentSystemType
-} from './model/model';
+import {AccessOption, AuthorityType, CompetitionType, ParticipantType, TournamentSystemType} from './model/model';
 import {toDate} from '@angular/common/src/i18n/format_date';
 
 export const LocaleMessages = {
@@ -162,9 +156,9 @@ export const LocaleMessages = {
     LEAGUE: TournamentSystemType.LEAGUE,
     ROUND_ROBIN: TournamentSystemType.ROUND_ROBIN
   },
-  TOURNAMENT_PARTICIPANT_TYPE: {
-    SINGLE: TournamentParticipantType.SINGLE,
-    TEAM: TournamentParticipantType.TEAM
+  PARTICIPANT_TYPE: {
+    SINGLE: ParticipantType.SINGLE,
+    TEAM: ParticipantType.TEAM
   },
   AUTHORITY_TYPE: {
     CLI: AuthorityType.CLI

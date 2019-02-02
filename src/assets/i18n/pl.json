@@ -152,7 +152,7 @@
     "LEAGUE": "Liga",
     "ROUND_ROBIN": "Każdy z każdym"
   },
-  "TOURNAMENT_PARTICIPANT_TYPE": {
+  "PARTICIPANT_TYPE": {
     "SINGLE": "Indywidualny",
     "TEAM": "Zespół"
   },

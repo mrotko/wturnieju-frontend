@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TournamentDTO, Tuple2} from '../model/model';
 import {LocaleMessages} from '../locale-messages';
-import {TeamData} from '../tournament-timetable-item/tournament-timetable-item.component';
+import {ParticipantData} from '../tournament-timetable-item/tournament-timetable-item.component';
 import {ObjectUtils} from '../utils/ObjectUtils';
 
 
@@ -17,7 +17,7 @@ export interface TimetableElement {
 export interface GameData {
   date: Date;
   bye: boolean;
-  teams: Tuple2<TeamData, TeamData>;
+  teams: Tuple2<ParticipantData, ParticipantData>;
 }
 
 @Component({
@@ -37,8 +37,7 @@ export class TournamentTimetableComponent implements OnInit, OnChanges {
 
   lm = LocaleMessages;
 
-  constructor(
-  ) {
+  constructor() {
   }
 
   ngOnInit() {

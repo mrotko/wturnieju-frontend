@@ -23,7 +23,8 @@ export class GameComponent implements OnInit {
     private gameEditorService: GameEditorService,
     private translate: TranslateService,
     private dialog: MatDialog
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
 
@@ -51,11 +52,11 @@ export class GameComponent implements OnInit {
         competitionType: this.gameFixture.competitionType,
         gameId: this.gameFixture.gameId,
         tournamentId: this.gameFixture.tournamentId,
-        homeName: this.gameFixture.homeTeam.name,
-        awayName: this.gameFixture.awayTeam.name
+        homeName: this.gameFixture.homeParticipant.name,
+        awayName: this.gameFixture.awayParticipant.name
       }
     }).afterClosed().subscribe(game => {
-      if(game) {
+      if (game) {
         this.gameFixture = game;
       }
     });
@@ -75,6 +76,6 @@ export class GameComponent implements OnInit {
 
   getGameHeaderText(): string {
     const roundText = this.translate.instant(this.lm.round) + ' ' + this.gameFixture.round + ': ';
-    return  roundText + this.gameFixture.homeTeam.name + ' vs ' + this.gameFixture.awayTeam.name;
+    return roundText + this.gameFixture.homeParticipant.name + ' vs ' + this.gameFixture.awayParticipant.name;
   }
 }

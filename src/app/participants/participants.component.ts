@@ -70,7 +70,7 @@ export class ParticipantsComponent implements OnInit {
         return dtos.map((dto): ParticipantItem => {
           return {
             id: dto.id,
-            name: dto.fullName,
+            name: dto.name,
             confirmed: (dto.participantStatus !== ParticipantStatus.INVITED)
           };
         });

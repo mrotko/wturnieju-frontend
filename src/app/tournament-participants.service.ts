@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {TournamentParticipantDTO} from './model/model';
+import {ParticipantDTO} from './model/model';
 import {RequestUrl} from './config/requestUrl';
 
 @Injectable()
@@ -9,10 +9,11 @@ export class TournamentParticipantsService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
-  getParticipants(tournamentId: string): Observable<TournamentParticipantDTO []> {
-    return this.http.get<TournamentParticipantDTO []>(RequestUrl.tournament.tournament + tournamentId + '/participants');
+  getParticipants(tournamentId: string): Observable<ParticipantDTO []> {
+    return this.http.get<ParticipantDTO []>(RequestUrl.tournament.tournament + tournamentId + '/participants');
   }
 
   invite(tournamentId: string, invitedIds: string []): Observable<any> {

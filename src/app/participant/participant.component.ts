@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {InvitationStatus, TournamentParticipantDTO} from '../model/model';
+import {InvitationStatus, ParticipantDTO} from '../model/model';
 
 
 @Component({
@@ -9,7 +9,7 @@ import {InvitationStatus, TournamentParticipantDTO} from '../model/model';
 })
 export class ParticipantComponent implements OnInit {
 
-  @Input() participant: TournamentParticipantDTO;
+  @Input() participant: ParticipantDTO;
 
   @Output() removeBtnClick: EventEmitter<String> = new EventEmitter();
 
@@ -17,7 +17,8 @@ export class ParticipantComponent implements OnInit {
 
   @Output() messageBtnClick: EventEmitter<String> = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
   isRejected() {
     return this.participant.invitationStatus === InvitationStatus.REJECTED;

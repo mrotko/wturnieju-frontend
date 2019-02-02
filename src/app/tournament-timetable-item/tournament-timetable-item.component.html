@@ -1,19 +1,20 @@
-<div class="component-container" *ngIf="homeTeamData">
-  <mat-card>
-    <div class="date">
-      <div>{{date | date: 'shortDate'}}</div>
-      <div *ngIf="!shortDate">{{date | date: 'shortTime'}}</div>
-    </div>
-    <div class="content">
-      <div *ngFor="let team of getTeams()" class="team" [ngClass]="team.winner ? 'winner' : ''">
-        <div>{{team.name}}</div>
-        <div class="result">
-          <div class="period-result" *ngFor="let periodResult of (team.periodsResult || [])">
-            <div class="period-result">{{periodResult.right}}</div>
-          </div>
-          <div class="current-result">{{team.currentResult}}</div>
+<div class="component-container" *ngIf="homeParticipantData">
+    <mat-card>
+        <div class="date">
+            <div>{{date | date: 'shortDate'}}</div>
+            <div *ngIf="!shortDate">{{date | date: 'shortTime'}}</div>
         </div>
-      </div>
-    </div>
-  </mat-card>
+        <div class="content">
+            <div *ngFor="let participant of getParticipants()" class="team"
+                 [ngClass]="participant.winner ? 'winner' : ''">
+                <div>{{participant.name}}</div>
+                <div class="result">
+                    <div class="period-result" *ngFor="let periodResult of (participant.periodsResult || [])">
+                        <div class="period-result">{{periodResult.right}}</div>
+                    </div>
+                    <div class="current-result">{{participant.currentResult}}</div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
 </div>

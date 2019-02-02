@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {LocaleMessages} from '../locale-messages';
 import {
   CompetitionType,
+  ParticipantType,
   TournamentCreatorConfig,
-  TournamentParticipantType,
   TournamentSystemType,
   TournamentTemplateDto
 } from '../model/model';
@@ -65,7 +65,7 @@ export class TournamentCreatorComponent implements OnInit {
       maxParticipants: new FormControl(''),
       competitionType: new FormControl('', Validators.required),
       invitationLink: new FormControl(''),
-      tournamentParticipantType: new FormControl({disabled: true}, Validators.required),
+      participantType: new FormControl({disabled: true}, Validators.required),
       systemType: new FormControl({disabled: true}, Validators.required)
     });
 
@@ -121,7 +121,7 @@ export class TournamentCreatorComponent implements OnInit {
     return this.config.systemTypes[competitionType];
   }
 
-  getAvailableParticipantTypes(): TournamentParticipantType [] {
+  getAvailableParticipantTypes(): ParticipantType [] {
     const competitionType = this.getSelectedCompetitionType();
 
     if (!ObjectUtils.exists(competitionType)) {

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {TournamentParticipantsService} from '../tournament-participants.service';
 import {SnackBarService} from '../snack-bar.service';
-import {InvitationStatus, TournamentDTO, TournamentParticipantDTO} from '../model/model';
+import {InvitationStatus, ParticipantDTO, TournamentDTO} from '../model/model';
 import {LocaleMessages} from '../locale-messages';
 import {FloatingButtonService} from '../floating-button.service';
 import {InviteTournamentParticipantPopupService} from '../invite-tournament-participant-popup.service';
@@ -25,11 +25,11 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
 
   lm = LocaleMessages;
 
-  private tournamentParticipants: TournamentParticipantDTO [];
+  private tournamentParticipants: ParticipantDTO [];
 
-  acceptedParticipants: TournamentParticipantDTO [];
-  invitedParticipants: TournamentParticipantDTO [];
-  requestedParticipants: TournamentParticipantDTO [];
+  acceptedParticipants: ParticipantDTO [];
+  invitedParticipants: ParticipantDTO [];
+  requestedParticipants: ParticipantDTO [];
 
   constructor(
     private searchService: SearchService,
@@ -39,7 +39,8 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
     private floatButtonService: FloatingButtonService,
     private dialog: MatDialog,
     private clipboardService: ClipboardService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.floatButtonService.setButtonClickAction(() => this.openPopup());
@@ -62,7 +63,7 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
     });
   }
 
-  private splitParticipantsByInvitationStatus(participants: TournamentParticipantDTO []) {
+  private splitParticipantsByInvitationStatus(participants: ParticipantDTO []) {
     this.clearParticipantLists();
     for (const participant of participants) {
       switch (participant.invitationStatus) {
@@ -103,7 +104,7 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
   }
 
   private getOwnerId() {
-    if(this.tournament) {
+    if (this.tournament) {
       return this.tournament.owner.id;
     }
     return null;
@@ -126,9 +127,9 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
   removeParticipant(participantId: string) {
     this.tournamentParticipantsService.remove(this.tournament.id, participantId)
       .subscribe(() => this.snackbarService.openSuccess(this.lm.removed),
-      () => this.snackbarService.openError(this.lm.unknownError),
-      () => this.initTournamentParticipants()
-    );
+        () => this.snackbarService.openError(this.lm.unknownError),
+        () => this.initTournamentParticipants()
+      );
   }
 
   acceptParticipant(participantId: string) {

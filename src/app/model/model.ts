@@ -11,7 +11,7 @@ export interface TournamentTemplateDto {
   competitionType: CompetitionType;
   invitationLink: boolean;
   systemType: TournamentSystemType;
-  tournamentParticipantType: TournamentParticipantType;
+  participantType: ParticipantType;
 }
 
 export interface ChessTournamentTemplateDto extends TournamentTemplateDto {
@@ -85,7 +85,7 @@ export interface TournamentCreatorConfig {
   accessOptions: AccessOption [];
   competitionTypes: CompetitionType [];
   systemTypes: { [key: string]: TournamentSystemType [] };
-  participantTypes: { [key: string]: TournamentParticipantType [] };
+  participantTypes: { [key: string]: ParticipantType [] };
 }
 
 export interface TranslatableValue<T> {
@@ -109,8 +109,8 @@ export interface GameEventDto {
   gameEventType: GameEventType;
 }
 
-export interface TeamEventDto extends GameEventDto {
-  teamId: string;
+export interface ParticipantEventDto extends GameEventDto {
+  participantId: string;
 }
 
 export interface StartGameEventDto extends GameEventDto {
@@ -124,14 +124,13 @@ export interface FinishGameEventDto extends GameEventDto {
   winner: number;
 }
 
-export interface TournamentParticipantDTO extends Profile {
-  firstName: string;
-  secondName: string;
+export interface ParticipantDTO extends Profile {
   name: string;
-  fullName: string;
-  email: string;
-  participantStatus: string;
+  shortName: string;
+  participantStatus: ParticipantStatus;
   invitationStatus: InvitationStatus;
+  participantType: ParticipantType;
+  members: ParticipantDTO [];
 }
 
 export interface GameFixtureDto {
@@ -139,9 +138,9 @@ export interface GameFixtureDto {
   startDate: Date;
   endDate: Date;
   finishedDate: Date;
-  homeTeam: TeamDto;
+  homeParticipant: ParticipantDTO;
   homeScore: ScoreDto;
-  awayTeam: TeamDto;
+  awayParticipant: ParticipantDTO;
   awayScore: ScoreDto;
   gameStatus: GameStatus;
   winner: number;
@@ -160,20 +159,20 @@ export interface TournamentDTO {
   img: string;
   status: TournamentStatus;
   accessOption: string;
-  participants: TournamentParticipantDTO [];
+  participants: ParticipantDTO [];
   owner: Profile;
   startDate: Date;
   endDate: Date;
   systemType: TournamentSystemType;
   competitionType: CompetitionType;
-  tournamentParticipantType: string;
+  participantType: ParticipantType;
   staffIds: string [];
   contributorsIds: string [];
   minParticipants: number;
   maxParticipants: number;
   currentRound: number;
-  winner: TournamentParticipantDTO;
-  nextOpponent: TournamentParticipantDTO;
+  winner: ParticipantDTO;
+  nextOpponent: ParticipantDTO;
   plannedRounds: number;
   invitationToken?: string;
 }
@@ -191,19 +190,13 @@ export interface ScheduleElementDto {
   startDate: Date;
   endDate?: Date;
   shortDate: boolean;
-  homeTeam: TeamDto;
+  homeParticipant: ParticipantDTO;
   homeScore?: ScoreDto;
-  awayTeam?: TeamDto;
+  awayParticipant?: ParticipantDTO;
   awayScore?: ScoreDto
   winner: number,
   bye: boolean;
   gameStatus: GameStatus;
-}
-
-export interface TeamDto {
-  id: string;
-  name: string;
-  membersIds: string [];
 }
 
 export interface ScoreDto {
@@ -225,7 +218,7 @@ export interface TournamentTableDTO {
 
 export interface TournamentTableRowDTO {
   baseOrderNum: number;
-  teamId: string;
+  participantId: string;
   name: string;
   draws: number;
   wins: number;
@@ -274,9 +267,9 @@ export const enum TournamentSystemType {
   ROUND_ROBIN = 'TOURNAMENT_SYSTEM_TYPE.ROUND_ROBIN',
 }
 
-export const enum TournamentParticipantType {
-  SINGLE = 'TOURNAMENT_PARTICIPANT_TYPE.SINGLE',
-  TEAM = 'TOURNAMENT_PARTICIPANT_TYPE.TEAM'
+export const enum ParticipantType {
+  SINGLE = 'PARTICIPANT_TYPE.SINGLE',
+  TEAM = 'PARTICIPANT_TYPE.TEAM'
 }
 
 export const enum TournamentStatus {

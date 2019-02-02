@@ -4,8 +4,8 @@
         <app-tournament-timetable-item
                 *ngFor="let game of element.games"
                 [date]="game.date"
-                [homeTeamData]="game.teams.left"
-                [awayTeamData]="game.teams.right"
+                [homeParticipantData]="game.teams.left"
+                [awayParticipantData]="game.teams.right"
                 [bye]="game.bye"
                 [shortDate]="true"></app-tournament-timetable-item>
     </mat-expansion-panel>

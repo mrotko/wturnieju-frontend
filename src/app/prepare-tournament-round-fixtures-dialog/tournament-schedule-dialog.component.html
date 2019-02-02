@@ -1,12 +1,12 @@
 <div *ngIf="isLoaded()" class="component-container">
     <table mat-table [dataSource]="schedule.elements || []">
 
-        <ng-container matColumnDef="homeTeam">
-            <td mat-cell *matCellDef="let element"> {{element.homeTeam.name}}</td>
+        <ng-container matColumnDef="homeParticipant">
+            <td mat-cell *matCellDef="let element"> {{element.homeParticipant.name}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="awayTeam">
-            <td mat-cell *matCellDef="let element"> {{!element.bye ? element.awayTeam.name : null}}</td>
+        <ng-container matColumnDef="awayParticipant">
+            <td mat-cell *matCellDef="let element"> {{!element.bye ? element.awayParticipant.name : null}}</td>
         </ng-container>
 
         <ng-container matColumnDef="startDate">

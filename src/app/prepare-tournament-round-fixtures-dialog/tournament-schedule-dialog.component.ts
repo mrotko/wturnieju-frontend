@@ -17,7 +17,7 @@ export class TournamentScheduleDialogComponent implements OnInit {
 
   schedule: ScheduleDto;
 
-  tableColumns = ['homeTeam', 'awayTeam', 'startDate'];
+  tableColumns = ['homeParticipant', 'awayParticipant', 'startDate'];
 
   constructor(
     private dialogRef: MatDialogRef<TournamentScheduleDialogComponent>,
