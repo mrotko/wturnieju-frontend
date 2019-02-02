@@ -81,11 +81,35 @@ export interface UserDTO {
   username?: string;
 }
 
+export interface TournamentCreatorConfigDto {
+  creator: TournamentCreatorConfig;
+  scoring: ScoringConfig;
+}
+
 export interface TournamentCreatorConfig {
   accessOptions: AccessOption [];
   competitionTypes: CompetitionType [];
   systemTypes: { [key: string]: TournamentSystemType [] };
   participantTypes: { [key: string]: ParticipantType [] };
+}
+
+export interface ScoringConfig {
+  competitions: ScoringCompetitionConfig [];
+}
+
+export interface ScoringCompetitionConfig {
+  competitionType: CompetitionType;
+  tournamentSystems: ScoringSystemTypeConfig [];
+}
+
+export interface ScoringSystemTypeConfig {
+  tournamentSystemType: TournamentSystemType;
+  gameResults: ScoringGameResultConfig [];
+}
+
+export interface ScoringGameResultConfig {
+  gameResultType: GameResultType;
+  points: number;
 }
 
 export interface TranslatableValue<T> {
@@ -310,4 +334,10 @@ export const enum TournamentTableColumnType {
 export const enum GameEventType {
   GAME_START = 'GAME_EVENT_TYPE.GAME_START',
   GAME_FINISHED = 'GAME_EVENT_TYPE.GAME_FINISHED'
+}
+
+export const enum GameResultType {
+  WIN = "GAME_RESULT_TYPE.WIN",
+  DRAW = "GAME_RESULT_TYPE.DRAW",
+  LOSE = "GAME_RESULT_TYPE.LOSE"
 }

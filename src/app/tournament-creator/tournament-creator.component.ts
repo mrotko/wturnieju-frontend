@@ -3,7 +3,7 @@ import {LocaleMessages} from '../locale-messages';
 import {
   CompetitionType,
   ParticipantType,
-  TournamentCreatorConfig,
+  TournamentCreatorConfigDto,
   TournamentSystemType,
   TournamentTemplateDto
 } from '../model/model';
@@ -30,7 +30,7 @@ export class TournamentCreatorComponent implements OnInit {
 
   lm = LocaleMessages;
 
-  config: TournamentCreatorConfig;
+  config: TournamentCreatorConfigDto;
 
   commonFormGroup: FormGroup;
 
@@ -104,7 +104,7 @@ export class TournamentCreatorComponent implements OnInit {
   }
 
   getAvailableCompetitionTypes(): CompetitionType [] {
-    return this.config['competitionTypes'];
+    return this.config.creator['competitionTypes'];
   }
 
   private getSelectedCompetitionType(): CompetitionType {
@@ -118,7 +118,7 @@ export class TournamentCreatorComponent implements OnInit {
       return [];
     }
 
-    return this.config.systemTypes[competitionType];
+    return this.config.creator.systemTypes[competitionType];
   }
 
   getAvailableParticipantTypes(): ParticipantType [] {
@@ -128,6 +128,6 @@ export class TournamentCreatorComponent implements OnInit {
       return [];
     }
 
-    return this.config.participantTypes[competitionType];
+    return this.config.creator.participantTypes[competitionType];
   }
 }
