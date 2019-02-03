@@ -25,7 +25,7 @@ export class TournamentScheduleComponent implements OnInit {
     return ObjectUtils.exists(this.tournamentSchedule) && this.tournamentSchedule.elements.length > 0;
   }
 
-  gethomeParticipantData(element: ScheduleElementDto): ParticipantData {
+  getHomeParticipantData(element: ScheduleElementDto): ParticipantData {
     return {
       name: element.homeParticipant.name,
       participantId: element.homeParticipant.id,
@@ -35,7 +35,7 @@ export class TournamentScheduleComponent implements OnInit {
     }
   }
 
-  getawayParticipantData(element: ScheduleElementDto): ParticipantData {
+  getAwayParticipantData(element: ScheduleElementDto): ParticipantData {
     return {
       name: element.awayParticipant.name,
       participantId: element.awayParticipant.id,

@@ -95,8 +95,9 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
   }
 
   reload() {
-    this.initTournament();
     this.initFutureGamesSchedule();
+    this.initInProgressGamesSchedule();
+    this.initEndedGamesSchedule();
   }
 
   isTournamentBeforeStart() {

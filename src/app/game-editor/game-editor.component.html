@@ -1,4 +1,5 @@
 <div *ngIf="isLoaded()" class="component-container">
-    <app-game *ngFor="let game of gameFixtures" [gameFixture]="game"></app-game>
+    <app-game *ngFor="let game of gameFixtures" [gameFixture]="game"
+              (gameStatusEvent)="handleGameStatusChange($event, game)"></app-game>
 </div>
 <app-spinner *ngIf="!isLoaded()"></app-spinner>

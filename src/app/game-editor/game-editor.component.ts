@@ -22,7 +22,8 @@ export class GameEditorComponent implements OnInit {
     private tournamentService: TournamentService,
     private gameEditorService: GameEditorService,
     private snackbarService: SnackBarService,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.initGameFixtures();
@@ -31,11 +32,20 @@ export class GameEditorComponent implements OnInit {
   private initGameFixtures() {
     this.tournamentService.getGameFixture(this.tournament.id).subscribe(
       response => this.gameFixtures = response.filter(game => game.gameStatus !== GameStatus.ENDED),
-      error => this.snackbarService.openError(this.lm.unknownError)
+      () => this.snackbarService.openError(this.lm.unknownError)
     );
   }
 
   isLoaded(): boolean {
     return true;
+  }
+
+  handleGameStatusChange(status: GameStatus, game: GameFixtureDto) {
+    if (status === GameStatus.ENDED) {
+      const index = this.gameFixtures.findIndex(v => v.gameId === game.gameId);
+      if (index >= 0) {
+        this.gameFixtures.splice(index, 1);
+      }
+    }
   }
 }

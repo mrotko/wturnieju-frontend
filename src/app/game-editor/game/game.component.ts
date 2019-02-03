@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LocaleMessages} from '../../locale-messages';
 import {GameFixtureDto, GameStatus} from '../../model/model';
 import {GameEditorService} from '../game-editor.service';
@@ -16,6 +16,8 @@ import {FinishGameDialogComponent} from '../finish-game-dialog/finish-game-dialo
 export class GameComponent implements OnInit {
 
   lm = LocaleMessages;
+
+  @Output() gameStatusEvent = new EventEmitter<GameStatus>();
 
   @Input() gameFixture: GameFixtureDto;
 
@@ -41,6 +43,7 @@ export class GameComponent implements OnInit {
     }).afterClosed().subscribe(game => {
       if (game) {
         this.gameFixture = game;
+        this.gameStatusEvent.emit(this.gameFixture.gameStatus);
       }
     })
   }
@@ -58,6 +61,7 @@ export class GameComponent implements OnInit {
     }).afterClosed().subscribe(game => {
       if (game) {
         this.gameFixture = game;
+        this.gameStatusEvent.emit(this.gameFixture.gameStatus);
       }
     });
   }
