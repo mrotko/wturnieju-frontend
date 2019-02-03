@@ -14,7 +14,7 @@
                     <mat-form-field>
                         <mat-label>{{lm.accessOption | translate}}</mat-label>
                         <mat-select formControlName="accessOption">
-                            <mat-option *ngFor="let accessOption of config['accessOptions']" [value]="accessOption">
+                            <mat-option *ngFor="let accessOption of getAvailableAccessOptions()" [value]="accessOption">
                                 {{accessOption | translate}}
                             </mat-option>
                         </mat-select>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocaleMessages} from '../locale-messages';
 import {
+  AccessOption,
   CompetitionType,
   ParticipantType,
   TournamentCreatorConfigDto,
@@ -129,5 +130,9 @@ export class TournamentCreatorComponent implements OnInit {
     }
 
     return this.config.creator.participantTypes[competitionType];
+  }
+
+  getAvailableAccessOptions(): AccessOption [] {
+    return this.config.creator.accessOptions;
   }
 }
