@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TournamentService} from '../tournament.service';
-import {TournamentDTO, TournamentSystemType, TournamentTableColumnType, TournamentTableDTO} from '../model/model';
+import {TournamentDTO, TournamentTableColumnType, TournamentTableDTO} from '../model/model';
 import {LocaleMessages} from '../locale-messages';
 
 
@@ -23,7 +23,8 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
   constructor(
     private tournamentService: TournamentService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.setCurrentTournamentColumns();
@@ -38,33 +39,6 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   }
 
   private setCurrentTournamentColumns() {
-    switch (this.tournament.systemType) {
-      case TournamentSystemType.SWISS:
-        this.useSwissTournamentColumns();
-        break;
-      default:
-        this.useDefaultColumns();
-    }
-  }
-
-  private useSwissTournamentColumns() {
-    this.tableColumns = [
-      TournamentTableColumnType.LP,
-      TournamentTableColumnType.NAME,
-      TournamentTableColumnType.TOTAL_GAMES,
-      TournamentTableColumnType.LOSES,
-      TournamentTableColumnType.DRAWS,
-      TournamentTableColumnType.WINS,
-      TournamentTableColumnType.POINTS,
-      TournamentTableColumnType.SMALL_POINTS
-    ];
-  }
-
-  private useDefaultColumns() {
-    this.tableColumns = [
-      TournamentTableColumnType.LP,
-      TournamentTableColumnType.NAME,
-      TournamentTableColumnType.POINTS
-    ];
+    this.tableColumns = this.tournament.tableColumns;
   }
 }

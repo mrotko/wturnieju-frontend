@@ -6,6 +6,7 @@ import {
   ParticipantType,
   TournamentCreatorConfigDto,
   TournamentSystemType,
+  TournamentTableColumnType,
   TournamentTemplateDto
 } from '../model/model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -91,6 +92,9 @@ export class TournamentCreatorComponent implements OnInit {
 
   public submitTournamentCreatorForm() {
     const data: TournamentTemplateDto = this.commonFormGroup.value;
+    data.scoring = this.getScoring();
+    data.tableColumns = this.getTableColumns();
+
     this.service.send(data).subscribe(
       response => {
         this.snackbarService.openSuccess(this.lm.tournamentCreatorSuccessMsg);
@@ -110,6 +114,10 @@ export class TournamentCreatorComponent implements OnInit {
 
   private getSelectedCompetitionType(): CompetitionType {
     return this.commonFormGroup.value['competitionType'];
+  }
+
+  private getSelectedSystemType(): TournamentSystemType {
+    return this.commonFormGroup.value['systemType'];
   }
 
   getAvailableSystemTypes(): TournamentSystemType [] {
@@ -134,5 +142,33 @@ export class TournamentCreatorComponent implements OnInit {
 
   getAvailableAccessOptions(): AccessOption [] {
     return this.config.creator.accessOptions;
+  }
+
+  getScoring(): { [key: string]: number } {
+    let scoring: { [key: string]: number } = {};
+    const competitionsIndex = this.config.scoring.findIndex(c => c.competitionType === this.getSelectedCompetitionType());
+
+    if (competitionsIndex >= 0) {
+      const competitionConfig = this.config.scoring[competitionsIndex];
+      const systemIndex = competitionConfig.tournamentSystems.findIndex(s => s.tournamentSystemType === this.getSelectedSystemType());
+
+      if (systemIndex >= 0) {
+        const gameResults = competitionConfig.tournamentSystems[systemIndex].gameResults;
+
+        for (const gameResult of gameResults) {
+          scoring[gameResult.gameResultType] = gameResult.points;
+        }
+      }
+    }
+    return scoring;
+  }
+
+  getTableColumns(): TournamentTableColumnType [] {
+    const systemType = this.getSelectedSystemType();
+    if (!ObjectUtils.exists(systemType)) {
+      return [];
+    }
+
+    return this.config.creator.columnTypes[systemType];
   }
 }

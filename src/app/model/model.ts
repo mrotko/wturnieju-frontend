@@ -12,6 +12,8 @@ export interface TournamentTemplateDto {
   invitationLink: boolean;
   systemType: TournamentSystemType;
   participantType: ParticipantType;
+  tableColumns: TournamentTableColumnType []
+  scoring: { [key: string]: number }
 }
 
 export interface ChessTournamentTemplateDto extends TournamentTemplateDto {
@@ -83,7 +85,7 @@ export interface UserDTO {
 
 export interface TournamentCreatorConfigDto {
   creator: TournamentCreatorConfig;
-  scoring: ScoringConfig;
+  scoring: ScoringConfig [];
 }
 
 export interface TournamentCreatorConfig {
@@ -91,13 +93,10 @@ export interface TournamentCreatorConfig {
   competitionTypes: CompetitionType [];
   systemTypes: { [key: string]: TournamentSystemType [] };
   participantTypes: { [key: string]: ParticipantType [] };
+  columnTypes: { [key: string]: TournamentTableColumnType []; }
 }
 
 export interface ScoringConfig {
-  competitions: ScoringCompetitionConfig [];
-}
-
-export interface ScoringCompetitionConfig {
   competitionType: CompetitionType;
   tournamentSystems: ScoringSystemTypeConfig [];
 }
@@ -169,6 +168,7 @@ export interface GameFixtureDto {
   gameStatus: GameStatus;
   winner: number;
   round: number;
+  stage: number;
   bye: boolean;
   live: boolean;
   competitionType: CompetitionType;
@@ -195,10 +195,12 @@ export interface TournamentDTO {
   minParticipants: number;
   maxParticipants: number;
   currentRound: number;
+  currentStage: number;
   winner: ParticipantDTO;
   nextOpponent: ParticipantDTO;
   plannedRounds: number;
   invitationToken?: string;
+  tableColumns: TournamentTableColumnType [];
 }
 
 
