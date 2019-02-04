@@ -15,6 +15,7 @@ export interface TournamentTemplateDto {
   tableColumns: TournamentTableColumnType []
   scoring: { [key: string]: number }
   stageTypes: StageType []
+  requiredAllGamesEndedStageTypes: StageType [];
 }
 
 export interface RegisterForm {
@@ -80,6 +81,7 @@ export interface TournamentCreatorConfig {
   participantTypes: { [key: string]: ParticipantType [] };
   columnTypes: { [key: string]: TournamentTableColumnType []; }
   stageTypes: { [key: string]: StageType [] }
+  requiredAllGamesEndedStageTypesMapping: { [key: string]: StageType [] }
 }
 
 export interface ScoringConfig {
@@ -208,6 +210,7 @@ export interface GroupDto {
   tournamentId: string;
   participants: ParticipantDTO [];
   stageType: StageType;
+  requiredAllGamesEnded: boolean;
 }
 
 export interface ScheduleDto {

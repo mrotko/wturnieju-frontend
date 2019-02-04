@@ -97,6 +97,7 @@ export class TournamentCreatorComponent implements OnInit {
     data.scoring = this.getScoring();
     data.tableColumns = this.getTableColumns();
     data.stageTypes = this.getStageTypes();
+    data.requiredAllGamesEndedStageTypes = this.getRequiredAllGamesEndedStageTypes();
 
     this.service.send(data).subscribe(
       response => {
@@ -183,5 +184,15 @@ export class TournamentCreatorComponent implements OnInit {
     }
 
     return this.config.creator.stageTypes[systemType];
+  }
+
+  getRequiredAllGamesEndedStageTypes(): StageType [] {
+    const systemType = this.getSelectedSystemType();
+
+    if (!ObjectUtils.exists(systemType)) {
+      return [];
+    }
+
+    return this.config.creator.requiredAllGamesEndedStageTypesMapping[systemType];
   }
 }
