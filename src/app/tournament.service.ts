@@ -39,8 +39,8 @@ export class TournamentService implements OnInit {
     return this.http.get<TournamentTableDTO>(RequestUrl.tournament.tournament + tournamentId + '/table');
   }
 
-  generateSchedule(tournamentId: string): Observable<ScheduleDto> {
-    return this.http.get<ScheduleDto>(RequestUrl.tournament.tournament + tournamentId + '/schedule/generate');
+  generateSchedule(tournamentId: string, groupId: string): Observable<ScheduleDto> {
+    return this.http.get<ScheduleDto>(RequestUrl.tournament.tournament + tournamentId + '/schedule/generate/' + groupId);
   }
 
   getFutureGamesSchedule(tournamentId: string): Observable<ScheduleDto []> {

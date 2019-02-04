@@ -15,8 +15,8 @@ export class ScheduleService {
   ) {
   }
 
-  getTournamentsScheduleFixturesByDate(tournamentsIds: string [], dateFrom: Date, dateTo: Date): Observable<ScheduleDto []> {
-    return this.http.get<ScheduleDto []>(RequestUrl.schedule.schedule + "/" + tournamentsIds, {
+  getTournamentsScheduleFixturesByDate(dateFrom: Date, dateTo: Date): Observable<ScheduleDto []> {
+    return this.http.get<ScheduleDto []>(RequestUrl.schedule.schedule + '/public', {
       params: {
         dateFrom: DateUtils.toYYYYMMDD(dateFrom),
         dateTo: DateUtils.toYYYYMMDD(dateTo)

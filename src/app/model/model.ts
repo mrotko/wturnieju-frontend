@@ -159,7 +159,10 @@ export interface ParticipantDTO extends Profile {
 }
 
 export interface GameFixtureDto {
-  gameId: string;
+  id: string;
+  groupId: string;
+  tournamentId: string;
+  previousGameId: string;
   startDate: Date;
   endDate: Date;
   finishedDate: Date;
@@ -170,11 +173,12 @@ export interface GameFixtureDto {
   gameStatus: GameStatus;
   winner: number;
   round: number;
-  stage: number;
   bye: boolean;
   live: boolean;
+  legType: LegType;
+  stageType: StageType;
+  accessOption: AccessOption;
   competitionType: CompetitionType;
-  tournamentId: string;
 }
 
 export interface TournamentDTO {
@@ -199,14 +203,23 @@ export interface TournamentDTO {
   currentRound: number;
   currentLegType: LegType;
   currentStageType: StageType;
+  stageTypes: StageType [];
   winner: ParticipantDTO;
   nextOpponent: ParticipantDTO;
   plannedRounds: number;
+  scoring: { [key: string]: number }
   invitationToken?: string;
+  groups: GroupDto [];
   tableColumns: TournamentTableColumnType [];
-  stageTypes: StageType [];
 }
 
+export interface GroupDto {
+  id: string;
+  name: string;
+  tournamentId: string;
+  participants: ParticipantDTO [];
+  stageType: StageType;
+}
 
 export interface ScheduleDto {
   tournamentId: string;
@@ -233,7 +246,6 @@ export interface ScoreDto {
   current: number;
   periods: { [key: number]: number };
 }
-
 
 export enum GameStatus {
   BEFORE_START = 'GAME_STATUS.BEFORE_START',

@@ -28,7 +28,7 @@ export class TournamentScheduleDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tournamentService.generateSchedule(this.tournament.id).subscribe(
+    this.tournamentService.generateSchedule(this.tournament.id, this.tournament.groups[0].id).subscribe(
       response => this.schedule = response,
       error => this.snackbarService.openError(this.lm.unknownError)
     );

@@ -37,7 +37,7 @@ export class GameComponent implements OnInit {
       width: '100vh',
       data: {
         competitionType: this.gameFixture.competitionType,
-        gameId: this.gameFixture.gameId,
+        gameId: this.gameFixture.id,
         tournamentId: this.gameFixture.tournamentId
       }
     }).afterClosed().subscribe(game => {
@@ -53,7 +53,7 @@ export class GameComponent implements OnInit {
       width: '100vh',
       data: {
         competitionType: this.gameFixture.competitionType,
-        gameId: this.gameFixture.gameId,
+        gameId: this.gameFixture.id,
         tournamentId: this.gameFixture.tournamentId,
         homeName: this.gameFixture.homeParticipant.name,
         awayName: this.gameFixture.awayParticipant.name

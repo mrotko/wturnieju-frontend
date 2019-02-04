@@ -42,7 +42,7 @@ export class GameEditorComponent implements OnInit {
 
   handleGameStatusChange(status: GameStatus, game: GameFixtureDto) {
     if (status === GameStatus.ENDED) {
-      const index = this.gameFixtures.findIndex(v => v.gameId === game.gameId);
+      const index = this.gameFixtures.findIndex(v => v.id === game.id);
       if (index >= 0) {
         this.gameFixtures.splice(index, 1);
       }
