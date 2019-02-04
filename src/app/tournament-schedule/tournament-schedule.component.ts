@@ -27,18 +27,18 @@ export class TournamentScheduleComponent implements OnInit {
 
   getHomeParticipantData(element: ScheduleElementDto): ParticipantData {
     return {
-      name: element.homeParticipant.name,
-      participantId: element.homeParticipant.id,
+      name: element.homeParticipant ? element.homeParticipant.name : '',
+      participantId: element.homeParticipant ? element.homeParticipant.id : '',
       periodsResult: this.mapToArrayPipe.transform(element.homeScore.periods),
-      currentResult: element.homeScore.current,
+      currentResult: element.homeScore.current || null,
       winner: element.winner == 1
     }
   }
 
   getAwayParticipantData(element: ScheduleElementDto): ParticipantData {
     return {
-      name: element.awayParticipant.name,
-      participantId: element.awayParticipant.id,
+      name: element.awayParticipant ? element.awayParticipant.name : '',
+      participantId: element.awayParticipant ? element.awayParticipant.id : '',
       periodsResult: this.mapToArrayPipe.transform(element.awayScore.periods),
       currentResult: element.awayScore.current,
       winner: element.winner == 2
