@@ -14,6 +14,7 @@ export interface TournamentTemplateDto {
   participantType: ParticipantType;
   tableColumns: TournamentTableColumnType []
   scoring: { [key: string]: number }
+  stageTypes: StageType []
 }
 
 export interface ChessTournamentTemplateDto extends TournamentTemplateDto {
@@ -94,6 +95,7 @@ export interface TournamentCreatorConfig {
   systemTypes: { [key: string]: TournamentSystemType [] };
   participantTypes: { [key: string]: ParticipantType [] };
   columnTypes: { [key: string]: TournamentTableColumnType []; }
+  stageTypes: { [key: string]: StageType [] }
 }
 
 export interface ScoringConfig {
@@ -195,12 +197,14 @@ export interface TournamentDTO {
   minParticipants: number;
   maxParticipants: number;
   currentRound: number;
-  currentStage: number;
+  currentLegType: LegType;
+  currentStageType: StageType;
   winner: ParticipantDTO;
   nextOpponent: ParticipantDTO;
   plannedRounds: number;
   invitationToken?: string;
   tableColumns: TournamentTableColumnType [];
+  stageTypes: StageType [];
 }
 
 
@@ -239,6 +243,7 @@ export enum GameStatus {
 
 export interface TournamentTableDTO {
   tournamentId: string;
+  name: string;
   rows: TournamentTableRowDTO [];
 }
 
@@ -342,4 +347,15 @@ export const enum GameResultType {
   WIN = "GAME_RESULT_TYPE.WIN",
   DRAW = "GAME_RESULT_TYPE.DRAW",
   LOSE = "GAME_RESULT_TYPE.LOSE"
+}
+
+export const enum StageType {
+  GROUP = "STAGE_TYPE.GROUP",
+  KNOCKOUT = "STAGE_TYPE.KNOCKOUT",
+  LEAGUE = "STAGE_TYPE.LEAGUE",
+}
+
+export const enum LegType {
+  FIRST = "LEG_TYPE.FIRST",
+  SECOND = "LEG_TYPE.SECOND"
 }

@@ -4,6 +4,7 @@ import {
   AccessOption,
   CompetitionType,
   ParticipantType,
+  StageType,
   TournamentCreatorConfigDto,
   TournamentSystemType,
   TournamentTableColumnType,
@@ -92,8 +93,10 @@ export class TournamentCreatorComponent implements OnInit {
 
   public submitTournamentCreatorForm() {
     const data: TournamentTemplateDto = this.commonFormGroup.value;
+
     data.scoring = this.getScoring();
     data.tableColumns = this.getTableColumns();
+    data.stageTypes = this.getStageTypes();
 
     this.service.send(data).subscribe(
       response => {
@@ -170,5 +173,15 @@ export class TournamentCreatorComponent implements OnInit {
     }
 
     return this.config.creator.columnTypes[systemType];
+  }
+
+  getStageTypes(): StageType [] {
+    const systemType = this.getSelectedSystemType();
+
+    if (!ObjectUtils.exists(systemType)) {
+      return [];
+    }
+
+    return this.config.creator.stageTypes[systemType];
   }
 }
