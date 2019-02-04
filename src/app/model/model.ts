@@ -17,22 +17,6 @@ export interface TournamentTemplateDto {
   stageTypes: StageType []
 }
 
-export interface ChessTournamentTemplateDto extends TournamentTemplateDto {
-
-}
-
-export interface FootballTournamentTemplateDto extends TournamentTemplateDto {
-
-}
-
-export interface CustomTournamentTemplateDto extends TournamentTemplateDto {
-
-}
-
-export interface TennisTournamentTemplateDto extends TournamentTemplateDto {
-
-}
-
 export interface RegisterForm {
   username: string;
   password: string;
@@ -155,7 +139,12 @@ export interface ParticipantDTO extends Profile {
   participantStatus: ParticipantStatus;
   invitationStatus: InvitationStatus;
   participantType: ParticipantType;
-  members: ParticipantDTO [];
+  members: MemberDto [];
+}
+
+export interface MemberDto {
+  userId: string;
+  name: string;
 }
 
 export interface GameFixtureDto {

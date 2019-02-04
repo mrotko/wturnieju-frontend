@@ -12,6 +12,10 @@ interface UserItem {
   name: string;
 }
 
+interface DialogData {
+  invitedUserIds: string [];
+}
+
 interface AutocompleteOption {
   id: string;
   icon: string;
@@ -34,14 +38,18 @@ export class InviteTournamentParticipantPopupComponent implements OnInit {
 
   selectedUsers: UserItem [];
 
+  hiddenUsersIds: string [] = [];
+
   constructor(
     private dialogRef: MatDialogRef<InviteTournamentParticipantPopupComponent>,
-    @Inject(MAT_DIALOG_DATA) private popupService: InviteTournamentParticipantPopupService
-  ) { }
+    private popupService: InviteTournamentParticipantPopupService,
+    @Inject(MAT_DIALOG_DATA) private dialogData: DialogData) {
+  }
 
   ngOnInit() {
     this.selectedUsers = [];
     this.initAutocompleteOptions()
+    this.refreshHiddenUsersIds();
   }
 
   addUserToSelected(autocompleteOption: AutocompleteOption) {
@@ -51,6 +59,7 @@ export class InviteTournamentParticipantPopupComponent implements OnInit {
       name: autocompleteOption.name
     };
     this.selectedUsers.push(user);
+    this.refreshHiddenUsersIds();
   }
 
   removeUserFromSelected(userId: string) {
@@ -70,20 +79,32 @@ export class InviteTournamentParticipantPopupComponent implements OnInit {
 
   prepareAutocompleteOptions(query: string): Observable<AutocompleteOption []> {
     if (query && query.length > 2) {
-      return this.popupService.findUsers(query.toLowerCase(), this.getSelectedUsersIds())
+      return this.popupService.findUsers(query.toLowerCase())
         .pipe(map((users): AutocompleteOption [] => {
-          return users.map((user): AutocompleteOption => {
-            return {
-              id: user.id,
-              icon: "",
-              name: (user.name || '') + " " + (user.surname || '') + " " + ' [' + user.username + ']',
-              description: ""
-            };
-          });
+          return users
+            .filter(user => !this.hiddenUsersIds.find(id => user.id === id))
+            .map((user): AutocompleteOption => {
+              return {
+                id: user.id,
+                icon: "",
+                name: (user.name || '') + " " + (user.surname || '') + " " + ' [' + user.username + ']',
+                description: ""
+              };
+            });
         }));
     } else {
       return new Observable();
     }
+  }
+
+  refreshHiddenUsersIds() {
+    let hiddenUsers: string [] = [];
+
+    hiddenUsers = hiddenUsers.concat(this.getSelectedUsersIds());
+    hiddenUsers = hiddenUsers.concat(this.dialogData.invitedUserIds);
+
+    this.hiddenUsersIds = hiddenUsers;
+    console.log(hiddenUsers);
   }
 
   getSelectedUsersIds(): string [] {

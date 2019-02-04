@@ -4,7 +4,6 @@ import {SnackBarService} from '../snack-bar.service';
 import {InvitationStatus, ParticipantDTO, TournamentDTO} from '../model/model';
 import {LocaleMessages} from '../locale-messages';
 import {FloatingButtonService} from '../floating-button.service';
-import {InviteTournamentParticipantPopupService} from '../invite-tournament-participant-popup.service';
 import {MatDialog} from '@angular/material';
 import {InviteTournamentParticipantPopupComponent} from '../invite-tournament-participant-popup/invite-tournament-participant-popup.component';
 import {SearchService} from '../search.service';
@@ -50,7 +49,9 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
   private openPopup() {
     const dialogRef = this.dialog.open(InviteTournamentParticipantPopupComponent, {
       width: '50vw',
-      data: this.createPopupService()
+      data: {
+        invitedUserIds: this.getInvitedUsersIds()
+      }
     });
     dialogRef.afterClosed().subscribe((invitedIds: string []) => {
       if (invitedIds && invitedIds.length > 0) {
@@ -87,34 +88,20 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
     this.requestedParticipants = [];
   }
 
-  private createPopupService(): InviteTournamentParticipantPopupService {
-    const currentParticipantsIds = this.getCurrentParticipantsIds();
-    return new InviteTournamentParticipantPopupService(this.searchService, currentParticipantsIds);
-  }
-
   ngOnDestroy(): void {
     this.floatButtonService.setButtonClickAction(null);
   }
 
-  private getTournamentId(): string {
-    if (this.tournament) {
-      return this.tournament.id;
-    }
-    return null;
-  }
-
-  private getOwnerId() {
-    if (this.tournament) {
-      return this.tournament.owner.id;
-    }
-    return null;
-  }
-
-  private getCurrentParticipantsIds() {
+  private getInvitedUsersIds(): string [] {
+    let usersIds: string [] = [];
     if (this.tournamentParticipants) {
-      return this.tournamentParticipants.map(p => p.id);
+      console.log(this.tournamentParticipants);
+      this.tournamentParticipants
+        .forEach(participant => {
+          usersIds = usersIds.concat(participant.members.map(p => p.userId));
+        });
     }
-    return [];
+    return usersIds;
   }
 
   private initTournamentParticipants() {
