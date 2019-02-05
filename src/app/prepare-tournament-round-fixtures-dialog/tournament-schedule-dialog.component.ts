@@ -35,7 +35,7 @@ export class TournamentScheduleDialogComponent implements OnInit {
   }
 
   cancel() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   confirm() {
@@ -44,8 +44,8 @@ export class TournamentScheduleDialogComponent implements OnInit {
     } else {
       this.tournamentService.saveSchedule(this.tournament.id, this.schedule).subscribe(
         null,
-        error => this.snackbarService.openError(this.lm.unknownError),
-        () => this.cancel()
+        () => this.snackbarService.openError(this.lm.unknownError),
+        () => this.dialogRef.close(true)
       );
       this.schedule = null;
     }

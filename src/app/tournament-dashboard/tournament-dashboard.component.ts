@@ -10,6 +10,7 @@ import {FloatingButtonService} from '../floating-button.service';
 import {GameData, TimetableData, TimetableElement} from '../tournament-timetable/tournament-timetable.component';
 import {SnackBarService} from '../snack-bar.service';
 import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-tournament-dashboard',
@@ -21,6 +22,8 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
   lm = LocaleMessages;
 
   tournament: TournamentDTO;
+
+  tournamentLoadedSubject: Subject<boolean> = new Subject<boolean>();
 
   tournamentId: string;
 
@@ -46,13 +49,14 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.tournamentId = this.router.snapshot.paramMap.get('id');
     this.initTournament();
-    this.initFutureGamesSchedule();
-    this.initEndedGamesSchedule();
-    this.initInProgressGamesSchedule();
+    this.tournamentLoadedSubject.subscribe(() => this.initGamesSchedule());
   }
 
   initTournament() {
-    this.tournamentService.getTournament(this.tournamentId).subscribe(dto => this.tournament = dto);
+    this.tournamentService.getTournament(this.tournamentId).subscribe(dto => {
+      this.tournament = dto;
+      this.tournamentLoadedSubject.next();
+    });
   }
 
   private initFutureGamesSchedule() {
@@ -60,7 +64,7 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
       response => {
         this.createFutureSchedulesTimetableData(response);
       },
-      error => this.snackbarService.openError(this.lm.unknownError)
+      () => this.snackbarService.openError(this.lm.unknownError)
     );
   }
 
@@ -95,9 +99,16 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
   }
 
   reload() {
-    this.initFutureGamesSchedule();
-    this.initInProgressGamesSchedule();
-    this.initEndedGamesSchedule();
+    this.initTournament();
+    this.initGamesSchedule();
+  }
+
+  private initGamesSchedule() {
+    if (this.tournament.status != TournamentStatus.BEFORE_START) {
+      this.initFutureGamesSchedule();
+      this.initInProgressGamesSchedule();
+      this.initEndedGamesSchedule();
+    }
   }
 
   isTournamentBeforeStart() {
@@ -128,8 +139,10 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
       data: this.tournament
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.reload();
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.reload();
+      }
     });
   }
 

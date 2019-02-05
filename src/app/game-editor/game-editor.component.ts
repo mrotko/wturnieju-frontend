@@ -1,7 +1,7 @@
 import {LocaleMessages} from '../locale-messages';
 import {GameEditorService} from './game-editor.service';
 import {GameFixtureDto, GameStatus, TournamentDTO} from '../model/model';
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TournamentService} from '../tournament.service';
 import {SnackBarService} from '../snack-bar.service';
 
@@ -10,13 +10,15 @@ import {SnackBarService} from '../snack-bar.service';
   templateUrl: './game-editor.component.html',
   styleUrls: ['./game-editor.component.scss']
 })
-export class GameEditorComponent implements OnInit {
+export class GameEditorComponent implements OnInit, OnChanges {
 
   lm = LocaleMessages;
 
   @Input() tournament: TournamentDTO;
 
   gameFixtures: GameFixtureDto [] = [];
+
+  @Output() reloadRequiredEvent: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     private tournamentService: TournamentService,
@@ -47,5 +49,10 @@ export class GameEditorComponent implements OnInit {
         this.gameFixtures.splice(index, 1);
       }
     }
+    this.reloadRequiredEvent.emit(true);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.initGameFixtures();
   }
 }

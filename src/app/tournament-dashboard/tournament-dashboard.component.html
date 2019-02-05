@@ -37,7 +37,7 @@
             </mat-tab>
             <mat-tab *ngIf="isCurrentUserTournamentOwner()" [label]="lm.resultEdit | translate">
                 <mat-card>
-                    <app-game-editor [tournament]="tournament"></app-game-editor>
+                    <app-game-editor (reloadRequiredEvent)="reload()" [tournament]="tournament"></app-game-editor>
                 </mat-card>
             </mat-tab>
         </mat-tab-group>
