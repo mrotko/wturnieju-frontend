@@ -170,6 +170,8 @@ export interface GameFixtureDto {
   stageType: StageType;
   accessOption: AccessOption;
   competitionType: CompetitionType;
+  homeSmallPoints: number;
+  awaySmallPoints: number;
 }
 
 export interface TournamentDTO {
