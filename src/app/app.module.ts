@@ -46,6 +46,7 @@ import {GameEditorModule} from './game-editor/game-editor.module';
 import {SharedModule} from './shared.module';
 import {FilterMenuComponent} from './filter-menu/filter-menu.component';
 import {TournamentScheduleComponent} from './tournament-schedule/tournament-schedule.component';
+import { TournamentTreeComponent } from './tournament-tree/tournament-tree.component';
 
 registerLocaleData(localePl);
 
@@ -80,7 +81,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ParticipantsProgressBarComponent,
     TournamentTimetableItemComponent,
     FilterMenuComponent,
-    TournamentScheduleComponent
+    TournamentScheduleComponent,
+    TournamentTreeComponent
   ],
   entryComponents: [
     TournamentScheduleDialogComponent,

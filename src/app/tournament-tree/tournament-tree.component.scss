@@ -1,0 +1,82 @@
+.component-container {
+	display: flex;
+	width: 1000px;
+	height: 1000px;
+}
+
+.round {
+	display: flex;
+	flex-direction: column;
+	width: 250px;
+	justify-content: space-around;
+}
+
+.relation {
+	display: flex;
+}
+
+.games {
+	display: flex;
+	width: 85%;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.game {
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
+}
+
+.spacers-after {
+	display: flex;
+	flex-direction: column;
+	width: 15%;
+}
+
+.spacer-after {
+	height: 25%;
+	border: solid 1px black;
+	border-left: 0;
+	border-top: 0;
+}
+
+.spacer-after:nth-child(1) {
+	border-top: 0;
+	border-right: 0;
+}
+
+.spacer-after:nth-child(2) {
+	border-bottom: 0;
+}
+
+.spacer-after:nth-child(3) {
+	border-top: 0;
+}
+
+.spacer-after:nth-child(4) {
+	border-bottom: 0;
+	border-right: 0;
+}
+
+.spacers-before {
+	display: flex;
+	flex-direction: column;
+	width: 15%;
+}
+
+.spacer-before:first-child {
+	border-bottom: black 1px solid;
+}
+
+.spacer-before {
+	height: 50%;
+}
+
+.teams {
+	padding: 10px;
+	width: 85%;
+	background: antiquewhite;
+}
+
+

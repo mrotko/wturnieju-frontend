@@ -16,6 +16,9 @@
                     <app-tournament-table [tournament]="tournament"></app-tournament-table>
                 </mat-card>
                 <mat-card>
+                    <app-tournament-tree [tournament]="tournament"></app-tournament-tree>
+                </mat-card>
+                <mat-card>
                     <app-tournament-timetable [tournament]="tournament"
                                               [timetableData]="endedGamesTimetableData"
                                               (reloadRequiredEvent)="reload()"></app-tournament-timetable>
