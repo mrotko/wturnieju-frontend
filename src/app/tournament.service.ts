@@ -35,8 +35,8 @@ export class TournamentService implements OnInit {
     return this.http.put<TournamentDTO>(RequestUrl.tournament.tournament + updateDto.tournamentId, updateDto);
   }
 
-  getTournamentTable(tournamentId: string): Observable<TournamentTableDTO> {
-    return this.http.get<TournamentTableDTO>(RequestUrl.tournament.tournament + tournamentId + '/table');
+  getTournamentTable(tournamentId: string, groupId: string): Observable<TournamentTableDTO> {
+    return this.http.get<TournamentTableDTO>(RequestUrl.tournament.tournament + tournamentId + '/table/' + groupId);
   }
 
   generateSchedule(tournamentId: string, groupId: string): Observable<ScheduleDto> {

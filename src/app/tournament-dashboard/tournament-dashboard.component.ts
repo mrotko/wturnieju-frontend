@@ -29,11 +29,11 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
 
   currentRound: number;
 
-  futureGamesTimetableData: TimetableData;
+  futureGamesTimetableData: TimetableData = {elements: []};
 
-  inProgressGamesTimetableData: TimetableData;
+  inProgressGamesTimetableData: TimetableData = {elements: []};
 
-  endedGamesTimetableData: TimetableData;
+  endedGamesTimetableData: TimetableData = {elements: []};
 
   constructor(
     private router: ActivatedRoute,

@@ -29,7 +29,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   }
 
   initTournamentTable() {
-    this.tournamentService.getTournamentTable(this.tournament.id).subscribe(dto => this.tournamentTable = dto);
+    this.tournamentService.getTournamentTable(this.tournament.id, this.getFirstGroupId()).subscribe(dto => this.tournamentTable = dto);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -38,5 +38,9 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
   private setCurrentTournamentColumns() {
     this.tableColumns = this.tournament.tableColumns;
+  }
+
+  getFirstGroupId() {
+    return this.tournament.groups[0].id;
   }
 }

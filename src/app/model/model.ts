@@ -246,7 +246,7 @@ export enum GameStatus {
 }
 
 export interface TournamentTableDTO {
-  tournamentId: string;
+  groupId: string;
   name: string;
   rows: TournamentTableRowDTO [];
 }
