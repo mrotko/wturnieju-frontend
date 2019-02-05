@@ -13,8 +13,7 @@
         <mat-tab-group *ngIf="isTournamentInProgress()" (selectedIndexChange)="handleTabChange($event)">
             <mat-tab [label]="lm.results | translate">
                 <mat-card>
-                    <app-tournament-table [tournament]="tournament"
-                                          (reloadRequiredEvent)="reload()"></app-tournament-table>
+                    <app-tournament-table [tournament]="tournament"></app-tournament-table>
                 </mat-card>
                 <mat-card>
                     <app-tournament-timetable [tournament]="tournament"

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {TournamentService} from '../tournament.service';
 import {TournamentDTO, TournamentTableColumnType, TournamentTableDTO} from '../model/model';
 import {LocaleMessages} from '../locale-messages';
@@ -12,8 +12,6 @@ import {LocaleMessages} from '../locale-messages';
 export class TournamentTableComponent implements OnInit, OnChanges {
 
   @Input() tournament: TournamentDTO;
-
-  @Output() reloadRequiredEvent: EventEmitter<boolean> = new EventEmitter();
 
   lm = LocaleMessages;
 
