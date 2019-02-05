@@ -47,6 +47,7 @@ import {SharedModule} from './shared.module';
 import {FilterMenuComponent} from './filter-menu/filter-menu.component';
 import {TournamentScheduleComponent} from './tournament-schedule/tournament-schedule.component';
 import { TournamentTreeComponent } from './tournament-tree/tournament-tree.component';
+import { TournamentSearchComponent } from './tournament-search/tournament-search.component';
 
 registerLocaleData(localePl);
 
@@ -82,7 +83,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TournamentTimetableItemComponent,
     FilterMenuComponent,
     TournamentScheduleComponent,
-    TournamentTreeComponent
+    TournamentTreeComponent,
+    TournamentSearchComponent
   ],
   entryComponents: [
     TournamentScheduleDialogComponent,

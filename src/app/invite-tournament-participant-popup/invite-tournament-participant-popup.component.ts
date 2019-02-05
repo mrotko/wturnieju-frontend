@@ -48,7 +48,7 @@ export class InviteTournamentParticipantPopupComponent implements OnInit {
 
   ngOnInit() {
     this.selectedUsers = [];
-    this.initAutocompleteOptions()
+    this.initAutocompleteOptions();
     this.refreshHiddenUsersIds();
   }
 

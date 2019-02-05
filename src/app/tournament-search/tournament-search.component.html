@@ -1,0 +1,15 @@
+<div class="component-container">
+    <form>
+        <mat-form-field class="search-input">
+            <input matInput type="text" [matAutocomplete]="auto"
+                   [formControl]="searchFormControl" [placeholder]="lm.doSearch | translate"/>
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of autocompleteOptions | async"
+                            (onSelectionChange)="acceptTournamentSelection(option)">
+                    <mat-icon>open_in_new</mat-icon>
+                    <span>{{option.name}}</span>
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+</div>

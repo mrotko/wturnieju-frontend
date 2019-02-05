@@ -18,6 +18,15 @@ export interface TournamentTemplateDto {
   requiredAllGamesEndedStageTypes: StageType [];
 }
 
+export interface SearchResultDto<T> {
+  data: T [];
+}
+
+export interface TournamentSearchDto {
+  tournamentId: string;
+  tournamentName: string;
+}
+
 export interface RegisterForm {
   username: string;
   password: string;

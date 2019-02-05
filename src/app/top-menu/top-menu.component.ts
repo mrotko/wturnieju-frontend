@@ -21,8 +21,6 @@ export class TopMenuComponent implements OnInit, OnDestroy {
   currentUser: User;
   routerUrl = RouterUrl;
 
-
-
   currentLocaleSub: Subscription;
   userLogSubscription: Subscription;
 
@@ -31,7 +29,7 @@ export class TopMenuComponent implements OnInit, OnDestroy {
     private localeService: LocaleService,
     private authService: AuthService,
     private userSettingsService: UserSettingsService
-    ) {
+  ) {
   }
 
   ngOnInit() {
@@ -47,7 +45,9 @@ export class TopMenuComponent implements OnInit, OnDestroy {
 
   private initCurrentLocale() {
     this.currentLocaleSub = this.localeService.getCurrentLocale()
-      .subscribe(locale => { this.currentLocale = locale; });
+      .subscribe(locale => {
+        this.currentLocale = locale;
+      });
   }
 
   private initCurrentUser() {

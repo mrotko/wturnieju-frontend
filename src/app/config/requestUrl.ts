@@ -10,7 +10,7 @@ export const RequestUrl = {
   },
 
   search: {
-    tournament: environment.apiUrl + '/search?tournament=',
+    tournament: environment.apiUrl + '/search/tournament',
     user: environment.apiUrl + '/search/user?q='
   },
 
