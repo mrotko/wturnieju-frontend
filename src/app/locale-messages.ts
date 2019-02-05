@@ -19,6 +19,8 @@ export const LocaleMessages = {
   loggedOut: 'loggedOut',
   loggedOutToken: 'loggedOutToken',
   emptyDatesErrorMsg: 'emptyDatesErrorMsg',
+  requiredMinValueErrMsg: 'requiredMinValueErrMsg',
+  plannedRounds: 'plannedRounds',
   draw: 'draw',
   selectWinner: 'selectWinner',
   finishGame: 'finishGame',

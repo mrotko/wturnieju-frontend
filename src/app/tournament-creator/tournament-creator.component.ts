@@ -68,14 +68,14 @@ export class TournamentCreatorComponent implements OnInit {
       maxParticipants: new FormControl(''),
       competitionType: new FormControl('', Validators.required),
       invitationLink: new FormControl(''),
-      participantType: new FormControl({disabled: true}, Validators.required),
-      systemType: new FormControl({disabled: true}, Validators.required)
+      participantType: new FormControl('', Validators.required),
+      systemType: new FormControl('', Validators.required)
     });
 
     this.commonFormGroup.get('startDate').setValidators([Validators.required, lessEqThanValidator('endDate')]);
     this.commonFormGroup.get('endDate').setValidators([Validators.required, greaterEqThanValidator('startDate')]);
 
-    this.commonFormGroup.get('minParticipants').setValidators([Validators.required, lessEqThanValidator('maxParticipants')]);
+    this.commonFormGroup.get('minParticipants').setValidators([Validators.required, Validators.min(2), lessEqThanValidator('maxParticipants')]);
     this.commonFormGroup.get('maxParticipants').setValidators([Validators.required, greaterEqThanValidator('minParticipants')]);
   }
 
@@ -194,5 +194,36 @@ export class TournamentCreatorComponent implements OnInit {
     }
 
     return this.config.creator.requiredAllGamesEndedStageTypesMapping[systemType];
+  }
+
+  getPlannedRound(n: number) {
+    const systemType = this.getSelectedSystemType();
+
+    if (!ObjectUtils.exists(n)) {
+      return 0;
+    }
+
+
+    if (systemType === TournamentSystemType.LEAGUE) {
+      return (2 * (n - 1));
+    }
+
+    if (systemType === TournamentSystemType.SWISS) {
+      return Math.ceil(Math.log2(n));
+    }
+
+    if (systemType === TournamentSystemType.ROUND_ROBIN) {
+      return (n - 1);
+    }
+
+    return 0;
+  }
+
+  getMinParticipants(): number {
+    return this.commonFormGroup.get('minParticipants').value;
+  }
+
+  getMaxParticipants(): number {
+    return this.commonFormGroup.get('maxParticipants').value;
   }
 }

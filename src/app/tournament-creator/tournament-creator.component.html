@@ -65,6 +65,9 @@
                             <mat-error *ngIf="commonFormGroup.get('minParticipants').hasError('required')">
                                 {{lm.requiredError | translate}}
                             </mat-error>
+                            <mat-error *ngIf="commonFormGroup.get('minParticipants').hasError('min')">
+                                {{lm.requiredMinValueErrMsg | translate: "{value: 2}" }}
+                            </mat-error>
                             <mat-error *ngIf="commonFormGroup.get('minParticipants').hasError('lowerEqThan')">
                                 {{lm.badValueError | translate}}
                             </mat-error>
@@ -90,15 +93,32 @@
                         </mat-select>
                         <mat-error>{{lm.requiredError | translate}}</mat-error>
                     </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>{{lm.tournamentSystem | translate}}</mat-label>
-                        <mat-select formControlName="systemType">
-                            <mat-option *ngFor="let systemType of getAvailableSystemTypes()" [value]="systemType">
-                                {{systemType | translate}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error>{{lm.requiredError | translate}}</mat-error>
-                    </mat-form-field>
+                    <div>
+                        <mat-form-field style="width: 100%">
+                            <mat-label>{{lm.tournamentSystem | translate}}</mat-label>
+                            <mat-select formControlName="systemType">
+                                <mat-option *ngFor="let systemType of getAvailableSystemTypes()" [value]="systemType">
+                                    {{systemType | translate}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>{{lm.requiredError | translate}}</mat-error>
+
+                        </mat-form-field>
+                        <div class="tournament-system-info" *ngIf="getSelectedSystemType()">
+                            <div class="planned-rounds-info">
+                                <p>{{lm.plannedRounds | translate}}: </p>
+                                <p *ngIf="getPlannedRound(getMinParticipants()) !== getPlannedRound(getMaxParticipants())">
+                                    {{getPlannedRound(getMinParticipants())}}
+                                    - {{getPlannedRound(getMaxParticipants())}}
+                                </p>
+                                <p *ngIf="getPlannedRound(getMinParticipants()) === getPlannedRound(getMaxParticipants())">
+                                    {{getPlannedRound(getMinParticipants())}}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
                     <mat-form-field>
                         <mat-label>{{lm.participantType | translate}}</mat-label>
                         <mat-select formControlName="participantType">

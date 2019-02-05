@@ -14,6 +14,8 @@
   "loses": "Porażki",
   "wins": "Zwycięstwa",
   "draws": "Remisy",
+  "plannedRounds": "Planowane rundy",
+  "requiredMinValueErrMsg": "Minimum {{value}}",
   "smallPoints": "Małe punkty",
   "emptyDatesErrorMsg": "Uzupełnij terminarz",
   "invitationVerificationMsg": "Zostałeś zaproszony do turnieju {{name}}",
