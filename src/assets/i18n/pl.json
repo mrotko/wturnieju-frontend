@@ -64,6 +64,7 @@
   "edit": "Edycja",
   "schedule": "Terminarz",
   "results": "Wyniki",
+  "result": "Wynik",
   "resultEdit": "Edycja wyników",
   "stats": "Statystyki",
   "requiredError": "Uzupełnij wymagane pole",
@@ -160,5 +161,14 @@
   },
   "AUTHORITY_TYPE": {
     "CLI": "CLI"
+  },
+  "FOOTBALL_PERIOD_TYPE": {
+    "FIRST_HALF": "Pierwsza połowa",
+    "SECOND_HALF": "Druga połowa"
+  },
+  "TENNIS_PERIOD_TYPE": {
+    "FIRST_SET": "Pierwszy set",
+    "SECOND_SET": "Drugi set",
+    "THIRD_SET": "Trzeci set"
   }
 }

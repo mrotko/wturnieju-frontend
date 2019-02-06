@@ -16,6 +16,7 @@ export interface TournamentTemplateDto {
   scoring: { [key: string]: number }
   stageTypes: StageType []
   requiredAllGamesEndedStageTypes: StageType [];
+  gamePeriodsNumber: number;
 }
 
 export interface SearchResultDto<T> {
@@ -91,6 +92,7 @@ export interface TournamentCreatorConfig {
   columnTypes: { [key: string]: TournamentTableColumnType []; }
   stageTypes: { [key: string]: StageType [] }
   requiredAllGamesEndedStageTypesMapping: { [key: string]: StageType [] }
+  competitionTypeToGamePeriodsNumberMapping: { [key: string]: number [] }
 }
 
 export interface ScoringConfig {
@@ -181,6 +183,7 @@ export interface GameFixtureDto {
   competitionType: CompetitionType;
   homeSmallPoints: number;
   awaySmallPoints: number;
+  periodsNumber: number;
 }
 
 export interface TournamentDTO {
@@ -213,6 +216,7 @@ export interface TournamentDTO {
   invitationToken?: string;
   groups: GroupDto [];
   tableColumns: TournamentTableColumnType [];
+  gamePeriodsNumber: number;
 }
 
 export interface GroupDto {
@@ -373,4 +377,15 @@ export const enum StageType {
 export const enum LegType {
   FIRST = "LEG_TYPE.FIRST",
   SECOND = "LEG_TYPE.SECOND"
+}
+
+export const enum FootballPeriodType {
+  FIRST_HALF = "FOOTBALL_PERIOD_TYPE.FIRST_HALF",
+  SECOND_HALF = "FOOTBALL_PERIOD_TYPE.SECOND_HALF",
+}
+
+export const enum TennisPeriodType {
+  FIRST_SET = "TENNIS_PERIOD_TYPE.FIRST_SET",
+  SECOND_SET = "TENNIS_PERIOD_TYPE.SECOND_SET",
+  THIRD_SET = "TENNIS_PERIOD_TYPE.THIRD_SET",
 }

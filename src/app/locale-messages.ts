@@ -1,4 +1,12 @@
-import {AccessOption, AuthorityType, CompetitionType, ParticipantType, TournamentSystemType} from './model/model';
+import {
+  AccessOption,
+  AuthorityType,
+  CompetitionType,
+  FootballPeriodType,
+  ParticipantType,
+  TennisPeriodType,
+  TournamentSystemType
+} from './model/model';
 import {toDate} from '@angular/common/src/i18n/format_date';
 
 export const LocaleMessages = {
@@ -48,6 +56,7 @@ export const LocaleMessages = {
   stats: 'stats',
   schedule: 'schedule',
   results: 'results',
+  result: 'result',
   wantToJoinParticipants: 'wantToJoinParticipants',
   forgetPasswordSuccessMsg: 'forgetPasswordSuccessMsg',
   changePasswordForm: 'changePasswordForm',
@@ -164,5 +173,14 @@ export const LocaleMessages = {
   },
   AUTHORITY_TYPE: {
     CLI: AuthorityType.CLI
+  },
+  FOOTBALL_PERIOD_TYPE: {
+    FIRST_HALF: FootballPeriodType.FIRST_HALF,
+    SECOND_HALF: FootballPeriodType.SECOND_HALF,
+  },
+  TENNIS_PERIOD_TYPE: {
+    FIRST_SET: TennisPeriodType.FIRST_SET,
+    SECOND_SET: TennisPeriodType.SECOND_SET,
+    THIRD_SET: TennisPeriodType.THIRD_SET,
   }
 };

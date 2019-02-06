@@ -21,6 +21,36 @@
                                       [value]="2">{{getPopupData().awayName}}</mat-radio-button>
                 </mat-radio-group>
             </div>
+            <div class="score">
+                <div class="score-team">
+                    <div class="mat-subheading-1">{{getPopupData().homeName}}</div>
+                    <mat-form-field>
+                        <input matInput type="number" [placeholder]="lm.result | translate" required
+                               [(ngModel)]="eventData.homeScore.current"/>
+                    </mat-form-field>
+                    <div *ngFor="let i of getRange(getPopupData().periodsNumber)">
+                        <mat-form-field>
+                            <input matInput type="number" [placeholder]="periodTypes[i] | translate" required
+                                   [(ngModel)]="eventData.homeScore.periods[i]">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="score-team">
+                    <div class="mat-subheading-1">{{getPopupData().awayName}}</div>
+                    <mat-form-field>
+                        <input matInput type="number" [placeholder]="lm.result | translate" required
+                               [(ngModel)]="eventData.awayScore.current"/>
+                    </mat-form-field>
+                    <div *ngFor="let i of getRange(getPopupData().periodsNumber)">
+                        <mat-form-field>
+                            <input matInput type="number" [placeholder]="periodTypes[i] | translate" required
+                                   [(ngModel)]="eventData.awayScore.periods[i]">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
         <!--<app-start-chess-game-dialog-content *ngIf="isChessTournament()"></app-start-chess-game-dialog-content>-->
     </div>

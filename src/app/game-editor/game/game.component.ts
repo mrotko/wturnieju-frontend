@@ -56,7 +56,8 @@ export class GameComponent implements OnInit {
         gameId: this.gameFixture.id,
         tournamentId: this.gameFixture.tournamentId,
         homeName: this.gameFixture.homeParticipant.name,
-        awayName: this.gameFixture.awayParticipant.name
+        awayName: this.gameFixture.awayParticipant.name,
+        periodsNumber: this.gameFixture.periodsNumber
       }
     }).afterClosed().subscribe(game => {
       if (game) {

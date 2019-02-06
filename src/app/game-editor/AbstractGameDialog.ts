@@ -6,6 +6,7 @@ export interface GameEditorDialogData {
   gameId: string;
   tournamentId: string;
   competitionType: CompetitionType,
+  periodsNumber: number;
 }
 
 @Injectable()
