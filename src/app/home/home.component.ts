@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadTournamentsSchedules() {
-    this.scheduleService.getTournamentsScheduleFixturesByDate(this.selectedDate, this.selectedDate).subscribe(
+    this.scheduleService.getTournamentsScheduleFixturesByDate(this.selectedDate).subscribe(
       response => this.tournamentsSchedules = response,
       () => this.snackbarService.openError(this.lm.unknownError)
     );
