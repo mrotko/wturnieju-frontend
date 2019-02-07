@@ -33,15 +33,8 @@ export class TournamentTimetableItemComponent implements OnInit {
   }
 
   getParticipants(): ParticipantData [] {
-    if (this.bye) {
-      return [this.homeParticipantData, {
-        name: '',
-        periodsResult: [],
-        winner: null,
-        participantId: null,
-        currentResult: null
-      }]
-    }
-    return [this.homeParticipantData, this.awayParticipantData];
+    return [
+      this.homeParticipantData || {} as ParticipantData,
+      this.awayParticipantData || {} as ParticipantData];
   }
 }

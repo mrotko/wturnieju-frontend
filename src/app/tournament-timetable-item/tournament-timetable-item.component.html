@@ -1,4 +1,4 @@
-<div class="component-container" *ngIf="homeParticipantData">
+<div class="component-container" *ngIf="homeParticipantData || awayParticipantData">
     <mat-card>
         <div class="date">
             <div>{{date | date: 'shortDate'}}</div>
@@ -7,7 +7,7 @@
         <div class="content">
             <div *ngFor="let participant of getParticipants()" class="team"
                  [ngClass]="participant.winner ? 'winner' : ''">
-                <div>{{participant.name}}</div>
+                <div class="empty-line-visible">{{participant.name}}</div>
                 <div class="result">
                     <div class="period-result" *ngFor="let periodResult of (participant.periodsResult || [])">
                         <div class="period-result">{{periodResult.right}}</div>

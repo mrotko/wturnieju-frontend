@@ -8,54 +8,59 @@ $lato-font-path: '~lato-font/fonts';
 @include lato-include-font('medium');
 
 $lato-typography: mat-typography-config(
-  $font-family: latoGetFontNameForVariant('medium')
+		$font-family: latoGetFontNameForVariant('medium')
 );
 
 @include angular-material-typography($lato-typography);
 
 
 body {
-  width: auto;
+	width: auto;
 }
 
 .center-horizontal {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .success-snackbar {
-  background: green;
+	background: green;
 }
 
 .error-snackbar {
-  background: red;
+	background: red;
 }
 
 .warning-snackbar {
-  background: yellow;
+	background: yellow;
 }
 
 .info-snackbar {
-  background: blue;
+	background: blue;
 }
 
 a {
-  text-decoration: none;
-  color: inherit;
+	text-decoration: none;
+	color: inherit;
 }
 
 @keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 .rotate-hover:hover {
-  animation: rotate 1s ease-in-out 0s;
+	animation: rotate 1s ease-in-out 0s;
+}
+
+.empty-line-visible:empty::after {
+	content: ".";
+	visibility: hidden;
 }
 
 
