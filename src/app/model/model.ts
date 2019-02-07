@@ -206,7 +206,6 @@ export interface TournamentDTO {
   minParticipants: number;
   maxParticipants: number;
   currentRound: number;
-  currentLegType: LegType;
   currentStageType: StageType;
   stageTypes: StageType [];
   winner: ParticipantDTO;
