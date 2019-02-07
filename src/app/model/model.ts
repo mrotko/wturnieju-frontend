@@ -16,7 +16,6 @@ export interface TournamentTemplateDto {
   scoring: { [key: string]: number }
   stageTypes: StageType []
   requiredAllGamesEndedStageTypes: StageType [];
-  gamePeriodsNumber: number;
   periodsConfig: PeriodsConfigDto;
 }
 
@@ -216,7 +215,6 @@ export interface TournamentDTO {
   invitationToken?: string;
   groups: GroupDto [];
   tableColumns: TournamentTableColumnType [];
-  gamePeriodsNumber: number;
   periodsConfig: PeriodsConfigDto;
 }
 
