@@ -4,6 +4,7 @@ import {
   AccessOption,
   CompetitionType,
   ParticipantType,
+  PeriodsConfigDto,
   StageType,
   TournamentCreatorConfigDto,
   TournamentSystemType,
@@ -98,7 +99,7 @@ export class TournamentCreatorComponent implements OnInit {
     data.tableColumns = this.getTableColumns();
     data.stageTypes = this.getStageTypes();
     data.requiredAllGamesEndedStageTypes = this.getRequiredAllGamesEndedStageTypes();
-    data.gamePeriodsNumber = this.getGamePeriodsNumber();
+    data.periodsConfig = this.getPeriodsConfig();
 
     this.service.send(data).subscribe(
       response => {
@@ -228,12 +229,15 @@ export class TournamentCreatorComponent implements OnInit {
     return this.commonFormGroup.get('maxParticipants').value;
   }
 
-  private getGamePeriodsNumber(): number {
+  private getPeriodsConfig(): PeriodsConfigDto {
     const competitionType = this.getSelectedCompetitionType();
 
     if (!ObjectUtils.exists(competitionType)) {
-      return 0;
+      return {
+        periodsNumber: 0,
+        requiredPeriodsNumber: 0
+      };
     }
-    return this.config.creator.competitionTypeToGamePeriodsNumberMapping[competitionType][0];
+    return this.config.creator.competitionTypeToGamePeriodsConfigMapping[competitionType][0];
   }
 }

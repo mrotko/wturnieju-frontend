@@ -17,6 +17,7 @@ export interface TournamentTemplateDto {
   stageTypes: StageType []
   requiredAllGamesEndedStageTypes: StageType [];
   gamePeriodsNumber: number;
+  periodsConfig: PeriodsConfigDto;
 }
 
 export interface SearchResultDto<T> {
@@ -92,7 +93,7 @@ export interface TournamentCreatorConfig {
   columnTypes: { [key: string]: TournamentTableColumnType []; }
   stageTypes: { [key: string]: StageType [] }
   requiredAllGamesEndedStageTypesMapping: { [key: string]: StageType [] }
-  competitionTypeToGamePeriodsNumberMapping: { [key: string]: number [] }
+  competitionTypeToGamePeriodsConfigMapping: { [key: string]: PeriodsConfigDto [] }
 }
 
 export interface ScoringConfig {
@@ -183,7 +184,7 @@ export interface GameFixtureDto {
   competitionType: CompetitionType;
   homeSmallPoints: number;
   awaySmallPoints: number;
-  periodsNumber: number;
+  periodsConfig: PeriodsConfigDto;
 }
 
 export interface TournamentDTO {
@@ -216,6 +217,12 @@ export interface TournamentDTO {
   groups: GroupDto [];
   tableColumns: TournamentTableColumnType [];
   gamePeriodsNumber: number;
+  periodsConfig: PeriodsConfigDto;
+}
+
+export interface PeriodsConfigDto {
+  periodsNumber: number;
+  requiredPeriodsNumber: number;
 }
 
 export interface GroupDto {

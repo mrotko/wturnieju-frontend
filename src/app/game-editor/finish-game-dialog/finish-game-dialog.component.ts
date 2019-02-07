@@ -31,6 +31,8 @@ export class FinishGameDialogComponent extends AbstractGameDialog implements OnI
 
   periodTypes: FootballPeriodType [] | TennisPeriodType [];
 
+  selectedPeriods: { [key: number]: boolean } = {};
+
   constructor(
     private dialogRef: MatDialogRef<FinishGameDialogComponent>,
     private gameEditorService: GameEditorService,
@@ -49,11 +51,11 @@ export class FinishGameDialogComponent extends AbstractGameDialog implements OnI
       competitionType: this.popupData.competitionType,
       homeScore: {
         current: 0,
-        periods: []
+        periods: {}
       },
       awayScore: {
         current: 0,
-        periods: []
+        periods: {}
       },
       finishedDate: new Date(),
       winner: 0
@@ -67,6 +69,7 @@ export class FinishGameDialogComponent extends AbstractGameDialog implements OnI
   }
 
   onConfirmBtnClick() {
+    this.removeNotSelectedPeriods();
     if (!this.isScoreValid()) {
       return;
     }
@@ -86,7 +89,6 @@ export class FinishGameDialogComponent extends AbstractGameDialog implements OnI
   }
 
   getRange(n: number): number [] {
-    console.log(n);
     return CollectionUtils.range(n);
   }
 
@@ -100,15 +102,16 @@ export class FinishGameDialogComponent extends AbstractGameDialog implements OnI
       this.periodTypes = [
         TennisPeriodType.FIRST_SET,
         TennisPeriodType.SECOND_SET,
-        TennisPeriodType.THIRD_SET
+        TennisPeriodType.THIRD_SET,
       ]
     }
   }
 
   private initPeriodValues() {
-    this.getRange(this.popupData.periodsNumber).forEach(i => {
+    this.getRange(this.popupData.periodsConfig.periodsNumber).forEach(i => {
       this.eventData.homeScore.periods[i] = 0;
       this.eventData.awayScore.periods[i] = 0;
+      this.selectedPeriods[i] = !this.isPeriodOptional(i);
     });
   }
 
@@ -127,5 +130,30 @@ export class FinishGameDialogComponent extends AbstractGameDialog implements OnI
     }
 
     return true;
+  }
+
+  protected isPeriodOptional(periodNumber: number): boolean {
+    return periodNumber >= this.popupData.periodsConfig.requiredPeriodsNumber
+  }
+
+  protected getPeriodsRange() {
+    return this.getRange(this.popupData.periodsConfig.periodsNumber);
+  }
+
+  private removeNotSelectedPeriods() {
+    const periodsToCheckMapping = this.mapToArrayPipe.transform(this.selectedPeriods);
+    const selectedHomePeriodsWithValues = {};
+    const selectedAwayPeriodsWithValues = {};
+    for (let i = 0; i < periodsToCheckMapping.length; i++) {
+      if (periodsToCheckMapping[i].right) {
+        selectedHomePeriodsWithValues[i] = this.eventData.homeScore.periods[i];
+        selectedAwayPeriodsWithValues[i] = this.eventData.awayScore.periods[i];
+      } else {
+        break;
+      }
+    }
+
+    this.eventData.homeScore.periods = selectedHomePeriodsWithValues;
+    this.eventData.awayScore.periods = selectedAwayPeriodsWithValues;
   }
 }

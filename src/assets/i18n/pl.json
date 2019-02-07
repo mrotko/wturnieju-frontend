@@ -14,6 +14,8 @@
   "loses": "Porażki",
   "wins": "Zwycięstwa",
   "draws": "Remisy",
+  "half": "Połowa",
+  "tennisSet": "Set",
   "plannedRounds": "Planowane rundy",
   "requiredMinValueErrMsg": "Minimum {{value}}",
   "smallPoints": "Małe punkty",

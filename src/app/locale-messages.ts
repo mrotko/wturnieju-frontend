@@ -21,6 +21,8 @@ export const LocaleMessages = {
   email: 'email',
   noTimetableDataMsg: 'noTimetableDataMsg',
   password: 'password',
+  half: 'half',
+  tennisSet: 'tennisSet',
   generateRound: 'generateRound',
   configuration: 'configuration',
   timetable: 'timetable',

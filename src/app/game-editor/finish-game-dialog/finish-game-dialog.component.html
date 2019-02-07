@@ -28,10 +28,13 @@
                         <input matInput type="number" [placeholder]="lm.result | translate" required
                                [(ngModel)]="eventData.homeScore.current"/>
                     </mat-form-field>
-                    <div *ngFor="let i of getRange(getPopupData().periodsNumber)">
+                    <div *ngFor="let i of getPeriodsRange()">
                         <mat-form-field>
-                            <input matInput type="number" [placeholder]="periodTypes[i] | translate" required
-                                   [(ngModel)]="eventData.homeScore.periods[i]">
+                            <input matInput type="number" [placeholder]="periodTypes[i] | translate"
+                                   [(ngModel)]="eventData.homeScore.periods[i]"
+                                   [disabled]="!selectedPeriods[i]"
+                                   [required]="!isPeriodOptional(i)"
+                            >
                         </mat-form-field>
                     </div>
                 </div>
@@ -41,14 +44,21 @@
                         <input matInput type="number" [placeholder]="lm.result | translate" required
                                [(ngModel)]="eventData.awayScore.current"/>
                     </mat-form-field>
-                    <div *ngFor="let i of getRange(getPopupData().periodsNumber)">
+                    <div *ngFor="let i of getPeriodsRange()">
                         <mat-form-field>
-                            <input matInput type="number" [placeholder]="periodTypes[i] | translate" required
-                                   [(ngModel)]="eventData.awayScore.periods[i]">
+                            <input matInput type="number" [placeholder]="periodTypes[i] | translate"
+                                   [required]="!isPeriodOptional(i)"
+                                   [(ngModel)]="eventData.awayScore.periods[i]"
+                                   [disabled]="!selectedPeriods[i]">
                         </mat-form-field>
+                        <mat-checkbox class="period-checkbox" [(ngModel)]="selectedPeriods[i]"
+                                      [disabled]="!isPeriodOptional(i)">
+                        </mat-checkbox>
                     </div>
                 </div>
+                <div class="select-period-col">
 
+                </div>
 
             </div>
         </div>
