@@ -30,7 +30,7 @@ export class TournamentScheduleComponent implements OnInit {
       name: element.homeParticipant ? element.homeParticipant.name : '',
       participantId: element.homeParticipant ? element.homeParticipant.id : '',
       periodsResult: this.mapToArrayPipe.transform(element.homeScore.periods),
-      currentResult: element.homeScore.current || null,
+      currentResult: element.homeScore ? element.homeScore.current : null,
       winner: element.winner == 1
     }
   }
@@ -40,7 +40,7 @@ export class TournamentScheduleComponent implements OnInit {
       name: element.awayParticipant ? element.awayParticipant.name : '',
       participantId: element.awayParticipant ? element.awayParticipant.id : '',
       periodsResult: this.mapToArrayPipe.transform(element.awayScore.periods),
-      currentResult: element.awayScore.current,
+      currentResult: element.awayScore ? element.awayScore.current : null,
       winner: element.winner == 2
     }
   }
