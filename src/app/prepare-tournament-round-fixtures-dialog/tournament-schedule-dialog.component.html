@@ -2,11 +2,11 @@
     <table mat-table [dataSource]="schedule.elements || []">
 
         <ng-container matColumnDef="homeParticipant">
-            <td mat-cell *matCellDef="let element"> {{element.homeParticipant.name}}</td>
+            <td mat-cell *matCellDef="let element"> {{getParticipantName(element.homeParticipant)}}</td>
         </ng-container>
 
         <ng-container matColumnDef="awayParticipant">
-            <td mat-cell *matCellDef="let element"> {{!element.bye ? element.awayParticipant.name : null}}</td>
+            <td mat-cell *matCellDef="let element"> {{getParticipantName(element.awayParticipant)}}</td>
         </ng-container>
 
         <ng-container matColumnDef="startDate">

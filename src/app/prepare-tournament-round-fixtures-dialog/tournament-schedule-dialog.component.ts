@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {ScheduleDto, TournamentDTO} from '../model/model';
+import {ParticipantDTO, ScheduleDto, TournamentDTO} from '../model/model';
 import {TournamentService} from '../tournament.service';
 import {LocaleMessages} from '../locale-messages';
 import {SnackBarService} from '../snack-bar.service';
@@ -57,5 +57,12 @@ export class TournamentScheduleDialogComponent implements OnInit {
 
   isLoaded(): boolean {
     return ObjectUtils.exists(this.schedule);
+  }
+
+  getParticipantName(participant: ParticipantDTO) {
+    if (!ObjectUtils.exists(participant)) {
+      return null;
+    }
+    return participant.name;
   }
 }
