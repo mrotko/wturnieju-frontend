@@ -132,11 +132,11 @@ export class FinishGameDialogComponent extends AbstractGameDialog implements OnI
     return true;
   }
 
-  protected isPeriodOptional(periodNumber: number): boolean {
+  isPeriodOptional(periodNumber: number): boolean {
     return periodNumber >= this.popupData.periodsConfig.requiredPeriodsNumber
   }
 
-  protected getPeriodsRange() {
+  getPeriodsRange() {
     return this.getRange(this.popupData.periodsConfig.periodsNumber);
   }
 
