@@ -150,6 +150,7 @@ export const LocaleMessages = {
   doSearch: 'doSearch',
   table: 'table',
   position: 'position',
+  forbidden: 'forbidden',
   points: 'points',
   winner: 'winner',
   participants: 'participants',

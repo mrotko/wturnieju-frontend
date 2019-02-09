@@ -6,6 +6,8 @@ import {throwError} from 'rxjs/internal/observable/throwError';
 import {AuthService} from '../service/auth.service';
 import {SnackBarService} from '../snack-bar.service';
 import {LocaleMessages} from '../locale-messages';
+import {Router} from '@angular/router';
+import {RouterUrl} from '../config/routerUrl';
 
 
 @Injectable()
@@ -13,6 +15,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(
     private snackbarService: SnackBarService,
+    private router: Router,
     private authService: AuthService) {
   }
 
@@ -25,6 +28,9 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.snackbarService.openError(LocaleMessages.loggedOut);
         }
         this.authService.logout();
+      } else if (error.status === 403) {
+        this.snackbarService.openError(LocaleMessages.forbidden);
+        this.router.navigate([RouterUrl.home]);
       }
       return throwError(error);
     }));
