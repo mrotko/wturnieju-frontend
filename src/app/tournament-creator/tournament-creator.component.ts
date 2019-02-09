@@ -5,6 +5,7 @@ import {
   CompetitionType,
   ParticipantType,
   PeriodsConfigDto,
+  PositionOrderElementType,
   StageType,
   TournamentCreatorConfigDto,
   TournamentSystemType,
@@ -20,8 +21,6 @@ import {SnackBarService} from '../snack-bar.service';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {ObjectUtils} from '../utils/ObjectUtils';
-
-// TODO daty są w nieprawidłowym formacie
 
 @Component({
   selector: 'app-tournament-creator',
@@ -100,6 +99,7 @@ export class TournamentCreatorComponent implements OnInit {
     data.stageTypes = this.getStageTypes();
     data.requiredAllGamesEndedStageTypes = this.getRequiredAllGamesEndedStageTypes();
     data.periodsConfig = this.getPeriodsConfig();
+    data.positionOrder = this.getPositionOrder();
 
     this.service.send(data).subscribe(
       response => {
@@ -239,5 +239,13 @@ export class TournamentCreatorComponent implements OnInit {
       };
     }
     return this.config.creator.competitionTypeToGamePeriodsConfigMapping[competitionType][0];
+  }
+
+  private getPositionOrder(): PositionOrderElementType [] {
+    const systemType = this.getSelectedSystemType();
+    if (!ObjectUtils.exists(systemType)) {
+      return [];
+    }
+    return this.config.creator.systemTypeToPositionOrderMapping[systemType];
   }
 }

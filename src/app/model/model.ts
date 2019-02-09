@@ -17,6 +17,7 @@ export interface TournamentTemplateDto {
   stageTypes: StageType []
   requiredAllGamesEndedStageTypes: StageType [];
   periodsConfig: PeriodsConfigDto;
+  positionOrder: PositionOrderElementType [];
 }
 
 export interface SearchResultDto<T> {
@@ -93,6 +94,7 @@ export interface TournamentCreatorConfig {
   stageTypes: { [key: string]: StageType [] }
   requiredAllGamesEndedStageTypesMapping: { [key: string]: StageType [] }
   competitionTypeToGamePeriodsConfigMapping: { [key: string]: PeriodsConfigDto [] }
+  systemTypeToPositionOrderMapping: { [key: string]: PositionOrderElementType [] }
 }
 
 export interface ScoringConfig {
@@ -216,6 +218,7 @@ export interface TournamentDTO {
   groups: GroupDto [];
   tableColumns: TournamentTableColumnType [];
   periodsConfig: PeriodsConfigDto;
+  positionOrder: PositionOrderElementType [];
 }
 
 export interface PeriodsConfigDto {
@@ -392,4 +395,11 @@ export const enum TennisPeriodType {
   FIRST_SET = "TENNIS_PERIOD_TYPE.FIRST_SET",
   SECOND_SET = "TENNIS_PERIOD_TYPE.SECOND_SET",
   THIRD_SET = "TENNIS_PERIOD_TYPE.THIRD_SET",
+}
+
+export const enum PositionOrderElementType {
+  POINTS = "POSITION_ORDER_ELEMENT_TYPE.POINTS",
+  SMALL_POINTS = "POSITION_ORDER_ELEMENT_TYPE.SMALL_POINTS",
+  WINS = "POSITION_ORDER_ELEMENT_TYPE.WINS",
+  DRAWS = "POSITION_ORDER_ELEMENT_TYPE.DRAWS",
 }
