@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {LocaleMessages} from '../locale-messages';
-import {AuthorityType, ExceptionErrorDTO, Pattern, User, UserConfig} from '../model/model';
+import {AuthorityType, ExceptionErrorDTO, User, UserConfig} from '../model/model';
 import {AuthService} from '../service/auth.service';
 import {UserSettingsService} from '../user-settings.service';
 import {SnackBarService} from '../snack-bar.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {matchValidator} from '../model/wt-validators';
 import {HttpErrorResponse} from '@angular/common/http';
+import {AuthConfigService} from '../auth-config.service';
 
 interface AuthorityItem {
   authorityType: AuthorityType,
@@ -36,6 +37,7 @@ export class UserSettingsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private authConfigService: AuthConfigService,
     private userSettingsService: UserSettingsService,
     private snackbarService: SnackBarService
   ) {
@@ -56,10 +58,27 @@ export class UserSettingsComponent implements OnInit {
   private prepareChangePasswordForm() {
     this.changePasswordForm = new FormGroup({
       oldPassword: new FormControl('', [Validators.required]),
-      newPassword: new FormControl('', [Validators.required, Validators.pattern(Pattern.password)]),
+      newPassword: new FormControl('', []),
       repeatPassword: new FormControl()
     });
+    this.authConfigService.init().subscribe(() => this.initChangePasswordPasswordsValidators());
+  }
+
+  private initChangePasswordPasswordsValidators() {
+    this.changePasswordForm.get('newPassword').setValidators([Validators.required, Validators.pattern(this.getPasswordPattern())]);
     this.changePasswordForm.get('repeatPassword').setValidators(matchValidator('newPassword'));
+  }
+
+  private getPasswordPattern() {
+    return this.authConfigService.getPasswordPattern();
+  }
+
+  getNewPasswordErrMsg(): string {
+    return this.authConfigService.getPasswordPatterErrMsg(this.getNewPasswordInputText());
+  }
+
+  private getNewPasswordInputText(): string {
+    return this.changePasswordForm.get('newPassword').value;
   }
 
   private prepareChangeEmailForm() {

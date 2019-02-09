@@ -5,8 +5,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 import {AbstractVerification} from '../abstract.verification';
 import {SnackBarService} from '../../snack-bar.service';
-import {Pattern} from '../../model/model';
 import {matchValidator} from '../../model/wt-validators';
+import {AuthConfigService} from '../../auth-config.service';
 
 @Component({
   selector: 'app-password-verification',
@@ -18,6 +18,7 @@ export class PasswordVerificationComponent extends AbstractVerification {
   resetPasswordFormGroup: FormGroup;
 
   constructor(
+    private authConfigService: AuthConfigService,
     verificationService: VerificationService,
     route: ActivatedRoute,
     router: Router,
@@ -33,10 +34,20 @@ export class PasswordVerificationComponent extends AbstractVerification {
 
   private prepareResetPasswordFormGroup() {
     this.resetPasswordFormGroup = new FormGroup({
-      'password': new FormControl('', [Validators.required, Validators.pattern(Pattern.password)]),
+      'password': new FormControl('', []),
       'repeatPassword': new FormControl('')
     });
+    this.authConfigService.init().subscribe(() => this.initPasswordsValidators());
+
+  }
+
+  private initPasswordsValidators() {
+    this.resetPasswordFormGroup.get('password').setValidators([Validators.required, Validators.pattern(this.getPasswordPattern())]);
     this.resetPasswordFormGroup.get('repeatPassword').setValidators(matchValidator('password'));
+  }
+
+  private getPasswordPattern() {
+    return this.authConfigService.getPasswordPattern();
   }
 
   submitResetPassword() {
@@ -53,5 +64,13 @@ export class PasswordVerificationComponent extends AbstractVerification {
         }
       );
     }
+  }
+
+  private getPasswordInputText(): string {
+    return this.resetPasswordFormGroup.get('password').value;
+  }
+
+  getPasswordErrMsg() {
+    return this.authConfigService.getPasswordPatterErrMsg(this.getPasswordInputText());
   }
 }

@@ -1,7 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {RequestUrl} from '../config/requestUrl';
-import {ForgetPasswordForm, LoginForm, RegisterForm, User, UserDTO, UserGrantedAuthority} from '../model/model';
+import {
+  AuthConfigDto,
+  ForgetPasswordForm,
+  LoginForm,
+  RegisterForm,
+  User,
+  UserDTO,
+  UserGrantedAuthority
+} from '../model/model';
 import {Observable} from 'rxjs/internal/Observable';
 import {map} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
@@ -17,7 +25,8 @@ export class AuthService {
   constructor(
     private router: Router,
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
   login(loginForm: LoginForm): Observable<void> {
     return this.http.post(RequestUrl.auth.login, loginForm, {observe: 'response'})
@@ -30,7 +39,7 @@ export class AuthService {
           this.setKeepLogin(loginForm.keepLogin);
           this.updateUserInStorage(user);
         }
-    }));
+      }));
   }
 
   isAccountActive(email: string): Observable<boolean> {
@@ -101,5 +110,9 @@ export class AuthService {
 
   private isKeepLogin(): boolean {
     return JSON.parse(localStorage.getItem('keepLogin'));
+  }
+
+  public getAuthConfig(): Observable<AuthConfigDto> {
+    return this.http.get<AuthConfigDto>(RequestUrl.auth.config);
   }
 }

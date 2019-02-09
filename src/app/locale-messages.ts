@@ -4,6 +4,7 @@ import {
   CompetitionType,
   FootballPeriodType,
   ParticipantType,
+  PasswordPatternGroupType,
   TennisPeriodType,
   TournamentSystemType
 } from './model/model';
@@ -184,5 +185,11 @@ export const LocaleMessages = {
     FIRST_SET: TennisPeriodType.FIRST_SET,
     SECOND_SET: TennisPeriodType.SECOND_SET,
     THIRD_SET: TennisPeriodType.THIRD_SET,
+  },
+  PASSWORD_PATTERN_GROUP_TYPE: {
+    BIG_LETTER: PasswordPatternGroupType.BIG_LETTER,
+    SMALL_LETTER: PasswordPatternGroupType.SMALL_LETTER,
+    NUMBER: PasswordPatternGroupType.NUMBER,
+    LENGTH_8: PasswordPatternGroupType.LENGTH_8,
   }
 };

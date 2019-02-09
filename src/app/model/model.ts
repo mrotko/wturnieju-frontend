@@ -285,6 +285,22 @@ export interface TournamentTableRowDTO {
   smallPoints: number;
 }
 
+export interface AuthConfigDto {
+  passwordPatternGroups: PasswordPatternGroup [];
+}
+
+export interface PasswordPatternGroup {
+  patternGroupType: PasswordPatternGroupType;
+  pattern: string;
+}
+
+export const enum PasswordPatternGroupType {
+  BIG_LETTER = "PASSWORD_PATTERN_GROUP_TYPE.BIG_LETTER",
+  SMALL_LETTER = "PASSWORD_PATTERN_GROUP_TYPE.SMALL_LETTER",
+  NUMBER = "PASSWORD_PATTERN_GROUP_TYPE.NUMBER",
+  LENGTH_8 = "PASSWORD_PATTERN_GROUP_TYPE.LENGTH_8",
+}
+
 export enum SwissTournamentTableColumns {
   POSITION = 'SWISS_TOURNAMENT_COLUMN.POSITION',
   FULL_NAME = 'SWISS_TOURNAMENT_COLUMN.FULL_NAME',

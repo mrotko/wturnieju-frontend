@@ -172,5 +172,11 @@
     "FIRST_SET": "Pierwszy set",
     "SECOND_SET": "Drugi set",
     "THIRD_SET": "Trzeci set"
+  },
+  "PASSWORD_PATTERN_GROUP_TYPE": {
+    "BIG_LETTER": "Duża litera",
+    "SMALL_LETTER": "Mała litera",
+    "NUMBER": "Cyfra",
+    "LENGTH_8": "8 znaków"
   }
 }

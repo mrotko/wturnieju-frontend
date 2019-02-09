@@ -6,7 +6,8 @@ export const RequestUrl = {
     login: environment.apiUrl + '/auth/login',
     register: environment.apiUrl + '/auth/register',
     forgetPassword: environment.apiUrl + '/auth/forget-password',
-    active: environment.apiUrl + '/auth/active?email='
+    active: environment.apiUrl + '/auth/active?email=',
+    config: environment.apiUrl + '/auth/config'
   },
 
   search: {

@@ -67,7 +67,7 @@
                         {{lm.requiredError | translate}}
                     </mat-error>
                     <mat-error *ngIf="changePasswordForm.get('newPassword').hasError('pattern')">
-                        {{lm.passwordPatternError | translate}}
+                        {{getNewPasswordErrMsg()}}
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field>
