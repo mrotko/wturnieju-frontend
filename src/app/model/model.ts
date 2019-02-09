@@ -45,10 +45,6 @@ export interface ForgetPasswordForm {
   username: string;
 }
 
-export class Pattern {
-  public static password = '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d].{8,}$';
-}
-
 export interface ExceptionErrorDTO {
   message: string;
   simpleClassName: string;
