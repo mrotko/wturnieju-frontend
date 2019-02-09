@@ -46,8 +46,9 @@ import {GameEditorModule} from './game-editor/game-editor.module';
 import {SharedModule} from './shared.module';
 import {FilterMenuComponent} from './filter-menu/filter-menu.component';
 import {TournamentScheduleComponent} from './tournament-schedule/tournament-schedule.component';
-import { TournamentTreeComponent } from './tournament-tree/tournament-tree.component';
-import { TournamentSearchComponent } from './tournament-search/tournament-search.component';
+import {TournamentTreeComponent} from './tournament-tree/tournament-tree.component';
+import {TournamentSearchComponent} from './tournament-search/tournament-search.component';
+import {TournamentControlDialogComponent} from './tournament-control-dialog/tournament-control-dialog.component';
 
 registerLocaleData(localePl);
 
@@ -84,11 +85,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     FilterMenuComponent,
     TournamentScheduleComponent,
     TournamentTreeComponent,
-    TournamentSearchComponent
+    TournamentSearchComponent,
+    TournamentControlDialogComponent
   ],
   entryComponents: [
     TournamentScheduleDialogComponent,
-    InviteTournamentParticipantPopupComponent
+    InviteTournamentParticipantPopupComponent,
+    TournamentControlDialogComponent,
   ],
   imports: [
     AppRoutingModule,

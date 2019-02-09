@@ -4,13 +4,15 @@ import {ScheduleDto, ScheduleElementDto, TournamentDTO, TournamentStatus} from '
 import {TournamentService} from '../tournament.service';
 import {AuthService} from '../service/auth.service';
 import {LocaleMessages} from '../locale-messages';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatTabChangeEvent} from '@angular/material';
 import {TournamentScheduleDialogComponent} from '../prepare-tournament-round-fixtures-dialog/tournament-schedule-dialog.component';
 import {FloatingButtonService} from '../floating-button.service';
 import {GameData, TimetableData, TimetableElement} from '../tournament-timetable/tournament-timetable.component';
 import {SnackBarService} from '../snack-bar.service';
 import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
 import {Subject} from 'rxjs';
+import {TournamentControlDialogComponent} from '../tournament-control-dialog/tournament-control-dialog.component';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tournament-dashboard',
@@ -42,7 +44,8 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private snackbarService: SnackBarService,
     private floatingButtonService: FloatingButtonService,
-    private mapToArray: MapToArrayPipe
+    private mapToArray: MapToArrayPipe,
+    private translate: TranslateService
   ) {
   }
 
@@ -83,19 +86,12 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
   }
 
   startTournament() {
-    this.tournamentService.updateTournament(
+    this.tournamentService.updateTournamentStatus(
       {
         tournamentId: this.tournamentId,
         status: 'START'
       }
     ).subscribe(dto => this.tournament = dto);
-  }
-
-  endTournament() {
-    this.tournamentService.updateTournament({
-      tournamentId: this.tournamentId,
-      status: 'END'
-    }).subscribe(dto => this.tournament = dto);
   }
 
   reload() {
@@ -117,6 +113,18 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
 
   isTournamentInProgress() {
     return this.tournament.status === TournamentStatus.IN_PROGRESS;
+  }
+
+  isTournamentFinished() {
+    return this.tournament.status === TournamentStatus.ENDED;
+  }
+
+  isResultEditTabVisible() {
+    return this.isCurrentUserTournamentOwner() && this.isTournamentInProgress();
+  }
+
+  isTimetableTabVisible() {
+    return this.isTournamentInProgress();
   }
 
   isCurrentUserTournamentOwner() {
@@ -146,8 +154,8 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  handleTabChange(index: number) {
-    if (index === 1) {
+  onTabChange(event: MatTabChangeEvent) {
+    if (event.tab.textLabel === this.translate.instant(this.lm.schedule)) {
       this.setScheduleFloatingBtnAction(true);
     } else {
       this.setScheduleFloatingBtnAction(false);
@@ -208,6 +216,23 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
       });
     }
     return gamesData;
+  }
+
+  openTournamentControlDialog(): void {
+    const dialogRef = this.dialog.open(TournamentControlDialogComponent, {
+      width: '300px',
+      autoFocus: true,
+      data: {
+        tournamentId: this.tournament.id,
+        currentTournamentStatus: this.tournament.status
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(tournament => {
+      if (tournament) {
+        this.tournament = tournament;
+      }
+    });
   }
 
   ngOnDestroy(): void {

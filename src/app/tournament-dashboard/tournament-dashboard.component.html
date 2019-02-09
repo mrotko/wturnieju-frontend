@@ -1,16 +1,16 @@
 <div *ngIf="tournament" class="component-container">
     <div class="dashboard-header">
-        <div class="mat-title dashboard-header-item">{{tournament.name}}</div>
-        <div class="dashboard-header-item">
-            <div>{{tournament.startDate | date: 'shortDate'}}</div>
-            <div>{{tournament.endDate | date: 'shortDate'}}</div>
-        </div>
+        <div class="mat-title dashboard-header-title">{{tournament.name}}</div>
+        <button mat-icon-button (click)="openTournamentControlDialog()">
+            <mat-icon>settings</mat-icon>
+        </button>
     </div>
     <div class="dashboard-content">
         <app-tournament-participants-configuration *ngIf="isTournamentBeforeStart()"
                                                    (startTournamentBtnClickEvent)="startTournament()"
                                                    [tournament]="tournament"></app-tournament-participants-configuration>
-        <mat-tab-group *ngIf="isTournamentInProgress()" (selectedIndexChange)="handleTabChange($event)">
+        <mat-tab-group *ngIf="isTournamentInProgress() || isTournamentFinished()"
+                       (selectedTabChange)="onTabChange($event)">
             <mat-tab [label]="lm.results | translate">
                 <mat-card>
                     <app-tournament-table [tournament]="tournament"></app-tournament-table>
@@ -24,20 +24,21 @@
                                               (reloadRequiredEvent)="reload()"></app-tournament-timetable>
                 </mat-card>
             </mat-tab>
-            <mat-tab
-                    [label]="lm.schedule | translate">
+            <mat-tab *ngIf="isTimetableTabVisible()"
+                     [label]="lm.schedule | translate">
                 <mat-card>
                     <app-tournament-timetable [tournament]="tournament"
                                               [timetableData]="futureGamesTimetableData"
                                               (reloadRequiredEvent)="reload()"></app-tournament-timetable>
                 </mat-card>
             </mat-tab>
-            <mat-tab [label]="lm.participants | translate">
+            <mat-tab title="asfasfs" [label]="lm.participants | translate">
                 <mat-card>
                     <app-participants [tournament]="tournament" (reloadRequiredEvent)="reload()"></app-participants>
                 </mat-card>
             </mat-tab>
-            <mat-tab *ngIf="isCurrentUserTournamentOwner()" [label]="lm.resultEdit | translate">
+            <mat-tab *ngIf="isResultEditTabVisible()"
+                     [label]="lm.resultEdit | translate">
                 <mat-card>
                     <app-game-editor (reloadRequiredEvent)="reload()" [tournament]="tournament"></app-game-editor>
                 </mat-card>

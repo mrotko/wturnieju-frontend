@@ -1,0 +1,9 @@
+<div class="component-container">
+    <div mat-dialog-content class="buttons">
+        <button [disabled]="!isTournamentInProgress()" (click)="onFinishTournament()"
+                mat-stroked-button>{{lm.finish | translate}}</button>
+    </div>
+    <div mat-dialog-actions class="actions">
+        <button (click)="onClose()" mat-button>{{lm.close | translate}}</button>
+    </div>
+</div>

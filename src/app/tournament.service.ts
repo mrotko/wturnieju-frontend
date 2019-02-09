@@ -7,7 +7,7 @@ import {RequestUrl} from './config/requestUrl';
 
 export interface UpdateTournamentStatusDTO {
   tournamentId: string;
-  status: 'START' | 'END';
+  status: 'START' | 'FINISH';
 }
 
 @Injectable()
@@ -31,7 +31,7 @@ export class TournamentService implements OnInit {
     return this.http.get<TournamentDTO>(RequestUrl.tournament.tournament + tournamentId);
   }
 
-  updateTournament(updateDto: UpdateTournamentStatusDTO): Observable<TournamentDTO> {
+  updateTournamentStatus(updateDto: UpdateTournamentStatusDTO): Observable<TournamentDTO> {
     return this.http.put<TournamentDTO>(RequestUrl.tournament.tournament + updateDto.tournamentId, updateDto);
   }
 
