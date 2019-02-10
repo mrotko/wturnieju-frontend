@@ -41,6 +41,11 @@
                     <td mat-cell *matCellDef="let element"> {{element.endDate | date: 'shortDate'}} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="accessOption">
+                    <th mat-header-cell *matHeaderCellDef>{{lm.accessOption | translate}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.accessOption | translate }} </td>
+                </ng-container>
+
                 <ng-container matColumnDef="actionButton">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element">
@@ -88,6 +93,11 @@
                 <ng-container matColumnDef="end">
                     <th mat-header-cell *matHeaderCellDef>{{lm.tournamentEnd | translate}}</th>
                     <td mat-cell *matCellDef="let element"> {{element.endDate | date: 'shortDate'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="accessOption">
+                    <th mat-header-cell *matHeaderCellDef>{{lm.accessOption | translate}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.accessOption | translate }} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="actionButton">
@@ -140,6 +150,11 @@
                 <ng-container matColumnDef="end">
                     <th mat-header-cell *matHeaderCellDef>{{lm.tournamentEnd | translate}}</th>
                     <td mat-cell *matCellDef="let element"> {{element.endDate | date: 'shortDate'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="accessOption">
+                    <th mat-header-cell *matHeaderCellDef>{{lm.accessOption | translate}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.accessOption | translate }} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="actionButton">

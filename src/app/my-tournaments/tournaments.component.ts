@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TournamentService} from '../tournament.service';
-import {TournamentDTO, TournamentStatus, TranslatableValue, Tuple2} from '../model/model';
+import {AccessOption, TournamentDTO, TournamentStatus, TranslatableValue, Tuple2} from '../model/model';
 import {AuthService} from '../service/auth.service';
 import {LocaleMessages} from '../locale-messages';
 import {Router} from '@angular/router';
@@ -16,6 +16,7 @@ interface BeforeStartTableRow {
   tournamentSystemType: TranslatableValue<string>;
   startDate: Date;
   endDate: Date;
+  accessOption: AccessOption;
   owner: boolean;
   tournamentId: string;
 }
@@ -27,6 +28,7 @@ interface InProgressTableRow {
   tournamentSystemType: TranslatableValue<string>;
   startDate: Date;
   endDate: Date;
+  accessOption: AccessOption;
   owner: boolean;
   tournamentId: string;
 }
@@ -38,6 +40,7 @@ interface EndedTableRow {
   tournamentSystemType: TranslatableValue<string>;
   startDate: Date;
   endDate: Date;
+  accessOption: AccessOption;
   owner: boolean;
   tournamentId: string;
 }
@@ -54,12 +57,12 @@ interface TournamentFilter {
 })
 export class TournamentsComponent implements OnInit, OnDestroy {
   inProgressTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start',
-    'end', 'actionButton'];
+    'end', 'accessOption', 'actionButton'];
 
-  endedTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start', 'end', 'actionButton'];
+  endedTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start', 'end', 'accessOption', 'actionButton'];
 
   beforeStartTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start',
-    'end', 'actionButton'];
+    'end', 'accessOption', 'actionButton'];
 
   inProgressTournamentsDataSource: MatTableDataSource<InProgressTableRow>;
   beforeStartTournamentsDataSource: MatTableDataSource<BeforeStartTableRow>;
@@ -105,6 +108,7 @@ export class TournamentsComponent implements OnInit, OnDestroy {
                   tournamentSystemType: {value: tournamentDto.systemType, translationKey: tournamentDto.systemType},
                   startDate: tournamentDto.startDate,
                   endDate: tournamentDto.endDate,
+                  accessOption: tournamentDto.accessOption,
                   owner: tournamentDto.owner.id === loggedUser.id,
                   tournamentId: tournamentDto.id
                 });
@@ -122,6 +126,7 @@ export class TournamentsComponent implements OnInit, OnDestroy {
                   tournamentSystemType: {value: tournamentDto.systemType, translationKey: tournamentDto.systemType},
                   startDate: tournamentDto.startDate,
                   endDate: tournamentDto.endDate,
+                  accessOption: tournamentDto.accessOption,
                   owner: tournamentDto.owner.id === loggedUser.id,
                   tournamentId: tournamentDto.id
                 });
@@ -139,6 +144,7 @@ export class TournamentsComponent implements OnInit, OnDestroy {
                   tournamentSystemType: {value: tournamentDto.systemType, translationKey: tournamentDto.systemType},
                   startDate: tournamentDto.startDate,
                   endDate: tournamentDto.endDate,
+                  accessOption: tournamentDto.accessOption,
                   owner: tournamentDto.owner.id === loggedUser.id,
                   tournamentId: tournamentDto.id
                 });

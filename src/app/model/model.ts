@@ -191,7 +191,7 @@ export interface TournamentDTO {
   place: string;
   img: string;
   status: TournamentStatus;
-  accessOption: string;
+  accessOption: AccessOption;
   participants: ParticipantDTO [];
   owner: Profile;
   startDate: Date;
