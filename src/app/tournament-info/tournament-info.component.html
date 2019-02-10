@@ -1,0 +1,16 @@
+<div class="component-container">
+    <div>{{lm.name | translate}}</div>
+    <div>{{tournament.name}}</div>
+
+    <div>{{lm.owner | translate}}</div>
+    <div>{{tournament.owner.fullName}}</div>
+
+    <div>{{lm.participants | translate}}</div>
+    <div>{{tournament.participants.length}}</div>
+
+    <div>{{lm.tournamentStart | translate}}</div>
+    <div>{{tournament.startDate | date: 'shortDate'}}</div>
+
+    <div>{{lm.tournamentEnd | translate}}</div>
+    <div>{{tournament.endDate | date: 'shortDate'}}</div>
+</div>

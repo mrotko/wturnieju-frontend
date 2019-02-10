@@ -44,6 +44,11 @@
                     <app-game-editor (reloadRequiredEvent)="reload()" [tournament]="tournament"></app-game-editor>
                 </mat-card>
             </mat-tab>
+            <mat-tab [label]="lm.info | translate">
+                <mat-card>
+                    <app-tournament-info [tournament]="tournament"></app-tournament-info>
+                </mat-card>
+            </mat-tab>
         </mat-tab-group>
     </div>
 </div>

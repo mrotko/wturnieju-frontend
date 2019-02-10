@@ -50,6 +50,7 @@ export const LocaleMessages = {
   emptyScheduleMsg: 'emptyScheduleMsg',
   clipboardCopyErrorMsg: 'clipboardCopyErrorMsg',
   join: 'join',
+  info: 'info',
   discard: 'discard',
   userParticipateErrorMsg: 'userParticipateErrorMsg',
   invitationLink: 'invitationLink',

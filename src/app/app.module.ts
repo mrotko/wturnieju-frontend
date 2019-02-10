@@ -49,6 +49,7 @@ import {TournamentScheduleComponent} from './tournament-schedule/tournament-sche
 import {TournamentTreeComponent} from './tournament-tree/tournament-tree.component';
 import {TournamentSearchComponent} from './tournament-search/tournament-search.component';
 import {TournamentControlDialogComponent} from './tournament-control-dialog/tournament-control-dialog.component';
+import { TournamentInfoComponent } from './tournament-info/tournament-info.component';
 
 registerLocaleData(localePl);
 
@@ -86,7 +87,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TournamentScheduleComponent,
     TournamentTreeComponent,
     TournamentSearchComponent,
-    TournamentControlDialogComponent
+    TournamentControlDialogComponent,
+    TournamentInfoComponent
   ],
   entryComponents: [
     TournamentScheduleDialogComponent,

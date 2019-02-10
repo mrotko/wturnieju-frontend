@@ -37,6 +37,7 @@
   "startGameDate": "Data rozpoczęcia gry",
   "finish": "Zakończ",
   "discard": "Odrzuć",
+  "info": "Informacje",
   "acceptTournamentInvitationMsg": "Dołączyłeś do turnieju",
   "tournamentParticipationRequestMsg": "Dołącz do turnieju {{name}}",
   "discardTournamentInvitationMsg": "Odrzuciłeś zaproszenie do turnieju ",

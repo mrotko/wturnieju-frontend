@@ -193,7 +193,7 @@ export interface TournamentDTO {
   status: TournamentStatus;
   accessOption: AccessOption;
   participants: ParticipantDTO [];
-  owner: Profile;
+  owner: TournamentOwner;
   startDate: Date;
   endDate: Date;
   systemType: TournamentSystemType;
@@ -215,6 +215,10 @@ export interface TournamentDTO {
   tableColumns: TournamentTableColumnType [];
   periodsConfig: PeriodsConfigDto;
   positionOrder: PositionOrderElementType [];
+}
+
+export interface TournamentOwner extends Profile {
+  fullName: string;
 }
 
 export interface PeriodsConfigDto {
