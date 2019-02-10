@@ -1,5 +1,8 @@
 <div *ngIf="isLoaded()" class="component-container">
     <app-game *ngFor="let game of gameFixtures" [gameFixture]="game"
               (gameStatusEvent)="handleGameStatusChange($event, game)"></app-game>
+    <div *ngIf="gameFixtures.length === 0" class="message mat-headline">
+        {{lm.noTimetableDataMsg | translate}}
+    </div>
 </div>
 <app-spinner *ngIf="!isLoaded()"></app-spinner>
