@@ -17,6 +17,8 @@ export class ParticipantComponent implements OnInit {
 
   @Output() messageBtnClick: EventEmitter<String> = new EventEmitter();
 
+  @Input() isTournamentOwner: boolean = false;
+
   constructor() {
   }
 

@@ -3,6 +3,15 @@
 	width: 50%;
 }
 
+.buttons {
+	display: flex;
+	flex-direction: column;
+
+	button {
+		margin-bottom: 10px;
+	}
+}
+
 .participants-tables {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -25,30 +34,31 @@ app-participants-progress-bar {
 	margin-top: auto;
 	margin-bottom: auto;
 }
+
 mat-card-title {
 	text-align: center;
 	margin-bottom: 25px;
 }
 
-@media screen and (max-width: 1350px){
+@media screen and (max-width: 1350px) {
 	.component-container {
 		width: 80%;
 	}
 }
 
-@media screen and (max-width: 1150px){
+@media screen and (max-width: 1150px) {
 	.component-container {
 		width: 100%;
 	}
 }
 
-@media screen and (max-width: 900px){
+@media screen and (max-width: 900px) {
 	.participants-tables {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
 	.participants-tables {
 		grid-template-columns: repeat(1, 1fr);
 	}

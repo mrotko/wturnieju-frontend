@@ -30,4 +30,8 @@ export class TournamentParticipantsService {
   accept(tournamentId: string, participantId: string): Observable<any> {
     return this.http.patch(RequestUrl.tournament.tournament + tournamentId + '/participants/', participantId);
   }
+
+  requestParticipation(tournamentId: string, userId: string): Observable<any> {
+    return this.http.post(RequestUrl.tournament.tournament + tournamentId + '/users/' + userId + '/join', null);
+  }
 }

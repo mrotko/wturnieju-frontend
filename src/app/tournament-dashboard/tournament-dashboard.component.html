@@ -7,6 +7,7 @@
     </div>
     <div class="dashboard-content">
         <app-tournament-participants-configuration *ngIf="isTournamentBeforeStart()"
+                                                   [isTournamentOwner]="isCurrentUserTournamentOwner()"
                                                    (startTournamentBtnClickEvent)="startTournament()"
                                                    [tournament]="tournament"></app-tournament-participants-configuration>
         <mat-tab-group *ngIf="isTournamentInProgress() || isTournamentFinished()"

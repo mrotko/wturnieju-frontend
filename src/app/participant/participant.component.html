@@ -3,15 +3,15 @@
         <span class="mat-body-1">{{participant.name}}</span>
     </div>
     <div class="action-panel">
-        <button mat-icon-button *ngIf="acceptBtnClick.observers.length > 0"
+        <button mat-icon-button *ngIf="acceptBtnClick.observers.length > 0 && isTournamentOwner"
                 (click)="acceptBtnClick.emit(participant.id)">
             <mat-icon>add</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="messageBtnClick.observers.length > 0"
+        <button mat-icon-button *ngIf="messageBtnClick.observers.length > 0 && isTournamentOwner"
                 (click)="messageBtnClick.emit(participant.id)">
             <mat-icon>mail</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="removeBtnClick.observers.length > 0"
+        <button mat-icon-button *ngIf="removeBtnClick.observers.length > 0 && isTournamentOwner"
                 (click)="removeBtnClick.emit(participant.id)">
             <mat-icon>delete</mat-icon>
         </button>

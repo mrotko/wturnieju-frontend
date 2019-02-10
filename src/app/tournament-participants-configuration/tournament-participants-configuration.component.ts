@@ -10,6 +10,9 @@ import {SearchService} from '../search.service';
 import {ClipboardService} from 'ngx-clipboard';
 import {TournamentService} from '../tournament.service';
 import {environment} from '../../environments/environment';
+import {AuthService} from '../service/auth.service';
+import {Router} from '@angular/router';
+import {RouterUrl} from '../config/routerUrl';
 
 @Component({
   selector: 'app-tournament-participants-configuration',
@@ -21,6 +24,8 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
   @Input() tournament: TournamentDTO;
 
   @Output() startTournamentBtnClickEvent: EventEmitter<any> = new EventEmitter();
+
+  @Input() isTournamentOwner: boolean = false;
 
   lm = LocaleMessages;
 
@@ -36,13 +41,15 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
     private tournamentService: TournamentService,
     private snackbarService: SnackBarService,
     private floatButtonService: FloatingButtonService,
+    private router: Router,
+    private authService: AuthService,
     private dialog: MatDialog,
     private clipboardService: ClipboardService
   ) {
   }
 
   ngOnInit() {
-    this.floatButtonService.setButtonClickAction(() => this.openPopup());
+    this.initFloatBtnService();
     this.initTournamentParticipants();
   }
 
@@ -159,5 +166,27 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
 
   startTournament() {
     this.startTournamentBtnClickEvent.emit();
+  }
+
+  private initFloatBtnService() {
+    if (this.isTournamentOwner) {
+      this.floatButtonService.setButtonClickAction(() => this.openPopup());
+    }
+  }
+
+  onJoinToTournament() {
+    const user = this.authService.getUserFromStorage();
+    if (user == null) {
+      this.router.navigate([RouterUrl.login], {
+        queryParams: {
+          'returnUrl': this.router.url
+        }
+      }).catch();
+    } else {
+      this.tournamentParticipantsService.requestParticipation(this.tournament.id, user.id).subscribe(
+        () => this.initTournamentParticipants(),
+        () => this.snackbarService.openError(this.lm.unknownError)
+      );
+    }
   }
 }
