@@ -1,7 +1,7 @@
 <div *ngIf="tournament" class="component-container">
     <div class="dashboard-header">
         <div class="mat-title dashboard-header-title">{{tournament.name}}</div>
-        <button mat-icon-button (click)="openTournamentControlDialog()">
+        <button *ngIf="isCurrentUserTournamentOwner()" mat-icon-button (click)="openTournamentControlDialog()">
             <mat-icon>settings</mat-icon>
         </button>
     </div>
