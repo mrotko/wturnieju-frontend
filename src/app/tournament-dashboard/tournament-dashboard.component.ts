@@ -128,6 +128,10 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
   }
 
   isCurrentUserTournamentOwner() {
+    if (this.authService.getUserFromStorage() == null) {
+      return false;
+    }
+
     const currentUserId = this.authService.getUserFromStorage().id;
     const ownerId = this.tournament.owner.id;
     return ownerId === currentUserId;
