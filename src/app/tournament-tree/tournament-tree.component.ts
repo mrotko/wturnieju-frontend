@@ -14,7 +14,6 @@ export class TournamentTreeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("reload");
   }
 
 }

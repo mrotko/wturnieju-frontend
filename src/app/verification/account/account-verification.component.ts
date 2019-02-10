@@ -20,7 +20,6 @@ export class AccountVerificationComponent extends AbstractVerification {
 
   ngOnInit() {
     super.ngOnInit();
-    console.log('run');
     this.verificationService.verifyAccount(this.token).subscribe(() => this.verificationStatus = true,
       () => this.verificationStatus = false)
   }

@@ -104,7 +104,6 @@ export class InviteTournamentParticipantPopupComponent implements OnInit {
     hiddenUsers = hiddenUsers.concat(this.dialogData.invitedUserIds);
 
     this.hiddenUsersIds = hiddenUsers;
-    console.log(hiddenUsers);
   }
 
   getSelectedUsersIds(): string [] {

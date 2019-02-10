@@ -95,7 +95,6 @@ export class TournamentParticipantsConfigurationComponent implements OnInit, OnD
   private getInvitedUsersIds(): string [] {
     let usersIds: string [] = [];
     if (this.tournamentParticipants) {
-      console.log(this.tournamentParticipants);
       this.tournamentParticipants
         .forEach(participant => {
           usersIds = usersIds.concat(participant.members.map(p => p.userId));
