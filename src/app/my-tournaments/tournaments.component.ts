@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {RouterUrl} from '../config/routerUrl';
 import {MapToArrayPipe} from '../pipe/map-to-array.pipe';
 import {FloatingButtonService} from '../floating-button.service';
+import {MatTableDataSource} from '@angular/material';
 
 interface BeforeStartTableRow {
   position: number;
@@ -15,6 +16,7 @@ interface BeforeStartTableRow {
   tournamentSystemType: TranslatableValue<string>;
   startDate: Date;
   endDate: Date;
+  owner: boolean;
   tournamentId: string;
 }
 
@@ -25,6 +27,7 @@ interface InProgressTableRow {
   tournamentSystemType: TranslatableValue<string>;
   startDate: Date;
   endDate: Date;
+  owner: boolean;
   tournamentId: string;
 }
 
@@ -35,7 +38,13 @@ interface EndedTableRow {
   tournamentSystemType: TranslatableValue<string>;
   startDate: Date;
   endDate: Date;
+  owner: boolean;
   tournamentId: string;
+}
+
+interface TournamentFilter {
+  owner: boolean;
+  participant: boolean;
 }
 
 @Component({
@@ -44,18 +53,25 @@ interface EndedTableRow {
   styleUrls: ['./tournaments.component.scss']
 })
 export class TournamentsComponent implements OnInit, OnDestroy {
-  inProgressTournamentRows: InProgressTableRow[];
   inProgressTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start',
     'end', 'actionButton'];
 
-  endedTournamentRows: EndedTableRow[];
   endedTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start', 'end', 'actionButton'];
 
-  beforeStartTournamentRows: BeforeStartTableRow[];
   beforeStartTournamentColumns: string[] = ['position', 'tournamentName', 'competition', 'tournamentSystem', 'start',
     'end', 'actionButton'];
 
+  inProgressTournamentsDataSource: MatTableDataSource<InProgressTableRow>;
+  beforeStartTournamentsDataSource: MatTableDataSource<BeforeStartTableRow>;
+  endedTournamentsDataSource: MatTableDataSource<EndedTableRow>;
+
+
   lm = LocaleMessages;
+
+  filter: TournamentFilter = {
+    owner: true,
+    participant: true
+  };
 
   constructor(
     private tournamentService: TournamentService,
@@ -71,15 +87,15 @@ export class TournamentsComponent implements OnInit, OnDestroy {
     if (loggedUser) {
       this.tournamentService.getAllUserTournaments(loggedUser.id)
         .subscribe(dto => {
-          this.beforeStartTournamentRows = [];
-          this.inProgressTournamentRows = [];
-          this.endedTournamentRows = [];
+          let beforeStartTournamentRows: BeforeStartTableRow [] = [];
+          let inProgressTournamentRows: InProgressTableRow [] = [];
+          let endedTournamentRows: EndedTableRow [] = [];
 
           this.mapToArray.transform(dto.tournaments).forEach((tuple: Tuple2<TournamentStatus, TournamentDTO[]>) => {
             if (tuple.left === TournamentStatus.BEFORE_START) {
-              tuple.right.forEach(tournamentDto => {
-                const pos = this.beforeStartTournamentRows.length + 1;
-                this.beforeStartTournamentRows.push({
+              tuple.right.forEach((tournamentDto: TournamentDTO) => {
+                const pos = beforeStartTournamentRows.length + 1;
+                beforeStartTournamentRows.push({
                   position: pos,
                   tournamentName: tournamentDto.name,
                   competitionType: {
@@ -89,13 +105,14 @@ export class TournamentsComponent implements OnInit, OnDestroy {
                   tournamentSystemType: {value: tournamentDto.systemType, translationKey: tournamentDto.systemType},
                   startDate: tournamentDto.startDate,
                   endDate: tournamentDto.endDate,
+                  owner: tournamentDto.owner.id === loggedUser.id,
                   tournamentId: tournamentDto.id
                 });
               });
             } else if (tuple.left === TournamentStatus.IN_PROGRESS) {
-              tuple.right.forEach(tournamentDto => {
-                const pos = this.inProgressTournamentRows.length + 1;
-                this.inProgressTournamentRows.push({
+              tuple.right.forEach((tournamentDto: TournamentDTO) => {
+                const pos = inProgressTournamentRows.length + 1;
+                inProgressTournamentRows.push({
                   position: pos,
                   tournamentName: tournamentDto.name,
                   competitionType: {
@@ -105,13 +122,14 @@ export class TournamentsComponent implements OnInit, OnDestroy {
                   tournamentSystemType: {value: tournamentDto.systemType, translationKey: tournamentDto.systemType},
                   startDate: tournamentDto.startDate,
                   endDate: tournamentDto.endDate,
+                  owner: tournamentDto.owner.id === loggedUser.id,
                   tournamentId: tournamentDto.id
                 });
               });
             } else if (tuple.left === TournamentStatus.ENDED) {
               tuple.right.forEach(tournamentDto => {
-                const pos = this.endedTournamentRows.length + 1;
-                this.endedTournamentRows.push({
+                const pos = endedTournamentRows.length + 1;
+                endedTournamentRows.push({
                   position: pos,
                   tournamentName: tournamentDto.name,
                   competitionType: {
@@ -121,16 +139,53 @@ export class TournamentsComponent implements OnInit, OnDestroy {
                   tournamentSystemType: {value: tournamentDto.systemType, translationKey: tournamentDto.systemType},
                   startDate: tournamentDto.startDate,
                   endDate: tournamentDto.endDate,
+                  owner: tournamentDto.owner.id === loggedUser.id,
                   tournamentId: tournamentDto.id
                 });
               });
             }
           });
+          this.inProgressTournamentsDataSource = new MatTableDataSource<InProgressTableRow>(inProgressTournamentRows);
+          this.beforeStartTournamentsDataSource = new MatTableDataSource<InProgressTableRow>(beforeStartTournamentRows);
+          this.endedTournamentsDataSource = new MatTableDataSource<InProgressTableRow>(endedTournamentRows);
+
+          this.inProgressTournamentsDataSource.filterPredicate = (data, filter) => {
+            return this.rowFilter(data.owner);
+          };
+          this.beforeStartTournamentsDataSource.filterPredicate = (data, filter) => {
+            return this.rowFilter(data.owner);
+          };
+          this.endedTournamentsDataSource.filterPredicate = (data, filter) => {
+            return this.rowFilter(data.owner);
+          };
         });
     }
 
     this.prepareFloatButton();
   }
+
+  applyFilter() {
+    this.inProgressTournamentsDataSource.filter = 'filter';
+    this.beforeStartTournamentsDataSource.filter = 'filter';
+    this.endedTournamentsDataSource.filter = 'filter';
+  }
+
+  private rowFilter(owner: boolean) {
+    if (this.filter.owner) {
+      if (owner) {
+        return true;
+      }
+    }
+
+    if (this.filter.participant) {
+      if (!owner) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
 
   openTournament(tournamentId: string) {
     this.router.navigate([RouterUrl.tournaments, tournamentId, 'dashboard']).catch();

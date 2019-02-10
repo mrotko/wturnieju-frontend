@@ -139,6 +139,8 @@
   "nextOpponent": "Następny przeciwnik",
   "points": "Punkty",
   "forbidden": "Brak dostępu",
+  "participant": "Uczestnik",
+  "owner": "Właściciel",
   "winner": "Zwycięzca",
   "participants": "Uczestnicy",
   "ACCESS_OPTION": {

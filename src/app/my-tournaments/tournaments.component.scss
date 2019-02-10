@@ -10,3 +10,11 @@ table {
 td, th {
 	padding: 5px !important;
 }
+
+.filters {
+	display: flex;
+
+	.filter {
+		padding: 5px;
+	}
+}

@@ -151,6 +151,8 @@ export const LocaleMessages = {
   table: 'table',
   position: 'position',
   forbidden: 'forbidden',
+  participant: 'participant',
+  owner: 'owner',
   points: 'points',
   winner: 'winner',
   participants: 'participants',
