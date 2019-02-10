@@ -8,6 +8,7 @@ import {SnackBarService} from '../snack-bar.service';
 import {LocaleMessages} from '../locale-messages';
 import {Router} from '@angular/router';
 import {RouterUrl} from '../config/routerUrl';
+import {EMPTY} from 'rxjs';
 
 
 @Injectable()
@@ -31,6 +32,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       } else if (error.status === 403) {
         this.snackbarService.openError(LocaleMessages.forbidden);
         this.router.navigate([RouterUrl.home]);
+        return EMPTY;
       }
       return throwError(error);
     }));
