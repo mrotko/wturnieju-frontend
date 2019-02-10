@@ -21,7 +21,7 @@
                                       [value]="2">{{getPopupData().awayName}}</mat-radio-button>
                 </mat-radio-group>
             </div>
-            <div class="score">
+            <div class="score" *ngIf="isScoreVisible()">
                 <div class="score-team">
                     <div class="mat-subheading-1">{{getPopupData().homeName}}</div>
                     <mat-form-field>

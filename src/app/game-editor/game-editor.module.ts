@@ -10,7 +10,6 @@ import {GameEditorRoutingModule} from './game-editor-routing.module';
 import {GameComponent} from './game/game.component';
 import {MatDialogModule} from '@angular/material';
 import {StartChessGameDialogContentComponent} from './start-chess-game-dialog-content/start-chess-game-dialog-content.component';
-import {FinishChessGameDialogContentComponent} from './finish-chess-game-dialog-content/finish-chess-game-dialog-content.component';
 import {FinishGameDialogComponent} from './finish-game-dialog/finish-game-dialog.component';
 
 @NgModule({
@@ -22,7 +21,6 @@ import {FinishGameDialogComponent} from './finish-game-dialog/finish-game-dialog
     StartGameDialogComponent,
     GameComponent,
     StartChessGameDialogContentComponent,
-    FinishChessGameDialogContentComponent,
     FinishGameDialogComponent,
   ],
   imports: [

@@ -108,7 +108,7 @@ export class FinishGameDialogComponent extends AbstractGameDialog implements OnI
   }
 
   private initPeriodValues() {
-    this.getRange(this.popupData.periodsConfig.periodsNumber).forEach(i => {
+    this.getPeriodsRange().forEach(i => {
       this.eventData.homeScore.periods[i] = 0;
       this.eventData.awayScore.periods[i] = 0;
       this.selectedPeriods[i] = !this.isPeriodOptional(i);
@@ -136,7 +136,17 @@ export class FinishGameDialogComponent extends AbstractGameDialog implements OnI
     return periodNumber >= this.popupData.periodsConfig.requiredPeriodsNumber
   }
 
+  isScoreVisible(): boolean {
+    if (this.popupData.periodsConfig === null) {
+      return false;
+    }
+    return this.popupData.periodsConfig.requiredPeriodsNumber > 0;
+  }
+
   getPeriodsRange() {
+    if (this.popupData.periodsConfig === null) {
+      return [];
+    }
     return this.getRange(this.popupData.periodsConfig.periodsNumber);
   }
 
