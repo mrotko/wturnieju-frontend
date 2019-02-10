@@ -3,6 +3,7 @@ mat-toolbar {
 }
 
 .top-menu {
+	min-width: 350px;
 	display: grid;
 	grid-template-columns: auto 1fr auto;
 }
@@ -27,7 +28,7 @@ mat-toolbar {
 	grid-row: 1;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
 	.top-menu {
 		grid-template-columns: 1fr 1fr;
 	}
@@ -46,3 +47,21 @@ mat-toolbar {
 	}
 }
 
+@media screen and (max-width: 600px) {
+	.top-menu {
+		grid-template-columns: 1fr;
+	}
+
+	.top-menu-left {
+		grid-row: 2;
+	}
+
+	.top-menu-center {
+		grid-row: 3;
+		grid-column: -1/1;
+	}
+
+	.top-menu-right {
+		grid-row: 1;
+	}
+}

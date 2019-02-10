@@ -1,12 +1,30 @@
 .component-container {
 	display: grid;
-	grid-template-columns: auto 300px;
+	grid-template-columns: auto 250px;
 	grid-gap: 20px;
 }
 
 .right-panel {
+
+}
+
+.left-panel {
+	width: 90%;
 }
 
 app-tournament-schedule {
 	padding: 5px;
+}
+
+
+@media screen and (max-width: 700px) {
+	.component-container {
+		grid-template-columns: 1fr;
+		justify-items: center;
+	}
+
+	.right-panel {
+		grid-row: 1;
+		max-width: 250px;
+	}
 }
