@@ -3,17 +3,20 @@ mat-toolbar {
 }
 
 .top-menu {
-	min-width: 350px;
+	min-width: 250px;
 	display: grid;
 	grid-template-columns: auto 1fr auto;
 }
 
 .top-menu-left {
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .top-menu-center {
 	justify-self: center;
 	overflow: hidden;
+
 	width: 65%;
 }
 

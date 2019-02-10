@@ -1,4 +1,4 @@
-.container {
+.component-container {
 	margin-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
@@ -17,12 +17,14 @@
 	column-gap: 20px;
 }
 
-.step-content {
-	display: grid;
+@media screen and (max-width: 500px) {
+	.column-style {
+		grid-template-columns: 1fr;
+	}
 }
 
-.container ::ng-deep .mat-step-label {
-	display: none;
+.step-content {
+	display: grid;
 }
 
 .summary {
