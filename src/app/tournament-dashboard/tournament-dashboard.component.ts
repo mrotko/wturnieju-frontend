@@ -198,13 +198,13 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
         date: scheduleElement.startDate,
         bye: scheduleElement.bye,
         teams: {
-          left: {
+          left: scheduleElement.homeParticipant ? {
             participantId: scheduleElement.homeParticipant.id,
             name: scheduleElement.homeParticipant.name,
             currentResult: scheduleElement.homeScore ? scheduleElement.homeScore.current : null,
             periodsResult: scheduleElement.homeScore ? this.mapToArray.transform(scheduleElement.homeScore.periods) : null,
             winner: scheduleElement.winner === 1
-          },
+          } : null,
           right: scheduleElement.awayParticipant ? {
             participantId: scheduleElement.awayParticipant.id,
             name: scheduleElement.awayParticipant.name,
