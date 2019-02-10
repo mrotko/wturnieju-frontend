@@ -159,7 +159,7 @@ export class TournamentDashboardComponent implements OnInit, OnDestroy {
   }
 
   onTabChange(event: MatTabChangeEvent) {
-    if (event.tab.textLabel === this.translate.instant(this.lm.schedule)) {
+    if (event.tab.textLabel === this.translate.instant(this.lm.schedule) && this.isCurrentUserTournamentOwner()) {
       this.setScheduleFloatingBtnAction(true);
     } else {
       this.setScheduleFloatingBtnAction(false);
