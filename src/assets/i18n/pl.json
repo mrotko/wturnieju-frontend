@@ -27,6 +27,7 @@
   "start": "Start",
   "startGame": "Rozpocznij pojedynek",
   "finishGame": "Zakończ pojedynek",
+  "emptyScheduleMsg": "Nie można wygenerować kolejnej rundy",
   "finishGameDate": "Data zakończenia pojedynku",
   "draw": "Remis",
   "selectWinner": "Wybierz zwycięzcę",

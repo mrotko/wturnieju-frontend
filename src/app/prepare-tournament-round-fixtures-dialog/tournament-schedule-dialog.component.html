@@ -21,6 +21,9 @@
 
         <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
     </table>
+    <div *ngIf="schedule.elements === null || schedule.elements.length === 0">
+        {{lm.emptyScheduleMsg | translate}}
+    </div>
     <mat-dialog-actions style="margin: auto; float: right;">
         <button mat-button (click)="cancel()">{{lm.cancel | translate}}</button>
         <button mat-raised-button (click)="confirm()">{{lm.confirm | translate}}</button>

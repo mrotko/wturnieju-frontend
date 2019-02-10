@@ -47,6 +47,7 @@ export const LocaleMessages = {
   acceptTournamentInvitationMsg: 'acceptTournamentInvitationMsg',
   discardTournamentInvitationMsg: 'discardTournamentInvitationMsg',
   clipboardCopySuccessMsg: 'clipboardCopySuccessMsg',
+  emptyScheduleMsg: 'emptyScheduleMsg',
   clipboardCopyErrorMsg: 'clipboardCopyErrorMsg',
   join: 'join',
   discard: 'discard',
