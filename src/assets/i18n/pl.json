@@ -140,7 +140,7 @@
   "position": "Pozycja",
   "nextOpponent": "Następny przeciwnik",
   "points": "Punkty",
-  "forbidden": "Brak dostępu",
+  "accessNotAllowed": "Brak dostępu",
   "participant": "Uczestnik",
   "owner": "Właściciel",
   "winner": "Zwycięzca",

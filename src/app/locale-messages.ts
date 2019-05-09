@@ -152,7 +152,7 @@ export const LocaleMessages = {
   doSearch: 'doSearch',
   table: 'table',
   position: 'position',
-  forbidden: 'forbidden',
+  accessNotAllowed: 'accessNotAllowed',
   participant: 'participant',
   owner: 'owner',
   points: 'points',

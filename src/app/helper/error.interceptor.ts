@@ -29,8 +29,8 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.snackbarService.openError(LocaleMessages.loggedOut);
         }
         this.authService.logout();
-      } else if (error.status === 403) {
-        this.snackbarService.openError(LocaleMessages.forbidden);
+      } else if (error.status === 406) {
+        this.snackbarService.openError(LocaleMessages.accessNotAllowed);
         this.router.navigate([RouterUrl.home]);
         return EMPTY;
       }
