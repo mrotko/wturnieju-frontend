@@ -8,7 +8,6 @@ import {
   TennisPeriodType,
   TournamentSystemType
 } from './model/model';
-import {toDate} from '@angular/common/src/i18n/format_date';
 
 export const LocaleMessages = {
   add: 'add',
